@@ -1,4 +1,4 @@
-package org.openjfx.Modul;
+package org.openjfx.modul;
 
 public class Arrangement {
 }
