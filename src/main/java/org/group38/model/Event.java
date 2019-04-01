@@ -54,6 +54,8 @@ public class Event {
     }
 
     //må endre denne dersom det er flere billetter per telefonnummer
+    //The ticket is removed from the matrix and there is no more references to the object. Therefore it is removed
+    //the next time the garbage collector runs.
     public String deleteTicket(String phoneNumber) {
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
