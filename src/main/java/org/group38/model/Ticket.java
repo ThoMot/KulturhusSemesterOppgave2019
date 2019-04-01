@@ -4,17 +4,18 @@ import java.util.Date;
 
 public class Ticket {
     //data field
-    int seatnumber; //evnt String
+    int seatRow;
+    int seatNumber;
     String facilityName;
     Date date;
     double price;
     String phonenumber;
 
     //constructor
-    public Ticket(int seatnumber, Date date, double price, String phonenumber, String facilityName) {
-        //sjekke om setenummeret er tatt i arraylisten
+    public Ticket(int seatRow, int seatNumber, Date date, double price, String phonenumber, String facilityName) {
+        this.seatRow=seatRow;
         this.facilityName=facilityName;
-        this.seatnumber=seatnumber;
+        this.seatNumber=seatNumber;
         this.date=date;
         this.phonenumber=phonenumber;
         this.price=price;
@@ -28,24 +29,24 @@ public class Ticket {
         return price;
     }
 
-    public void setDate(Date date) {
+    private void setDate(Date date) {
         this.date = date;
     }
 
-    public void setFacilityName(String facilityName) {
+    private void setFacilityName(String facilityName) {
         this.facilityName = facilityName;
     }
 
-    public void setPhonenumber(String phonenumber) {
+    private void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    public void setPrice(double price) {
+    private void setPrice(double price) {
         this.price = price;
     }
 
-    public void setSeatnumber(int seatnumber) {
-        this.seatnumber = seatnumber;
+    private void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
     }
     //A method for updateing the tickets. Checking if there is an input, and then updateing the given variable
     //burde vi ha feilmelding her dersom det gis feil input?
@@ -60,7 +61,7 @@ public class Ticket {
             this.setPhonenumber(phoneNumber);
         }
         if(seatNumber!=0){
-            this.setSeatnumber(seatNumber);
+            this.setSeatNumber(seatNumber);
         }
         if(price!=0){
             setPrice(price);
