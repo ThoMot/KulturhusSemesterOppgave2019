@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.openjfx.FrontpageController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.group38.FrontpageController" prefHeight="400.0" prefWidth="600.0">
     <Label text="Meny" layoutX="200" layoutY="10"></Label>
     <Button fx:id="Knapp1" text="Lokaler" layoutX="50" layoutY="50" ></Button>
     <Button fx:id="Knapp2" text="Arrangementer" layoutX="150" layoutY="50"></Button>

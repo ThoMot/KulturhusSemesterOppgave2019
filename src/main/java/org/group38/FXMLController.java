@@ -1,10 +1,11 @@
-package org.openjfx;
+package org.group38;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class FrontpageController {
+public class FXMLController {
+
     @FXML
     private Label label;
 
@@ -12,5 +13,9 @@ public class FrontpageController {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
+    }
+
+    public void initialize() {
+        // TODO
     }
 }

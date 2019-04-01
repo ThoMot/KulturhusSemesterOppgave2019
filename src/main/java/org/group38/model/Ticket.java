@@ -1,4 +1,4 @@
-package org.openjfx.model;
+package org.group38.model;
 
 import java.util.Date;
 
