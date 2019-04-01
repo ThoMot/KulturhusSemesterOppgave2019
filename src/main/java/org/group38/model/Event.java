@@ -31,6 +31,7 @@ public class Event {
         this.maxTickets = maxTickets;
     }
 
+    //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if (tickets[seatNumber][seatRow].equals(null)) {
             tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
@@ -41,6 +42,7 @@ public class Event {
         }
     }
 
+    //Checks if there is any free seats in the matrix, and returns a String of available seats
     public String freeSeats() {
         StringJoiner s= new StringJoiner(", ");
         for (int i = 0; i < tickets.length; i++) {
@@ -68,7 +70,6 @@ public class Event {
         return "Billetten eksisterer ikke";
     }
 }
-    //delete
-    //edit
+    //edit må også endre alle billetter
     //set
     //get

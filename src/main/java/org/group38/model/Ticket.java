@@ -14,8 +14,8 @@ public class Ticket {
     //constructor
     public Ticket(int seatRow, int seatNumber, Date date, double price, String phonenumber, String facilityName) {
         this.seatRow=seatRow;
-        this.facilityName=facilityName;
         this.seatNumber=seatNumber;
+        this.facilityName=facilityName;
         this.date=date;
         this.phonenumber=phonenumber;
         this.price=price;
@@ -29,6 +29,7 @@ public class Ticket {
         return price;
     }
 
+    //må legge inn feilmelding ved feil input i alle setmetoder
     private void setDate(Date date) {
         this.date = date;
     }
@@ -48,9 +49,12 @@ public class Ticket {
     private void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
+
+    private void setSeatRow(int seatRow){ this.seatRow=seatRow; }
     //A method for updateing the tickets. Checking if there is an input, and then updateing the given variable
-    //burde vi ha feilmelding her dersom det gis feil input?
-    public void editTicket(Date date, String facilityName, String phoneNumber, int seatNumber, double price){
+    //her trengs det ikke å kalle på setmetode, kan bruke direkte tilgang til variabelen, men da må man sjekke
+    //riktig input i denne metoden og
+    public void editTicket(Date date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
         if(date!=null){
             this.setDate(date);
         }
@@ -62,6 +66,9 @@ public class Ticket {
         }
         if(seatNumber!=0){
             this.setSeatNumber(seatNumber);
+        }
+        if(seatRow!=0){
+            this.setSeatRow(seatRow);
         }
         if(price!=0){
             setPrice(price);
