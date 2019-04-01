@@ -15,9 +15,9 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("frontpage.fxml"));
 
         Scene scene = new Scene(root);
-       // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("Kulturhuset");
         stage.setScene(scene);
         stage.show();
     }

@@ -9,6 +9,6 @@
     <Button fx:id="Knapp2" text="Arrangementer" layoutX="150" layoutY="50"></Button>
     <Button fx:id="Knapp3" text="Billetter" layoutX="250" layoutY="50"></Button>
     <Button fx:id="Knapp4" text="Kontaktpersoner" layoutX="350" layoutY="50"></Button>
-    <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+    <Label fx:id="label" layoutX="100" layoutY="100" minHeight="400" minWidth="400" text="Arrangementliste her"/>
 
 </AnchorPane>
