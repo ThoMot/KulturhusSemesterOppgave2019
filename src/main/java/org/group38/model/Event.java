@@ -31,12 +31,13 @@ public class Event {
         this.maxTickets = maxTickets;
     }
 
-    public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
-        if (tickets[seatRow][seatNumber].equals(null)) {
-            tickets[seatRow][seatNumber] = new Ticket(seatRow, seatNumber,
+    public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
+        if (tickets[seatNumber][seatRow].equals(null)) {
+            tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
                     this.date, this.ticketPrice, phoneNumber, this.facility.getFacilityName());
+            return "Billett er reservert på plass: "+seatNumber+","+seatRow;
         } else {
-            //feilmelding setet er tatt
+            return "Setet er opptatt";
         }
     }
 
@@ -50,6 +51,19 @@ public class Event {
             }
         }
         return s.toString();
+    }
+
+    //må endre denne dersom det er flere billetter per telefonnummer
+    public String deleteTicket(String phoneNumber) {
+        for (int i = 0; i < tickets.length; i++) {
+            for (int j = 0; j < tickets[i].length; j++) {
+                if (tickets[i][j].getPhonenumber().equals(phoneNumber)) {
+                    tickets[i][j]=null;
+                   return "Billetten er slettet";
+                }
+            }
+        }
+        return "Billetten eksisterer ikke";
     }
 }
     //delete
