@@ -27,6 +27,9 @@ public class Ticket {
     public String getPhonenumber() {
         return phonenumber;
     }
+    public double getPrice(){
+        return price;
+    }
 
     public void setDate(Date date) {
         this.date = date;
