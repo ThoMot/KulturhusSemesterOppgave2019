@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
-    ArrayList<Ticket> tickets; 
+    ArrayList<Ticket> tickets;
     //Kontaktperson kontaktperson;
     String eventName;
     String type;//velge fra rullegardin

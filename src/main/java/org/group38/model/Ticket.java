@@ -19,10 +19,7 @@ public class Ticket {
         this.phonenumber=phonenumber;
         this.price=price;
     }
-    //delete method, burde denne lages på en annen måte?
-    public void delete(){
-        this.delete();
-    }
+    //slette objekter??, holder det å bare slette det fra arraylisten i arrangementer feks
     //sjekke om vi trenger flere getmetoder etterhvert
     public String getPhonenumber() {
         return phonenumber;
