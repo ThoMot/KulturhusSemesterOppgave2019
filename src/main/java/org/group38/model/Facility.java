@@ -1,4 +1,4 @@
 package org.group38.model;
 
-public class Lokale {
+public class Facility {
 }

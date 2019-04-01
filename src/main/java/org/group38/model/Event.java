@@ -9,7 +9,7 @@ public class Event {
     String name;
     //Type, hvordan skal vi definere denne?
     String participants;
-    //Lokale lokale;
+    //Facility lokale;
     //program;
     Date date;
     int ticketPrice;
@@ -19,7 +19,7 @@ public class Event {
     //delete
     //edit
     //set
-    //get
+    //get 
 
 
 
