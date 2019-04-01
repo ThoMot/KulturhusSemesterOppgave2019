@@ -15,6 +15,12 @@ public class Event {
     int ticketPrice;
     int maxTickets;
 
+    //constructor
+    //delete
+    //edit
+    //set
+    //get
+
 
 
 }
