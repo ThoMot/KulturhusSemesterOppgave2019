@@ -1,4 +1,4 @@
-package org.openjfx.modul;
+package org.openjfx.model;
 
 public class Kontaktperson {
 }

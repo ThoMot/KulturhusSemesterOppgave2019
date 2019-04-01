@@ -1,4 +1,4 @@
-package org.openjfx.modul;
+package org.openjfx.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,6 @@ public class Event {
     Date date;
     int ticketPrice;
     int maxTickets;
-
 
 
 
