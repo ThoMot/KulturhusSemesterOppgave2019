@@ -35,7 +35,7 @@ public class Event {
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
-        if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og"+columns;
+        if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns;
         if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
         if (tickets[seatNumber][seatRow]==(null)) {
             tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
@@ -48,11 +48,11 @@ public class Event {
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
     public String freeSeats() {
-        StringJoiner s= new StringJoiner(", ");
+        StringJoiner s= new StringJoiner("\n ");
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j].equals(null)) {
-                    s.add("setenummer:"+i+", rad:"+j+")");
+                if (tickets[i][j]==null) {
+                    s.add("Rad:"+i+", Setenummer:"+j);
                 }
             }
         }
@@ -77,7 +77,12 @@ public class Event {
         if(antallSlettet==0)return "Billetten eksisterer ikke";
         else return antallSlettet+" billetter er slettet på "+phoneNumber;
     }
+
+    public Ticket[][] getTickets() {
+        return tickets;
+    }
 }
+
     //edit må også endre alle billetter
     //set
     //get
