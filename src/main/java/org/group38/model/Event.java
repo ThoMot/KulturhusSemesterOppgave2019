@@ -91,6 +91,8 @@ public class Event {
 //    }
 
     //Method to edit a ticket based on the seat and rownumber, need to add more checks for wrong input
+    //what is necessary to change?
+    //skal jeg lage en egen per parameter som skal endres?
     public String editTicket(int oldSeatNumber, int oldSeatRow, Calendar date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
         if(tickets[oldSeatRow][oldSeatNumber]==null){
             return "Finnes ingen billett på denne plasseringen";
