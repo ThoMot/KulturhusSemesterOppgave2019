@@ -43,25 +43,32 @@ public class Ticket {
     private void setSeatRow(int seatRow){ this.seatRow=seatRow; }
     //A method for updateing the tickets. Checking if there is an input, and then updateing the given variable
     //her trengs det ikke å kalle på setmetode, kan bruke direkte tilgang til variabelen, men da må man sjekke
-    //riktig input i denne metoden og
-    public void editTicket(Calendar date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
+    public String editTicket(Calendar date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
+        String s="";
         if(date!=null){
             this.setDate(date);
+            s+="Dato er endret\n";
         }
         if(facilityName!="null"){
             this.setFacilityName(facilityName);
+            s+="Lokalnavn er endret\n";
         }
         if(phoneNumber!="null"){
             this.setPhonenumber(phoneNumber);
+            s+="Telefonnummer er endret\n";
         }
-        if(seatNumber!=0){
+        if(seatNumber!=this.seatNumber){
             this.setSeatNumber(seatNumber);
+            s+="Setenummer er endret\n";
         }
-        if(seatRow!=0){
+        if(seatRow!=this.seatRow){
             this.setSeatRow(seatRow);
+            s+="Radnummer er endret\n";
         }
         if(price!=0){
             setPrice(price);
+            s+="Prisen er endret";
         }
+        return s;
     }
 }

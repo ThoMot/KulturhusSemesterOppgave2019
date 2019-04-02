@@ -62,7 +62,7 @@ public class TestMain {
             System.out.println("Feil i sletting av billetter somj ikke finnes");
             antallFeil++;
         }
-
+        System.out.println(maxManus.freeSeats());
 
         System.out.println("Antall feil i enhetstesting testing: "+antallFeil);
 
