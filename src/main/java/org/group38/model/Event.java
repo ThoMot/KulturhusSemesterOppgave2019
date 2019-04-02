@@ -35,6 +35,8 @@ public class Event {
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
+        if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og"+columns;
+        if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
         if (tickets[seatNumber][seatRow]==(null)) {
             tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
                     this.date, this.ticketPrice, phoneNumber, this.facility.getFacilityName());
