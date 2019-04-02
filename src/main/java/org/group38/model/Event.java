@@ -1,6 +1,7 @@
 package org.group38.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringJoiner;
 
@@ -12,19 +13,20 @@ public class Event {
     String participants;
     Facility facility;
     //String program?;
-    Date date;
+    Calendar date;
     double ticketPrice;
     int maxTickets;
     int rows;
     int columns;
 
     //constructor
-    public Event(String eventName, String type, int maxTickets, String participants, Date date, double ticketPrice) {
-        this.columns = facility.columns;
-        this.rows = facility.rows;
+    public Event(Facility facility, String eventName, int maxTickets, String participants, Calendar date, double ticketPrice) {
+        this.facility=facility;
+        this.columns = facility.getColumns();
+        this.rows = facility.getRows();
         tickets = new Ticket[columns][rows];
         this.eventName = eventName;
-        this.type = type;
+        this.type = facility.getType();
         this.participants = participants;
         this.date = date;
         this.ticketPrice = ticketPrice;
@@ -33,7 +35,7 @@ public class Event {
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
-        if (tickets[seatNumber][seatRow].equals(null)) {
+        if (tickets[seatNumber][seatRow]==(null)) {
             tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
                     this.date, this.ticketPrice, phoneNumber, this.facility.getFacilityName());
             return "Billett er reservert på plass: "+seatNumber+","+seatRow;
@@ -59,15 +61,19 @@ public class Event {
     //The ticket is removed from the matrix and there is no more references to the object. Therefore it is removed
     //the next time the garbage collector runs.
     public String deleteTicket(String phoneNumber) {
+        int antallSlettet=0;
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j].getPhonenumber().equals(phoneNumber)) {
-                    tickets[i][j]=null;
-                   return "Billetten er slettet";
+                if (tickets[i][j]!=null) {
+                    if (tickets[i][j].getPhonenumber().equals(phoneNumber)) {
+                        tickets[i][j] = null;
+                        antallSlettet++;
+                    }
                 }
             }
         }
-        return "Billetten eksisterer ikke";
+        if(antallSlettet==0)return "Billetten eksisterer ikke";
+        else return antallSlettet+" billetter er slettet på "+phoneNumber;
     }
 }
     //edit må også endre alle billetter
