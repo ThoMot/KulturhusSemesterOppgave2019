@@ -1,11 +1,11 @@
 package org.group38.model;
 
 public class Facility {
-    String facilityName;
-    String type;
-    int rows;
-    int columns;
-    int totalSeats;
+    private String facilityName;
+    private String type;
+    private int rows;
+    private int columns;
+    private int totalSeats;
 
     //constructor
     public Facility(String facilityName, String type, int rows, int columns){

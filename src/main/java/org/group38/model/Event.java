@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.StringJoiner;
 
 public class Event {
-    Ticket[][] tickets;
+    private Ticket[][] tickets;
     //Kontaktperson kontaktperson;
-    String eventName;
-    String type;//velge fra rullegardin
-    String participants;
-    Facility facility;
+    private String eventName;
+    private String type;//velge fra rullegardin
+    private String participants;
+    private Facility facility;
     //String program?;
-    Calendar date;
-    double ticketPrice;
-    int maxTickets;
-    int rows;
-    int columns;
+    private Calendar date;
+    private double ticketPrice;
+    private int maxTickets;
+    private int rows;
+    private int columns;
 
     //constructor
     public Event(Facility facility, String eventName, int maxTickets, String participants, Calendar date, double ticketPrice) {
@@ -78,9 +78,6 @@ public class Event {
         else return antallSlettet+" billetter er slettet på "+phoneNumber;
     }
 
-    public Ticket[][] getTickets() {
-        return tickets;
-    }
 }
 
     //edit må også endre alle billetter

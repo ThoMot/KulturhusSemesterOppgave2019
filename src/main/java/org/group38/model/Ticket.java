@@ -4,12 +4,12 @@ import java.util.Calendar;
 
 public class Ticket {
     //data field
-    int seatRow;
-    int seatNumber;
-    String facilityName;
-    Calendar date;
-    double price;
-    String phonenumber;
+    private int seatRow;
+    private int seatNumber;
+    private String facilityName;
+    private Calendar date;
+    private double price;
+    private String phonenumber;
 
     //constructor
     public Ticket(int seatRow, int seatNumber, Calendar date, double price, String phonenumber, String facilityName) {
