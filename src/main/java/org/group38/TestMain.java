@@ -64,15 +64,29 @@ public class TestMain {
             System.out.println("Feil i sletting av billetter somj ikke finnes");
             antallFeil++;
         }
-//        System.out.println(maxManus.freeSeats());
 
         maxManus.buyTicket(4, 2, "90862870");
         Ticket ticket = maxManus.findTicket("90862870");
         System.out.println(ticket.toString());
 
-        System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
+        //testing of setmethod for phonenumber
+        String testsetelefonnummer = ticket.setPhonenumber("8734");
+        String testsetelefonnummer2 = ticket.setPhonenumber("absofhrt");
+        String testsettelefonnummer3 = ticket.setPhonenumber("23541234");
+        if(!"Telefonnummeret inneholder ikke 8 symboler".equals(testsetelefonnummer)){
+            antallFeil++;
+            System.out.println("Feil i sjekking av lengde av telefonnummer");
+        }
+        if(!"Telefonnummer er på feil format".equals(testsetelefonnummer2)){
+            antallFeil++;
+            System.out.println("Feil ved sjekkin om telefonnummer bare er tall");
+        }
+        if(!"Telefonnummer er oppdatert".equals(testsettelefonnummer3)){
+            antallFeil++;
+            System.out.println("Feil ved oppdatering av telefonnummer");
+        }
 
-        //System.out.println(maxManus.freeSeats());
+        System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
 
 
 

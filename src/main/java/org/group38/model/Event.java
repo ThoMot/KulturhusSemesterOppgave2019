@@ -1,18 +1,21 @@
+//trenger slette billett på noe annet enn telefonnummer
+//trenger en endre arrangement metode/settere som også endrer på billetten
+//trenger metode for å endre kontaktperson
+//trenger metode for å endre lokalet
+
 package org.group38.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.StringJoiner;
 
 public class Event {
     private Ticket[][] tickets;
-    Kontaktperson kontaktperson;
+    private Kontaktperson kontaktperson;
     private String eventName;
-    private String type;//velge fra rullegardin
+    private String type;
     private String participants;
     private Facility facility;
-    //String program?;
+    private String program;
     private Calendar date;
     private double ticketPrice;
     private int maxTickets;
@@ -61,9 +64,9 @@ public class Event {
         return s.toString();
     }
 
-    //må endre denne dersom det er flere billetter per telefonnummer
     //The ticket is removed from the matrix and there is no more references to the object. Therefore it is removed
     //the next time the garbage collector runs.
+    //deletes all tickets on one phonenumber
     public String deleteTicket(String phoneNumber) {
         int antallSlettet=0;
         for (int i = 0; i < tickets.length; i++) {
@@ -79,6 +82,7 @@ public class Event {
         if(antallSlettet==0)return "Billetten eksisterer ikke";
         else return antallSlettet+" billetter er slettet på "+phoneNumber;
     }
+    //finds a ticket based on the phonenumber
     public Ticket findTicket(String phoneNumber){
         for(int i=0;i<tickets.length;i++){
             for(int j=0;j<tickets[i].length;j++){
@@ -90,30 +94,4 @@ public class Event {
         }
         return null;
     }
-
-
-//    public String editTicket(int oldSeatNumber, int oldSeatRow, Calendar date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
-//        if(tickets[oldSeatRow][oldSeatNumber]==null){
-//            return "Finnes ingen billett på denne plasseringen";
-//        }
-//        if(tickets[seatRow][seatNumber]==null){
-//            if(seatRow<0||seatRow>rows){
-//                return "Ugylig seterad er oppgitt, gi en rad mellom 0 og "+rows;
-//            }
-//            if(seatNumber<0||seatNumber>columns){
-//                return "Ugyldig setenummer er oppgitt, oppgi et sete mellom 0 og "+columns;
-//            }
-//            else{
-//                String s=tickets[oldSeatRow][oldSeatNumber].editTicket(date, facilityName,
-//                        phoneNumber, seatNumber, seatRow, price);
-//                return "Følgende info er redigert:\n"+s;
-//            }
-//        }
-//        else return "Nye seter er opptatt";
-//    }
-
 }
-
-    //edit må også endre alle billetter
-    //set
-    //get

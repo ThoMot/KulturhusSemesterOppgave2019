@@ -1,16 +1,16 @@
+//må legge inn feilmelding ved feil input i alle setmetoder
+
 package org.group38.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Ticket {
     //data field
     private int seatRow;
     private int seatNumber;
+    private double price;
     private String facilityName;
     private Calendar date;
-    private double price;
     private String phonenumber;
     private String eventName;
 
@@ -24,8 +24,7 @@ public class Ticket {
         this.price=price;
         this.eventName=eventName;
     }
-    //slette objekter??, holder det å bare slette det fra arraylisten i arrangementer feks
-    //sjekke om vi trenger flere getmetoder etterhvert
+
     public String getPhonenumber() {
         return phonenumber;
     }
@@ -33,7 +32,6 @@ public class Ticket {
         return price;
     }
 
-    //må legge inn feilmelding ved feil input i alle setmetoder
     public String setDate(Calendar date) {
         this.date = date;
         return "Dato er endret";
