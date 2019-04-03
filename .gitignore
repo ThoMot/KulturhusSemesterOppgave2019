@@ -31,3 +31,11 @@
 hs_err_pid*
 
 \.idea/workspace\.xml
+
+\.idea/libraries/Maven__org_openjfx_javafx_base_linux_11_0_2\.xml
+
+\.idea/libraries/Maven__org_openjfx_javafx_controls_linux_11_0_2\.xml
+
+\.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11_0_2\.xml
+
+\.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11_0_2\.xml
