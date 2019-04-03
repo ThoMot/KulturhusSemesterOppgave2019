@@ -26,7 +26,7 @@ public class Event {
         this.rows = facility.getRows();
         tickets = new Ticket[columns][rows];
         this.eventName = eventName;
-        this.type = facility.getType();
+        this.type = facility.getFacilityType();
         this.participants = participants;
         this.date = date;
         this.ticketPrice = ticketPrice;

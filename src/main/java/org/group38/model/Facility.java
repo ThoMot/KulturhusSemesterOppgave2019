@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Facility {
-    private final String facilityName;
+    private String facilityName;
     private String facilityType;
     private List<Seat> seats = new ArrayList<>();
 
