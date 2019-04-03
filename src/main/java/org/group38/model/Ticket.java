@@ -1,5 +1,7 @@
 package org.group38.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Ticket {
@@ -70,7 +72,8 @@ public class Ticket {
     }
 
     public String toString(){
-        return "Billett til "+eventName+ " i "+facilityName+" dato: "+date+"\n"+
+        return "Billett til "+eventName+ " i "+facilityName+"\n"+
+                date.getTime()+"\n"+
                 "På seterad: "+seatRow+" setenummer: "+seatNumber+"\n"
                 +"Koster "+price+"kr og er registrert på telefonnummer "+phonenumber;
     }

@@ -11,7 +11,7 @@ public class TestMain {
     public static void main(String[] args) {
         int antallFeil=0;
         Facility facility=new Facility("Sal1","kino", 10,10);
-        Calendar d= new GregorianCalendar(2019, 10,10);
+        Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
         Event maxManus=new Event(facility, "MaxManus", 100, "MaxManus",d, 100.00);
 
 
@@ -62,12 +62,13 @@ public class TestMain {
             System.out.println("Feil i sletting av billetter somj ikke finnes");
             antallFeil++;
         }
-        System.out.println(maxManus.freeSeats());
+//        System.out.println(maxManus.freeSeats());
 
         maxManus.buyTicket(4, 2, "90862870");
         Ticket ticket = maxManus.findTicket("90862870");
+        System.out.println(ticket.toString());
 
-        System.out.println("Antall feil i enhetstesting testing: "+antallFeil);
+        System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
 
 
 
