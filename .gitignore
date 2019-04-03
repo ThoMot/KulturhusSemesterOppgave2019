@@ -39,3 +39,15 @@ hs_err_pid*
 \.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11_0_2\.xml
 
 \.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11_0_2\.xml
+
+src/\.idea/encodings\.xml
+
+src/\.idea/misc\.xml
+
+src/\.idea/modules\.xml
+
+src/\.idea/src\.iml
+
+src/\.idea/vcs\.xml
+
+src/\.idea/workspace\.xml
