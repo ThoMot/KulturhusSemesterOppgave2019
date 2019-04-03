@@ -1,3 +1,6 @@
+//fjerne alle metoder for billett og reservasjon, men se først om det kan brukes i den andre reservasjonen
+//lag tostring metode
+//lage setmetoder som også sjekker at det blir gitt riktig type input
 package org.group38.model;
 
 import java.util.ArrayList;
