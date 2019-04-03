@@ -1,3 +1,5 @@
+//legge inn if else i alle setmetoder for å sjekke for riktig input
+
 package org.group38.model;
 
 public class Kontaktperson {

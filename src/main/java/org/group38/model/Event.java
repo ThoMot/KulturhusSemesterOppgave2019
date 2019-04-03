@@ -2,6 +2,8 @@
 //trenger en endre arrangement metode/settere som også endrer på billetten
 //trenger metode for å endre kontaktperson
 //trenger metode for å endre lokalet
+//slette arrangementer etter at datoen har vært?
+//lage en metode som sjekker om et arrangement er fullt, ved hjelp av freeseats?
 
 package org.group38.model;
 
