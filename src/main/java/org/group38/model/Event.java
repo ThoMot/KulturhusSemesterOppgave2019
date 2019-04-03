@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 
 public class Event {
     private Ticket[][] tickets;
-    //Kontaktperson kontaktperson;
+    Kontaktperson kontaktperson;
     private String eventName;
     private String type;//velge fra rullegardin
     private String participants;
@@ -20,7 +20,7 @@ public class Event {
     private int columns;
 
     //constructor
-    public Event(Facility facility, String eventName, int maxTickets, String participants, Calendar date, double ticketPrice) {
+    public Event(Kontaktperson kontaktperson, Facility facility, String eventName, int maxTickets, String participants, Calendar date, double ticketPrice) {
         this.facility=facility;
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
@@ -31,6 +31,7 @@ public class Event {
         this.date = date;
         this.ticketPrice = ticketPrice;
         this.maxTickets = maxTickets;
+        this.kontaktperson=kontaktperson;
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
