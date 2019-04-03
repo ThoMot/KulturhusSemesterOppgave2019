@@ -7,6 +7,8 @@ public class Facility {
     private String facilityName;
     private String facilityType;
     private List<Seat> seats = new ArrayList<>();
+    private int rows;
+    private int columns;
 
 
     // Constructor
@@ -17,6 +19,8 @@ public class Facility {
     public Facility(String facilityName, String facilityType, int numRows, int seatsPerRow){
         this.facilityName = facilityName;
         this.facilityType = facilityType;
+        this.rows=numRows;
+        this.columns=seatsPerRow;
 
 
         // Creating seats with rows
@@ -36,6 +40,12 @@ public class Facility {
 
     public String getFacilityType() {
         return facilityType;
+    }
+    public int getRows(){
+        return rows;
+    }
+    public int getColumns(){
+        return columns;
     }
 
     // Check if seat exists and reserve seat.

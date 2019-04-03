@@ -64,6 +64,9 @@ public class TestMain {
         }
         System.out.println(maxManus.freeSeats());
 
+        maxManus.buyTicket(4, 2, "90862870");
+        Ticket ticket = maxManus.findTicket("90862870");
+
         System.out.println("Antall feil i enhetstesting testing: "+antallFeil);
 
 

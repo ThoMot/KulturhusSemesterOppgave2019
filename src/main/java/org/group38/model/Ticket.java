@@ -10,15 +10,17 @@ public class Ticket {
     private Calendar date;
     private double price;
     private String phonenumber;
+    private String eventName;
 
     //constructor
-    public Ticket(int seatRow, int seatNumber, Calendar date, double price, String phonenumber, String facilityName) {
+    public Ticket(int seatRow, int seatNumber, Calendar date, double price, String phonenumber, String facilityName, String eventName) {
         this.seatRow=seatRow;
         this.seatNumber=seatNumber;
         this.facilityName=facilityName;
         this.date=date;
         this.phonenumber=phonenumber;
         this.price=price;
+        this.eventName=eventName;
     }
     //slette objekter??, holder det å bare slette det fra arraylisten i arrangementer feks
     //sjekke om vi trenger flere getmetoder etterhvert
@@ -30,45 +32,46 @@ public class Ticket {
     }
 
     //må legge inn feilmelding ved feil input i alle setmetoder
-    private void setDate(Calendar date) { this.date = date; }
+    public String setDate(Calendar date) {
+        this.date = date;
+        return "Dato er endret";
+    }
 
-    private void setFacilityName(String facilityName) { this.facilityName = facilityName; }
+    public String setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
+        return "Lokalnavn er oppdatert";
+    }
 
-    private void setPhonenumber(String phonenumber) { this.phonenumber = phonenumber; }
+    public String setPhonenumber(String phonenumber) {
+        if(phonenumber.length()!=8){
+            return "Telefonnummeret inneholder ikke 8 symboler";
+        }
+        boolean numeric = phonenumber.matches("-?\\d+(\\.\\d+)?");
+        if(!numeric){
+            return "Telefonnummer er på feil format";
+        }
+        this.phonenumber = phonenumber;
+        return "Telefonnummer er oppdatert";
+    }
 
-    private void setPrice(double price) { this.price = price; }
+    public String setPrice(double price) {
+        this.price = price;
+        return "Prisen er oppdatert";
+    }
 
-    private void setSeatNumber(int seatNumber) { this.seatNumber = seatNumber; }
+    public String setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+        return "Setenummer er endret";
+    }
 
-    private void setSeatRow(int seatRow){ this.seatRow=seatRow; }
-    //A method for updateing the tickets. Checking if there is an input, and then updateing the given variable
-    //her trengs det ikke å kalle på setmetode, kan bruke direkte tilgang til variabelen, men da må man sjekke
-    public String editTicket(Calendar date, String facilityName, String phoneNumber, int seatNumber, int seatRow, double price){
-        String s="";
-        if(date!=null){
-            this.setDate(date);
-            s+="Dato er endret\n";
-        }
-        if(facilityName!="null"){
-            this.setFacilityName(facilityName);
-            s+="Lokalnavn er endret\n";
-        }
-        if(phoneNumber!="null"){
-            this.setPhonenumber(phoneNumber);
-            s+="Telefonnummer er endret\n";
-        }
-        if(seatNumber!=this.seatNumber){
-            this.setSeatNumber(seatNumber);
-            s+="Setenummer er endret\n";
-        }
-        if(seatRow!=this.seatRow){
-            this.setSeatRow(seatRow);
-            s+="Radnummer er endret\n";
-        }
-        if(price!=0){
-            setPrice(price);
-            s+="Prisen er endret";
-        }
-        return s;
+    public String setSeatRow(int seatRow){
+        this.seatRow=seatRow;
+        return "Seterad er oppdatert";
+    }
+
+    public String toString(){
+        return "Billett til "+eventName+ " i "+facilityName+" dato: "+date+"\n"+
+                "På seterad: "+seatRow+" setenummer: "+seatNumber+"\n"
+                +"Koster "+price+"kr og er registrert på telefonnummer "+phonenumber;
     }
 }
