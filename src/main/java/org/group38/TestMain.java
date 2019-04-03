@@ -72,6 +72,8 @@ public class TestMain {
 
         System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
 
+        //System.out.println(maxManus.freeSeats());
+
 
 
 

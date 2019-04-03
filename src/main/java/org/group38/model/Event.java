@@ -24,7 +24,7 @@ public class Event {
         this.facility=facility;
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
-        tickets = new Ticket[columns][rows];
+        tickets = new Ticket[rows][columns];
         this.eventName = eventName;
         this.type = facility.getFacilityType();
         this.participants = participants;
@@ -38,8 +38,8 @@ public class Event {
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns;
         if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
-        if (tickets[seatNumber][seatRow]==(null)) {
-            tickets[seatNumber][seatRow] = new Ticket(seatRow, seatNumber,
+        if (tickets[seatRow][seatNumber]==(null)) {
+            tickets[seatRow][seatNumber] = new Ticket(seatRow, seatNumber,
                     this.date, this.ticketPrice, phoneNumber, this.facility.getFacilityName(), this.eventName);
             return "Billett er reservert på plass: "+seatNumber+","+seatRow;
         } else {
