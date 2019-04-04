@@ -4,6 +4,8 @@
 //trenger metode for å endre lokalet
 //slette arrangementer etter at datoen har vært?
 //lage en metode som sjekker om et arrangement er fullt, ved hjelp av freeseats?
+//endre utskrift av ledige seter til et passende format for visualisering
+//lage tostring metode som skriver ut informasjon om arrangementet
 
 package org.group38.model;
 
