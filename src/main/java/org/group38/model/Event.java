@@ -67,10 +67,8 @@ public class Event {
         }
         return s.toString();
     }
-
-    //The ticket is removed from the matrix and there is no more references to the object. Therefore it is removed
-    //the next time the garbage collector runs.
-    //deletes all tickets on one phonenumber
+    
+    //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
     public String deleteTicket(String phoneNumber) {
         int antallSlettet=0;
         for (int i = 0; i < tickets.length; i++) {
@@ -86,6 +84,7 @@ public class Event {
         if(antallSlettet==0)return "Billetten eksisterer ikke";
         else return antallSlettet+" billetter er slettet på "+phoneNumber;
     }
+
     //finds a ticket based on the phonenumber
     public Ticket findTicket(String phoneNumber){
         for(int i=0;i<tickets.length;i++){
