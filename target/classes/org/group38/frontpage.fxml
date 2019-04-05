@@ -25,37 +25,16 @@
                         <MenuItem text="Show..."/>
                     </items>
                 </Menu>
+                <Menu text="Lokale">
+                    <items>
+                        <MenuItem text="Show..."/>
+                    </items>
+                </Menu>
             </menus>
         </MenuBar>
       </top>
     <center>
-        <TableView fx:id="contactsTable">
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
-            <columns>
-                <TableColumn text="Date">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="firstName"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn text="Location">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="lastName"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn text="Phone Number">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="phoneNumber"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn text="notes">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="notes"/>
-                    </cellValueFactory>
-                </TableColumn>
-            </columns>
-        </TableView>
+
     </center>
 
     <Button fx:id="Knapp1" text="Lokaler" layoutX="50" layoutY="50" ></Button>
