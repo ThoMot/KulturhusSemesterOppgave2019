@@ -1,6 +1,8 @@
 package org.group38.model;
 
+import java.util.ArrayList;
+
 public class Kulturhus {
-    private Event[] events;
+    private ArrayList<Event> events;
 
 }
