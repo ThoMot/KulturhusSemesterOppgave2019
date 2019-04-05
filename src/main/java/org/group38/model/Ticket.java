@@ -48,7 +48,7 @@ public class Ticket {
         }
         boolean numeric = phonenumber.matches("-?\\d+(\\.\\d+)?");
         if(!numeric){
-            return "Telefonnummer er på feil format";
+            return "Telefonnummer er på feil format, må inneholde bare tall";
         }
         this.phonenumber = phonenumber;
         return "Telefonnummer er oppdatert";

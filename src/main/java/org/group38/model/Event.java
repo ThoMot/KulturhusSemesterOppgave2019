@@ -6,6 +6,9 @@
 //lage en metode som sjekker om et arrangement er fullt, ved hjelp av freeseats?
 //endre utskrift av ledige seter til et passende format for visualisering
 //lage tostring metode som skriver ut informasjon om arrangementet
+//finn billett burde legge inn i en arraylist, som viser hvilke seter som er reservert på denne
+//finnbillett med setenummer
+
 
 package org.group38.model;
 
@@ -67,7 +70,7 @@ public class Event {
         }
         return s.toString();
     }
-    
+
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
     public String deleteTicket(String phoneNumber) {
         int antallSlettet=0;

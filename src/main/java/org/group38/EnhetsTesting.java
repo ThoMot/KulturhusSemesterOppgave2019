@@ -1,3 +1,4 @@
+//lese meg opp på hvordan testing burde være
 package org.group38;
 
 import org.group38.model.Event;
@@ -87,14 +88,6 @@ public class EnhetsTesting {
         }
 
         System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
-
-
-
-
-
-
-
-
 
     }
 }
