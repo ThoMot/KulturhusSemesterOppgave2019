@@ -1,7 +1,10 @@
 //lese meg opp på hvordan testing burde være
 package org.group38;
 
-import org.group38.model.ContactPerson;
+import org.group38.model.ContactPerson.ContactPerson;
+import org.group38.model.ContactPerson.ContactInfo;
+import org.group38.model.ContactPerson.ContactPerson;
+import org.group38.model.ContactPerson.Personalia;
 import org.group38.model.Event;
 import org.group38.model.Facility;
 import org.group38.model.Ticket;
@@ -15,7 +18,7 @@ public class EnhetsTesting {
         Facility facility=new Facility("Sal1","kino", 10,10);
 
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
-        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", "martinarebekka@gmail.com", "90862870");
+        ContactPerson contactPerson = new ContactPerson(new Personalia("Martina", "Førre"), new ContactInfo("martina@gmail.com","11223344"));
         Event maxManus=new Event(contactPerson, facility, "MaxManus", 100, "MaxManus",d, 100.00);
 
 
