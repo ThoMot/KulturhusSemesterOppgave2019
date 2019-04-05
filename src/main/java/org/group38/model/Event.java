@@ -12,6 +12,8 @@
 
 package org.group38.model;
 
+import org.group38.model.ContactPerson.ContactPerson;
+
 import java.util.Calendar;
 import java.util.StringJoiner;
 
