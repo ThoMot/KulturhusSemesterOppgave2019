@@ -13,7 +13,6 @@ public class EnhetsTesting {
     public static void main(String[] args) {
         int antallFeil=0;
         Facility facility=new Facility("Sal1","kino", 10,10);
-        Facility forelesning = new Facility("Green", "Forelesningssal", 40);
 
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
         ContactPerson contactPerson = new ContactPerson("Martina", "Førre", "martinarebekka@gmail.com", "90862870");

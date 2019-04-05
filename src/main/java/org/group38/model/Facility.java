@@ -73,7 +73,7 @@ public class Facility {
                     '}';
 
     }
-    
+
     public String toForsamlingssal() {
         return "Facility{" +
                 "facilityName='" + facilityName + '\'' +
