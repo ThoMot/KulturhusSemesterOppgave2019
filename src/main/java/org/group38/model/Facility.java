@@ -7,11 +7,17 @@ package org.group38.model;
 public class Facility {
     private String facilityName;
     private String facilityType;
+    private int maxAntSeats;
     private int rows;
     private int columns;
 
 
     // Constructor
+    public Facility(String facilityName, int maxAntSeats){
+        this.facilityName = facilityName;
+        this.facilityType = "Forsamlinssal";
+        this.maxAntSeats = maxAntSeats;
+    }
 
     public Facility(String facilityName, String facilityType, int numRows, int seatsPerRow){
         this.facilityName = facilityName;
@@ -53,12 +59,29 @@ public class Facility {
         this.columns = columns;
     }
 
+
+
     @Override
     public String toString() {
+        if(maxAntSeats != 0){
+            return toForsamlingssal();
+        }
+        else return "Facility{" +
+                    "facilityName='" + facilityName + '\'' +
+                    ", facilityType='" + facilityType + '\'' +
+                    ", total seats=" + rows * columns +
+                    '}';
+
+    }
+    
+    public String toForsamlingssal() {
         return "Facility{" +
                 "facilityName='" + facilityName + '\'' +
                 ", facilityType='" + facilityType + '\'' +
-                ", total seats=" + rows*columns +
+                ", total seats=" + maxAntSeats +
                 '}';
     }
+
+
+
 }
