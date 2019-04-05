@@ -16,43 +16,32 @@ import org.group38.model.ContactPerson.ContactPerson;
 import org.group38.model.Facility;
 import org.group38.model.Performer;
 import org.group38.model.Ticket;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.StringJoiner;
 
 public class Event {
     private ContactPerson contactPerson;
     private Facility facility;
-    //kan dette hete noe annet enn participant? - Bruke Contact info/Person til å opprette disse personene - Egen klasse?
-    private ArrayList<Performer> performers;
+    private ArrayList performers;
     private Ticket[][] tickets;
-
-    private String eventName;
-    private Calendar date;
-    
-
+    private EventInfo eventInfo;
 
 
     private double ticketPrice;
-    private int maxTickets;
 
     private int rows;
     private int columns;
 
     //constructor
-    public Event(ContactPerson contactPerson, Facility facility, String eventName, int maxTickets, String participants, Calendar date, double ticketPrice) {
+    public Event(ContactPerson contactPerson, Facility facility, ArrayList performers, double ticketPrice, EventInfo eventInfo) {
         this.facility=facility;
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
         tickets = new Ticket[rows][columns];
-        this.eventName = eventName;
-        this.performers = participants;
-        this.date = date;
+        this.performers = performers;
         this.ticketPrice = ticketPrice;
-        this.maxTickets = maxTickets;
         this.contactPerson = contactPerson;
+        this.eventInfo = eventInfo;
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
@@ -61,7 +50,7 @@ public class Event {
         if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
         if (tickets[seatRow][seatNumber]==(null)) {
             tickets[seatRow][seatNumber] = new Ticket(seatRow, seatNumber,
-                    this.date, this.ticketPrice, phoneNumber, this.facility.getFacilityName(), this.eventName);
+                    eventInfo.getDate(), this.ticketPrice, phoneNumber, this.facility.getFacilityName(), eventInfo.getEventName());
             return "Billett er reservert på plass: "+seatNumber+","+seatRow;
         } else {
             return "Setet er opptatt";

@@ -18,7 +18,7 @@ public class EnhetsTesting {
         Facility facility=new Facility("Sal1","kino", 10,10);
 
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
-        ContactPerson contactPerson = new ContactPerson(new Personalia("Martina", "Førre"), new ContactInfo("martina@gmail.com","11223344"));
+        ContactPerson contactPerson = new ContactPerson(new ("Martina", "Førre"), new ContactInfo("martina@gmail.com","11223344"));
         Event maxManus=new Event(contactPerson, facility, "MaxManus", 100, "MaxManus",d, 100.00);
 
 
