@@ -1,9 +1,9 @@
 //lese meg opp på hvordan testing burde være
 package org.group38;
 
+import org.group38.model.ContactPerson;
 import org.group38.model.Event;
 import org.group38.model.Facility;
-import org.group38.model.Kontaktperson;
 import org.group38.model.Ticket;
 
 import java.util.Calendar;
@@ -14,8 +14,8 @@ public class EnhetsTesting {
         int antallFeil=0;
         Facility facility=new Facility("Sal1","kino", 10,10);
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
-        Kontaktperson kontaktperson = new Kontaktperson("Martina", "Førre", "martinarebekka@gmail.com", "90862870");
-        Event maxManus=new Event(kontaktperson, facility, "MaxManus", 100, "MaxManus",d, 100.00);
+        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", "martinarebekka@gmail.com", "90862870");
+        Event maxManus=new Event(contactPerson, facility, "MaxManus", 100, "MaxManus",d, 100.00);
 
 
         //Testing the buy tickets method

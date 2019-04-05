@@ -2,7 +2,7 @@
 
 package org.group38.model;
 
-public class Kontaktperson {
+public class ContactPerson {
     //Required
     private String firstName;
     private String lastName;
@@ -14,7 +14,7 @@ public class Kontaktperson {
     private String notes;
 
 
-public Kontaktperson(String firstName, String lastName, String email, String phoneNr){
+public ContactPerson(String firstName, String lastName, String email, String phoneNr){
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
