@@ -3,12 +3,13 @@ package org.group38;
 
 import org.group38.model.ContactPerson.ContactPerson;
 import org.group38.model.ContactPerson.ContactInfo;
-import org.group38.model.ContactPerson.ContactPerson;
-import org.group38.model.ContactPerson.Personalia;
-import org.group38.model.Event;
+import org.group38.model.Event.Event;
+import org.group38.model.Event.EventInfo;
 import org.group38.model.Facility;
+import org.group38.model.Performer;
 import org.group38.model.Ticket;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -17,9 +18,15 @@ public class EnhetsTesting {
         int antallFeil=0;
         Facility facility=new Facility("Sal1","kino", 10,10);
 
+
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
-        ContactPerson contactPerson = new ContactPerson(new ("Martina", "Førre"), new ContactInfo("martina@gmail.com","11223344"));
-        Event maxManus=new Event(contactPerson, facility, "MaxManus", 100, "MaxManus",d, 100.00);
+        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
+        EventInfo eventInfo = new EventInfo("Max Manus", "film",d);
+        ArrayList<Performer> performers= new ArrayList();
+        performers.add(new Performer("Hans", "Langus"));
+        performers.add(new Performer("Kine", "Larsen"));
+
+        Event maxManus=new Event(contactPerson, facility, performers, 100, eventInfo);
 
 
         //Testing the buy tickets method
