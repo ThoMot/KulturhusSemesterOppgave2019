@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.TicketOverViewController">
+    <children>
+    <MenuBar layoutY="-2.0" prefHeight="17.0" prefWidth="602.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="Kulturhuset">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Arrangement">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Legg til ..." />
+                    <MenuItem mnemonicParsing="false" text="Vis alle ..." />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Billett">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Legg til ..." />
+                    <MenuItem mnemonicParsing="false" text="Vis alle ...." />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+      <Label layoutX="25.0" layoutY="31.0" text="Billetter">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <TableView layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Dato" />
+          <TableColumn prefWidth="75.0" text="Klokken" />
+            <TableColumn prefWidth="113.0" text="Telefonnummer" />
+            <TableColumn prefWidth="206.0" text="Arrangement" />
+            <TableColumn prefWidth="82.0" />
+        </columns>
+      </TableView>
+    </children>
+</AnchorPane>

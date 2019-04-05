@@ -1,94 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.TicketSceneController">
+<AnchorPane prefHeight="395.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.TicketSceneController">
    <children>
-      <SplitPane dividerPositions="0.29431438127090304" prefHeight="400.0" prefWidth="600.0">
+      <MenuBar layoutY="-2.0" prefHeight="17.0" prefWidth="602.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Kulturhuset">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Arrangement">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Legg til ..." />
+                  <MenuItem mnemonicParsing="false" text="Vis alle ..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Billett">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Legg til ..." />
+                  <MenuItem mnemonicParsing="false" text="Vis alle ...." />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.32274247491638797" layoutX="1.0" layoutY="27.0" prefHeight="374.0" prefWidth="602.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="228.0">
                <children>
-                  <VBox prefHeight="400.0" prefWidth="174.0">
+                  <VBox layoutY="1.0" prefHeight="374.0" prefWidth="190.0">
                      <children>
-                        <Pane prefHeight="103.0" prefWidth="174.0">
+                        <Pane prefHeight="74.0" prefWidth="212.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Tittel på arrangement">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="42.0" text="Dato, sted" />
+                              <GridPane layoutX="4.0" layoutY="9.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Tittel på arrangement" GridPane.columnSpan="2">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Dato, sted" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
                            </children>
                         </Pane>
-                        <Pane prefHeight="138.0" prefWidth="174.0">
+                        <Pane prefHeight="67.0" prefWidth="186.0">
                            <children>
                               <Label layoutX="14.0" layoutY="6.0" text="Valgte seter:" />
                            </children></Pane>
-                        <Pane prefHeight="226.0" prefWidth="174.0">
+                        <Pane prefHeight="220.0" prefWidth="212.0">
                            <children>
-                              <Button layoutX="35.0" layoutY="163.0" mnemonicParsing="false" text="Opprett billett" />
-                              <Label layoutX="9.0" layoutY="4.0" text="Oppsummering:">
+                              <Label layoutX="9.0" layoutY="10.0" text="Oppsummering:">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="8.0" layoutY="30.0" text="Pris per billett:" />
-                              <Label layoutX="8.0" layoutY="50.0" text="Ant. Billetter:" />
-                              <Label layoutX="7.0" layoutY="70.0" text="Total pris:" />
-                              <TextField layoutX="9.0" layoutY="119.0" prefHeight="27.0" prefWidth="104.0" />
-                              <Label layoutX="8.0" layoutY="99.0" text="Telefonnummer til kjøper:" />
-                              <Label layoutX="103.0" layoutY="30.0" text="150kr" />
-                              <Label layoutX="99.0" layoutY="51.0" text="2" />
-                              <Label layoutX="112.0" layoutY="51.0" text="stk" />
-                              <Label layoutX="76.0" layoutY="70.0" text="300" />
-                              <Label layoutX="104.0" layoutY="70.0" text="kr" />
+                              <GridPane layoutX="14.0" layoutY="30.0" prefHeight="145.0" prefWidth="158.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="95.0" />
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="28.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="38.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="30.0" minHeight="4.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Pris per billett:" />
+                                    <Label text="Ant. Billetter:" GridPane.rowIndex="1" />
+                                    <Label text="Total pris:" GridPane.rowIndex="2" />
+                                    <Label text="Telefonnummer til kjøper:" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                                    <TextField prefHeight="27.0" prefWidth="104.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                                    <Label text="150" GridPane.columnIndex="1" />
+                                    <Label text="2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="300" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="kr" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label text="stk" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="kr" GridPane.columnIndex="2" />
+                                 </children>
+                              </GridPane>
+                              <Button layoutX="54.0" layoutY="196.0" mnemonicParsing="false" text="Opprett billett" />
                            </children></Pane>
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="402.0">
                <children>
-                  <VBox layoutX="7.0" layoutY="6.0" prefHeight="386.0" prefWidth="409.0">
+                  <VBox layoutX="7.0" layoutY="6.0" prefHeight="386.0" prefWidth="409.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Pane prefHeight="49.0" prefWidth="409.0">
+                        <Pane prefHeight="96.0" prefWidth="409.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="-7.0" layoutY="-7.0" prefHeight="62.0" prefWidth="418.0" text="Velg plass(er)">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="32.0" prefWidth="304.0">
-                           <children>
-                              <HBox alignment="BASELINE_CENTER" layoutX="-1.0" layoutY="7.0" prefHeight="25.0" prefWidth="409.0">
+                              <GridPane layoutX="35.0" layoutY="30.0" prefHeight="46.0" prefWidth="306.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="17.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <Circle fill="#dadada" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Label prefHeight="17.0" prefWidth="68.0" text=" Opptatt" />
-                                    <Circle fill="DODGERBLUE" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Label prefHeight="17.0" prefWidth="62.0" text=" Ledig" />
-                                    <Circle fill="#ffb71f" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Label prefHeight="17.0" prefWidth="79.0" text=" Valgte seter" />
+                                    <Label alignment="TOP_CENTER" prefHeight="49.0" prefWidth="300.0" text="Velg plass(er)" GridPane.columnSpan="3">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Circle fill="#dadada" radius="7.0" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="77.0" text=" Opptatt" GridPane.rowIndex="2" />
+                                    <Circle fill="DODGERBLUE" radius="7.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="71.0" text=" Ledig" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Circle fill="#ffb71f" radius="7.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="104.0" text=" Valgte seter" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                  </children>
-                                 <cursor>
-                                    <Cursor fx:constant="S_RESIZE" />
-                                 </cursor>
-                              </HBox>
+                              </GridPane>
                            </children>
                         </Pane>
-                        <Pane prefHeight="307.0" prefWidth="409.0">
+                        <Pane prefHeight="245.0" prefWidth="409.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cdcdcd" height="40.0" layoutX="80.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
                               <Label alignment="CENTER" layoutX="112.0" layoutY="5.0" text="Scene/Lerret">
@@ -96,7 +153,23 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <Pane layoutX="32.0" layoutY="54.0" prefHeight="227.0" prefWidth="318.0" />
+                              <Pane layoutX="32.0" layoutY="54.0" prefHeight="227.0" prefWidth="318.0">
+                                 <children>
+                                    <GridPane layoutX="35.0" layoutY="90.0" prefHeight="98.0" prefWidth="235.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="111.0" />
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="24.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
+                                 </children></Pane>
                            </children>
                         </Pane>
                      </children>
