@@ -1,12 +1,12 @@
 package org.group38.model.ContactPerson;
 
-public class Personalia {
+public class Person {
 
     private String firstName;
     private String lastName;
 
 
-    public Personalia(String firstName, String lastName) {
+    public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

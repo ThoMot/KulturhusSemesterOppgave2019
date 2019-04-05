@@ -10,24 +10,34 @@
 //finnbillett med setenummer
 
 
-package org.group38.model;
+package org.group38.model.Event;
 
 import org.group38.model.ContactPerson.ContactPerson;
+import org.group38.model.Facility;
+import org.group38.model.Performer;
+import org.group38.model.Ticket;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.StringJoiner;
 
 public class Event {
-    private Ticket[][] tickets;
     private ContactPerson contactPerson;
-    private String eventName;
-    private String type;
-    private String participants;
     private Facility facility;
-    private String program;
+    //kan dette hete noe annet enn participant? - Bruke Contact info/Person til å opprette disse personene - Egen klasse?
+    private ArrayList<Performer> performers;
+    private Ticket[][] tickets;
+
+    private String eventName;
     private Calendar date;
+    
+
+
+
     private double ticketPrice;
     private int maxTickets;
+
     private int rows;
     private int columns;
 
@@ -38,8 +48,7 @@ public class Event {
         this.rows = facility.getRows();
         tickets = new Ticket[rows][columns];
         this.eventName = eventName;
-        this.type = facility.getFacilityType();
-        this.participants = participants;
+        this.performers = participants;
         this.date = date;
         this.ticketPrice = ticketPrice;
         this.maxTickets = maxTickets;

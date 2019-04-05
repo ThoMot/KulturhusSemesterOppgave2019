@@ -3,15 +3,17 @@
 
 package org.group38.model.ContactPerson;
 
-public class ContactPerson {
+public class ContactPerson extends Person {
     //Optional
     private String webPage;
     private String affiliation;
     private String notes;
+    private ContactInfo contactInfo;
 
 
-public ContactPerson(Personalia personalia, ContactInfo contactInfo){
-
+public ContactPerson(String firstName, String lastName, ContactInfo contactInfo){
+super(firstName, lastName);
+this.contactInfo = contactInfo;
 }
 
     public void setWebPage(String webPage) {
