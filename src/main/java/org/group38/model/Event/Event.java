@@ -14,8 +14,7 @@ package org.group38.model.Event;
 
 import org.group38.model.ContactPerson.ContactPerson;
 import org.group38.model.Facility;
-import org.group38.model.Performer;
-import org.group38.model.Ticket;
+
 import java.util.ArrayList;
 import java.util.StringJoiner;
 

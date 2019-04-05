@@ -26,7 +26,13 @@ public class ContactInfo {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "ContactInfo{" +
+                "email='" + email + '\'' +
+                ", phoneNr='" + phoneNr + '\'' +
+                '}';
+    }
 }
 
 

@@ -6,8 +6,8 @@ import org.group38.model.ContactPerson.ContactInfo;
 import org.group38.model.Event.Event;
 import org.group38.model.Event.EventInfo;
 import org.group38.model.Facility;
-import org.group38.model.Performer;
-import org.group38.model.Ticket;
+import org.group38.model.Event.Performer;
+import org.group38.model.Event.Ticket;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,11 +22,23 @@ public class EnhetsTesting {
         Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
         ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
         EventInfo eventInfo = new EventInfo("Max Manus", "film",d);
-        ArrayList<Performer> performers= new ArrayList();
+        ArrayList<Performer> performers= new ArrayList <Performer>();
         performers.add(new Performer("Hans", "Langus"));
         performers.add(new Performer("Kine", "Larsen"));
 
         Event maxManus=new Event(contactPerson, facility, performers, 100, eventInfo);
+
+
+        ContactInfo martinasInfo = new ContactInfo("test", "1010101010101");
+        ContactPerson martina = new ContactPerson("Martina", "Førre", martinasInfo);
+        System.out.println(martina.toString());
+
+        martinasInfo.setEmail("Heipådeg");
+        martina.setFirstName("IkkeMartina");
+        System.out.println(martina.toString());
+
+
+
 
 
         //Testing the buy tickets method

@@ -1,11 +1,9 @@
-package org.group38.model;
+package org.group38.model.Event;
 
 import org.group38.model.ContactPerson.ContactInfo;
 import org.group38.model.ContactPerson.Person;
 
 public class Performer extends Person {
-
-    ContactInfo contactInfo;
 
 
     public Performer(String firstName, String lastName) {
@@ -13,10 +11,5 @@ public class Performer extends Person {
     }
 
 
-    @Override
-    public String toString() {
-        return "Performer{" +
-                "contactInfo=" + contactInfo +
-                '}';
-    }
+
 }

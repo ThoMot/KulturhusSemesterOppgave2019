@@ -1,6 +1,6 @@
 //må legge inn feilmelding ved feil input i alle setmetoder
 
-package org.group38.model;
+package org.group38.model.Event;
 
 import java.util.Calendar;
 

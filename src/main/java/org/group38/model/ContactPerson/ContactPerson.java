@@ -40,6 +40,15 @@ this.contactInfo = contactInfo;
         return notes;
     }
 
+    @Override
+    public String toString() {
+        return "ContactPerson{" + " firstname= " + super.getFirstName() + " lastname= " + super.getLastName() +
+                " webPage='" + webPage + '\'' +
+                ", affiliation='" + affiliation + '\'' +
+                ", notes='" + notes + '\'' +
+                ", contactInfo=" + contactInfo.toString() +
+                '}';
+    }
 }
 
 
