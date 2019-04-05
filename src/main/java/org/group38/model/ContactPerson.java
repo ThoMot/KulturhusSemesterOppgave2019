@@ -1,4 +1,5 @@
 //legge inn if else i alle setmetoder for å sjekke for riktig input
+//tostring metode
 
 package org.group38.model;
 
