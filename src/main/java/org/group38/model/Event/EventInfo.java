@@ -36,4 +36,9 @@ public class EventInfo {
     public void setDate(Calendar date) {
         this.date = date;
     }
+
+    public String toString(){
+        return eventName+" "+date.getTime()+"\n"+
+                program;
+    }
 }

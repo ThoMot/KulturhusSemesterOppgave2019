@@ -1,5 +1,3 @@
-//må legge inn feilmelding ved feil input i alle setmetoder
-
 package org.group38.model.Event;
 
 import java.util.Calendar;
@@ -74,5 +72,8 @@ public class Ticket {
                 date.getTime()+"\n"+
                 "På seterad: "+seatRow+" setenummer: "+seatNumber+"\n"
                 +"Koster "+price+"kr og er registrert på telefonnummer "+phonenumber;
+    }
+    public Calendar getDate(){
+        return date;
     }
 }

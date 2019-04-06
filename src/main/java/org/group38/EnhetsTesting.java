@@ -1,4 +1,3 @@
-//lese meg opp på hvordan testing burde være
 package org.group38;
 
 import org.group38.model.ContactPerson.ContactPerson;
@@ -75,42 +74,88 @@ public class EnhetsTesting {
             antallFeil++;
         }
 
-        //Testing the delete ticket method, must also check that the space in the matrix is cleared
+        //Testing the delete ticket method
         maxManus.buyTicket(8,5,"90862870");
         String slett = maxManus.deleteTicket("90862870");
         if(!"2 billetter er slettet på 90862870".equals(slett)){
-            System.out.println("Feil i sletting av flere billetter");
+            System.out.println("Feil i sletting av flere billetter på telefonnummer");
             antallFeil++;
         }
 
         String slett2 =maxManus.deleteTicket("90862870");
         if(!"Billetten eksisterer ikke".equals(slett2)){
-            System.out.println("Feil i sletting av billetter somj ikke finnes");
+            System.out.println("Feil i sletting av billetter som ikke finnes på telefonnummer");
             antallFeil++;
         }
+        maxManus.buyTicket(8,5,"90862870");
+        boolean slett3 = maxManus.deleteTicket(8, 5);
+        boolean slett4 = maxManus.deleteTicket(8, 5);
 
-        maxManus.buyTicket(4, 2, "90862870");
-        Ticket ticket = maxManus.findTicket("90862870");
-        System.out.println(ticket.toString());
+        if(!slett3){
+            antallFeil++;
+            System.out.println("Feil i sletting av billett med seteplassering som input");
+        }
+        if(slett4){
+            antallFeil++;
+            System.out.println("Feil i sletting av billett som ikke finnes med seteplass som input");
+        }
 
         //testing of setmethod for phonenumber
-        String testsetelefonnummer = ticket.setPhonenumber("8734");
-        String testsetelefonnummer2 = ticket.setPhonenumber("absofhrt");
+        maxManus.buyTicket(4, 2, "90862870");
+        Ticket ticket = maxManus.findTicket(4,2);
+        String testsettelefonnummer = ticket.setPhonenumber("8734");
+        String testsettelefonnummer2 = ticket.setPhonenumber("absofhrt");
         String testsettelefonnummer3 = ticket.setPhonenumber("23541234");
-        if(!"Telefonnummeret inneholder ikke 8 symboler".equals(testsetelefonnummer)){
+        if(!"Telefonnummeret inneholder ikke 8 symboler".equals(testsettelefonnummer)){
             antallFeil++;
             System.out.println("Feil i sjekking av lengde av telefonnummer");
         }
-        if(!"Telefonnummer er på feil format".equals(testsetelefonnummer2)){
+        if(!"Telefonnummer er på feil format, må inneholde bare tall".equals(testsettelefonnummer2)){
             antallFeil++;
-            System.out.println("Feil ved sjekkin om telefonnummer bare er tall");
+            System.out.println("Feil ved sjekking om telefonnummer bare er tall");
         }
         if(!"Telefonnummer er oppdatert".equals(testsettelefonnummer3)){
             antallFeil++;
             System.out.println("Feil ved oppdatering av telefonnummer");
         }
 
-        System.out.println("\nAntall feil i enhetstesting testing: "+antallFeil);
+        //testing av setdate metode
+        maxManus.buyTicket(2, 4, "90862870");
+        Calendar e= new GregorianCalendar(2019, 10,8, 20,00);
+        maxManus.setDate(e);
+        String changedate= eventInfo.getDate().getTime().toString();
+        String changedate2= maxManus.findTicket(2,4).getDate().getTime().toString();
+
+        if(!"Fri Nov 08 20:00:00 CET 2019".equals(changedate)){
+            antallFeil++;
+            System.out.println("Feil i redigering av dato i eventinfoobjektet");
+        }
+        if(!"Fri Nov 08 20:00:00 CET 2019".equals(changedate2)){
+            antallFeil++;
+            System.out.println("Feil i redigering av dato i billettobjektet");
+        }
+
+        //Testing setTicketPrice method
+        maxManus.buyTicket(2, 4, "90862870");
+        maxManus.setTicketPrice(200);
+        String setPriceTest= maxManus.getTicketPrice()+"";
+        String setPriceTest2= maxManus.findTicket(2, 4).getPrice()+"";
+        if(!"200.0".equals(setPriceTest)){
+            antallFeil++;
+            System.out.println("Feil i endring av pris i eventklassen");
+        }
+        if(!"200.0".equals(setPriceTest2)){
+            antallFeil++;
+            System.out.println("Feil i endring av pris i billettklassen");
+        }
+
+        maxManus.buyTicket(9, 8, "90241020");
+        System.out.println(maxManus.findTicket(9, 8).toString());
+        String editSeat= maxManus.editSeat(9,8, 3,4);
+        //System.out.println(maxManus.findTicket(9,8).toString());
+        System.out.println(maxManus.findTicket(3, 4).toString());
+
+        System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 
     }
 }
