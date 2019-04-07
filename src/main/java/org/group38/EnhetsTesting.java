@@ -152,7 +152,12 @@ public class EnhetsTesting {
         maxManus.buyTicket(9, 8, "90241020");
         System.out.println(maxManus.findTicket(9, 8).toString());
         String editSeat= maxManus.editSeat(9,8, 3,4);
-        //System.out.println(maxManus.findTicket(9,8).toString());
+        try{
+            System.out.println(maxManus.findTicket(9,8).toString());
+        }
+        catch (NullPointerException billettFinnesikke){
+            System.out.println("Finnes ingen billett på plasseringen");
+        }
         System.out.println(maxManus.findTicket(3, 4).toString());
 
         System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
