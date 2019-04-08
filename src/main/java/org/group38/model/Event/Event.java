@@ -1,6 +1,7 @@
 //er det mer som må kunne redigeres ved et arrangement enn billettpris og dato? skal vi feks kunne endre hvilket lokale det skjer i? da blir det mye som må endres
 //Hvordan skal utskrift av ledige seter se ut?
 //Trenger vi mer i tostringmetoden?
+//lage metoder som samsvarer med at lokalet ikke har sitteplasser også
 
 package org.group38.model.Event;
 
@@ -12,12 +13,12 @@ import java.util.Calendar;
 import java.util.StringJoiner;
 
 public class Event {
-    private ContactPerson contactPerson; //skal denne også være på eventinfo
+    private ContactPerson contactPerson; //skal denne også være på eventinfo?
     private Facility facility;
-    private ArrayList performers; //skal denne også være på eventinfo
+    private ArrayList performers; //skal denne også være på eventinfo?
     private Ticket[][] tickets;
     private EventInfo eventInfo;
-
+    //private Ticket[] tickets2;
     private double ticketPrice;
     private int rows;
     private int columns;
@@ -33,6 +34,9 @@ public class Event {
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;
     }
+//    public Event(ContactPerson contactPerson, Facility facility, ArrayList performers, double ticketPrice, EventInfo eventInfo, int maxNumbSeats){
+//
+//    }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
