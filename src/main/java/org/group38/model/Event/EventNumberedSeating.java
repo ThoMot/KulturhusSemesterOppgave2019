@@ -25,12 +25,11 @@ public class EventNumberedSeating extends Event {
         if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns;
         if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(seatRow, seatNumber,
-                    super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber, super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
+            tickets[seatRow][seatNumber] = new Ticket(super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber,
+                    super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
             return "Billett er reservert på plass: "+seatNumber+","+seatRow;
-        } else {
-            return "Setet er opptatt";
         }
+        else return "Setet er opptatt";
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
@@ -49,19 +48,19 @@ public class EventNumberedSeating extends Event {
 
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
     public String DeleteTicket(String phoneNumber) {
-        int antallSlettet=0;
+        int numberDeleted=0;
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
                 if (tickets[i][j]!=null) {
                     if (tickets[i][j].getPhonenumber().equals(phoneNumber)) {
                         tickets[i][j] = null;
-                        antallSlettet++;
+                        numberDeleted++;
                     }
                 }
             }
         }
-        if(antallSlettet==0)return "Billetten eksisterer ikke";
-        else return antallSlettet+" billetter er slettet på "+phoneNumber;
+        if(numberDeleted==0)return "Billetten eksisterer ikke";
+        else return numberDeleted+" billetter er slettet på "+phoneNumber;
     }
 
     //Deletes tickets based on the seatrow and seatnumber
@@ -132,5 +131,9 @@ public class EventNumberedSeating extends Event {
             return BuyTicket(seatRow, seatNumber, phoneNumber);
         }
         else return "Det eksisterer ikke noe sete på det gamle plasseringen";
+    }
+    public String printTicket(int seatRow, int seatNumber){
+        Ticket t= FindTicket(seatRow, seatNumber);
+        return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
 }

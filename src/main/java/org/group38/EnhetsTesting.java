@@ -147,15 +147,15 @@ public class EnhetsTesting {
         }
 
         maxManus.BuyTicket(9, 8, "90241020");
-        System.out.println(maxManus.FindTicket(9, 8).toString());
+        System.out.println(maxManus.printTicket(9, 8));
         String editSeat= maxManus.EditSeat(9,8, 3,4);
         try{
-            System.out.println(maxManus.FindTicket(9,8).toString());
+            System.out.println(maxManus.printTicket(9,8));
         }
         catch (NullPointerException billettFinnesikke){
             System.out.println("Finnes ingen billett på plasseringen");
         }
-        System.out.println(maxManus.FindTicket(3, 4).toString());
+        System.out.println(maxManus.printTicket(3, 4));
 
         System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 
