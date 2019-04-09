@@ -2,11 +2,8 @@ package org.group38;
 
 import org.group38.model.ContactPerson.ContactPerson;
 import org.group38.model.ContactPerson.ContactInfo;
-import org.group38.model.Event.Event;
-import org.group38.model.Event.EventInfo;
+import org.group38.model.Event.*;
 import org.group38.model.Facility;
-import org.group38.model.Event.Performer;
-import org.group38.model.Event.Ticket;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +22,7 @@ public class EnhetsTesting {
         performers.add(new Performer("Hans", "Langus"));
         performers.add(new Performer("Kine", "Larsen"));
 
-        Event maxManus=new Event(contactPerson, facility, performers, 100, eventInfo);
+        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, performers, 100, eventInfo);
 
 
         ContactInfo martinasInfo = new ContactInfo("test", "1010101010101");

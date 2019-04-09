@@ -59,7 +59,7 @@ public class Facility {
         this.columns = columns;
     }
 
-
+    public int getMaxAntSeats() { return maxAntSeats; }
 
     @Override
     public String toString() {
