@@ -14,22 +14,19 @@ public class EventNumberedSeating extends Event {
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, ArrayList performers, double ticketPrice, EventInfo eventInfo) {
-        this.facility=facility;
+        super(contactPerson, facility, performers, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
         tickets = new Ticket[rows][columns];
-        this.performers = performers;
-        this.ticketPrice = ticketPrice;
-        this.contactPerson = contactPerson;
-        this.eventInfo = eventInfo;
     }
 
-    public String buyTicket(int seatRow, int seatNumber, String phoneNumber) {
+    //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
+    public String BuyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns;
         if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
         if (tickets[seatRow][seatNumber]==null) {
             tickets[seatRow][seatNumber] = new Ticket(seatRow, seatNumber,
-                    eventInfo.getDate(), this.ticketPrice, phoneNumber, this.facility.getFacilityName(), eventInfo.getEventName());
+                    super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber, super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
             return "Billett er reservert på plass: "+seatNumber+","+seatRow;
         } else {
             return "Setet er opptatt";
@@ -37,7 +34,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
-    public String freeSeats() {
+    public String FreeSeats() {
         StringJoiner s= new StringJoiner("\n ");
         for (int i = 0; i < tickets.length; i++) {
             s.add("\n");
@@ -51,7 +48,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
-    public String deleteTicket(String phoneNumber) {
+    public String DeleteTicket(String phoneNumber) {
         int antallSlettet=0;
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
@@ -68,7 +65,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //Deletes tickets based on the seatrow and seatnumber
-    public boolean deleteTicket(int seatRow, int seatNumber){
+    public boolean DeleteTicket(int seatRow, int seatNumber){
         if(tickets[seatRow][seatNumber]!=null){
             tickets[seatRow][seatNumber]=null;
             return true;
@@ -77,7 +74,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //finds tickets based on the phonenumber and returns an arraylist of these tickets
-    public ArrayList<Ticket> findTickets(String phoneNumber){
+    public ArrayList<Ticket> FindTickets(String phoneNumber){
         ArrayList<Ticket> list= new ArrayList<>();
         for(int i=0;i<tickets.length;i++){
             for(int j=0;j<tickets[i].length;j++){
@@ -90,7 +87,7 @@ public class EventNumberedSeating extends Event {
         return list;
     }
     //Returns the ticket based on seatnumber and row
-    public Ticket findTicket(int seatRow, int seatNumber){
+    public Ticket FindTicket(int seatRow, int seatNumber){
         if (tickets[seatRow][seatNumber]!=null){
             return tickets[seatRow][seatNumber];
         }
@@ -98,7 +95,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //Checking if the event is full, by going through the matrix searching for any available spots
-    public boolean full() {
+    public boolean Full() {
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
                 if (tickets[i][j] == null) return false;
@@ -108,7 +105,7 @@ public class EventNumberedSeating extends Event {
     }
     //Edit the date of an event, also updating all bought tickets and eventinfo
     public void setDate(Calendar date){
-        eventInfo.setDate(date);
+        super.getEventInfo().setDate(date);
         for(Ticket[] tickets: tickets){
             for( Ticket ticket: tickets){
                 if(ticket!=null){
@@ -120,7 +117,7 @@ public class EventNumberedSeating extends Event {
 
     //Updates the ticketprice bought in the event, and also for all bought tickets
     public void setTicketPrice(double price){
-        this.ticketPrice=price;
+        super.setTicketPrice(price);
         for(Ticket[] tickets: tickets){
             for( Ticket ticket: tickets){
                 if(ticket!=null){
@@ -129,10 +126,10 @@ public class EventNumberedSeating extends Event {
             }
         }
     }
-    public String editSeat(int oldRow,int oldSeat, int seatRow, int seatNumber){
-        String phoneNumber= findTicket(oldRow, oldSeat).getPhonenumber();
-        if(deleteTicket(oldRow, oldSeat)){
-            return buyTicket(seatRow, seatNumber, phoneNumber);
+    public String EditSeat(int oldRow,int oldSeat, int seatRow, int seatNumber){
+        String phoneNumber= FindTicket(oldRow, oldSeat).getPhonenumber();
+        if(DeleteTicket(oldRow, oldSeat)){
+            return BuyTicket(seatRow, seatNumber, phoneNumber);
         }
         else return "Det eksisterer ikke noe sete på det gamle plasseringen";
     }

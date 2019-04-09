@@ -7,20 +7,24 @@ package org.group38.model.Event;
 
 import org.group38.model.ContactPerson.ContactPerson;
 import org.group38.model.Facility;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.StringJoiner;
 
-public class Event {
-    ContactPerson contactPerson; //skal denne også være på eventinfo?
-    Facility facility;
-    ArrayList performers; //skal denne også være på eventinfo?
-    EventInfo eventInfo;
-    double ticketPrice;
 
-    //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
+public abstract class Event {
+    private ContactPerson contactPerson; //skal denne også være på eventinfo?
+    private Facility facility;
+    private ArrayList performers; //skal denne også være på eventinfo?
+    private EventInfo eventInfo;
+    private double ticketPrice;
 
+    //constructor
+    public Event(ContactPerson contactPerson, Facility facility, ArrayList performers, EventInfo eventInfo, double ticketPrice){
+        this.facility=facility;
+        this.performers = performers;
+        this.ticketPrice = ticketPrice;
+        this.contactPerson = contactPerson;
+        this.eventInfo = eventInfo;
+    }
 
     //er det interessant å skrive ut noe mer info om et arrangement?
     public String toString(){
@@ -33,5 +37,13 @@ public class Event {
     }
     public EventInfo getEventInfo(){
         return eventInfo;
+    }
+
+    public Facility getFacility() {
+        return facility;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }
