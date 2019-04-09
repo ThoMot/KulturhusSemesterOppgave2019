@@ -12,19 +12,19 @@
          <top>
             <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="Event">
+                <Menu mnemonicParsing="false" text="Arrangement">
                   <items>
                     <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Add..." />
                         <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Ticket">
+                <Menu mnemonicParsing="false" text="Billett">
                   <items>
                     <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Add.." />
                         <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Show..." />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Venue">
+                  <Menu mnemonicParsing="false" text="Lokale">
                      <items>
                         <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Show..." />
                      </items>

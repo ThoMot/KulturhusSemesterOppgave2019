@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class FrontpageController {
+public class FrontpageController{
+
 
     @FXML
     private MenuItem addEvent;
@@ -29,6 +30,7 @@ public class FrontpageController {
     private AnchorPane rootPane;
     @FXML
     private MenuBar menuBar;
+
 
 
     @FXML
