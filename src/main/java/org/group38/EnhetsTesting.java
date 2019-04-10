@@ -34,9 +34,6 @@ public class EnhetsTesting {
         System.out.println(martina.toString());
 
 
-
-
-
         //Testing the buy tickets method
         String buy= maxManus.BuyTicket(5,4,"90862870");
         if(!"Billett er reservert på plass: 4,5".equals(buy)){
