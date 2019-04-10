@@ -16,7 +16,8 @@ public class EnhetsTesting {
         Facility facility=new Facility("Sal1","kino", 10,10);
 
 
-        Calendar d= new GregorianCalendar(2019, 10,10, 22,00);
+        Calendar d= new GregorianCalendar(2019, 10,10,22,00);
+
         ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
         EventInfo eventInfo = new EventInfo("Max Manus", "film",d);
         ArrayList<Performer> performers= new ArrayList <Performer>();

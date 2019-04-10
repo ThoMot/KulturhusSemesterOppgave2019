@@ -30,7 +30,11 @@ public class Ticket {
         this.date = date;
     }
 
-    public void setFacilityName(String facilityName) {
+    public Calendar getDate() {
+        return date;
+    }
+
+    public String setFacilityName(String facilityName) {
         this.facilityName = facilityName;
     }
 
@@ -48,6 +52,25 @@ public class Ticket {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+        return "Setenummer er endret";
+    }
+
+    public String setSeatRow(int seatRow){
+        this.seatRow=seatRow;
+        return "Seterad er oppdatert";
+    }
+
+    public int getSeatRow() {
+        return seatRow;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
 
     public String toString(){
         return "Billett til "+eventName+ " i "+facilityName+"\n"+
