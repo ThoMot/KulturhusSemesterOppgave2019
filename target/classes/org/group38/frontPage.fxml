@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorpaneFront" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.FrontpageController">
-   <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <top>
-            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="Event">
-                  <items>
-                    <MenuItem fx:id="addEvent" mnemonicParsing="false" text="Add..." />
-                        <MenuItem fx:id="showEvent" mnemonicParsing="false" text="Show..." />
-                  </items>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.group38.FrontpageController" prefHeight="400.0" prefWidth="600.0">
+      <top>
+        <MenuBar >
+            <menus>
+                <Menu text="Arrangement">
+                    <items>
+                        <MenuItem text="Add..." />
+                    </items>
+                    <items>
+                        <MenuItem text="Show..."/>
+                    </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Ticket">
-                  <items>
-                    <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToTicket" text="Add.." />
-                        <MenuItem fx:id="showTicket" mnemonicParsing="false" text="Show..." />
-                  </items>
+                <Menu text="Billett">
+                    <items>
+                        <MenuItem text="Add..." />
+                    </items>
+                    <items>
+                        <MenuItem text="Show..."/>
+                    </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Venue">
-                     <items>
-                        <MenuItem fx:id="showVenue" mnemonicParsing="false" text="Show..." />
-                     </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
-         </top>
-         <center>
-            <Button mnemonicParsing="false" onAction="#goToTicket" text="Button" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-   </children>
-</AnchorPane>
+                <Menu text="Lokale">
+                    <items>
+                        <MenuItem text="Show..."/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+      </top>
+    <center>
+
+    </center>
+
+    <Button fx:id="Knapp1" text="Lokaler" layoutX="50" layoutY="50" ></Button>
+    <Button fx:id="Knapp2" text="Arrangementer" layoutX="150" layoutY="50"></Button>
+    <Button fx:id="Knapp3" text="Billetter" layoutX="250" layoutY="50"></Button>
+    <Button fx:id="Knapp4" text="Kontaktpersoner" layoutX="350" layoutY="50"></Button>
+    <Label fx:id="label" layoutX="100" layoutY="100" minHeight="400" minWidth="400" text="Arrangementliste her"/>
+</BorderPane>

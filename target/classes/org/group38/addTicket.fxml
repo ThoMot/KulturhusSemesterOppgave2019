@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorAddTicket" prefHeight="395.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.TicketSceneController">
+<AnchorPane fx:id="anchorAddTicket" prefHeight="395.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.model.Controllers.AddTicketController">
    <children>
       <MenuBar layoutY="-2.0" prefHeight="17.0" prefWidth="602.0">
         <menus>
