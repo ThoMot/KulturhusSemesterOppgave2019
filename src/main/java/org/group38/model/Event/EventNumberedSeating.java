@@ -5,6 +5,7 @@ import org.group38.model.Facility;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 
 public class EventNumberedSeating extends Event {
@@ -21,15 +22,14 @@ public class EventNumberedSeating extends Event {
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
-    public String BuyTicket(int seatRow, int seatNumber, String phoneNumber) {
-        if(seatNumber>columns||seatNumber<0) return "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns;
-        if(seatRow>rows|| seatRow<0) return "Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows;
+    public void BuyTicket(int seatRow, int seatNumber, String phoneNumber) {
+        if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
+        if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
             tickets[seatRow][seatNumber] = new Ticket(super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber,
                     super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
-            return "Billett er reservert på plass: "+seatNumber+","+seatRow;
         }
-        else return "Setet er opptatt";
+        else throw new IllegalArgumentException("Setet er opptatt");
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
@@ -47,7 +47,7 @@ public class EventNumberedSeating extends Event {
     }
 
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
-    public String DeleteTicket(String phoneNumber) {
+    public void DeleteTicket(String phoneNumber) {
         int numberDeleted=0;
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
@@ -59,17 +59,15 @@ public class EventNumberedSeating extends Event {
                 }
             }
         }
-        if(numberDeleted==0)return "Billetten eksisterer ikke";
-        else return numberDeleted+" billetter er slettet på "+phoneNumber;
+        if(numberDeleted==0)throw new NoSuchElementException("Billetten(e) eksisterer ikke");
     }
 
     //Deletes tickets based on the seatrow and seatnumber
-    public boolean DeleteTicket(int seatRow, int seatNumber){
+    public void DeleteTicket(int seatRow, int seatNumber){
         if(tickets[seatRow][seatNumber]!=null){
             tickets[seatRow][seatNumber]=null;
-            return true;
         }
-        return false;
+        else throw new NoSuchElementException("Billetten finnes ikke");
     }
 
     //finds tickets based on the phonenumber and returns an arraylist of these tickets
@@ -125,12 +123,16 @@ public class EventNumberedSeating extends Event {
             }
         }
     }
-    public String EditSeat(int oldRow,int oldSeat, int seatRow, int seatNumber){
-        String phoneNumber= FindTicket(oldRow, oldSeat).getPhonenumber();
-        if(DeleteTicket(oldRow, oldSeat)){
-            return BuyTicket(seatRow, seatNumber, phoneNumber);
+    public void EditSeat(int oldRow,int oldSeat, int seatRow, int seatNumber) {
+        String phoneNumber = FindTicket(oldRow, oldSeat).getPhonenumber();
+        try {
+            DeleteTicket(oldRow, oldSeat);
+            BuyTicket(seatRow, seatNumber, phoneNumber);
+        } catch (NoSuchElementException e) {
+            System.out.println(e);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
         }
-        else return "Det eksisterer ikke noe sete på det gamle plasseringen";
     }
     public String printTicket(int seatRow, int seatNumber){
         Ticket t= FindTicket(seatRow, seatNumber);

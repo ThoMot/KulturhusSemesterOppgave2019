@@ -26,31 +26,27 @@ public class Ticket {
         return price;
     }
 
-    public String setDate(Calendar date) {
+    public void setDate(Calendar date) {
         this.date = date;
-        return "Dato er endret";
     }
 
-    public String setFacilityName(String facilityName) {
+    public void setFacilityName(String facilityName) {
         this.facilityName = facilityName;
-        return "Lokalnavn er oppdatert";
     }
 
-    public String setPhonenumber(String phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         if(phonenumber.length()!=8){
-            return "Telefonnummeret inneholder ikke 8 symboler";
+            throw new IllegalArgumentException("Telefonnummeret inneholder ikke 8 symboler");
         }
         boolean numeric = phonenumber.matches("-?\\d+(\\.\\d+)?");
         if(!numeric){
-            return "Telefonnummer er på feil format, må inneholde bare tall";
+            throw new IllegalArgumentException("Telefonnummer er på feil format, må inneholde bare tall");
         }
-        this.phonenumber = phonenumber;
-        return "Telefonnummer er oppdatert";
+        else this.phonenumber = phonenumber;
     }
 
-    public String setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
-        return "Prisen er oppdatert";
     }
 
     public String toString(){
