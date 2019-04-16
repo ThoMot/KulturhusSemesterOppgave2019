@@ -35,7 +35,7 @@ public class FrontpageController{
 
     @FXML
     private void goToAddTicket(ActionEvent event) throws IOException {
-            Parent homeScreen = FXMLLoader.load(getClass().getResource("/org/group38/addTicket.fxml"));
+            Parent homeScreen = FXMLLoader.load(getClass().getResource("org/group38/addTicket.fxml"));
             Scene scene = new Scene(homeScreen);
             Stage stage = (Stage)  menuBar.getScene().getWindow();
             stage.setScene(scene);

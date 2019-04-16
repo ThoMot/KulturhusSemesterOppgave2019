@@ -88,7 +88,7 @@ public class EventNumberedSeating extends Event {
         if (tickets[seatRow][seatNumber]!=null){
             return tickets[seatRow][seatNumber];
         }
-        else return null;
+        else throw new NoSuchElementException("Det finnes ingen billett med gitt plassering");
     }
 
     //Checking if the event is full, by going through the matrix searching for any available spots
