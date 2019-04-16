@@ -14,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.group38.kulturhus.sceneHandling.SceneManager;
+import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Kulturhus;
 
@@ -50,20 +52,12 @@ public class FrontpageController implements MainController{
 
     @FXML
     private void goToAddTicket(ActionEvent event) throws IOException {
-            Parent homeScreen = FXMLLoader.load(getClass().getResource("org/group38/addTicket.fxml"));
-            Scene scene = new Scene(homeScreen);
-            Stage stage = (Stage)  menuBar.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+        SceneManager.navigate(SceneName.ADDTICKET);
     }
 
     @FXML
     private void goToShowTicket(ActionEvent event) throws IOException {
-        Parent homeScreen = FXMLLoader.load(getClass().getResource("showTickets.fxml"));
-        Scene scene = new Scene(homeScreen);
-        Stage stage = (Stage)  menuBar.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        SceneManager.navigate(SceneName.ADDEVENT);
     }
 
 
