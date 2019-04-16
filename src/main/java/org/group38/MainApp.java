@@ -1,24 +1,23 @@
 package org.group38;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.group38.kulturhus.sceneHandling.SceneManager;
+import org.group38.kulturhus.sceneHandling.SceneName;
 
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("frontpage.fxml"));
+    public void start(Stage primarystage) throws Exception {
 
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        SceneManager sceneManager = SceneManager.INSTANCE;
+        sceneManager.setPrimaryStage(primarystage);
+        SceneManager.navigate(SceneName.FRONTPAGE);
 
-        stage.setTitle("Kulturhuset");
-        stage.setScene(scene);
-        stage.show();
+        primarystage.show();
     }
+
+
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.

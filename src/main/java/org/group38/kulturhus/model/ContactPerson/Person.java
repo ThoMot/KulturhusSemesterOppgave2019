@@ -1,4 +1,4 @@
-package org.group38.model.ContactPerson;
+package org.group38.kulturhus.model.ContactPerson;
 
 public class Person {
 

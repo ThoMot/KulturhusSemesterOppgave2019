@@ -2,7 +2,7 @@
 //slette arraylist
 //lag tostring metode
 //lage setmetoder som også sjekker at det blir gitt riktig type input
-package org.group38.model;
+package org.group38.kulturhus.model;
 
 public class Facility {
     private String facilityName;

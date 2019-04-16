@@ -1,7 +1,7 @@
-package org.group38.model.Event;
+package org.group38.kulturhus.model.Event;
 
-import org.group38.model.ContactPerson.ContactPerson;
-import org.group38.model.Facility;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Facility;
 
 import java.util.ArrayList;
 import java.util.Calendar;

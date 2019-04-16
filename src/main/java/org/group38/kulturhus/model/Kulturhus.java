@@ -1,12 +1,12 @@
 //slette arrangementer etter at datoen har vært?
-package org.group38.model;
+package org.group38.kulturhus.model;
 
-import org.group38.model.ContactPerson.ContactInfo;
-import org.group38.model.ContactPerson.ContactPerson;
-import org.group38.model.Event.Event;
-import org.group38.model.Event.EventInfo;
-import org.group38.model.Event.EventNumberedSeating;
-import org.group38.model.Event.Performer;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Event.Event;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Event.Performer;
 
 import java.util.ArrayList;
 import java.util.Calendar;

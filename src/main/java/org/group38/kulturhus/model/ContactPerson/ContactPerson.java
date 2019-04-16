@@ -1,7 +1,7 @@
 //legge inn if else i alle setmetoder for å sjekke for riktig input
 //tostring metode
 
-package org.group38.model.ContactPerson;
+package org.group38.kulturhus.model.ContactPerson;
 
 public class ContactPerson extends Person {
     //Optional

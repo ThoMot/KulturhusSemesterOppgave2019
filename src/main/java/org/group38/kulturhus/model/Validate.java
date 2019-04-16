@@ -1,4 +1,4 @@
-package org.group38.model;
+package org.group38.kulturhus.model;
 
 public class Validate {
 

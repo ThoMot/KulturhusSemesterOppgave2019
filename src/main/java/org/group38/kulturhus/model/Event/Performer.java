@@ -1,7 +1,6 @@
-package org.group38.model.Event;
+package org.group38.kulturhus.model.Event;
 
-import org.group38.model.ContactPerson.ContactInfo;
-import org.group38.model.ContactPerson.Person;
+import org.group38.kulturhus.model.ContactPerson.Person;
 
 public class Performer extends Person {
 
