@@ -32,12 +32,11 @@
       </MenuBar>
    </top>
    <center>
-      <TableView fx:id="tableview" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="140.0" text="Navn" />
-          <TableColumn prefWidth="266.0" text="Program" />
-            <TableColumn minWidth="0.0" prefWidth="86.0" text="Type" />
-            <TableColumn prefWidth="107.0" text="Tid" />
+          <TableColumn prefWidth="140.0" text="Navn" fx:id="nameColumn"/>
+          <TableColumn prefWidth="266.0" text="Program" fx:id="programColumn"/>
+            <TableColumn prefWidth="107.0" text="Tid" fx:id="timeColumn"/>
         </columns>
       </TableView>
    </center>
