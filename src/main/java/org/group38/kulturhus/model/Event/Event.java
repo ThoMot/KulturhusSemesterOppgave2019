@@ -3,10 +3,10 @@
 //Trenger vi mer i tostringmetoden?
 //lage metoder som samsvarer med at lokalet ikke har sitteplasser også
 
-package org.group38.model.Event;
+package org.group38.kulturhus.model.Event;
 
-import org.group38.model.ContactPerson.ContactPerson;
-import org.group38.model.Facility;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Facility;
 import java.util.ArrayList;
 
 

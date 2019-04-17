@@ -1,9 +1,12 @@
 package org.group38;
 
-import org.group38.model.ContactPerson.ContactPerson;
-import org.group38.model.ContactPerson.ContactInfo;
-import org.group38.model.Event.*;
-import org.group38.model.Facility;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Event.Performer;
+import org.group38.kulturhus.model.Event.Ticket;
+import org.group38.kulturhus.model.Facility;
 
 import java.util.ArrayList;
 import java.util.Calendar;

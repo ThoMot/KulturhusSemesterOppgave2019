@@ -1,4 +1,4 @@
-package org.group38.model.Event;
+package org.group38.kulturhus.model.Event;
 
 import java.util.Calendar;
 

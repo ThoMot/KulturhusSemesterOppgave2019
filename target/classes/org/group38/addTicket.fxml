@@ -17,30 +17,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorAddTicket" prefHeight="395.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.model.Controllers.AddTicketController">
+<AnchorPane fx:id="anchorAddTicket" prefHeight="800" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
    <children>
-      <MenuBar layoutY="-2.0" prefHeight="17.0" prefWidth="602.0">
+      <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Kulturhuset">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Arrangement">
             <items>
-              <MenuItem mnemonicParsing="false" text="Legg til ..." />
-                  <MenuItem mnemonicParsing="false" text="Vis alle ..." />
+              <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="Legg til arrangement" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToShowEvent" text="Show arrangements" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Billett">
             <items>
-              <MenuItem mnemonicParsing="false" text="Legg til ..." />
-                  <MenuItem mnemonicParsing="false" text="Vis alle ...." />
+              <MenuItem mnemonicParsing="false" onAction="#goToShowTicket" text="vis billetter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Lokale">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Se Lokaler" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.32274247491638797" layoutX="1.0" layoutY="27.0" prefHeight="374.0" prefWidth="602.0">
+      <SplitPane dividerPositions="0.46327212020033387" layoutX="1.0" layoutY="27.0" prefHeight="771.0" prefWidth="1200.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="228.0">
                <children>
