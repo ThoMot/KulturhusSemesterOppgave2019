@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.FrontpageController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
    <top>
-      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+      <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="Arrangement">
                <items>
-                  <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Add..." />
+                  <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til arrangement" />
                   <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
                </items>
             </Menu>
@@ -34,10 +36,17 @@
    <center>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="140.0" text="Navn" fx:id="nameColumn"/>
-          <TableColumn prefWidth="266.0" text="Program" fx:id="programColumn"/>
-            <TableColumn prefWidth="107.0" text="Tid" fx:id="timeColumn"/>
+          <TableColumn fx:id="nameColumn" prefWidth="140.0" text="Navn" />
+          <TableColumn fx:id="programColumn" prefWidth="266.0" text="Program" />
+            <TableColumn fx:id="timeColumn" prefWidth="107.0" text="Tid" />
         </columns>
       </TableView>
    </center>
+   <bottom>
+      <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Oppdater" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>
