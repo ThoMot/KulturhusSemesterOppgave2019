@@ -13,12 +13,13 @@ import java.util.ArrayList;
 public abstract class Event {
     private ContactPerson contactPerson; //skal denne også være på eventinfo?
     private Facility facility;
-    private ArrayList performers; //skal denne også være på eventinfo?
+    //private ArrayList performers; //skal denne også være på eventinfo?
+    private String performers; //skal denne også være på eventinfo?
     private EventInfo eventInfo;
     private double ticketPrice;
 
     //constructor
-    public Event(ContactPerson contactPerson, Facility facility, ArrayList performers, EventInfo eventInfo, double ticketPrice){
+    public Event(ContactPerson contactPerson, Facility facility, String performers, EventInfo eventInfo, double ticketPrice){
         this.facility=facility;
         this.performers = performers;
         this.ticketPrice = ticketPrice;
@@ -28,8 +29,16 @@ public abstract class Event {
 
     //er det interessant å skrive ut noe mer info om et arrangement?
     public String toString(){
-        return eventInfo.toString()+"\n"+
-                "Billetpris: "+ticketPrice;
+        return eventInfo.toString();
+    }
+
+
+    public String getPerformers() {
+        return performers;
+    }
+
+    public void setPerformers(String performers) {
+        this.performers = performers;
     }
 
     public double getTicketPrice(){

@@ -3,6 +3,7 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.NoSuchElementException;
@@ -14,7 +15,7 @@ public class EventNumberedSeating extends Event {
     private int rows;
 
     //constructor
-    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, ArrayList performers, double ticketPrice, EventInfo eventInfo) {
+    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, performers, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
@@ -101,7 +102,7 @@ public class EventNumberedSeating extends Event {
         return true;
     }
     //Edit the date of an event, also updating all bought tickets and eventinfo
-    public void setDate(Calendar date){
+    public void setDate(LocalDate date){
         super.getEventInfo().setDate(date);
         for(Ticket[] tickets: tickets){
             for( Ticket ticket: tickets){

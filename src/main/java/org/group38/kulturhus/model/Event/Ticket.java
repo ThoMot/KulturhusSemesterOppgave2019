@@ -1,17 +1,18 @@
 package org.group38.kulturhus.model.Event;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Ticket {
     //data field
     private double price;
     private String facilityName;
-    private Calendar date;
+    private LocalDate date;
     private String phonenumber;
     private String eventName;
 
     //constructor
-    public Ticket(Calendar date, double price, String phonenumber, String facilityName, String eventName) {
+    public Ticket(LocalDate date, double price, String phonenumber, String facilityName, String eventName) {
         this.facilityName=facilityName;
         this.date=date;
         this.phonenumber=phonenumber;
@@ -26,15 +27,15 @@ public class Ticket {
         return price;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
-    }
-
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public String setFacilityName(String facilityName) {
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setFacilityName(String facilityName) {
         this.facilityName = facilityName;
     }
 
@@ -53,31 +54,29 @@ public class Ticket {
         this.price = price;
     }
 
-    public String setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
-        return "Setenummer er endret";
-    }
-
-    public String setSeatRow(int seatRow){
-        this.seatRow=seatRow;
-        return "Seterad er oppdatert";
-    }
-
-    public int getSeatRow() {
-        return seatRow;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
+//    public String setSeatNumber(int seatNumber) {
+//        this.seatNumber = seatNumber;
+//        return "Setenummer er endret";
+//    }
+//
+//    public String setSeatRow(int seatRow){
+//        this.seatRow=seatRow;
+//        return "Seterad er oppdatert";
+//    }
+//
+//    public int getSeatRow() {
+//        return seatRow;
+//    }
+//
+//    public int getSeatNumber() {
+//        return seatNumber;
+//    }
 
 
     public String toString(){
         return "Billett til "+eventName+ " i "+facilityName+"\n"+
-                date.getTime()+"\n"+
+                date+"\n"+
                 "Koster "+price+"kr og er registrert på telefonnummer "+phonenumber;
     }
-    public Calendar getDate(){
-        return date;
-    }
+
 }

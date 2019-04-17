@@ -1,13 +1,19 @@
 package org.group38.kulturhus.model.Event;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class EventInfo {
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
+
     private String eventName;
     private String program;
-    private Calendar date;
+    private LocalDate date;
+    private LocalTime time;
 
-    public EventInfo(String eventName, String program, Calendar date) {
+    public EventInfo(String eventName, String program, LocalDate date) {
         this.eventName = eventName;
         this.program = program;
         this.date = date;
@@ -29,16 +35,26 @@ public class EventInfo {
         this.program = program;
     }
 
-    public Calendar getDate() {
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public String toString(){
-        return eventName+" "+date.getTime()+"\n"+
-                program;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("d. MMMM yyyy");
+        return df.format(date) + " \t" + eventName;
     }
 }

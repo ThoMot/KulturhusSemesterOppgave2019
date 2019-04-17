@@ -9,6 +9,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
    <top>
       <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
@@ -34,13 +39,19 @@
       </MenuBar>
    </top>
    <center>
-      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="140.0" text="Navn" />
-          <TableColumn fx:id="programColumn" prefWidth="266.0" text="Program" />
-            <TableColumn fx:id="timeColumn" prefWidth="107.0" text="Tid" />
-        </columns>
-      </TableView>
+
+      <ListView fx:id="eventsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
+
+
+        <!--<columns>-->
+          <!--&lt;!&ndash;<TableColumn fx:id="nameColumn" prefWidth="140.0" text="Navn" />&ndash;&gt;-->
+          <!--&lt;!&ndash;<TableColumn fx:id="programColumn" prefWidth="266.0" text="Program" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<TableColumn fx:id="timeColumn" prefWidth="107.0" text="Tid" />&ndash;&gt;-->
+        <!--</columns>-->
+         
+      </ListView>
+
+
    </center>
    <bottom>
       <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">

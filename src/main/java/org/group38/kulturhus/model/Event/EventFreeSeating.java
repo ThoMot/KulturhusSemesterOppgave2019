@@ -3,6 +3,7 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -10,7 +11,7 @@ public class EventFreeSeating extends Event {
     private Ticket[] tickets;
     private int maxSeats;
 
-    public EventFreeSeating(ContactPerson contactPerson, Facility facility, ArrayList performers, double ticketPrice, EventInfo eventInfo) {
+    public EventFreeSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, performers, eventInfo, ticketPrice);
         this.maxSeats=facility.getMaxAntSeats();
         tickets = new Ticket[maxSeats];
@@ -37,7 +38,7 @@ public class EventFreeSeating extends Event {
         else return numberDeleted+" billetter er slettet";
     }
 
-    public void setDate(Calendar date){
+    public void setDate(LocalDate date){
         super.getEventInfo().setDate(date);
         for(Ticket ticket : tickets){
             if(ticket!=null){

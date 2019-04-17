@@ -13,6 +13,9 @@ public class Facility {
 
 
     // Constructor
+    public Facility(){
+
+    }
     public Facility(String facilityName, int maxAntSeats){
         this.facilityName = facilityName;
         this.facilityType = "Forsamlinssal";
@@ -24,6 +27,18 @@ public class Facility {
         this.facilityType = facilityType;
         this.rows=numRows;
         this.columns=seatsPerRow;
+    }
+
+    public Facility addCinema(){
+        return new Facility("Sal 1", "Kino", 50,40);
+    }
+
+    public Facility addTheater(){
+        return new Facility("Sal 2", "Theater", 4,3);
+    }
+
+    public Facility addAssemblyHall(){
+        return new Facility("Sal 3", 40);
     }
 
 
