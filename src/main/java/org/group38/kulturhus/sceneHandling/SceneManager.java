@@ -89,8 +89,8 @@ public enum SceneManager {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-
     }
+
 
     @Override
     public String toString() {
