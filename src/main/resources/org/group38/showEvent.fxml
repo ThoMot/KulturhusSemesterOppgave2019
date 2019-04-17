@@ -15,19 +15,19 @@
          <menus>
             <Menu mnemonicParsing="false" text="Arrangement">
                <items>
-                  <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til arrangement" />
-                  <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
+                  <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" />
+                  <MenuItem fx:id="addEvent1" mnemonicParsing="false" onAction="#goToAddEvent" text="endre arrangement" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Billett">
                <items>
-                  <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Add.." />
-                  <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Show..." />
+                  <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" />
+                  <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Lokale">
                <items>
-                  <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Show..." />
+                  <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
                </items>
             </Menu>
          </menus>

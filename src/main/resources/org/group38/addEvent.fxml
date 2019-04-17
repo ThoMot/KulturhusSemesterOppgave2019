@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.group38.kulturhus.controllers.AddEventController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="600.0">
             <top>
                 <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
                     <menus>
-                        <Menu mnemonicParsing="false" text="Event">
+                        <Menu mnemonicParsing="false" text="Arrangement">
                             <items>
-                                <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Add..." />
-                                <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
+                                <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Arrangementsoversikt" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Ticket">
                             <items>
-                                <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToTicket" text="Add.." />
-                                <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Show..." />
+                                <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToTicket" text="Reserver billett" />
+                                <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Venue">
                             <items>
-                                <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Show..." />
+                                <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Vis lokaler" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
             </top>
+         <bottom>
+            <Pane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Legg til Arrangement" />
+               </children>
+            </Pane>
+         </bottom>
         </BorderPane>
     </children>
 
