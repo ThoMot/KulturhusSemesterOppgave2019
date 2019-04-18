@@ -1,10 +1,12 @@
 //slette arrangementer etter at datoen har vært?
 package org.group38.kulturhus.model;
 
+import javafx.collections.ObservableList;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -17,7 +19,7 @@ public class Kulturhus {
     private static ArrayList<Ticket> tickets;
     public Kulturhus(){
             ArrayList<Event> events = new ArrayList();
-            tickets = new ArrayList<>();
+            tickets = new ArrayList<Ticket>();
             this.tickets = tickets;
             this.events=events;
     }
@@ -43,11 +45,16 @@ public class Kulturhus {
         events.add(maxManus);
         events.add(event2);
 
+
+
         Ticket ticket1 = new Ticket(maxManus,1,3,"11223344");
         Ticket ticket2 = new Ticket(maxManus,2,3,"11223344");
         tickets = new ArrayList<>();
         tickets.add(ticket1);
         tickets.add(ticket2);
+
+
+
 
 
 

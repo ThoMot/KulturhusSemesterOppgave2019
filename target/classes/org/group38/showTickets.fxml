@@ -11,6 +11,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
     <top>
         <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
@@ -45,13 +46,33 @@
 
     <center>
       <ListView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER" >
-        <!--<columns>-->
-          <!--<TableColumn prefWidth="75.0" text="Dato" />-->
-          <!--<TableColumn prefWidth="75.0" text="Klokken" />-->
-            <!--<TableColumn prefWidth="113.0" text="Telefonnummer" />-->
-            <!--<TableColumn prefWidth="206.0" text="Arrangement" />-->
-            <!--<TableColumn prefWidth="82.0" />-->
-        <!--</columns>-->
+
+              <!--<columnResizePolicy>-->
+                  <!--<TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
+              <!--</columnResizePolicy>-->
+              <!--<columns>-->
+                  <!--<TableColumn text="Dato">-->
+                      <!--<cellFactory>-->
+                          <!--<PropertyValueFactory property="date"/>-->
+                      <!--</cellFactory>-->
+                  <!--</TableColumn>-->
+                  <!--<TableColumn text="Tid">-->
+                      <!--<cellFactory>-->
+                          <!--<PropertyValueFactory property="time" />-->
+                      <!--</cellFactory>-->
+                  <!--</TableColumn>-->
+                  <!--<TableColumn text="Arrangement">-->
+                      <!--<cellFactory>-->
+                          <!--<PropertyValueFactory property="eventName" />-->
+                      <!--</cellFactory>-->
+                  <!--</TableColumn>-->
+                  <!--<TableColumn text="Telefonnummer">-->
+                      <!--<cellFactory>-->
+                          <!--<PropertyValueFactory property="phoneNumber" />-->
+                      <!--</cellFactory>-->
+                  <!--</TableColumn>-->
+              <!--</columns>-->
+
       </ListView>
     </center>
 
