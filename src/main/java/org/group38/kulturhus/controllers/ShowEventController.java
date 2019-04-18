@@ -29,6 +29,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.opprett;
+
 public class ShowEventController implements MainController{
 
 
@@ -72,11 +75,8 @@ public class ShowEventController implements MainController{
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
-        Kulturhus kulturhus = new Kulturhus();
-        kulturhus.opprett(); //kun for å lage et event for å sjekke
-        kulturhus.getEvents();
-
-        eventsView.getItems().setAll(kulturhus.getEvents());
+        opprett(); //kun for å lage et event for å sjekke
+        eventsView.getItems().setAll(getEvents());
         eventsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         eventsView.getSelectionModel().selectFirst();
     }

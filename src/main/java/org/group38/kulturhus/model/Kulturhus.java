@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Kulturhus {
-    private ArrayList<Event> events;
+    private static ArrayList<Event> events;
     private ArrayList<Ticket> tickets;
     public Kulturhus(){
             ArrayList<Event> events = new ArrayList();
@@ -24,14 +24,7 @@ public class Kulturhus {
 
 
     //kun for testing
-    public void opprett() {
-//        Facility facility = new Facility("Sal1", "kino", 10, 10);
-//        Calendar d = new GregorianCalendar(2019, 10, 10, 22, 00);
-//        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
-//        EventInfo eventInfo = new EventInfo("Max Manus", "film", d);
-//        ArrayList<Performer> performers = new ArrayList<Performer>();
-//        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, performers, 100, eventInfo);
-
+    public static void opprett() {
         Facility facility = new Facility("Sal1", "kino", 10, 10);
         LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
         LocalTime t = LocalTime.of(22,00);
@@ -55,7 +48,7 @@ public class Kulturhus {
 
     }
 
-    public ArrayList<Event> getEvents() {
+    public static ArrayList<Event> getEvents() {
         return events;
     }
 
