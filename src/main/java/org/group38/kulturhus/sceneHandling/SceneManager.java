@@ -33,7 +33,7 @@ public enum SceneManager {
         SceneInfo showEvent = new SceneInfo("Arrangementsoversikt", "/org/group38/showEvent.fxml");
         SceneInfo addEvent = new SceneInfo("Legg til Arrangement", "/org/group38/addEvent.fxml"  );
         SceneInfo addTickets = new SceneInfo("Reserver Billett", "/org/group38/addTicket.fxml"  );
-        SceneInfo showTickets = new SceneInfo("Vis Billetter", "/org/group38/showTicket.fxml"  );
+        SceneInfo showTickets = new SceneInfo("Vis Billetter", "/org/group38/showTickets.fxml"  );
         SceneInfo showVenues = new SceneInfo("Oversikt over Lokaler", "/org/group38/showVenues.fxml"  );
 
         scenes.put(SceneName.SHOWEVENT, showEvent);

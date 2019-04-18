@@ -1,4 +1,17 @@
-//package org.group38;
+package org.group38;
+
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Facility;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+
 //
 //import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 //import org.group38.kulturhus.model.ContactPerson.ContactInfo;
@@ -13,8 +26,8 @@
 //import java.util.GregorianCalendar;
 //import java.util.NoSuchElementException;
 //
-//public class EnhetsTesting {
-//    public static void main(String[] args) {
+public class EnhetsTesting {
+    public static void main(String[] args) {
 //        int antallFeil=0;
 //        Facility facility=new Facility("Sal1","kino", 10,10);
 //
@@ -193,5 +206,20 @@
 //
 //        System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 //
-//    }
-//}
+        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
+        ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
+        Facility facility = new Facility("Kino", 15);
+        String performers = "Arne";
+        LocalDate date = LocalDate.of(1993, 10, 22);
+        LocalTime time = LocalTime.of(12, 30);
+        EventInfo eventInfo = new EventInfo("Karpe", "konsert med karpe", date, time);
+
+        List<EventNumberedSeating> events = new ArrayList<>();
+        events.add(0,(new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo)));
+        events.add(1, new EventNumberedSeating(contactPerson, facility, performers, 260, eventInfo));
+        System.out.println("hei" + events.get(0) + events.get(1));
+
+
+
+    }
+}
