@@ -73,30 +73,9 @@ public class ShowEventController implements MainController{
     }
     public void initialize(){
         Kulturhus kulturhus = new Kulturhus();
-        //kulturhus.opprett(); //kun for å lage et event for å sjekke
+        kulturhus.opprett(); //kun for å lage et event for å sjekke
+        kulturhus.getEvents();
 
-        Facility facility = new Facility("Sal1", "kino", 10, 10);
-        LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
-        LocalTime t = LocalTime.of(22,00);
-        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
-        EventInfo eventInfo = new EventInfo("Max Manus", "film", d);
-        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, "Ane Dahl Torp", 100, eventInfo);
-
-        Facility facility1 = new Facility("Sal1", "Theater", 15, 10);
-        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-        LocalTime t1 = LocalTime.of(18,00);
-        ContactPerson contactPerson1 = new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455"));
-        EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen", d1);
-        EventNumberedSeating event2 =new EventNumberedSeating(contactPerson1, facility1, "Sjefen", 100, eventInfo1);
-
-        events = new ArrayList<>();
-        events.add(maxManus);
-        events.add(event2);
-//        ArrayList<Event> list = new ArrayList<>(kulturhus.getEvents());
-//        ObservableList<Event> observableList2 = FXCollections.observableList(list);
-//        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
-//        programColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getProgram()));
-//        timeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
 
 
         eventsView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
@@ -111,10 +90,9 @@ public class ShowEventController implements MainController{
             }
         });
 
-        eventsView.getItems().setAll(events);
+        eventsView.getItems().setAll(kulturhus.getEvents());
         eventsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         eventsView.getSelectionModel().selectFirst();
- //       eventsView.setItems(observableList2);
     }
 
     @Override
