@@ -7,17 +7,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class EventInfo {
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM");
+
 
     private String eventName;
     private String program;
     private LocalDate date;
     private LocalTime time;
 
-    public EventInfo(String eventName, String program, LocalDate date) {
+    public EventInfo(String eventName, String program, LocalDate date, LocalTime time) {
         this.eventName = eventName;
         this.program = program;
         this.date = date;
+        this.time = time;
     }
 
     public String getEventName() {
@@ -55,7 +57,6 @@ public class EventInfo {
     }
 
     public String toString(){
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("d. MMMM");
-        return df.format(date) + " \t\t";
+        return dateFormatter.format(date) + " \t\t";
     }
 }

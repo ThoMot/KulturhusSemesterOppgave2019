@@ -75,7 +75,7 @@ public class ShowEventController implements MainController{
         Kulturhus kulturhus = new Kulturhus();
         kulturhus.opprett(); //kun for å lage et event for å sjekke
         kulturhus.getEvents();
-        
+
         eventsView.getItems().setAll(kulturhus.getEvents());
         eventsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         eventsView.getSelectionModel().selectFirst();

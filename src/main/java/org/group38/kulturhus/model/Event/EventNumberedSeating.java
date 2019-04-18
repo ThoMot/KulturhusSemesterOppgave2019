@@ -5,7 +5,6 @@ import org.group38.kulturhus.model.Facility;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 

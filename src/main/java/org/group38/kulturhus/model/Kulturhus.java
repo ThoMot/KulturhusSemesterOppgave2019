@@ -52,7 +52,7 @@ public class Kulturhus {
 
 
         maxManus.BuyTicket(1,2,"11223344");
-        
+
     }
 
     public ArrayList<Event> getEvents() {
