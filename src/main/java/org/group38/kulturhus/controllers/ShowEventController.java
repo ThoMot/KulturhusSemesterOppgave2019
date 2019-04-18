@@ -75,21 +75,7 @@ public class ShowEventController implements MainController{
         Kulturhus kulturhus = new Kulturhus();
         kulturhus.opprett(); //kun for å lage et event for å sjekke
         kulturhus.getEvents();
-
-
-
-        eventsView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
-            @Override
-            public void changed(ObservableValue<? extends Event> observableValue, Event oldValue, Event newValue) {
-                if(newValue != null){
-                    Event event = eventsView.getSelectionModel().getSelectedItem();
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-                    //timeColumn.setText(df.format(event.getEventInfo().getDate()));
-                    //nameColumn.setText(event.getEventInfo().getEventName());
-                }
-            }
-        });
-
+        
         eventsView.getItems().setAll(kulturhus.getEvents());
         eventsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         eventsView.getSelectionModel().selectFirst();
