@@ -10,8 +10,17 @@ public class Ticket {
     private LocalDate date;
     private String phonenumber;
     private String eventName;
+    private EventNumberedSeating event;
+    private int row;
+    private int seat;
 
     //constructor
+    public Ticket(EventNumberedSeating event, int seat, int row, String phoneNumber) {
+        this.event = event;
+        this.seat = seat;
+        this.phonenumber = phoneNumber;
+        event.BuyTicket(row,seat, phoneNumber);
+    }
     public Ticket(LocalDate date, double price, String phonenumber, String facilityName, String eventName) {
         this.facilityName=facilityName;
         this.date=date;
@@ -74,9 +83,7 @@ public class Ticket {
 
 
     public String toString(){
-        return "Billett til "+eventName+ " i "+facilityName+"\n"+
-                date+"\n"+
-                "Koster "+price+"kr og er registrert på telefonnummer "+phonenumber;
+        return event.getEventInfo().getDate() + " " + phonenumber + " " + seat + " "+ row + " "+ event.getEventInfo().getEventName() ;
     }
 
 }

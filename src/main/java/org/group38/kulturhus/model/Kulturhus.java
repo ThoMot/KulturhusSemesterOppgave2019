@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 
 public class Kulturhus {
     private static ArrayList<Event> events;
-    private ArrayList<Ticket> tickets;
+    private static ArrayList<Ticket> tickets;
     public Kulturhus(){
             ArrayList<Event> events = new ArrayList();
             tickets = new ArrayList<>();
@@ -43,13 +43,22 @@ public class Kulturhus {
         events.add(maxManus);
         events.add(event2);
 
+        Ticket ticket1 = new Ticket(maxManus,1,3,"11223344");
+        Ticket ticket2 = new Ticket(maxManus,2,3,"11223344");
+        tickets = new ArrayList<>();
+        tickets.add(ticket1);
+        tickets.add(ticket2);
 
-        maxManus.BuyTicket(1,2,"11223344");
+
 
     }
 
     public static ArrayList<Event> getEvents() {
         return events;
+    }
+
+    public static ArrayList<Ticket> getTickets(){
+        return tickets;
     }
 
 

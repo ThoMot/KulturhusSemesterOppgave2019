@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ListView?>
 <BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
     <top>
         <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
@@ -35,20 +36,23 @@
         </MenuBar>
     </top>
 
+
       <Label layoutX="25.0" layoutY="31.0" text="Billetter">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
 
-      <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Dato" />
-          <TableColumn prefWidth="75.0" text="Klokken" />
-            <TableColumn prefWidth="113.0" text="Telefonnummer" />
-            <TableColumn prefWidth="206.0" text="Arrangement" />
-            <TableColumn prefWidth="82.0" />
-        </columns>
-      </TableView>
+    <center>
+      <ListView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER" >
+        <!--<columns>-->
+          <!--<TableColumn prefWidth="75.0" text="Dato" />-->
+          <!--<TableColumn prefWidth="75.0" text="Klokken" />-->
+            <!--<TableColumn prefWidth="113.0" text="Telefonnummer" />-->
+            <!--<TableColumn prefWidth="206.0" text="Arrangement" />-->
+            <!--<TableColumn prefWidth="82.0" />-->
+        <!--</columns>-->
+      </ListView>
+    </center>
 
 </BorderPane>

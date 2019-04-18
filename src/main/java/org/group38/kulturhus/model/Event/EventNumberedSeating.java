@@ -5,6 +5,7 @@ import org.group38.kulturhus.model.Facility;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 
@@ -137,5 +138,14 @@ public class EventNumberedSeating extends Event {
     public String printTicket(int seatRow, int seatNumber){
         Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
+    }
+
+    @Override
+    public String toString() {
+        return "EventNumberedSeating{" +
+                "tickets=" + Arrays.toString(tickets) +
+                ", columns=" + columns +
+                ", rows=" + rows +
+                '}';
     }
 }

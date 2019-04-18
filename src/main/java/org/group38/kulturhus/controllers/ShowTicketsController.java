@@ -22,6 +22,9 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 
+import static org.group38.kulturhus.model.Kulturhus.getTickets;
+import static org.group38.kulturhus.model.Kulturhus.opprett;
+
 public class ShowTicketsController implements MainController {
 
     private List<Ticket> tickets;
@@ -29,7 +32,7 @@ public class ShowTicketsController implements MainController {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private TableView<Ticket> ticketsView;
+    private ListView<Ticket> ticketsView;
 
     @FXML
     private void goToAddTicket(ActionEvent event) throws IOException {
@@ -53,13 +56,12 @@ public class ShowTicketsController implements MainController {
     }
 
     public void initialize(){
-        Kulturhus kulturhus = new Kulturhus();
-        kulturhus.opprett(); //kun for å lage et event for å sjekke
-        kulturhus.getEvents();
-//
-//        //ticketsView.getItems().setAll(kulturhus.getEvents());
-//        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        ticketsView.getSelectionModel().selectFirst();
+
+        opprett(); //kun for å lage et event for å sjekke
+
+        ticketsView.getItems().setAll(getTickets());
+        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        ticketsView.getSelectionModel().selectFirst();
     }
 
 
