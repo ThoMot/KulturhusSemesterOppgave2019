@@ -81,20 +81,12 @@ public class Facility {
         if(maxAntSeats != 0){
             return toForsamlingssal();
         }
-        else return "Facility{" +
-                    "facilityName='" + facilityName + '\'' +
-                    ", facilityType='" + facilityType + '\'' +
-                    ", total seats=" + rows * columns +
-                    '}';
+        else return facilityName + ", " + facilityType;
 
     }
 
     public String toForsamlingssal() {
-        return "Facility{" +
-                "facilityName='" + facilityName + '\'' +
-                ", facilityType='" + facilityType + '\'' +
-                ", total seats=" + maxAntSeats +
-                '}';
+        return facilityName + ", " + facilityType;
     }
 
 

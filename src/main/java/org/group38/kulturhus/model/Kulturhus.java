@@ -29,6 +29,8 @@ public class Kulturhus {
 //        ArrayList<Performer> performers = new ArrayList<Performer>();
 //        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, performers, 100, eventInfo);
 //
+
+
 //        events.add(maxManus);
     }
 

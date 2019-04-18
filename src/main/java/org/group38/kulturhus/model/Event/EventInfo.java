@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EventInfo {
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
@@ -54,7 +55,7 @@ public class EventInfo {
     }
 
     public String toString(){
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-        return df.format(date) + " \t" + eventName;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("d. MMMM");
+        return df.format(date) + " \t\t";
     }
 }
