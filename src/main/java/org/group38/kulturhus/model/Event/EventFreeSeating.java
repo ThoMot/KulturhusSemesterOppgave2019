@@ -89,4 +89,11 @@ public class EventFreeSeating extends Event {
         }
         return list;
     }
+    @Override
+    public String toString() {
+        return "Eventnavn: " + getEventInfo().getEventName() + "\n" +
+                "Lokale: " + getFacility() + "\n" +
+                "Dato og tid: " + getEventInfo().getDate() + " " + getEventInfo().getTime() + "\n" +
+                "Type arrangement: ingen setereservering";
+    }
 }

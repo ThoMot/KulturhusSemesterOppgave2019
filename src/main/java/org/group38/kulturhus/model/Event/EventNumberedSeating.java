@@ -146,13 +146,12 @@ public class EventNumberedSeating extends Event {
         Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
-
     @Override
     public String toString() {
-        return "EventNumberedSeating{" +
-                "tickets=" + Arrays.toString(tickets) +
-                ", columns=" + columns +
-                ", rows=" + rows +
-                '}';
+        return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
+                "Lokale: "+getFacility()+"\n" +
+                "Dato og tid: "+getEventInfo().getDate()+" "+getEventInfo().getTime()+"\n" +
+                "Type arrangement: setereservering";
     }
+
 }

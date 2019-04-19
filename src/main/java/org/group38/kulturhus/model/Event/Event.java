@@ -57,4 +57,5 @@ public abstract class Event {
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
 }

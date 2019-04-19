@@ -20,8 +20,8 @@ public class Kulturhus {
     public Kulturhus(){
             ArrayList<Event> events = new ArrayList();
             tickets = new ArrayList<Ticket>();
-            this.tickets = tickets;
             this.events=events;
+
     }
 
 
@@ -66,6 +66,9 @@ public class Kulturhus {
 
     public static ArrayList<Ticket> getTickets(){
         return tickets;
+    }
+    public static ArrayList<Facility> getFacility(){
+        return getFacility();
     }
 
 
