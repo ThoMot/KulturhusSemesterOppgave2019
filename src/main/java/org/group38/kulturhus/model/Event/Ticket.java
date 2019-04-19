@@ -1,10 +1,12 @@
 package org.group38.kulturhus.model.Event;
 
+import org.group38.kulturhus.model.SaveLoad.CsvBase;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 
-public class Ticket {
+public class Ticket implements CsvBase {
     //data field
     private double price;
     private String phonenumber;
@@ -77,8 +79,20 @@ public class Ticket {
 //    }
 
 
-    public String toString(){
-        return date + " " + phonenumber + " " + seat + " "+ row ;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "price=" + price +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", row=" + row +
+                ", seat=" + seat +
+                ", date=" + date +
+                ", time=" + time +
+                '}';
     }
 
+    @Override
+    public String toCSV() {
+        return price + "," + phonenumber + "," + row + "," + seat + "," + date + "," + time;
+    }
 }

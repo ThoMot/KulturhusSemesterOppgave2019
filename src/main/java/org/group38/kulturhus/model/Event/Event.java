@@ -5,6 +5,7 @@
 
 package org.group38.kulturhus.model.Event;
 
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public abstract class Event {
     public Facility getFacility() {
         return facility;
     }
+
+    public ContactPerson getContactPerson() { return contactPerson; }
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;

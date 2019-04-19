@@ -227,8 +227,11 @@ public class EnhetsTesting {
 
 
         SaveCsvInterface save = new SaveCsvInterface();
-        save.writeEvent(en);
+
         SaveJobj jo = new SaveJobj();
         jo.writeEvent(en);
+
+        SaveCsvInterface.writeObject(en);
+
     }
 }
