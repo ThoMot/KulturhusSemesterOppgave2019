@@ -67,7 +67,7 @@ public class ShowTicketsController implements MainController {
     @FXML
     private TableColumn<Ticket, LocalDate> dateColumn ;
 
-    public void initialize() throws IOException{
+    public void initialize(){
 
         opprett(); //kun for å lage et event for å sjekke
 

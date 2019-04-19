@@ -29,7 +29,7 @@ public abstract class Event {
 
     //er det interessant å skrive ut noe mer info om et arrangement?
     public String toString(){
-        return eventInfo.toString() + eventInfo.getTime() + "\n\t\t\t" +
+        return eventInfo.toString() + eventInfo.getDate() + "\n\t\t\t" +
                 eventInfo.getEventName() + "\n\t\t\t" +
                 facility.toString();
     }

@@ -4,10 +4,8 @@ import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
+import java.time.LocalTime;
+import java.util.*;
 
 public class EventNumberedSeating extends Event {
     private Ticket[][] tickets;
@@ -27,8 +25,7 @@ public class EventNumberedSeating extends Event {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber,
-                    super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
+            tickets[seatRow][seatNumber] = new Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
         }
         else throw new IllegalArgumentException("Setet er opptatt");
     }
@@ -108,6 +105,16 @@ public class EventNumberedSeating extends Event {
             for( Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setDate(date);
+                }
+            }
+        }
+    }
+    public void setTime(LocalTime time){
+        super.getEventInfo().setTime(time);
+        for(Ticket[] tickets: tickets){
+            for( Ticket ticket: tickets){
+                if(ticket!=null){
+                    ticket.setTime(time);
                 }
             }
         }

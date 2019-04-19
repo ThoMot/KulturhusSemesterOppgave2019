@@ -8,7 +8,10 @@ import org.group38.kulturhus.model.Facility;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -210,9 +213,9 @@ public class EnhetsTesting {
         ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
         Facility facility = new Facility("Kino", 15);
         String performers = "Arne";
-        LocalDate date = LocalDate.of(1993, 10, 22);
-        LocalTime time = LocalTime.of(12, 30);
-        EventInfo eventInfo = new EventInfo("Karpe", "konsert med karpe", date, time);
+        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
+        LocalTime t1 = LocalTime.of(18,00);
+        EventInfo eventInfo = new EventInfo("Karpe", "konsert med karpe", d1, t1);
 
         List<EventNumberedSeating> events = new ArrayList<>();
         events.add(0,(new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo)));

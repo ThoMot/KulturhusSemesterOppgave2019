@@ -45,10 +45,10 @@ public class Kulturhus {
         events.add(maxManus);
         events.add(event2);
 
-
-
-        Ticket ticket1 = new Ticket(maxManus,1,3,"11223344");
-        Ticket ticket2 = new Ticket(maxManus,2,3,"11223344");
+//        event2.BuyTicket(3, 5, "34563254", d1, t1);
+//        event2.BuyTicket(1,4,"56743827", d, t);
+        Ticket ticket1 = new Ticket(200, "54353423", d1, t1);
+        Ticket ticket2 = new Ticket(150, "45761234", d, t);
         tickets = new ArrayList<>();
         tickets.add(ticket1);
         tickets.add(ticket2);

@@ -4,6 +4,7 @@ import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -19,7 +20,7 @@ public class EventFreeSeating extends Event {
     public String BuyTicket(String phoneNumber){
         for(int i=0; i<tickets.length;i++){
             if(tickets[i]==null){
-                tickets[i]=new Ticket(getEventInfo().getDate(), getTicketPrice(), phoneNumber, getFacility().getFacilityName(), getEventInfo().getEventName());
+                tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
                 return "Billett er reservert på telefonnummer: "+phoneNumber;
             }
         }
@@ -43,6 +44,14 @@ public class EventFreeSeating extends Event {
         for(Ticket ticket : tickets){
             if(ticket!=null){
                 ticket.setDate(date);
+            }
+        }
+    }
+    public void setTime(LocalTime time){
+        super.getEventInfo().setTime(time);
+        for(Ticket ticket : tickets){
+            if(ticket!=null){
+                ticket.setTime(time);
             }
         }
     }
