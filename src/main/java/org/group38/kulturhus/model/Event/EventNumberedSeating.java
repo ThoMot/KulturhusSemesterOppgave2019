@@ -3,11 +3,12 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class EventNumberedSeating extends Event {
+public class EventNumberedSeating extends Event implements Serializable {
     private Ticket[][] tickets;
     private int columns;
     private int rows;

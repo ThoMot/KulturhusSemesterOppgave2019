@@ -2,17 +2,17 @@ package org.group38;
 
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
 import org.group38.kulturhus.model.Facility;
+import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
+import org.group38.kulturhus.model.SaveLoad.SaveJobj;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 
 //
@@ -216,13 +216,19 @@ public class EnhetsTesting {
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);
         EventInfo eventInfo = new EventInfo("Karpe", "konsert med karpe", d1, t1);
+        EventFreeSeating test = new EventFreeSeating(contactPerson, facility, performers, 150, eventInfo);
+        EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo);
 
-        List<EventNumberedSeating> events = new ArrayList<>();
+        List<Object> events = new ArrayList<>();
         events.add(0,(new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo)));
         events.add(1, new EventNumberedSeating(contactPerson, facility, performers, 260, eventInfo));
-        System.out.println("hei" + events.get(0) + events.get(1));
+        events.add(2, test);
+        System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
 
-
+        SaveCsvInterface save = new SaveCsvInterface();
+        save.writeEvent(en);
+        SaveJobj jo = new SaveJobj();
+        jo.writeEvent(en);
     }
 }
