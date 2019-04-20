@@ -3,13 +3,12 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
+import java.time.LocalTime;
+import java.util.*;
 
-public class EventNumberedSeating extends Event {
+public class EventNumberedSeating extends Event implements Serializable {
     private Ticket[][] tickets;
     private int columns;
     private int rows;
@@ -27,8 +26,7 @@ public class EventNumberedSeating extends Event {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(super.getEventInfo().getDate(), super.getTicketPrice(), phoneNumber,
-                    super.getFacility().getFacilityName(), super.getEventInfo().getEventName());
+            tickets[seatRow][seatNumber] = new Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
         }
         else throw new IllegalArgumentException("Setet er opptatt");
     }
@@ -112,6 +110,16 @@ public class EventNumberedSeating extends Event {
             }
         }
     }
+    public void setTime(LocalTime time){
+        super.getEventInfo().setTime(time);
+        for(Ticket[] tickets: tickets){
+            for( Ticket ticket: tickets){
+                if(ticket!=null){
+                    ticket.setTime(time);
+                }
+            }
+        }
+    }
 
     //Updates the ticketprice bought in the event, and also for all bought tickets
     public void setTicketPrice(double price){
@@ -139,13 +147,12 @@ public class EventNumberedSeating extends Event {
         Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
-
     @Override
     public String toString() {
-        return "EventNumberedSeating{" +
-                "tickets=" + Arrays.toString(tickets) +
-                ", columns=" + columns +
-                ", rows=" + rows +
-                '}';
+        return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
+                "Lokale: "+getFacility()+"\n" +
+                "Dato og tid: "+getEventInfo().getDate()+" "+getEventInfo().getTime()+"\n" +
+                "Type arrangement: setereservering";
     }
+
 }

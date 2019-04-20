@@ -1,32 +1,33 @@
 package org.group38.kulturhus.model.Event;
 
+import org.group38.kulturhus.model.SaveLoad.CsvBase;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 
-public class Ticket {
+public class Ticket implements CsvBase {
     //data field
     private double price;
-    private String facilityName;
-    private LocalDate date;
     private String phonenumber;
-    private String eventName;
-    private EventNumberedSeating event;
     private int row;
     private int seat;
+    LocalDate date;
+    LocalTime time;
 
     //constructor
-    public Ticket(EventNumberedSeating event, int seat, int row, String phoneNumber) {
-        this.event = event;
+    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time) {
         this.seat = seat;
         this.phonenumber = phoneNumber;
-        event.BuyTicket(row,seat, phoneNumber);
-    }
-    public Ticket(LocalDate date, double price, String phonenumber, String facilityName, String eventName) {
-        this.facilityName=facilityName;
         this.date=date;
+        this.row=row;
+        this.time=time;
+    }
+    public Ticket(double price, String phonenumber, LocalDate date, LocalTime time) {
         this.phonenumber=phonenumber;
         this.price=price;
-        this.eventName=eventName;
+        this.date=date;
+        this.time=time;
     }
 
     public String getPhonenumber() {
@@ -36,17 +37,6 @@ public class Ticket {
         return price;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setFacilityName(String facilityName) {
-        this.facilityName = facilityName;
-    }
 
     public void setPhonenumber(String phonenumber) {
         if(phonenumber.length()!=8){
@@ -61,6 +51,13 @@ public class Ticket {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setDate(LocalDate date){
+        this.date=date;
+    }
+    public void setTime(LocalTime time){
+        this.time=time;
     }
 
 //    public String setSeatNumber(int seatNumber) {
@@ -82,8 +79,20 @@ public class Ticket {
 //    }
 
 
-    public String toString(){
-        return event.getEventInfo().getDate() + " " + phonenumber + " " + seat + " "+ row + " "+ event.getEventInfo().getEventName() ;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "price=" + price +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", row=" + row +
+                ", seat=" + seat +
+                ", date=" + date +
+                ", time=" + time +
+                '}';
     }
 
+    @Override
+    public String toCSV() {
+        return price + "," + phonenumber + "," + row + "," + seat + "," + date + "," + time;
+    }
 }

@@ -5,6 +5,7 @@
 
 package org.group38.kulturhus.model.Event;
 
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Facility;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public abstract class Event {
 
     //er det interessant å skrive ut noe mer info om et arrangement?
     public String toString(){
-        return eventInfo.toString() + eventInfo.getTime() + "\n\t\t\t" +
+        return eventInfo.toString() + eventInfo.getDate() + "\n\t\t\t" +
                 eventInfo.getEventName() + "\n\t\t\t" +
                 facility.toString();
     }
@@ -54,7 +55,10 @@ public abstract class Event {
         return facility;
     }
 
+    public ContactPerson getContactPerson() { return contactPerson; }
+
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
 }
