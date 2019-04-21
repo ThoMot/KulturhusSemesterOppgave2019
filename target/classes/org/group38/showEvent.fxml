@@ -41,8 +41,26 @@
    </top>
    <center>
 
-      <ListView fx:id="eventsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
+      <TableView fx:id="eventsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
 
+         <columns>
+            <TableColumn text="Dato" fx:id="eventDateColumn">
+               <cellValueFactory>
+                  <PropertyValueFactory property="eventDate"/>
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Tid" fx:id="eventTimeColumn"/>
+            <TableColumn text="Arrangement">
+               <cellValueFactory>
+                  <PropertyValueFactory property="eventInfo"/>
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Sted">
+               <cellValueFactory>
+                  <PropertyValueFactory property="facility"/>
+               </cellValueFactory>
+            </TableColumn>
+         </columns>
 
         <!--<columns>-->
            <!---->
@@ -51,7 +69,7 @@
             <!--&lt;!&ndash;<TableColumn fx:id="timeColumn" prefWidth="107.0" text="Tid" />&ndash;&gt;-->
         <!--</columns>-->
 
-      </ListView>
+      </TableView>
 
 
    </center>

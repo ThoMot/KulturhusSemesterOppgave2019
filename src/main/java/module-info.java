@@ -5,6 +5,8 @@ module hellofx {
     opens org.group38 to javafx.fxml;
     exports org.group38;
 
+
+    opens org.group38.kulturhus.model.Event;
     opens org.group38.kulturhus.controllers to javafx.fxml;
     exports org.group38.kulturhus.controllers;
 }

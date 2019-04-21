@@ -5,7 +5,7 @@ import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Facility;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.SaveLoad.SaveJobj;
 
@@ -22,7 +22,7 @@ import java.util.*;
 //import org.group38.kulturhus.model.Event.EventNumberedSeating;
 //import org.group38.kulturhus.model.Event.Performer;
 //import org.group38.kulturhus.model.Event.Ticket;
-//import org.group38.kulturhus.model.Facility;
+//import org.group38.kulturhus.model.facility.Facility;
 //
 //import java.util.ArrayList;
 //import java.util.Calendar;
@@ -37,13 +37,13 @@ public class EnhetsTesting {
 //
 //        Calendar d= new GregorianCalendar(2019, 10,10,22,00);
 //
-//        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
+//        ContactPerson ContactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
 //        EventInfo eventInfo = new EventInfo("Max Manus", "film",d);
 //        ArrayList<Performer> performers= new ArrayList <Performer>();
 //        performers.add(new Performer("Hans", "Langus"));
 //        performers.add(new Performer("Kine", "Larsen"));
 //
-//        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, performers, 100, eventInfo);
+//        EventNumberedSeating maxManus=new EventNumberedSeating(ContactPerson, facility, performers, 100, eventInfo);
 //
 //
 //        ContactInfo martinasInfo = new ContactInfo("test", "1010101010101");
@@ -211,7 +211,7 @@ public class EnhetsTesting {
 //
         ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
         ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
-        Facility facility = new Facility("Kino", 15);
+        Facility facility = new Facility().addCinema();
         String performers = "Arne";
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);

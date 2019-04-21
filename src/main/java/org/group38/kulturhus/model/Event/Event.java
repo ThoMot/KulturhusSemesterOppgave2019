@@ -5,10 +5,8 @@
 
 package org.group38.kulturhus.model.Event;
 
-import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.Facility;
-import java.util.ArrayList;
+import org.group38.kulturhus.model.facility.Facility;
 
 
 public abstract class Event {

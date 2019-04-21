@@ -26,7 +26,7 @@ public class SaveCsvInterface {
         if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
             filename = "events.csv";
         } else if (object instanceof ContactPerson) {
-            filename = "contactPerson.csv";
+            filename = "ContactPerson.csv";
         } else if (object instanceof Ticket) {
             filename = "tickets.csv";
         }

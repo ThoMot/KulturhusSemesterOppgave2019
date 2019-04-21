@@ -1,24 +1,24 @@
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.Facility;
+import org.group38.kulturhus.model.facility.Facility;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class EventNumberedSeating extends Event implements Serializable {
-    private Ticket[][] tickets;
+public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Event implements Serializable {
+    private org.group38.kulturhus.model.Event.Ticket[][] tickets;
     private int columns;
     private int rows;
 
     //constructor
-    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, EventInfo eventInfo) {
+    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, org.group38.kulturhus.model.Event.EventInfo eventInfo) {
         super(contactPerson, facility, performers, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
-        tickets = new Ticket[rows][columns];
+        tickets = new org.group38.kulturhus.model.Event.Ticket[rows][columns];
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
@@ -26,7 +26,7 @@ public class EventNumberedSeating extends Event implements Serializable {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
+            tickets[seatRow][seatNumber] = new org.group38.kulturhus.model.Event.Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
         }
         else throw new IllegalArgumentException("Setet er opptatt");
     }
@@ -70,8 +70,8 @@ public class EventNumberedSeating extends Event implements Serializable {
     }
 
     //finds tickets based on the phonenumber and returns an arraylist of these tickets
-    public ArrayList<Ticket> FindTickets(String phoneNumber){
-        ArrayList<Ticket> list= new ArrayList<>();
+    public ArrayList<org.group38.kulturhus.model.Event.Ticket> FindTickets(String phoneNumber){
+        ArrayList<org.group38.kulturhus.model.Event.Ticket> list= new ArrayList<>();
         for(int i=0;i<tickets.length;i++){
             for(int j=0;j<tickets[i].length;j++){
                 if(tickets[i][j]!=null){
@@ -83,14 +83,14 @@ public class EventNumberedSeating extends Event implements Serializable {
         return list;
     }
     //Returns the ticket based on seatnumber and row
-    public Ticket FindTicket(int seatRow, int seatNumber){
+    public org.group38.kulturhus.model.Event.Ticket FindTicket(int seatRow, int seatNumber){
         if (tickets[seatRow][seatNumber]!=null){
             return tickets[seatRow][seatNumber];
         }
         else throw new NoSuchElementException("Det finnes ingen billett med gitt plassering");
     }
 
-    //Checking if the event is full, by going through the matrix searching for any available spots
+    //Checking if the Event is full, by going through the matrix searching for any available spots
     public boolean Full() {
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
@@ -99,11 +99,11 @@ public class EventNumberedSeating extends Event implements Serializable {
         }
         return true;
     }
-    //Edit the date of an event, also updating all bought tickets and eventinfo
+    //Edit the date of an Event, also updating all bought tickets and eventinfo
     public void setDate(LocalDate date){
         super.getEventInfo().setDate(date);
-        for(Ticket[] tickets: tickets){
-            for( Ticket ticket: tickets){
+        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
+            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setDate(date);
                 }
@@ -112,8 +112,8 @@ public class EventNumberedSeating extends Event implements Serializable {
     }
     public void setTime(LocalTime time){
         super.getEventInfo().setTime(time);
-        for(Ticket[] tickets: tickets){
-            for( Ticket ticket: tickets){
+        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
+            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setTime(time);
                 }
@@ -121,11 +121,11 @@ public class EventNumberedSeating extends Event implements Serializable {
         }
     }
 
-    //Updates the ticketprice bought in the event, and also for all bought tickets
+    //Updates the ticketprice bought in the Event, and also for all bought tickets
     public void setTicketPrice(double price){
         super.setTicketPrice(price);
-        for(Ticket[] tickets: tickets){
-            for( Ticket ticket: tickets){
+        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
+            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setPrice(price);
                 }
@@ -144,7 +144,7 @@ public class EventNumberedSeating extends Event implements Serializable {
         }
     }
     public String printTicket(int seatRow, int seatNumber){
-        Ticket t= FindTicket(seatRow, seatNumber);
+        org.group38.kulturhus.model.Event.Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
     @Override

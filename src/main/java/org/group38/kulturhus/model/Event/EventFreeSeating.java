@@ -1,12 +1,11 @@
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.Facility;
+import org.group38.kulturhus.model.facility.Facility;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class EventFreeSeating extends Event {
     private Ticket[] tickets;

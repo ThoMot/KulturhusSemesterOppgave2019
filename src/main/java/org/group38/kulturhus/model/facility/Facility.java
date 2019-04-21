@@ -2,7 +2,7 @@
 //slette arraylist
 //lag tostring metode
 //lage setmetoder som også sjekker at det blir gitt riktig type input
-package org.group38.kulturhus.model;
+package org.group38.kulturhus.model.facility;
 
 public class Facility {
     private String facilityName;
@@ -14,11 +14,11 @@ public class Facility {
 
     // Constructor
     public Facility(){
-
     }
-    public Facility(String facilityName, int maxAntSeats){
+
+    public Facility(String facilityName, String facilityType, int maxAntSeats){
         this.facilityName = facilityName;
-        this.facilityType = "Forsamlinssal";
+        this.facilityType = facilityType;
         this.maxAntSeats = maxAntSeats;
     }
 
@@ -27,6 +27,18 @@ public class Facility {
         this.facilityType = facilityType;
         this.rows=numRows;
         this.columns=seatsPerRow;
+    }
+
+    public Facility addCinema(){
+        return new Cinema();
+    }
+
+    public Facility addTheater(){
+        return new Theater();
+    }
+
+    public Facility addAssemblyHall(){
+        return new AssemblyHall();
     }
 
 

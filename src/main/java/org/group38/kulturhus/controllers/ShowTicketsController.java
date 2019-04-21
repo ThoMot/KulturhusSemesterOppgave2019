@@ -1,29 +1,15 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import org.group38.kulturhus.model.ContactPerson.ContactInfo;
-import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.model.Facility;
-import org.group38.kulturhus.model.Kulturhus;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.List;
 
 import static org.group38.kulturhus.model.Kulturhus.getTickets;
@@ -69,7 +55,7 @@ public class ShowTicketsController implements MainController {
 
     public void initialize(){
 
-        opprett(); //kun for å lage et event for å sjekke
+        opprett(); //kun for å lage et Event for å sjekke
 
 //        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 //
