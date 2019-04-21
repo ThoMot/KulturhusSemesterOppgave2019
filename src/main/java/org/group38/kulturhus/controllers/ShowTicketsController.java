@@ -3,25 +3,26 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.group38.kulturhus.model.Event.*;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.group38.kulturhus.model.Kulturhus.getTickets;
-import static org.group38.kulturhus.model.Kulturhus.opprett;
+import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
 
     private List<Ticket> tickets;
-    DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @FXML
-    private ListView<Ticket> ticketsView;
+    private TableView<Event> ticketsView;
 
 
     @FXML
@@ -48,7 +49,22 @@ public class ShowTicketsController implements MainController {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
 
-    private TicketData data;
+    @FXML
+    private
+    TableColumn<Event,LocalDate> eventDateColumn;
+
+    @FXML
+    private
+    TableColumn<Event, LocalTime> eventTimeColumn;
+
+    @FXML
+    private
+    TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
+
+    @FXML
+    private
+    TableColumn<EventNumberedSeating,String> phoneNumberColumn = new TableColumn<>("Telefonnummer");
+
 
     @FXML
     private TableColumn<Ticket, LocalDate> dateColumn ;
@@ -57,30 +73,16 @@ public class ShowTicketsController implements MainController {
 
         opprett(); //kun for å lage et Event for å sjekke
 
-//        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-//
-//        data = new TicketData();
-//        //data.loadHolidays();
-//        ticketsView.setItems(data.getTickets());
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-//        dateColumn.setCellFactory(column -> new TableCell<Ticket, LocalDate>() {
-//            @Override
-//            protected void updateItem(LocalDate date, boolean empty) {
-//                super.updateItem(date, empty);
-//                if (empty) {
-//                    setText("");
-//                } else {
-//                    setText(formatter.format(date));
-//                }
-//            }
-//        });
+        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
+        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
+        //Denne er det noe feil med
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("eventInfo"));
+        //phoneNumberColumn.setCellValueFactory(data->data.getValue().);
 
-//        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-//
-        ticketsView.getItems().setAll(getTickets());
-        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        ticketsView.getSelectionModel().selectFirst();
+
+        ticketsView.getItems().setAll(getEvents());
+//        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//        ticketsView.getSelectionModel().selectFirst();
     }
 
 

@@ -45,35 +45,26 @@
       </Label>
 
     <center>
-      <ListView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER" >
+      <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER" >
 
-              <!--<columnResizePolicy>-->
-                  <!--<TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
-              <!--</columnResizePolicy>-->
-              <!--<columns>-->
-                  <!--<TableColumn text="Dato">-->
-                      <!--<cellFactory>-->
-                          <!--<PropertyValueFactory property="date"/>-->
-                      <!--</cellFactory>-->
-                  <!--</TableColumn>-->
-                  <!--<TableColumn text="Tid">-->
-                      <!--<cellFactory>-->
-                          <!--<PropertyValueFactory property="time" />-->
-                      <!--</cellFactory>-->
-                  <!--</TableColumn>-->
-                  <!--<TableColumn text="Arrangement">-->
-                      <!--<cellFactory>-->
-                          <!--<PropertyValueFactory property="eventName" />-->
-                      <!--</cellFactory>-->
-                  <!--</TableColumn>-->
-                  <!--<TableColumn text="Telefonnummer">-->
-                      <!--<cellFactory>-->
-                          <!--<PropertyValueFactory property="phoneNumber" />-->
-                      <!--</cellFactory>-->
-                  <!--</TableColumn>-->
-              <!--</columns>-->
+          <columns>
+              <TableColumn text="Dato" fx:id="eventDateColumn"/>
+              <TableColumn text="Tid" fx:id="eventTimeColumn">
+              </TableColumn>
+              <TableColumn text="Arrangement">
+                  <cellValueFactory>
+                      <PropertyValueFactory property="eventInfo"/>
+                  </cellValueFactory>
+              </TableColumn>
+              <TableColumn text="Telefonnummer" > <!--fx:id="phoneNumberColumn"-->
+                  <!--<cellValueFactory>-->
+                      <!--<PropertyValueFactory property="phoneNumber"/>-->
+                  <!--</cellValueFactory>-->
+              </TableColumn>
+          </columns>
 
-      </ListView>
+
+      </TableView>
     </center>
 
 </BorderPane>
