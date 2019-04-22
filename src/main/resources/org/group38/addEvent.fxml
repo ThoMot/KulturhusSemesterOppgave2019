@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
     <children>
-        <BorderPane fx:id="TEST" prefHeight="800.0" prefWidth="1200.0">
+        <BorderPane fx:id="TEST" prefHeight="600.0" prefWidth="1200.0">
             <top>
                 <MenuBar fx:id="menuBar" prefHeight="29.0" prefWidth="1209.0" BorderPane.alignment="CENTER">
                     <menus>

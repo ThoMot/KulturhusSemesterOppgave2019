@@ -83,7 +83,7 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
         return list;
     }
     //Returns the ticket based on seatnumber and row
-    public org.group38.kulturhus.model.Event.Ticket FindTicket(int seatRow, int seatNumber){
+    public Ticket FindTicket(int seatRow, int seatNumber){
         if (tickets[seatRow][seatNumber]!=null){
             return tickets[seatRow][seatNumber];
         }

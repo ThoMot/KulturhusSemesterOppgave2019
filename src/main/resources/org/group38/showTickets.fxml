@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
+<BorderPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
     <top>
         <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
             <menus>

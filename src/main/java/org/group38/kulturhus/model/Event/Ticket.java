@@ -60,7 +60,14 @@ public class Ticket implements CsvBase {
         this.time=time;
     }
 
-//    public String setSeatNumber(int seatNumber) {
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+    //    public String setSeatNumber(int seatNumber) {
 //        this.seatNumber = seatNumber;
 //        return "Setenummer er endret";
 //    }

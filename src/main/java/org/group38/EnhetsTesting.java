@@ -1,20 +1,20 @@
-package org.group38;
-
-import org.group38.kulturhus.model.ContactPerson.ContactInfo;
-import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.Event.EventFreeSeating;
-import org.group38.kulturhus.model.Event.EventInfo;
-import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.facility.Facility;
-import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
-import org.group38.kulturhus.model.SaveLoad.SaveJobj;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
-import java.util.*;
-
-
+//package org.group38;
+//
+//import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+//import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+//import org.group38.kulturhus.model.Event.EventFreeSeating;
+//import org.group38.kulturhus.model.Event.EventInfo;
+//import org.group38.kulturhus.model.Event.EventNumberedSeating;
+//import org.group38.kulturhus.model.facility.Facility;
+//import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
+//import org.group38.kulturhus.model.SaveLoad.SaveJobj;
+//
+//import java.time.LocalDate;
+//import java.time.LocalTime;
+//import java.time.Month;
+//import java.util.*;
+//
+//
 //
 //import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 //import org.group38.kulturhus.model.ContactPerson.ContactInfo;
@@ -29,21 +29,23 @@ import java.util.*;
 //import java.util.GregorianCalendar;
 //import java.util.NoSuchElementException;
 //
-public class EnhetsTesting {
-    public static void main(String[] args) {
+//public class EnhetsTesting {
+//    public static void main(String[] args) {
 //        int antallFeil=0;
 //        Facility facility=new Facility("Sal1","kino", 10,10);
 //
 //
-//        Calendar d= new GregorianCalendar(2019, 10,10,22,00);
+//        LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
+//        LocalTime t = LocalTime.of(22,00);
 //
 //        ContactPerson ContactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
-//        EventInfo eventInfo = new EventInfo("Max Manus", "film",d);
+//        EventInfo eventInfo = new EventInfo("Max Manus", "film",d, t);
 //        ArrayList<Performer> performers= new ArrayList <Performer>();
 //        performers.add(new Performer("Hans", "Langus"));
 //        performers.add(new Performer("Kine", "Larsen"));
+//        String performers2 = "Arne";
 //
-//        EventNumberedSeating maxManus=new EventNumberedSeating(ContactPerson, facility, performers, 100, eventInfo);
+//        EventNumberedSeating maxManus=new EventNumberedSeating(ContactPerson, facility, performers2, 100, eventInfo);
 //
 //
 //        ContactInfo martinasInfo = new ContactInfo("test", "1010101010101");
@@ -159,19 +161,6 @@ public class EnhetsTesting {
 //            System.out.println(e);
 //            antallFeil++;
 //        }
-//        Calendar e= new GregorianCalendar(2019, 10,8, 20,00);
-//        maxManus.setDate(e);
-//        String changedate= eventInfo.getDate().getTime().toString();
-//        String changedate2= maxManus.FindTicket(2,4).getDate().getTime().toString();
-//
-//        if(!"Fri Nov 08 20:00:00 CET 2019".equals(changedate)){
-//            antallFeil++;
-//            System.out.println("Feil i redigering av dato i eventinfoobjektet");
-//        }
-//        if(!"Fri Nov 08 20:00:00 CET 2019".equals(changedate2)){
-//            antallFeil++;
-//            System.out.println("Feil i redigering av dato i billettobjektet");
-//        }
 //
 //        //Testing setTicketPrice method
 //        maxManus.setTicketPrice(200);
@@ -209,29 +198,28 @@ public class EnhetsTesting {
 //
 //        System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 //
-        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
-        ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
-        Facility facility = new Facility().addCinema();
-        String performers = "Arne";
-        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-        LocalTime t1 = LocalTime.of(18,00);
-        EventInfo eventInfo = new EventInfo("Karpe", "konsert med karpe", d1, t1);
-        EventFreeSeating test = new EventFreeSeating(contactPerson, facility, performers, 150, eventInfo);
-        EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo);
-
-        List<Object> events = new ArrayList<>();
-        events.add(0,(new EventNumberedSeating(contactPerson, facility, performers, 150, eventInfo)));
-        events.add(1, new EventNumberedSeating(contactPerson, facility, performers, 260, eventInfo));
-        events.add(2, test);
-        System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
-
-
-        SaveCsvInterface save = new SaveCsvInterface();
-
-        SaveJobj jo = new SaveJobj();
-        jo.writeEvent(en);
-
-        SaveCsvInterface.writeObject(en);
-
-    }
-}
+//        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
+//        ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
+//        Facility facility2 = new Facility().addCinema();
+//        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
+//        LocalTime t1 = LocalTime.of(18,00);
+//        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe", d1, t1);
+//        EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, performers2, 150, eventInfo2);
+//        EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, performers2, 150, eventInfo2);
+//
+//        List<Object> events = new ArrayList<>();
+//        events.add(0,(new EventNumberedSeating(contactPerson, facility2, performers2, 150, eventInfo2)));
+//        events.add(1, new EventNumberedSeating(contactPerson, facility2, performers2, 260, eventInfo2));
+//        events.add(2, test);
+//        System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
+//
+//
+//        SaveCsvInterface save = new SaveCsvInterface();
+//
+//        SaveJobj jo = new SaveJobj();
+//        jo.writeEvent(en);
+//
+//        SaveCsvInterface.writeObject(en);
+//
+//    }
+//}
