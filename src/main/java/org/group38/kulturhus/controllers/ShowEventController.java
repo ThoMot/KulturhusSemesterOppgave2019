@@ -1,11 +1,12 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.group38.kulturhus.model.Event.EventInfo;
-import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.group38.kulturhus.model.Kulturhus.getEvents;
@@ -35,9 +37,9 @@ public class ShowEventController implements MainController{
 
 
     @FXML
-    private TableColumn<Event,LocalDate> eventDateColumn = new TableColumn<>("Dato");
+    private TableColumn<Event,String> eventDateColumn = new TableColumn<>("Dato");
     @FXML
-    private TableColumn<Event, LocalTime> eventTimeColumn = new TableColumn<>("Tid");
+    private TableColumn<Event, String> eventTimeColumn = new TableColumn<>("Tid");
     @FXML
     private TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
     @FXML
@@ -68,15 +70,13 @@ public class ShowEventController implements MainController{
     public void initialize(){
         opprett(); //kun for å lage et Event for å sjekke
 
+        ArrayList<Event> list = new ArrayList<>(getEvents());
+        ObservableList<Event> observableList2 = FXCollections.observableList(list);
+        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
+        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
+        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
 
-        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
-        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("eventInfo"));
-        eventFacilityColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("facility"));
-
-        eventsView.getItems().setAll(getEvents());
-//        eventsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        eventsView.getSelectionModel().selectFirst();
+        eventsView.getItems().setAll(observableList2);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class MainApp extends Application {
 
         SceneManager sceneManager = SceneManager.INSTANCE;
         sceneManager.setPrimaryStage(primarystage);
-        SceneManager.navigate(SceneName.SHOWTICKET);
+        SceneManager.navigate(SceneName.SHOWEVENT);
 
         primarystage.show();
     }

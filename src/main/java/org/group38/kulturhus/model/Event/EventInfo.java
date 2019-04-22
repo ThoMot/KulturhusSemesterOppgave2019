@@ -1,8 +1,5 @@
 package org.group38.kulturhus.model.Event;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,15 +10,15 @@ public class EventInfo {
 
     private String eventName;
     private String program;
-    private ObjectProperty<LocalDate> date;
-    private ObjectProperty<LocalTime> time;
+    private LocalDate date;
+    private LocalTime time;
 
 
     public EventInfo(String eventName, String program, LocalDate date, LocalTime time) {
         this.eventName=eventName;
         this.program=program;
-        this.date = new SimpleObjectProperty<>(date);
-        this.time=new SimpleObjectProperty<>(time);
+        this.date = date;
+        this.time = time;
     }
 
     public String getEventName() {
@@ -41,32 +38,23 @@ public class EventInfo {
     }
 
     public LocalDate getDate() {
-        return date.get();
-    }
-
-    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
 
+
     public void setDate(LocalDate date) {
-        this.date.set(date);
+        this.date=date;
     }
 
     public LocalTime getTime() {
-        return time.get();
-    }
-
-    public ObjectProperty<LocalTime> timeProperty() {
         return time;
     }
 
     public void setTime(LocalTime time) {
-        this.time.set(time);
+        this.time=time;
     }
 
-    public String toString(){
-//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-//        return dateFormatter.format(date) + ", kl: " + time;
-        return eventName;
-    }
+//    public String toString(){
+//        return eventName;
+//    }
 }

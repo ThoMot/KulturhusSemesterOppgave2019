@@ -73,11 +73,11 @@ public class ShowTicketsController implements MainController {
 
         opprett(); //kun for å lage et Event for å sjekke
 
-        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
-        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
-        //Denne er det noe feil med
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("eventInfo"));
-        //phoneNumberColumn.setCellValueFactory(data->data.getValue().);
+//        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
+//        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
+//        //Denne er det noe feil med
+//        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("eventInfo"));
+//        //phoneNumberColumn.setCellValueFactory(data->data.getValue().);
 
 
         ticketsView.getItems().setAll(getEvents());
