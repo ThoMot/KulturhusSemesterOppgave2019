@@ -20,9 +20,8 @@
     <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
         <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Vis info" />
-        <Button layoutX="115.0" layoutY="10.0" mnemonicParsing="false" text="Endre" />
-        <Button layoutX="203.0" layoutY="10.0" mnemonicParsing="false" text="Slett" />
-        <Button layoutX="280.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" />
+        <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett" />
+        <Button layoutX="257.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" />
       </children>
     </Pane>
   </bottom>
@@ -33,7 +32,6 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="151.0" text="Dato" fx:id="eventDateColumn" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Tid" fx:id="eventTimeColumn" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" text="Sted" fx:id="eventFacilityColumn" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="185.0" text="Mer info" fx:id="eventMoreInfo" />
       </columns>
       <BorderPane.margin>
         <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
