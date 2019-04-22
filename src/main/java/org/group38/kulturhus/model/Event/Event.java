@@ -8,6 +8,8 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.util.ArrayList;
+
 
 public abstract class Event {
     private ContactPerson contactPerson; //skal denne også være på eventinfo?
@@ -45,6 +47,7 @@ public abstract class Event {
     public double getTicketPrice(){
         return ticketPrice;
     }
+
     public EventInfo getEventInfo(){
         return eventInfo;
     }
@@ -58,5 +61,6 @@ public abstract class Event {
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+    public abstract ArrayList<Ticket> boughtTickets();
 
 }

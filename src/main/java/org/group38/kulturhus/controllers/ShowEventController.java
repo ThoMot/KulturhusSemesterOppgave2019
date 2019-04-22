@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -37,13 +39,15 @@ public class ShowEventController implements MainController{
 
 
     @FXML
-    private TableColumn<Event,String> eventDateColumn = new TableColumn<>("Dato");
+    private TableColumn<Event,String> eventDateColumn, getEventTimeColumn;
     @FXML
-    private TableColumn<Event, String> eventTimeColumn = new TableColumn<>("Tid");
+    private TableColumn<Event, String> eventTimeColumn;
     @FXML
-    private TableColumn<Event, String> eventNameColumn = new TableColumn<>("Arrangement");
+    private TableColumn<Event, String> eventNameColumn;
     @FXML
-    private TableColumn<Event,String> eventFacilityColumn = new TableColumn<>("Sted");
+    private TableColumn<Event,String> eventFacilityColumn;
+    @FXML
+    private TableColumn<Event, Button> eventButtonTableColumn;
 
 
 
@@ -69,16 +73,27 @@ public class ShowEventController implements MainController{
     }
     public void initialize(){
         opprett(); //kun for å lage et Event for å sjekke
-
-        ArrayList<Event> list = new ArrayList<>(getEvents());
-        ObservableList<Event> observableList2 = FXCollections.observableList(list);
+        initCols();
+        loadData();
+        editableCols();
+    }
+    private void initCols(){
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
         eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
         eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
         eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
-
-        eventsView.getItems().setAll(observableList2);
     }
+    private void editableCols(){
+        eventsView.setEditable(true);
+        eventNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        eventNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setEventName(e.getNewValue()));
+    }
+
+    private void loadData(){
+        ObservableList<Event> observableList2 = FXCollections.observableList(getEvents());
+        eventsView.setItems(observableList2);
+    }
+
 
     @Override
     public void exit() {
