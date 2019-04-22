@@ -1,5 +1,8 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.group38.kulturhus.model.Kulturhus.*;
@@ -65,6 +69,15 @@ public class ShowTicketsController implements MainController {
     private
     TableColumn<EventNumberedSeating,String> phoneNumberColumn = new TableColumn<>("Telefonnummer");
 
+    @FXML
+    private TableColumn<Event,String> eventDateColumn, getEventTimeColumn;
+    @FXML
+    private TableColumn<Event, String> eventTimeColumn;
+    @FXML
+    private TableColumn<Event, String> eventNameColumn;
+    @FXML
+    private TableColumn<Event,String> eventFacilityColumn;
+
 
     @FXML
     private TableColumn<Ticket, LocalDate> dateColumn ;
@@ -73,6 +86,14 @@ public class ShowTicketsController implements MainController {
 
         opprett(); //kun for å lage et Event for å sjekke
 
+        ArrayList list = new ArrayList();
+        ObservableList<Event> observableList2 = FXCollections.observableList(list);
+
+
+        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
+        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
+        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
+
 //        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
 //        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
 //        //Denne er det noe feil med
@@ -80,7 +101,7 @@ public class ShowTicketsController implements MainController {
 //        //phoneNumberColumn.setCellValueFactory(data->data.getValue().);
 
 
-        ticketsView.getItems().setAll(getEvents());
+        ticketsView.setItems(observableList2);
 //        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 //        ticketsView.getSelectionModel().selectFirst();
     }
