@@ -95,4 +95,8 @@ public class EventFreeSeating extends Event {
                 "Dato og tid: " + getEventInfo().getDate() + " " + getEventInfo().getTime() + "\n" +
                 "Type arrangement: ingen setereservering";
     }
+
+    public Ticket[] getTickets() {
+        return tickets;
+    }
 }

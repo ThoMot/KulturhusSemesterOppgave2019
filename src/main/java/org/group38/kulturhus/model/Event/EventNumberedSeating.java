@@ -155,4 +155,7 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
                 "Type arrangement: setereservering";
     }
 
+    public Ticket[][] getTickets() {
+        return tickets;
+    }
 }
