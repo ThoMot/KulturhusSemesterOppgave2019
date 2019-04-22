@@ -20,9 +20,8 @@ public abstract class Event {
     private double ticketPrice;
 
     //constructor
-    public Event(ContactPerson contactPerson, Facility facility, String performers, EventInfo eventInfo, double ticketPrice){
+    public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
         this.facility=facility;
-        this.performers = performers;
         this.ticketPrice = ticketPrice;
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;

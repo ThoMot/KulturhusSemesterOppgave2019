@@ -15,8 +15,8 @@ public class EventNumberedSeating extends Event implements Serializable {
     private int rows;
 
     //constructor
-    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, org.group38.kulturhus.model.Event.EventInfo eventInfo) {
-        super(contactPerson, facility, performers, eventInfo, ticketPrice);
+    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, org.group38.kulturhus.model.Event.EventInfo eventInfo) {
+        super(contactPerson, facility, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
         tickets = new Ticket[rows][columns];
