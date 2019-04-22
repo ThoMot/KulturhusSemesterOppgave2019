@@ -52,19 +52,10 @@
       <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER">
 
           <columns>
-              <TableColumn fx:id="eventDateColumn" prefWidth="107.0" text="Dato" />
-              <TableColumn fx:id="eventTimeColumn" prefWidth="263.0" text="Tid">
-              </TableColumn>
-              <TableColumn text="Arrangement">
-                  <cellValueFactory>
-                      <PropertyValueFactory property="eventInfo" />
-                  </cellValueFactory>
-              </TableColumn>
-              <TableColumn text="Telefonnummer"> <!--fx:id="phoneNumberColumn"-->
-                  <!--<cellValueFactory>-->
-                      <!--<PropertyValueFactory property="phoneNumber"/>-->
-                  <!--</cellValueFactory>-->
-              </TableColumn>
+              <TableColumn text="Dato" fx:id="eventDateColumn" prefWidth="107.0"  />
+              <TableColumn text="Tid" fx:id="eventTimeColumn" prefWidth="263.0"/>
+              <TableColumn text="Arrangement" fx:id="eventNameColumn"/>
+              <TableColumn text="Telefonnummer" fx:id="phoneNumberColumn"/>
           </columns>
          <padding>
             <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
@@ -92,7 +83,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Tittel">
+                        <Label text="Tittel" fx:id="eventName" GridPane.columnSpan="2">
                            <font>
                               <Font size="20.0" />
                            </font>

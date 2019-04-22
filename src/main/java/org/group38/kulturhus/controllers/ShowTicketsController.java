@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
@@ -15,6 +17,7 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +25,12 @@ import java.util.List;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
 
     private List<Ticket> tickets;
 
     @FXML
-    private TableView<Event> ticketsView;
+    private TableView<Ticket> ticketsView;
 
 
     @FXML
@@ -53,52 +57,54 @@ public class ShowTicketsController implements MainController {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
 
-    @FXML
-    private
-    TableColumn<Event,LocalDate> eventDateColumn;
+
+    @FXML private TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
 
     @FXML
     private
-    TableColumn<Event, LocalTime> eventTimeColumn;
+    TableColumn<Ticket,String> phoneNumberColumn = new TableColumn<>("Telefonnummer");
 
     @FXML
-    private
-    TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
+    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers;
 
     @FXML
-    private
-    TableColumn<EventNumberedSeating,String> phoneNumberColumn = new TableColumn<>("Telefonnummer");
+    private TableColumn<Event,String> eventDateColumn, eventTimeColumn;
 
-    @FXML
-    private TableColumn<Event,String> eventDateColumn, getEventTimeColumn;
-    @FXML
-    private TableColumn<Event, String> eventTimeColumn;
-    @FXML
-    private TableColumn<Event, String> eventNameColumn;
     @FXML
     private TableColumn<Event,String> eventFacilityColumn;
 
 
-    @FXML
-    private TableColumn<Ticket, LocalDate> dateColumn ;
-
     public void initialize(){
 
-        opprett(); //kun for å lage et Event for å sjekke
+        Facility facility = new Facility("Sal 1", "Kinosal", 10, 20);
+        LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
+        LocalTime t = LocalTime.of(22,00);
+        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
+        EventInfo eventInfo = new EventInfo("Max Manus", "film", d,t);
+        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, "Ane Dahl Torp", 100, eventInfo);
 
-        ArrayList list = new ArrayList();
-        ObservableList<Event> observableList2 = FXCollections.observableList(list);
+        Facility facility1 = new Facility("Sal 2", "Teatersal", 10, 12);
+        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
+        LocalTime t1 = LocalTime.of(18,00);
+        ContactPerson contactPerson1 = new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455"));
+        EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen", d1, t1);
+        EventNumberedSeating event2 =new EventNumberedSeating(contactPerson1, facility1, "Sjefen", 100, eventInfo1);
 
 
-        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
-        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
-        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
+        maxManus.BuyTicket(1,2,"11223344");
+        maxManus.BuyTicket(2,3,"11223344");
+        maxManus.BuyTicket(1,4,"56743827");
 
-//        eventDateColumn.setCellValueFactory(data-> data.getValue().getEventInfo().dateProperty());
-//        eventTimeColumn.setCellValueFactory(data-> data.getValue().getEventInfo().timeProperty());
-//        //Denne er det noe feil med
-//        eventNameColumn.setCellValueFactory(new PropertyValueFactory<Event,String>("eventInfo"));
-//        //phoneNumberColumn.setCellValueFactory(data->data.getValue().);
+        ObservableList<Ticket> observableList2 = FXCollections.observableList(maxManus.boughtTickets());
+
+        eventName.setText(maxManus.getEventInfo().getEventName());
+ //       eventDate.setText(maxManus.getEventInfo().getDate().toString());
+
+//        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
+//        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
+//        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
+       phoneNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getPhonenumber()));
+
 
 
         ticketsView.setItems(observableList2);
