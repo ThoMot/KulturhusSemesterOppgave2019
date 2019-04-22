@@ -52,10 +52,10 @@
       <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER">
 
           <columns>
-              <TableColumn text="Dato" fx:id="eventDateColumn" prefWidth="107.0"  />
-              <TableColumn text="Tid" fx:id="eventTimeColumn" prefWidth="263.0"/>
-              <TableColumn text="Arrangement" fx:id="eventNameColumn"/>
               <TableColumn text="Telefonnummer" fx:id="phoneNumberColumn"/>
+              <TableColumn text="Seterad" fx:id="seatRowColumn" prefWidth="107.0"  />
+              <TableColumn text="Setenummer" fx:id="seatNumberColumn" prefWidth="263.0"/>
+              <TableColumn text="Endre"/>
           </columns>
          <padding>
             <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
@@ -88,8 +88,12 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Tid" GridPane.rowIndex="1" />
-                        <Label text="Sted" GridPane.rowIndex="2" />
+                        <Label text="Dato" GridPane.rowIndex="1" />
+                         <Label fx:id="eventDate" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                         <Label text="Klokken" GridPane.rowIndex="2" />
+                         <Label fx:id="eventTime" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        <Label text="Sted" GridPane.rowIndex="3" />
+                         <Label fx:id="eventFacility" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
                      </children>
                   </GridPane>
                   <GridPane>
@@ -104,18 +108,18 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Artist/Deltaker" GridPane.columnSpan="2">
+                        <Label text="Artist/Deltaker/Skuespiller" GridPane.columnSpan="3">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label text="Deltakere/artister test" GridPane.rowIndex="1" />
-                        <Label text="Program" GridPane.rowIndex="2">
+                        <Label fx:id="eventPerformers" GridPane.rowIndex="1" />
+                        <Label text="Program/Beskrivelse" GridPane.rowIndex="2" GridPane.columnSpan="3">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label text="program tekst" GridPane.rowIndex="3" />
+                        <Label fx:id="eventProgram" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>

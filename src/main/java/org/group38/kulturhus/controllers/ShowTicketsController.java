@@ -25,7 +25,8 @@ import java.util.List;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     private List<Ticket> tickets;
 
@@ -58,20 +59,18 @@ public class ShowTicketsController implements MainController {
     }
 
 
-    @FXML private TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
 
     @FXML
-    private
-    TableColumn<Ticket,String> phoneNumberColumn = new TableColumn<>("Telefonnummer");
+    private TableColumn<Ticket,String> phoneNumberColumn;
 
     @FXML
-    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers;
+    private TableColumn<Ticket,String> seatRowColumn;
 
     @FXML
-    private TableColumn<Event,String> eventDateColumn, eventTimeColumn;
+    private TableColumn<Ticket,String> seatNumberColumn;
 
     @FXML
-    private TableColumn<Event,String> eventFacilityColumn;
+    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers, eventFacility;
 
 
     public void initialize(){
@@ -80,7 +79,7 @@ public class ShowTicketsController implements MainController {
         LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
         LocalTime t = LocalTime.of(22,00);
         ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
-        EventInfo eventInfo = new EventInfo("Max Manus", "film","", d,t);
+        EventInfo eventInfo = new EventInfo("Max Manus", "film","Ingen", d,t);
         EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, 100, eventInfo);
 
         Facility facility1 = new Facility("Sal 2", "Teatersal", 10, 12);
@@ -98,14 +97,15 @@ public class ShowTicketsController implements MainController {
         ObservableList<Ticket> observableList2 = FXCollections.observableList(maxManus.boughtTickets());
 
         eventName.setText(maxManus.getEventInfo().getEventName());
-        eventDate.setText(maxManus.getEventInfo().getDate().format(formatter));
-       // eventPerformers.setText(maxManus.getEventInfo().);
+        eventDate.setText(maxManus.getEventInfo().getDate().format(dateFormatter));
+        eventTime.setText(maxManus.getEventInfo().getTime().format(timeFormatter));
+        eventFacility.setText(maxManus.getFacility().toString());
+        eventPerformers.setText(maxManus.getEventInfo().getPerformers());
         eventProgram.setText(maxManus.getEventInfo().getProgram());
 
-//        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
-//        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
-//        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
         phoneNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getPhonenumber()));
+       // seatNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().));
+
 
 
 
