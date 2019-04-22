@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Event implements Serializable {
-    private org.group38.kulturhus.model.Event.Ticket[][] tickets;
+    private Ticket[][] tickets;
     private int columns;
     private int rows;
 
@@ -18,7 +18,7 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
         super(contactPerson, facility, performers, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
-        tickets = new org.group38.kulturhus.model.Event.Ticket[rows][columns];
+        tickets = new Ticket[rows][columns];
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
@@ -26,7 +26,7 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new org.group38.kulturhus.model.Event.Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
+            tickets[seatRow][seatNumber] = new Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
         }
         else throw new IllegalArgumentException("Setet er opptatt");
     }
@@ -102,8 +102,8 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
     //Edit the date of an Event, also updating all bought tickets and eventinfo
     public void setDate(LocalDate date){
         super.getEventInfo().setDate(date);
-        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
-            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
+        for(Ticket[] tickets: tickets){
+            for(Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setDate(date);
                 }
@@ -112,8 +112,8 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
     }
     public void setTime(LocalTime time){
         super.getEventInfo().setTime(time);
-        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
-            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
+        for(Ticket[] tickets: tickets){
+            for(Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setTime(time);
                 }
