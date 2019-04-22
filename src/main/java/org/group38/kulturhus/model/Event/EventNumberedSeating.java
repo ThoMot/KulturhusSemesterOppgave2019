@@ -2,13 +2,14 @@ package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
+import org.group38.kulturhus.model.Event.Ticket;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Event implements Serializable {
+public class EventNumberedSeating extends Event implements Serializable {
     private Ticket[][] tickets;
     private int columns;
     private int rows;
@@ -124,8 +125,8 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
     //Updates the ticketprice bought in the Event, and also for all bought tickets
     public void setTicketPrice(double price){
         super.setTicketPrice(price);
-        for(org.group38.kulturhus.model.Event.Ticket[] tickets: tickets){
-            for( org.group38.kulturhus.model.Event.Ticket ticket: tickets){
+        for(Ticket[] tickets: tickets){
+            for(Ticket ticket: tickets){
                 if(ticket!=null){
                     ticket.setPrice(price);
                 }
@@ -144,7 +145,7 @@ public class EventNumberedSeating extends org.group38.kulturhus.model.Event.Even
         }
     }
     public String printTicket(int seatRow, int seatNumber){
-        org.group38.kulturhus.model.Event.Ticket t= FindTicket(seatRow, seatNumber);
+        Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
     @Override
