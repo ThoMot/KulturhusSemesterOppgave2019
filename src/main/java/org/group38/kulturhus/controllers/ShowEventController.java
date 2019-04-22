@@ -41,7 +41,7 @@ public class ShowEventController implements MainController{
     @FXML
     private TableColumn<Event, String> eventTimeColumn = new TableColumn<>("Tid");
     @FXML
-    private TableColumn<Event,String> eventNameColumn = new TableColumn<>("Arrangement");
+    private TableColumn<Event, String> eventNameColumn = new TableColumn<>("Arrangement");
     @FXML
     private TableColumn<Event,String> eventFacilityColumn = new TableColumn<>("Sted");
 
@@ -75,6 +75,7 @@ public class ShowEventController implements MainController{
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
         eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
         eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
+        eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
 
         eventsView.getItems().setAll(observableList2);
     }
