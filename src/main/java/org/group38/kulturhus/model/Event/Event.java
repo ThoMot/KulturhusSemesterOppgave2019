@@ -2,6 +2,7 @@
 //Hvordan skal utskrift av ledige seter se ut?
 //Trenger vi mer i tostringmetoden?
 //lage metoder som samsvarer med at lokalet ikke har sitteplasser også
+//legge inn abstarkte metoder som er felles for subklassene
 
 package org.group38.kulturhus.model.Event;
 
@@ -62,5 +63,9 @@ public abstract class Event {
         this.ticketPrice = ticketPrice;
     }
     public abstract ArrayList<Ticket> boughtTickets();
+
+    public void setFacility(){
+        this.facility=facility;
+    }
 
 }
