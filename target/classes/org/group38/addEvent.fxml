@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
     <children>
         <BorderPane fx:id="TEST" prefHeight="600.0" prefWidth="1200.0">
             <top>
@@ -75,8 +75,8 @@
          <right>
           <AnchorPane minHeight="0.0" minWidth="600.0" prefHeight="724.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <ListView layoutX="144.0" layoutY="27.0" prefHeight="587.0" prefWidth="354.0" />
-                  <Button layoutX="233.0" layoutY="631.0" mnemonicParsing="false" onAction="#test" text="Opprett ny kontaktperson" />
+                  <ListView layoutX="179.0" layoutY="27.0" prefHeight="368.0" prefWidth="319.0" />
+                  <Button layoutX="235.0" layoutY="416.0" mnemonicParsing="false" onAction="#test" text="Opprett ny kontaktperson" />
                </children>
             </AnchorPane>
          </right>
