@@ -45,6 +45,19 @@ public class EventNumberedSeating extends Event implements Serializable {
         }
         return s.toString();
     }
+    public ArrayList<Ticket> boughtTickets(){
+        ArrayList<Ticket> bought = new ArrayList();
+        for (int i = 0; i < tickets.length; i++) {
+            for (int j = 0; j < tickets[i].length; j++) {
+                if (tickets[i][j]==null) {
+                }
+                else{
+                    bought.add(tickets[i][j]);
+                }
+            }
+        }
+        return bought;
+    }
 
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
     public void DeleteTicket(String phoneNumber) {
