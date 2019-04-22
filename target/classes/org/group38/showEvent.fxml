@@ -1,60 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
-   <top>
-      <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
-         <menus>
-            <Menu mnemonicParsing="false" text="Arrangement">
-               <items>
-                  <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" />
-                  <MenuItem fx:id="addEvent1" mnemonicParsing="false" onAction="#goToAddEvent" text="endre arrangement" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Billett">
-               <items>
-                  <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" />
-                  <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Lokale">
-               <items>
-                  <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-   </top>
-   <center>
-
-      <TableView fx:id="eventsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS">
-
-         <columns>
-            <TableColumn text="Dato" fx:id="eventDateColumn"/>
-            <TableColumn text="Tid" fx:id="eventTimeColumn"/>
-            <TableColumn text="Arrangement" fx:id="eventNameColumn"/>
-            <TableColumn text="Sted" fx:id="eventFacilityColumn">
-            </TableColumn>
-         </columns>
-      </TableView>
-
-
-   </center>
-   <bottom>
-      <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Oppdater" />
-         </children>
-      </Pane>
-   </bottom>
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
+  <bottom>
+    <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <children>
+        <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Vis info" />
+        <Button layoutX="115.0" layoutY="10.0" mnemonicParsing="false" text="Endre" />
+        <Button layoutX="203.0" layoutY="10.0" mnemonicParsing="false" text="Slett" />
+        <Button layoutX="280.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" />
+      </children>
+    </Pane>
+  </bottom>
+  <center>
+    <TableView fx:id="eventsView" prefHeight="371.0" prefWidth="849.0" BorderPane.alignment="CENTER">
+      <columns>
+        <TableColumn text="Dato" fx:id="eventDateColumn" />
+        <TableColumn text="Tid" fx:id="eventTimeColumn" />
+        <TableColumn text="Arrangement" fx:id="eventNameColumn" />
+        <TableColumn text="Sted" fx:id="eventFacilityColumn" />
+      </columns>
+      <BorderPane.margin>
+        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+      </BorderPane.margin>
+    </TableView>
+  </center>
+  <top>
+    <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Arrangement">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" fx:id="addEvent" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="endre arrangement" fx:id="addEvent1" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Billett">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" fx:id="addTicket" />
+            <MenuItem mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" fx:id="showTicket" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Lokale">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" fx:id="showVenue" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
 </BorderPane>
