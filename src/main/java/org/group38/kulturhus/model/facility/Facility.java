@@ -29,19 +29,6 @@ public class Facility {
         this.columns=seatsPerRow;
     }
 
-    public Facility addCinema(){
-        return new Cinema();
-    }
-
-    public Facility addTheater(){
-        return new Theater();
-    }
-
-    public Facility addAssemblyHall(){
-        return new AssemblyHall();
-    }
-
-
     public String getFacilityName() {
         return facilityName;
     }
