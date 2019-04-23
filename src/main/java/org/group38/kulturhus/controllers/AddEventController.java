@@ -106,6 +106,7 @@ public class AddEventController implements MainController {
             alert.show();
         }
         else {
+            //try og catch med feilmeldinger ved feil input
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
             thisEvent.getEventInfo().setEventName(eventName.toString());
             thisEvent.getEventInfo().setDate(date.getValue());
