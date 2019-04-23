@@ -17,19 +17,15 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 import java.io.IOException;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
 
 public class AddEventController implements MainController {
     private Event thisEvent;
 
-    @FXML private TextField eventName;
-    @FXML private TextField eventType;
-    @FXML private TextField artist;
-    @FXML private TextField ticketPrice;
-    @FXML private TextField programInfo;
+    @FXML private TextField eventName, artist, ticketPrice, programInfo, time;
     @FXML private DatePicker date;
-    @FXML private ComboBox facility;
+    @FXML private ComboBox facility, eventType;
     @FXML private ListView contactPerson;
-    @FXML private TextField time;
 
 
     public AddEventController() {
@@ -73,30 +69,31 @@ public class AddEventController implements MainController {
     }
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
-        eventType.setText(thisEvent.getType());
+        eventType.getSelectionModel().select(thisEvent.getClass());
         artist.setText(thisEvent.getEventInfo().getPerformer());
         ticketPrice.setText(Double.toString(thisEvent.getTicketPrice()));
         programInfo.setText(thisEvent.getEventInfo().getProgram());
         date.setValue(thisEvent.getDate());
         facility.getSelectionModel().select(thisEvent.getFacility());
+        time.setText(thisEvent.getTime().toString());
         //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
 
     }
     public void createEvent(ActionEvent event){
-        EventInfo eventInfo = new EventInfo(eventName.toString(), programInfo.toString(), artist.toString(), org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()), org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
-        if(eventType.toString()=="EventNumberedSeating"){
-            //EventNumberedSeating eventNumberedSeating= new EventNumberedSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()), eventInfo);
+        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()), org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
+        if(eventType.toString()=="class org.group38.kulturhus.model.Event.EventNumberedSeating"){
+            //getEvents().add(new EventNumberedSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.getText(), eventInfo)));
         }
-        else if(eventType.toString()=="EventFreeSeating"){
-            //EventFreeSeating eventFreeSeating =new EventFreeSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()), eventInfo))
+        else if(eventType.toString()=="class org.group38.kulturhus.model.Event.EventFreeSeating"){
+            //getEvents().add(new EventFreeSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.getText()), eventInfo));
         }
     }
     //dette må lagres, oppdateres ikke i showEvent
     public void updateEvent(ActionEvent event){
-        //thisEvent.setTicketPrice(org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()));
+        thisEvent.setTicketPrice(org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.getText()));
         thisEvent.getEventInfo().setEventName(eventName.toString());
-        //thisEvent.getEventInfo().setDate(org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()));
-        //thisEvent.getEventInfo().setTime(org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
+        thisEvent.getEventInfo().setDate(date.getValue());
+        //thisEvent.getEventInfo().setTime(org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.getText())); noe galt med converter
         thisEvent.getEventInfo().setPerformers(artist.toString());
         thisEvent.getEventInfo().setProgram(programInfo.toString());
     }

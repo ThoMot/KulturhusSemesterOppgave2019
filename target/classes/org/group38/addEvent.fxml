@@ -36,7 +36,7 @@
           <AnchorPane minHeight="0.0" minWidth="600.0" prefHeight="724.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="eventName" layoutX="20.0" layoutY="69.0" prefHeight="26.0" prefWidth="229.0" />
-                  <TextField fx:id="eventType" layoutX="259.0" layoutY="69.0" prefHeight="26.0" prefWidth="272.0" />
+                   <ComboBox fx:id="eventType" layoutX="20.0" layoutY="192.0" prefHeight="26.0" prefWidth="224.0" promptText="velg et lokale" />
                   <TextField fx:id="artist" layoutX="22.0" layoutY="131.0" prefHeight="26.0" prefWidth="224.0" />
                   <Label layoutX="33.0" layoutY="53.0" text="Navn på arrangement:" />
                   <Label layoutX="226.0" layoutY="270.0" text="Program info: " />

@@ -11,7 +11,7 @@ public class Converters {
         return localDate;
     }
     public static LocalTime StringtoLocalTime(String time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("TT.mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM:yy");
         LocalTime localTime = LocalTime.parse(time, formatter);
         return localTime;
     }
