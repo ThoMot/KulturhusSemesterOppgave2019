@@ -85,12 +85,12 @@ public class ShowTicketsController implements MainController {
         loadData();
 
 
-        eventName.setText(thisEvent.getEventInfo().getEventName());
-        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
-        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
-        eventFacility.setText(thisEvent.getFacility().toString());
-        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
-        eventProgram.setText(thisEvent.getEventInfo().getProgram());
+//        eventName.setText(thisEvent.getEventInfo().getEventName());
+//        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
+//        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
+//        eventFacility.setText(thisEvent.getFacility().toString());
+//        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
+//        eventProgram.setText(thisEvent.getEventInfo().getProgram());
 
 
 
