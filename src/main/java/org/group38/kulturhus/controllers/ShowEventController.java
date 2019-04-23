@@ -120,7 +120,7 @@ public class ShowEventController implements MainController{
     public static Event getSelectedEvent() {
         return selectedEvent;
     }
-    //metode som viser feilmelding ved ingen markerte endringer
+    //metode som viser feilmelding ved ingen markerte felt
 
     @Override
     public void exit() {
