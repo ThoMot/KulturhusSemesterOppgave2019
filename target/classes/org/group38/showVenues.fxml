@@ -23,7 +23,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Ticket">
                             <items>
-                                <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToTicket" text="Add.." />
+                                <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Add.." />
                                 <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Show..." />
                             </items>
                         </Menu>
