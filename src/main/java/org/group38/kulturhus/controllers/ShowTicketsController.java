@@ -78,45 +78,30 @@ public class ShowTicketsController implements MainController {
     private Label eventName, eventDate, eventTime, eventProgram, eventPerformers, eventFacility;
 
 
-    public void initialize(){
-
+    public void initialize() {
+        setThisEvent(getSelectedEvent());
         ObservableList<Ticket> observableList2 = FXCollections.observableList(thisEvent.boughtTickets());
 
-//        eventName.setText(thisEvent.getEventInfo().getEventName());
-//        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
-//        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
-//        eventFacility.setText(thisEvent.getFacility().toString());
-//        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
-//        eventProgram.setText(thisEvent.getEventInfo().getProgram());
+        eventName.setText(thisEvent.getEventInfo().getEventName());
+        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
+        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
+        eventFacility.setText(thisEvent.getFacility().toString());
+        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
+        eventProgram.setText(thisEvent.getEventInfo().getProgram());
+
+        phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhonenumber()));
+        seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRow().toString()));
+        seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeat().toString()));
 
 
-
-//        ticketsView.setItems(observableList2);
+        ticketsView.setItems(observableList2);
 //        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 //        ticketsView.getSelectionModel().selectFirst();
-        System.out.println(getSelectedEvent());
     }
 
-    private void initCols(){
-        eventName.setText(getSelectedEvent().getEventInfo().getEventName());
-        eventDate.setText(getSelectedEvent().getEventInfo().getDate().format(dateFormatter));
-        eventTime.setText(getSelectedEvent().getEventInfo().getTime().format(timeFormatter));
-        eventFacility.setText(getSelectedEvent().getFacility().toString());
-        eventPerformers.setText(getSelectedEvent().getEventInfo().getPerformers());
-        eventProgram.setText(getSelectedEvent().getEventInfo().getProgram());
-
-        phoneNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getPhonenumber()));
-        seatRowColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getRow().toString()));
-        seatNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getSeat().toString()));
+    public void setThisEvent(Event thisEvent) {
+        this.thisEvent = thisEvent;
     }
-
-    private void loadData(){
-        observableList = FXCollections.observableList(getSelectedEvent().boughtTickets());
-        ticketsView.setItems(observableList);
-    }
-
-
-
 
     @Override
     public void exit() {
