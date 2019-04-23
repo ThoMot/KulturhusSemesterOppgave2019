@@ -17,6 +17,7 @@ public abstract class Event {
     private Facility facility;
     private EventInfo eventInfo;
     private double ticketPrice;
+    private String type;
 
     //constructor
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
@@ -56,6 +57,10 @@ public abstract class Event {
 
     public void setFacility(){
         this.facility=facility;
+    }
+
+    public String getType(){
+        return type;
     }
 
 }

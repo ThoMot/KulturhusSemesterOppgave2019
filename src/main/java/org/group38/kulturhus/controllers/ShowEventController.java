@@ -1,6 +1,7 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +17,11 @@ import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.group38.kulturhus.Utilities.Converters.StringtoLocalDate;
 import static org.group38.kulturhus.Utilities.Converters.StringtoLocalTime;
@@ -27,17 +31,13 @@ import static org.group38.kulturhus.model.Kulturhus.opprett;
 public class ShowEventController implements MainController{
     private ObservableList<Event> observableList;
     private static Event selectedEvent;
+    DatePicker datePicker;
 
-    @FXML
-    private DialogPane dialogPane;
-    @FXML
-    private MenuBar menuBar;
-    @FXML
-    private TableView<Event> eventsView;
-    @FXML
-    private Label eventName, eventDate;
-    @FXML
-    private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
+    @FXML private DialogPane dialogPane;
+    @FXML private MenuBar menuBar;
+    @FXML private TableView<Event> eventsView;
+    @FXML private Label eventName, eventDate;
+    @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
 
     @FXML
     private void goToAddTicket(ActionEvent event){
@@ -56,10 +56,10 @@ public class ShowEventController implements MainController{
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
-        opprett(); //kun for å lage et Event for å sjekke
+        opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
         initCols();
         loadData();
-        editableCols();
+//        editableCols();
     }
     private void initCols(){
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
@@ -67,21 +67,21 @@ public class ShowEventController implements MainController{
         eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
         eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
     }
-    private void editableCols(){
-        eventsView.setEditable(true);
-
-        eventNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        eventNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setEventName(e.getNewValue()));
-
-        eventDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        eventDateColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setDate(StringtoLocalDate(e.getNewValue())));
-
-        eventTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        eventTimeColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setTime(StringtoLocalTime(e.getNewValue())));
-
-        eventFacilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        eventFacilityColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getFacility().setFacilityName(e.getNewValue()));
-    }
+//    private void editableCols(){
+//        eventsView.setEditable(true);
+//
+//        eventNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        eventNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setEventName(e.getNewValue()));
+//
+//        eventDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        eventDateColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setDate(StringtoLocalDate(e.getNewValue())));
+//
+//        eventTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        eventTimeColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setTime(StringtoLocalTime(e.getNewValue())));
+//
+//        eventFacilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        eventFacilityColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getFacility().setFacilityName(e.getNewValue()));
+//    }
 
     private void loadData(){
         observableList = FXCollections.observableList(getEvents());
@@ -109,6 +109,15 @@ public class ShowEventController implements MainController{
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
             SceneManager.navigate(SceneName.ADDTICKET);
+        }
+    }
+    public void goToCreateEvent(ActionEvent event){
+        if(eventsView.getSelectionModel().getSelectedItem()==null){
+            //feilmelding
+        }
+        else{
+            setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.ADDEVENT);
         }
     }
 

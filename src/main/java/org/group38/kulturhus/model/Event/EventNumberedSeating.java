@@ -17,6 +17,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     private Ticket[][] tickets;
     private int columns;
     private int rows;
+    private final String type="EventNumberedSeating";
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
@@ -211,4 +212,12 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         this.rows = rows;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public double getTicketPrice() {
+        return super.getTicketPrice();
+    }
 }

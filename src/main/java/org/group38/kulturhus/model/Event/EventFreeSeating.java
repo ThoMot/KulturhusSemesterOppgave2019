@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class EventFreeSeating extends Event {
     private Ticket[] tickets;
     private int maxSeats;
+    private final String type="EventFreeSeating";
 
     public EventFreeSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
@@ -112,5 +113,14 @@ public class EventFreeSeating extends Event {
             }
         }
         return bought;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public double getTicketPrice() {
+        return super.getTicketPrice();
     }
 }
