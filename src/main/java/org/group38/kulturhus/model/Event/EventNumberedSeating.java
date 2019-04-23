@@ -27,7 +27,7 @@ public class EventNumberedSeating extends Event implements Serializable {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(super.getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
+            tickets[seatRow][seatNumber] = new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
         }
         else throw new IllegalArgumentException("Setet er opptatt");
     }
@@ -171,5 +171,21 @@ public class EventNumberedSeating extends Event implements Serializable {
 
     public Ticket[][] getTickets() {
         return tickets;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 }

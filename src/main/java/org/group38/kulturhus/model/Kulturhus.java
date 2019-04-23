@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Kulturhus {
     private static ArrayList<Event> events;
@@ -43,9 +44,9 @@ public class Kulturhus {
         events.add(event2);
 
 
-        event2.BuyTicket(1,2,"11223344");
-        event2.BuyTicket(2,3,"11223344");
-        event2.BuyTicket(1,4,"56743827");
+        maxManus.BuyTicket(1,2,"11223344");
+        maxManus.BuyTicket(2,3,"11223344");
+        maxManus.BuyTicket(3,4,"56743827");
 
 
         Ticket ticket1 = new Ticket(200, "11111111", d1, t1);
@@ -53,11 +54,6 @@ public class Kulturhus {
         tickets = new ArrayList<>();
         tickets.add(ticket1);
         tickets.add(ticket2);
-
-
-
-
-
 
     }
 
@@ -68,6 +64,7 @@ public class Kulturhus {
     public static ArrayList<Ticket> getTickets(){
         return tickets;
     }
+
     public static ArrayList<Facility> getFacility(){
         return getFacility();
     }
