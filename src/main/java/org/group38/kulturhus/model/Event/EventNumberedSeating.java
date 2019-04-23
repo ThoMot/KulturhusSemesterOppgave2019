@@ -1,5 +1,8 @@
 package org.group38.kulturhus.model.Event;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.model.Event.Ticket;
@@ -188,4 +191,5 @@ public class EventNumberedSeating extends Event implements Serializable {
     public void setRows(int rows) {
         this.rows = rows;
     }
+
 }
