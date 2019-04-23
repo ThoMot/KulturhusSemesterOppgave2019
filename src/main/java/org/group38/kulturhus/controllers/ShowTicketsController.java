@@ -1,5 +1,7 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import java.util.List;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
+    private ObservableList<Ticket> observableList;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -92,7 +95,7 @@ public class ShowTicketsController implements MainController {
 
         maxManus.BuyTicket(1,2,"11223344");
         maxManus.BuyTicket(2,3,"11223344");
-        maxManus.BuyTicket(1,4,"56743827");
+        maxManus.BuyTicket(3,4,"56743827");
 
         ObservableList<Ticket> observableList2 = FXCollections.observableList(maxManus.boughtTickets());
 
@@ -104,9 +107,8 @@ public class ShowTicketsController implements MainController {
         eventProgram.setText(maxManus.getEventInfo().getProgram());
 
         phoneNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getPhonenumber()));
-       // seatNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().));
-
-
+        seatRowColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getRow().toString()));
+        seatNumberColumn.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getSeat().toString()));
 
 
         ticketsView.setItems(observableList2);
