@@ -37,11 +37,11 @@ public class EventInfo {
     }
 
     public String getPerformers() {
-        return performers;
+        return performer;
     }
 
     public void setPerformers(String performers) {
-        this.performers = performers;
+        this.performer = performer;
     }
 
     public LocalDate getDate() {

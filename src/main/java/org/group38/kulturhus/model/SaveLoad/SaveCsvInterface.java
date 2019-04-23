@@ -21,8 +21,9 @@ public class SaveCsvInterface {
         if (Modifier.isPublic(method.getModifiers()) &&
                 method.getParameterTypes().length == 0) {
             if (method.getName().matches("^get[A-Z].*") &&
-                    !method.getReturnType().equals(void.class))
+                    !method.getReturnType().equals(void.class) && !method.getReturnType().equals(Object.class))
                 return true;
+            System.out.println(method.getReturnType());
         }
         return false;
     }
