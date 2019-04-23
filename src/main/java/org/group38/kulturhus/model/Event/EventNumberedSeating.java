@@ -1,6 +1,7 @@
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.model.Event.Ticket;
 
@@ -9,13 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class EventNumberedSeating extends Event implements Serializable {
+public class EventNumberedSeating extends Event implements Serializable, CsvBase {
     private Ticket[][] tickets;
     private int columns;
     private int rows;
 
     //constructor
-    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, org.group38.kulturhus.model.Event.EventInfo eventInfo) {
+    public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
@@ -161,6 +162,21 @@ public class EventNumberedSeating extends Event implements Serializable {
         Ticket t= FindTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
+
+    //brukes for lagring
+    public int getColumns() {
+        return columns;
+    }
+
+    //brukes for lagring
+    public int getRows() {
+        return rows;
+    }
+
+
+
+
+
     @Override
     public String toString() {
         return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
@@ -169,20 +185,23 @@ public class EventNumberedSeating extends Event implements Serializable {
                 "Type arrangement: setereservering";
     }
 
-    public Ticket[][] getTickets() {
-        return tickets;
+    //public Ticket[][] getTickets() {
+    //    return tickets;
+    //}
+
+    @Override
+    public String toCSV() {
+
+        StringBuilder sb = new StringBuilder();
+        String delimitter = ",";
+
+
+        return sb.toString();
     }
 
-    public int getColumns() {
-        return columns;
-    }
 
     public void setColumns(int columns) {
         this.columns = columns;
-    }
-
-    public int getRows() {
-        return rows;
     }
 
     public void setRows(int rows) {

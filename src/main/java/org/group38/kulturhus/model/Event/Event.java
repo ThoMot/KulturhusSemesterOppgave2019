@@ -15,8 +15,6 @@ import java.util.ArrayList;
 public abstract class Event {
     private ContactPerson contactPerson; //skal denne også være på eventinfo?
     private Facility facility;
-    //private ArrayList performers; //skal denne også være på eventinfo?
-    private String performers; //skal denne også være på eventinfo?
     private EventInfo eventInfo;
     private double ticketPrice;
 
@@ -35,14 +33,6 @@ public abstract class Event {
                 facility.toString();
     }
 
-
-    public String getPerformers() {
-        return performers;
-    }
-
-    public void setPerformers(String performers) {
-        this.performers = performers;
-    }
 
     public double getTicketPrice(){
         return ticketPrice;
