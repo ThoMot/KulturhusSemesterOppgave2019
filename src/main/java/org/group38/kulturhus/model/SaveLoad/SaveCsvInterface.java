@@ -7,6 +7,9 @@ import org.group38.kulturhus.model.Event.Ticket;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,9 +17,19 @@ import java.util.Objects;
 
 public class SaveCsvInterface {
 
-    public static boolean writeObject(Object object) {
+    public static boolean isGetter(Method method) {
+        if (Modifier.isPublic(method.getModifiers()) &&
+                method.getParameterTypes().length == 0) {
+            if (method.getName().matches("^get[A-Z].*") &&
+                    !method.getReturnType().equals(void.class))
+                return true;
+        }
+        return false;
+    }
+
+    public static void writeObject(CsvBase object) {
         FileWriter fileWriter = null;
-        List<Object> objects = new ArrayList<>();
+        List<CsvBase> objects = new ArrayList<>();
         final String divider = ",";
         final String nextline = "\n";
         String filename = null;
@@ -26,30 +39,56 @@ public class SaveCsvInterface {
         if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
             filename = "events.csv";
         } else if (object instanceof ContactPerson) {
-            filename = "ContactPerson.csv";
+            filename = "contactPerson.csv";
         } else if (object instanceof Ticket) {
             filename = "tickets.csv";
         }
 
-        try {
-            fileWriter = new FileWriter(filename);
-            for (Object objectInfo : objects) {
-                fileWriter.write(objectInfo.toString());
+        StringBuilder sb = new StringBuilder();
+
+        Method[] methods = object.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            if (isGetter(method)) {
+                System.out.println(method.toString());
+                try {
+                    sb.append(method.invoke(object).toString());
+                    sb.append(divider);
+                } catch (IllegalAccessException | InvocationTargetException y) {
+                    y.printStackTrace();
+                }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        System.out.println(sb);
 
-        return true;
     }
-
-
-
-
-
-
 }
+
+
+
+             /*   try {
+                    fileWriter = new FileWriter(filename, true);
+                    for (CsvBase objectInfo : objects) {
+                        fileWriter.append(objectInfo.toCSV());
+
+                        System.out.println(objectInfo.toCSV());
+                    }
+
+                   // return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                   // return false;
+                } finally {
+                    try {
+                        fileWriter.flush();
+                        fileWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+    }
+}
+
 
 
 
@@ -66,4 +105,4 @@ public class SaveCsvInterface {
     //en som oppdaterer en linje
 
 
-
+*/

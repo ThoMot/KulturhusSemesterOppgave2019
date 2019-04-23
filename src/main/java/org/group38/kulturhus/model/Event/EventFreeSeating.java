@@ -11,8 +11,8 @@ public class EventFreeSeating extends Event {
     private Ticket[] tickets;
     private int maxSeats;
 
-    public EventFreeSeating(ContactPerson contactPerson, Facility facility, String performers, double ticketPrice, EventInfo eventInfo) {
-        super(contactPerson, facility, performers, eventInfo, ticketPrice);
+    public EventFreeSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
+        super(contactPerson, facility, eventInfo, ticketPrice);
         this.maxSeats=facility.getMaxAntSeats();
         tickets = new Ticket[maxSeats];
     }

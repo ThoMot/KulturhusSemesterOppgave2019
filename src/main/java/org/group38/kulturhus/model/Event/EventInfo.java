@@ -6,13 +6,16 @@ import java.time.LocalTime;
 public class EventInfo {
     private String eventName;
     private String program;
+    private String performer;
     private LocalDate date;
     private LocalTime time;
 
 
-    public EventInfo(String eventName, String program, LocalDate date, LocalTime time) {
+
+    public EventInfo(String eventName, String program, String performer, LocalDate date, LocalTime time) {
         this.eventName = eventName;
         this.program = program;
+        this.performer = performer;
         this.date = date;
         this.time = time;
     }
@@ -36,6 +39,8 @@ public class EventInfo {
     public LocalDate getDate() {
         return date;
     }
+
+    public String getPerformer() { return performer; }
 
 
     public void setDate(LocalDate date) {

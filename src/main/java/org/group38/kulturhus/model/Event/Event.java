@@ -8,19 +8,19 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 public abstract class Event {
     private ContactPerson contactPerson; //skal denne også være på eventinfo?
     private Facility facility;
-    //private ArrayList performers; //skal denne også være på eventinfo?
-    private String performers; //skal denne også være på eventinfo?
     private EventInfo eventInfo;
     private double ticketPrice;
 
     //constructor
-    public Event(ContactPerson contactPerson, Facility facility, String performers, EventInfo eventInfo, double ticketPrice){
+    public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
         this.facility=facility;
-        this.performers = performers;
         this.ticketPrice = ticketPrice;
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;
@@ -34,17 +34,10 @@ public abstract class Event {
     }
 
 
-    public String getPerformers() {
-        return performers;
-    }
-
-    public void setPerformers(String performers) {
-        this.performers = performers;
-    }
-
     public double getTicketPrice(){
         return ticketPrice;
     }
+
     public EventInfo getEventInfo(){
         return eventInfo;
     }
@@ -57,6 +50,43 @@ public abstract class Event {
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    //brukes for lagring
+    public String getContactPersonPhone() {
+        return getContactPerson().getContactInfo().getPhoneNr();
+    }
+
+    //brukes for lagring
+    public String getFacilityName(){
+        return getFacility().getFacilityName();
+    }
+
+    //brukes for lagring
+    public String getFacilityType(){
+        return getFacility().getFacilityType();
+    }
+
+    //brukes for lagring
+    public String getPerformer(){
+        return getEventInfo().getPerformer();
+    }
+
+    //brukes for lagring
+    public String getEventName(){
+        return getEventInfo().getEventName();
+    }
+
+    public String getEventProgram(){
+        return getEventInfo().getProgram();
+    }
+
+    public LocalDate getDate(){
+        return getEventInfo().getDate();
+    }
+
+    public LocalTime getLocalTime(){
+        return getEventInfo().getTime();
     }
 
 }

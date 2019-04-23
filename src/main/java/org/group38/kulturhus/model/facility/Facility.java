@@ -25,8 +25,8 @@ public class Facility {
     public Facility(String facilityName, String facilityType, int numRows, int seatsPerRow){
         this.facilityName = facilityName;
         this.facilityType = facilityType;
-        this.rows=numRows;
-        this.columns=seatsPerRow;
+        this.rows = numRows;
+        this.columns = seatsPerRow;
     }
 
     public String getFacilityName() {

@@ -4,6 +4,7 @@ import org.group38.kulturhus.model.SaveLoad.CsvBase;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Ticket implements CsvBase {
@@ -98,8 +99,21 @@ public class Ticket implements CsvBase {
                 '}';
     }
 
+
+
     @Override
     public String toCSV() {
-        return price + "," + phonenumber + "," + row + "," + seat + "," + date + "," + time;
+
+        StringBuilder sb = new StringBuilder();
+        String delimitter = ",";
+        sb.append((getPhonenumber()));
+        sb.append(delimitter);
+        sb.append(getDate());
+        sb.append(delimitter);
+        sb.append(getPrice());
+        sb.append(delimitter);
+        sb.append(getTime());
+
+        return sb.toString();
     }
 }
