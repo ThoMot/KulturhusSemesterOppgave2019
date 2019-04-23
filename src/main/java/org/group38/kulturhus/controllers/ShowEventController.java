@@ -37,11 +37,11 @@ public class ShowEventController implements MainController{
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
 
     @FXML
-    private void goToAddEvent(ActionEvent event){
+    public void goToAddEvent(ActionEvent event){
        SceneManager.navigate(SceneName.ADDEVENT);
     }
     @FXML
-    private void goToShowVenue(ActionEvent event){
+    public void goToShowVenue(ActionEvent event){
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){

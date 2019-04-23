@@ -29,12 +29,6 @@
                                 <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Arrangementsoversikt" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Billetter">
-                            <items>
-                                <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" />
-                                <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" />
-                            </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Lokaler">
                             <items>
                                 <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Vis lokaler" />
