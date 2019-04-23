@@ -29,14 +29,14 @@ public class Kulturhus {
         LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
         LocalTime t = LocalTime.of(22,00);
         ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
-        EventInfo eventInfo = new EventInfo("Max Manus", "film", "Anne", d,t);
+        EventInfo eventInfo = new EventInfo("Max Manus", "film", "Anne", "kino", d,t);
         EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, 100, eventInfo);
 
         Facility facility1 = new Facility("Sal 2", "Teatersal", 10, 12);
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);
         ContactPerson contactPerson1 = new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455"));
-        EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen", "Arild", d1, t1);
+        EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen", "Arild", "kino", d1, t1);
         EventNumberedSeating event2 =new EventNumberedSeating(contactPerson1, facility1,  100, eventInfo1);
 
 

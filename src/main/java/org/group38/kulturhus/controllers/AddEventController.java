@@ -84,17 +84,17 @@ public class AddEventController implements MainController {
         //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
 
     }
-    public void createEvent(ActionEvent event){
-        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), date.getValue(), LocalTime.parse(time.getText()));
-        if(eventType.equals("Event med setereservasjon")){
-            //try catch som sender en errormelding dersom man putter inn feil input?
-            //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
-        }
-        else if(eventType.equals("Event uten setereservasjon")){
-            //try catch med Alert feilmelding dersom man putter feil input?
-            //getEvents().add(new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo));
-        }
-    }
+//    public void createEvent(ActionEvent event){
+//        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), date.getValue(), LocalTime.parse(time.getText()));
+//        if(eventType.equals("Event med setereservasjon")){
+//            //try catch som sender en errormelding dersom man putter inn feil input?
+//            //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
+//        }
+//        else if(eventType.equals("Event uten setereservasjon")){
+//            //try catch med Alert feilmelding dersom man putter feil input?
+//            //getEvents().add(new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo));
+//        }
+//    }
     //dette må lagres, oppdateres ikke i showEvent
     public void updateEvent(ActionEvent event){
         if(thisEvent==null){

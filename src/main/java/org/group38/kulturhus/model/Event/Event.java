@@ -21,7 +21,6 @@ public abstract class Event {
     private Facility facility;
     private EventInfo eventInfo;
     private double ticketPrice;
-    private String type;
 
 
     //constructor
@@ -84,14 +83,7 @@ public abstract class Event {
         return facility.getMaxAntSeats();
     }
 
-    public int getRows(){
-        return facility.getRows();
-    }
-
-    public int getColumns(){
-        return facility.getColumns();
-    }
-
+    public String getType() { return getEventInfo().getType(); }
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
@@ -103,15 +95,8 @@ public abstract class Event {
         this.facility=facility;
     }
 
-    public String getType(){
-        return type;
-    }
 
     public AtomicInteger getEventId() {
         return eventId;
-    }
-
-    public ContactPerson getContactPerson() {
-        return contactPerson;
     }
 }

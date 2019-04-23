@@ -199,7 +199,7 @@ public class EnhetsTesting {
         Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);
-        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", d1, t1);
+        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", "konsert",d1, t1);
         EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
         EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
 

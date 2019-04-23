@@ -212,12 +212,9 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         this.rows = rows;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    @Override
-    public double getTicketPrice() {
-        return super.getTicketPrice();
-    }
+//    @Override
+//    public double getTicketPrice() {
+//        return super.getTicketPrice();
+//    }
 }

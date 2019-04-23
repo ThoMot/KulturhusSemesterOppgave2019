@@ -9,15 +9,17 @@ public class EventInfo {
     private String performer;
     private LocalDate date;
     private LocalTime time;
+    private String type;
 
 
 
-    public EventInfo(String eventName, String program, String performer, LocalDate date, LocalTime time) {
+    public EventInfo(String eventName, String program, String performer, String type, LocalDate date, LocalTime time) {
         this.eventName = eventName;
         this.program = program;
         this.performer = performer;
         this.date = date;
         this.time = time;
+        this.type = type;
     }
 
     public String getEventName() {
@@ -61,6 +63,10 @@ public class EventInfo {
 
     public void setTime(LocalTime time) {
         this.time=time;
+    }
+
+    public String getType(){
+        return type;
     }
 
 }
