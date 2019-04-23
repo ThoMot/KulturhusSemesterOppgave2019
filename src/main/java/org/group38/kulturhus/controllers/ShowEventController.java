@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Popup;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
@@ -20,41 +21,32 @@ import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.opprett;
 
 public class ShowEventController implements MainController{
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-
     private ObservableList<Event> observableList;
-    private List<Event> events;
+    private Event selectedEvent;
 
     @FXML
     private MenuBar menuBar;
     @FXML
     private TableView<Event> eventsView;
-
     @FXML
     private Label eventName, eventDate;
-
-
     @FXML
     private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
 
     @FXML
-    private void goToAddTicket(ActionEvent event) throws IOException {
+    private void goToAddTicket(ActionEvent event){
         SceneManager.navigate(SceneName.ADDTICKET);
     }
-
     @FXML
-    private void goToShowTicket(ActionEvent event) throws IOException {
+    private void goToShowTicket(ActionEvent event){
         SceneManager.navigate(SceneName.SHOWTICKET);
     }
-
-
     @FXML
-    private void goToAddEvent(ActionEvent event) throws IOException {
+    private void goToAddEvent(ActionEvent event){
        SceneManager.navigate(SceneName.ADDEVENT);
     }
-
     @FXML
-    private void goToShowVenue(ActionEvent event) throws IOException {
+    private void goToShowVenue(ActionEvent event){
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
@@ -94,9 +86,27 @@ public class ShowEventController implements MainController{
         observableList.remove(eventsView.getSelectionModel().getSelectedItem());
     }
 
+    //metode som bytter scene til visinfo og tar med seg eventet som er trykket på
+    public void goToVisInfo(ActionEvent event){
+        if(eventsView.getSelectionModel().getSelectedItem()==null){
+            System.out.println("Ingen felt er trykket på");
+        }
+        else {
+            setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.SHOWTICKET);
+        }
+    }
+
+    public void setSelectedEvent(Event selectedEvent) {
+        this.selectedEvent = selectedEvent;
+    }
+
+    public Event getSelectedEvent() {
+        return selectedEvent;
+    }
+
     @Override
     public void exit() {
-
     }
 }
 
