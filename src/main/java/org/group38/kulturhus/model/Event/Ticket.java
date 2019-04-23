@@ -87,6 +87,13 @@ public class Ticket implements CsvBase {
        return row;
     }
 
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
 
     @Override
     public String toString() {
