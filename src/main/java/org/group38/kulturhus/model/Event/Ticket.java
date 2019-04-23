@@ -1,6 +1,7 @@
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
+import org.group38.kulturhus.model.facility.Facility;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -68,7 +69,7 @@ public class Ticket implements CsvBase {
     public LocalTime getTime() {
         return time;
     }
-    //    public String setSeatNumber(int seatNumber) {
+//    public String setSeatNumber(int seatNumber) {
 //        this.seatNumber = seatNumber;
 //        return "Setenummer er endret";
 //    }
@@ -78,13 +79,13 @@ public class Ticket implements CsvBase {
 //        return "Seterad er oppdatert";
 //    }
 //
-//    public int getSeatRow() {
-//        return seatRow;
-//    }
-//
-//    public int getSeatNumber() {
-//        return seatNumber;
-//    }
+    public Integer getSeat() {
+        return seat;
+    }
+
+    public Integer getRow() {
+       return row;
+    }
 
 
     @Override

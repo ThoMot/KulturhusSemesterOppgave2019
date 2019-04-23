@@ -51,6 +51,7 @@ public abstract class Event {
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
     public abstract ArrayList<Ticket> boughtTickets();
 
     public void setFacility(){
