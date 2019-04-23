@@ -26,7 +26,7 @@ public class EventNumberedSeating extends Event implements Serializable {
     }
 
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
-    public void BuyTicket(int seatRow, int seatNumber, String phoneNumber) {
+    public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
         if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
         if (tickets[seatRow][seatNumber]==null) {
@@ -153,7 +153,7 @@ public class EventNumberedSeating extends Event implements Serializable {
         String phoneNumber = FindTicket(oldRow, oldSeat).getPhonenumber();
         try {
             DeleteTicket(oldRow, oldSeat);
-            BuyTicket(seatRow, seatNumber, phoneNumber);
+            buyTicket(seatRow, seatNumber, phoneNumber);
         } catch (NoSuchElementException e) {
             System.out.println(e);
         } catch (IllegalArgumentException e) {

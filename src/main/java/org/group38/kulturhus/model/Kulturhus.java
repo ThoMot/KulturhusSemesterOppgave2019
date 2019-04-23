@@ -39,14 +39,18 @@ public class Kulturhus {
         EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen","Sjefen" ,d1, t1);
         EventNumberedSeating event2 =new EventNumberedSeating(contactPerson1, facility1, 100, eventInfo1);
 
+        event2.buyTicket(8,2,"90862870");
+        event2.buyTicket(2,3,"90862870");
+        event2.buyTicket(3,4,"90862870");
+
         events = new ArrayList<>();
         events.add(maxManus);
         events.add(event2);
 
 
-        maxManus.BuyTicket(1,2,"11223344");
-        maxManus.BuyTicket(2,3,"11223344");
-        maxManus.BuyTicket(3,4,"56743827");
+        maxManus.buyTicket(1,2,"11223344");
+        maxManus.buyTicket(2,3,"11223344");
+        maxManus.buyTicket(3,4,"56743827");
 
 
         Ticket ticket1 = new Ticket(200, "11111111", d1, t1);

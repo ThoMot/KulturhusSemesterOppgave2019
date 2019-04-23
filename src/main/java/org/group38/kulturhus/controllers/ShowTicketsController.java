@@ -31,6 +31,7 @@ public class ShowTicketsController implements MainController {
     private ObservableList<Ticket> observableList;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private Event thisEvent;
 
     private List<Ticket> tickets;
 
@@ -84,6 +85,12 @@ public class ShowTicketsController implements MainController {
         loadData();
 
 
+        eventName.setText(thisEvent.getEventInfo().getEventName());
+        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
+        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
+        eventFacility.setText(thisEvent.getFacility().toString());
+        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
+        eventProgram.setText(thisEvent.getEventInfo().getProgram());
 
 
 
