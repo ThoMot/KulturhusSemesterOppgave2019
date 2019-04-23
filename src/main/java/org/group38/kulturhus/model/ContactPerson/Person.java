@@ -1,6 +1,6 @@
 package org.group38.kulturhus.model.ContactPerson;
 
-public class Person {
+public abstract class Person {
 
     private String firstName;
     private String lastName;

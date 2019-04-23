@@ -20,7 +20,6 @@ import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Event.Performer;
 import org.group38.kulturhus.model.Event.Ticket;
 import org.group38.kulturhus.model.facility.Facility;
 
@@ -209,13 +208,15 @@ public class EnhetsTesting {
         events.add(2, test);
         //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
+        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1);
+
 
         SaveCsvInterface save = new SaveCsvInterface();
 
         SaveJobj jo = new SaveJobj();
         jo.writeEvent(en);
 
-        SaveCsvInterface.writeObject(en);
+        SaveCsvInterface.writeObject(ticket);
 
     }
 }

@@ -9,6 +9,8 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -46,7 +48,46 @@ public abstract class Event {
         return facility;
     }
 
-    public ContactPerson getContactPerson() { return contactPerson; }
+    public String getPhoneNr(){
+        return contactPerson.getContactInfo().getPhoneNr();
+    }
+
+    public String getEventName(){
+        return eventInfo.getEventName();
+    }
+
+    public String getProgram(){
+        return eventInfo.getProgram();
+    }
+
+    public String getPerformer(){
+        return eventInfo.getPerformers();
+    }
+
+    public LocalDate getDate(){
+        return eventInfo.getDate();
+    }
+
+    public LocalTime getTime(){
+        return eventInfo.getTime();
+    }
+
+    public String getFacilityName(){
+        return facility.getFacilityName();
+    }
+
+    public int getMaxSeats(){
+        return facility.getMaxAntSeats();
+    }
+
+    public int getRows(){
+        return facility.getRows();
+    }
+
+    public int getColumns(){
+        return facility.getColumns();
+    }
+
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
