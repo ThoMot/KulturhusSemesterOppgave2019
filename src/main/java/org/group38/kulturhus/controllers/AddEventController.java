@@ -44,7 +44,7 @@ public class AddEventController implements MainController {
 
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.ADDEVENT);
+        SceneManager.navigate(SceneName.SHOWEVENT);
     }
 
     @FXML

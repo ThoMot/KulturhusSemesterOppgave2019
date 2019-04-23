@@ -22,7 +22,6 @@
         <Menu mnemonicParsing="false" text="Arrangement">
           <items>
             <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" />
-            <MenuItem fx:id="addEvent1" mnemonicParsing="false" onAction="#goToAddEvent" text="endre arrangement" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Billett">
