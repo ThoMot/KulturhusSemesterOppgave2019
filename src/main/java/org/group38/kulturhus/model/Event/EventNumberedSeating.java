@@ -202,16 +202,9 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return sb.toString();
     }
 
-    public int getColumns() {
-        return columns;
-    }
 
     public void setColumns(int columns) {
         this.columns = columns;
-    }
-
-    public int getRows() {
-        return rows;
     }
 
     public void setRows(int rows) {

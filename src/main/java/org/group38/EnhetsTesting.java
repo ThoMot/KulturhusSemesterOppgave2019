@@ -1,36 +1,36 @@
-//package org.group38;
-//
-//import org.group38.kulturhus.model.ContactPerson.ContactInfo;
-//import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-//import org.group38.kulturhus.model.Event.EventFreeSeating;
-//import org.group38.kulturhus.model.Event.EventInfo;
-//import org.group38.kulturhus.model.Event.EventNumberedSeating;
-//import org.group38.kulturhus.model.facility.Facility;
-//import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
-//import org.group38.kulturhus.model.SaveLoad.SaveJobj;
-//
-//import java.time.LocalDate;
-//import java.time.LocalTime;
-//import java.time.Month;
-//import java.util.*;
-//
-//
-//
-//import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-//import org.group38.kulturhus.model.ContactPerson.ContactInfo;
-//import org.group38.kulturhus.model.Event.EventInfo;
-//import org.group38.kulturhus.model.Event.EventNumberedSeating;
-//import org.group38.kulturhus.model.Event.Performer;
-//import org.group38.kulturhus.model.Event.Ticket;
-//import org.group38.kulturhus.model.facility.Facility;
-//
-//import java.util.ArrayList;
-//import java.util.Calendar;
-//import java.util.GregorianCalendar;
-//import java.util.NoSuchElementException;
-//
-//public class EnhetsTesting {
-//    public static void main(String[] args) {
+package org.group38;
+
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Event.EventFreeSeating;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.facility.Facility;
+import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
+import org.group38.kulturhus.model.SaveLoad.SaveJobj;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+import java.util.*;
+
+
+
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Event.Performer;
+import org.group38.kulturhus.model.Event.Ticket;
+import org.group38.kulturhus.model.facility.Facility;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.NoSuchElementException;
+
+public class EnhetsTesting {
+   public static void main(String[] args) {
 //        int antallFeil=0;
 //        Facility facility=new Facility("Sal1","kino", 10,10);
 //
@@ -194,28 +194,28 @@
 //
 //        System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 //
-//        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
-//        ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
-//        Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
-//        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-//        LocalTime t1 = LocalTime.of(18,00);
-//        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", d1, t1);
-//        EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
-//        EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
-//
-//        List<Object> events = new ArrayList<>();
-//        events.add(0,(new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2)));
-//        events.add(1, new EventNumberedSeating(contactPerson, facility2, 260, eventInfo2));
-//        events.add(2, test);
-//        System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
-//
-//
-//        SaveCsvInterface save = new SaveCsvInterface();
-//
-//        SaveJobj jo = new SaveJobj();
-//        jo.writeEvent(en);
-//
-//        SaveCsvInterface.writeObject(en);
-//
-//    }
-//}
+        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
+        ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
+        Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
+        LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
+        LocalTime t1 = LocalTime.of(18,00);
+        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", d1, t1);
+        EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
+        EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
+
+        List<Object> events = new ArrayList<>();
+        events.add(0,(new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2)));
+        events.add(1, new EventNumberedSeating(contactPerson, facility2, 260, eventInfo2));
+        events.add(2, test);
+        //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
+
+
+        SaveCsvInterface save = new SaveCsvInterface();
+
+        SaveJobj jo = new SaveJobj();
+        jo.writeEvent(en);
+
+        SaveCsvInterface.writeObject(en);
+
+    }
+}
