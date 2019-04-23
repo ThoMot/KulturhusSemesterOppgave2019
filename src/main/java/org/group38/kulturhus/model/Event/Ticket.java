@@ -7,9 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ticket implements CsvBase {
     //data field
+    private AtomicInteger eventId;
     private double price;
     private String phonenumber;
     private int row;
@@ -18,18 +20,20 @@ public class Ticket implements CsvBase {
     LocalTime time;
 
     //constructor
-    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time) {
+    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
         this.seat = seat;
         this.phonenumber = phoneNumber;
         this.date=date;
         this.row=row;
         this.time=time;
+        this.eventId=eventId;
     }
-    public Ticket(double price, String phonenumber, LocalDate date, LocalTime time) {
+    public Ticket(double price, String phonenumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
         this.phonenumber=phonenumber;
         this.price=price;
         this.date=date;
         this.time=time;
+        this.eventId=eventId;
     }
 
     public String getPhonenumber() {
@@ -87,6 +91,13 @@ public class Ticket implements CsvBase {
        return row;
     }
 
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
 
     @Override
     public String toString() {

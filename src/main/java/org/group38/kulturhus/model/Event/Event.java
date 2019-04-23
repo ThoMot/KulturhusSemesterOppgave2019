@@ -12,13 +12,17 @@ import org.group38.kulturhus.model.facility.Facility;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public abstract class Event {
+    private final AtomicInteger eventId=new AtomicInteger();
     private ContactPerson contactPerson; //skal denne også være på eventinfo?
     private Facility facility;
     private EventInfo eventInfo;
     private double ticketPrice;
+    private String type;
+
 
     //constructor
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
@@ -99,4 +103,11 @@ public abstract class Event {
         this.facility=facility;
     }
 
+    public String getType(){
+        return type;
+    }
+
+    public AtomicInteger getEventId() {
+        return eventId;
+    }
 }

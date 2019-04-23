@@ -15,25 +15,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
   <top>
     <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
       <menus>
         <Menu mnemonicParsing="false" text="Arrangement">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" fx:id="addEvent" />
-            <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="endre arrangement" fx:id="addEvent1" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Billett">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" fx:id="addTicket" />
-            <MenuItem mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" fx:id="showTicket" />
+            <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Lokale">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" fx:id="showVenue" />
+            <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
           </items>
         </Menu>
       </menus>
@@ -42,10 +35,10 @@
   <center>
     <TableView fx:id="eventsView" prefHeight="371.0" prefWidth="849.0" BorderPane.alignment="CENTER">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="176.0" text="Arrangement" fx:id="eventNameColumn" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="151.0" text="Dato" fx:id="eventDateColumn" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Tid" fx:id="eventTimeColumn" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" text="Sted" fx:id="eventFacilityColumn" />
+        <TableColumn fx:id="eventNameColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="176.0" text="Arrangement" />
+        <TableColumn fx:id="eventDateColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="151.0" text="Dato" />
+        <TableColumn fx:id="eventTimeColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Tid" />
+        <TableColumn fx:id="eventFacilityColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" text="Sted" />
       </columns>
       <BorderPane.margin>
         <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
@@ -55,9 +48,10 @@
   <bottom>
     <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
-        <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Vis info" onAction="#goToVisInfo"/>
-        <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett" />
-        <Button layoutX="257.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" />
+        <Button layoutX="54.0" mnemonicParsing="false" onAction="#goToVisInfo" text="Vis mer info / vis reserverte billetter" />
+        <Button layoutX="431.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett arrangement" />
+        <Button layoutX="575.0" mnemonicParsing="false" onAction="#goToBuyTicket" text="Kjøp billett" />
+            <Button fx:id="editEvent" layoutX="279.0" mnemonicParsing="false" onAction="#goToCreateEvent" text="Endre arrangement" />
       </children>
     </Pane>
   </bottom>

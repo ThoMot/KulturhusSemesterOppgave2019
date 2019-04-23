@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class EventFreeSeating extends Event {
     private Ticket[] tickets;
     private int maxSeats;
+    private final String type="EventFreeSeating";
 
     public EventFreeSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
@@ -21,7 +22,7 @@ public class EventFreeSeating extends Event {
     public String buyTicket(String phoneNumber){
         for(int i=0; i<tickets.length;i++){
             if(tickets[i]==null){
-                tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
+                tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId());
                 return "Billett er reservert på telefonnummer: "+phoneNumber;
             }
         }
@@ -112,5 +113,14 @@ public class EventFreeSeating extends Event {
             }
         }
         return bought;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public double getTicketPrice() {
+        return super.getTicketPrice();
     }
 }
