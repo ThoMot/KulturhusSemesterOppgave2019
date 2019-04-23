@@ -38,7 +38,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
-    public String FreeSeats() {
+    public String freeSeats() {
         StringJoiner s= new StringJoiner("\n ");
         for (int i = 0; i < tickets.length; i++) {
             s.add("\n");
@@ -65,7 +65,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     }
 
     //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
-    public void DeleteTicket(String phoneNumber) {
+    public void deleteTicket(String phoneNumber) {
         int numberDeleted=0;
         for (int i = 0; i < tickets.length; i++) {
             for (int j = 0; j < tickets[i].length; j++) {
@@ -81,7 +81,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     }
 
     //Deletes tickets based on the seatrow and seatnumber
-    public void DeleteTicket(int seatRow, int seatNumber){
+    public void deleteTicket(int seatRow, int seatNumber){
         if(tickets[seatRow][seatNumber]!=null){
             tickets[seatRow][seatNumber]=null;
         }
@@ -102,7 +102,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return list;
     }
     //Returns the ticket based on seatnumber and row
-    public Ticket FindTicket(int seatRow, int seatNumber){
+    public Ticket findTicket(int seatRow, int seatNumber){
         if (tickets[seatRow][seatNumber]!=null){
             return tickets[seatRow][seatNumber];
         }
@@ -151,10 +151,10 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
             }
         }
     }
-    public void EditSeat(int oldRow,int oldSeat, int seatRow, int seatNumber) {
-        String phoneNumber = FindTicket(oldRow, oldSeat).getPhonenumber();
+    public void editSeat(int oldRow,int oldSeat, int seatRow, int seatNumber) {
+        String phoneNumber = findTicket(oldRow, oldSeat).getPhonenumber();
         try {
-            DeleteTicket(oldRow, oldSeat);
+            deleteTicket(oldRow, oldSeat);
             buyTicket(seatRow, seatNumber, phoneNumber);
         } catch (NoSuchElementException e) {
             System.out.println(e);
@@ -163,7 +163,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         }
     }
     public String printTicket(int seatRow, int seatNumber){
-        Ticket t= FindTicket(seatRow, seatNumber);
+        Ticket t= findTicket(seatRow, seatNumber);
         return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
 
