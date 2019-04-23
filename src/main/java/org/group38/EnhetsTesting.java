@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EnhetsTesting {
    public static void main(String[] args) {
@@ -208,7 +209,8 @@ public class EnhetsTesting {
         events.add(2, test);
         //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
-        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1);
+       AtomicInteger nummer = new AtomicInteger();
+        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer);
 
 
         SaveCsvInterface save = new SaveCsvInterface();
