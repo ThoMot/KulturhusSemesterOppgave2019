@@ -15,4 +15,7 @@ public class Converters {
         LocalTime localTime = LocalTime.parse(time, formatter);
         return localTime;
     }
+    public static double StringtoDouble(String price){
+        return Double.parseDouble(price);
+    }
 }

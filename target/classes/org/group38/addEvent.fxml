@@ -27,8 +27,8 @@
          <bottom>
             <Pane prefHeight="103.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="183.0" text="Legg til Arrangement" />
-                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="166.0" text="Oppdater arrangement" />
+                  <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="183.0" text="Legg til Arrangement" onAction="#createEvent"/>
+                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="166.0" text="Oppdater arrangement" onAction="#updateEvent"/>
                </children>
             </Pane>
          </bottom>
@@ -39,7 +39,7 @@
                   <TextField fx:id="eventType" layoutX="259.0" layoutY="69.0" prefHeight="26.0" prefWidth="272.0" />
                   <TextField fx:id="artist" layoutX="22.0" layoutY="131.0" prefHeight="26.0" prefWidth="224.0" />
                   <Label layoutX="33.0" layoutY="53.0" text="Navn på arrangement:" />
-                  <Label layoutX="218.0" layoutY="254.0" text="Program info: " />
+                  <Label layoutX="226.0" layoutY="270.0" text="Program info: " />
                   <DatePicker fx:id="date" layoutX="264.0" layoutY="131.0" prefHeight="26.0" prefWidth="264.0" />
                   <Label layoutX="345.0" layoutY="115.0" text="Velg dato:" />
                   <Label graphicTextGap="10.0" layoutX="160.0" layoutY="14.0" prefHeight="21.0" prefWidth="154.0" text="Arrangement Info">
@@ -49,12 +49,14 @@
                   </Label>
                   <Label layoutX="21.0" layoutY="61.0" />
                   <Label layoutX="326.0" layoutY="53.0" text="Type:" />
-                  <TextField fx:id="programInfo" layoutX="22.0" layoutY="278.0" prefHeight="88.0" prefWidth="497.0" />
+                  <TextField fx:id="programInfo" layoutX="33.0" layoutY="306.0" prefHeight="88.0" prefWidth="497.0" />
                   <Label layoutX="33.0" layoutY="115.0" text="Artist/Annet" />
                   <Label layoutX="33.0" layoutY="176.0" text="Lokale" />
                   <ComboBox fx:id="facility" layoutX="20.0" layoutY="192.0" prefHeight="26.0" prefWidth="224.0" promptText="velg et lokale" />
                   <Label layoutX="268.0" layoutY="176.0" text="Billettpris" />
                   <TextField fx:id="ticketPrice" layoutX="260.0" layoutY="192.0" prefHeight="26.0" prefWidth="264.0" />
+                  <Label layoutX="33.0" layoutY="234.0" text="Tidspunkt" />
+                  <TextField fx:id="time" layoutX="18.0" layoutY="251.0" />
                </children>
             </AnchorPane>
          </left>

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
@@ -81,14 +82,23 @@ public class AddEventController implements MainController {
         //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
 
     }
-    public void opprettEvent(ActionEvent event){
+    public void createEvent(ActionEvent event){
         EventInfo eventInfo = new EventInfo(eventName.toString(), programInfo.toString(), artist.toString(), org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()), org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
         if(eventType.toString()=="EventNumberedSeating"){
-            //EventNumberedSeating eventNumberedSeating= new EventNumberedSeating(contactPerson, facility, Double.parseDouble(ticketPrice.toString()), eventInfo);
+            //EventNumberedSeating eventNumberedSeating= new EventNumberedSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()), eventInfo);
         }
         else if(eventType.toString()=="EventFreeSeating"){
-            //EventFreeSeating eventFreeSeating =new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.toString()), eventInfo))
+            //EventFreeSeating eventFreeSeating =new EventFreeSeating(contactPerson, facility, org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()), eventInfo))
         }
+    }
+    //dette må lagres, oppdateres ikke i showEvent
+    public void updateEvent(ActionEvent event){
+        //thisEvent.setTicketPrice(org.group38.kulturhus.Utilities.Converters.StringtoDouble(ticketPrice.toString()));
+        thisEvent.getEventInfo().setEventName(eventName.toString());
+        //thisEvent.getEventInfo().setDate(org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()));
+        //thisEvent.getEventInfo().setTime(org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
+        thisEvent.getEventInfo().setPerformers(artist.toString());
+        thisEvent.getEventInfo().setProgram(programInfo.toString());
     }
 
     @Override
