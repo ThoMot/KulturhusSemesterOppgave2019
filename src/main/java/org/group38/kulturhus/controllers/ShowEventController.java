@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static org.group38.kulturhus.Utilities.Converters.StringtoLocalDate;
-import static org.group38.kulturhus.Utilities.Converters.StringtoLocalTime;
 import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.opprett;
 
