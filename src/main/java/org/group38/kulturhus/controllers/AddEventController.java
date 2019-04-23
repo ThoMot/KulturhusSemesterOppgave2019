@@ -71,7 +71,8 @@ public class AddEventController implements MainController {
     }
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
-        eventType.getSelectionModel().select(thisEvent.getClass());
+        if (thisEvent instanceof EventNumberedSeating)eventType.getSelectionModel().select("Event med setereservasjon");
+        if (thisEvent instanceof EventFreeSeating) eventType.getSelectionModel().select("Event uten setereservasjon");
         artist.setText(thisEvent.getEventInfo().getPerformer());
         ticketPrice.setText(Double.toString(thisEvent.getTicketPrice()));
         programInfo.setText(thisEvent.getEventInfo().getProgram());
@@ -82,11 +83,11 @@ public class AddEventController implements MainController {
 
     }
     public void createEvent(ActionEvent event){
-        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), LocalDate.parse(date.toString()), LocalTime.parse(time.toString()));
-        if(eventType.toString()=="class org.group38.kulturhus.model.Event.EventNumberedSeating"){
-            //getEvents().add(new EventNumberedSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo)));
+        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), date.getValue(), LocalTime.parse(time.getText()));
+        if(eventType.equals("Event med setereservasjon")){
+            //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
         }
-        else if(eventType.toString()=="class org.group38.kulturhus.model.Event.EventFreeSeating"){
+        else if(eventType.equals("Event uten setereservasjon")){
             //getEvents().add(new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo));
         }
     }
