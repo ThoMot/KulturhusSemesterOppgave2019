@@ -22,7 +22,7 @@ import static org.group38.kulturhus.model.Kulturhus.opprett;
 
 public class ShowEventController implements MainController{
     private ObservableList<Event> observableList;
-    private Event selectedEvent;
+    private static Event selectedEvent;
 
     @FXML
     private MenuBar menuBar;
@@ -89,7 +89,7 @@ public class ShowEventController implements MainController{
     //metode som bytter scene til visinfo og tar med seg eventet som er trykket på
     public void goToVisInfo(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            System.out.println("Ingen felt er trykket på");
+            //feilmelding, ingen rader markert
         }
         else {
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -101,9 +101,10 @@ public class ShowEventController implements MainController{
         this.selectedEvent = selectedEvent;
     }
 
-    public Event getSelectedEvent() {
+    public static Event getSelectedEvent() {
         return selectedEvent;
     }
+    //metode som viser feilmelding ved ingen markerte endringer
 
     @Override
     public void exit() {
