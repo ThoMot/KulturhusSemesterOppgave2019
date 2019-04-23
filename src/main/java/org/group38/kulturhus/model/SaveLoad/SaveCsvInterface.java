@@ -43,7 +43,7 @@ public class SaveCsvInterface {
             }
         }
 
-        String[] mid = new String[antall];
+        Method[] mid = new Method[antall];
         System.out.println("antall metoder " + antall);
         for (Method method : methods) {
             if (isGetter(method)) {
@@ -53,13 +53,20 @@ public class SaveCsvInterface {
 
                     for (int i=0; i<pattern.length; i++){
                         if (name.equals(pattern[i])){
-                            mid[i] = pattern[i];
+                           mid[i] = method;
                         }
                     }
-                    sb.append(",");
             }
         }
-        System.out.println(Arrays.toString(mid));
+        try {
+            for (Method method : mid) {
+                sb.append(method.invoke(object).toString());
+                sb.append(";");
+            }
+            sb.append("\n");
+        } catch (InvocationTargetException | IllegalAccessException e){
+            e.printStackTrace();
+        }
         return sb;
     }
 
