@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import static org.group38.kulturhus.Utilities.Converters.StringtoLocalDate;
 import static org.group38.kulturhus.Utilities.Converters.StringtoLocalTime;
@@ -31,22 +32,10 @@ import static org.group38.kulturhus.model.Kulturhus.opprett;
 public class ShowEventController implements MainController{
     private ObservableList<Event> observableList;
     private static Event selectedEvent;
-    DatePicker datePicker;
 
-    @FXML private DialogPane dialogPane;
-    @FXML private MenuBar menuBar;
     @FXML private TableView<Event> eventsView;
-    @FXML private Label eventName, eventDate;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
 
-    @FXML
-    private void goToAddTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.ADDTICKET);
-    }
-    @FXML
-    private void goToShowTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.SHOWTICKET);
-    }
     @FXML
     private void goToAddEvent(ActionEvent event){
        SceneManager.navigate(SceneName.ADDEVENT);
@@ -88,14 +77,26 @@ public class ShowEventController implements MainController{
         eventsView.setItems(observableList);
     }
     public void deleteRow(ActionEvent event){
-        //vil du virkelig slette dette eventet?
-        observableList.remove(eventsView.getSelectionModel().getSelectedItem());
+        if(eventsView.getSelectionModel().getSelectedItem()==null){
+            showErrorMessage();
+        }
+        else{
+            Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
+            mb.setTitle("Bekreft");
+            mb.setHeaderText("Du har trykket slett på "+ eventsView.getSelectionModel().getSelectedItem().getEventInfo().getEventName());
+            mb.setContentText("Ønsker du virkerlig å slette dette arrangementet?");
+            mb.showAndWait().ifPresent(response -> {
+                if(response==ButtonType.OK){
+                    observableList.remove(eventsView.getSelectionModel().getSelectedItem());
+                }
+            });
+        }
     }
 
     //metode som bytter scene til visinfo og tar med seg eventet som er trykket på
     public void goToVisInfo(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            //feilmelding, ingen rader markert
+            showErrorMessage();
         }
         else {
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -104,7 +105,7 @@ public class ShowEventController implements MainController{
     }
     public void goToBuyTicket(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            //feilmelding
+            showErrorMessage();
         }
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -113,7 +114,7 @@ public class ShowEventController implements MainController{
     }
     public void goToCreateEvent(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            //feilmelding
+            showErrorMessage();
         }
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -128,7 +129,14 @@ public class ShowEventController implements MainController{
     public static Event getSelectedEvent() {
         return selectedEvent;
     }
-    //metode som viser feilmelding ved ingen markerte felt
+    //method for opening an error if there is no selected fields
+    public void showErrorMessage(){
+        Alert mb = new Alert(Alert.AlertType.INFORMATION);
+        mb.setHeaderText("Det er ingen rader som er markert");
+        mb.setTitle("Feil");
+        mb.setContentText("Vennligst marker en rad i tabellen");
+        mb.show();
+    }
 
     @Override
     public void exit() {

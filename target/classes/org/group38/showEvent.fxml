@@ -24,12 +24,6 @@
             <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="legg til nytt arrangement" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Billett">
-          <items>
-            <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Reserver billett" />
-            <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Vis billetter" />
-          </items>
-        </Menu>
         <Menu mnemonicParsing="false" text="Lokale">
           <items>
             <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
@@ -54,10 +48,10 @@
   <bottom>
     <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
-        <Button layoutX="50.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToVisInfo" text="Vis info" />
-        <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett" />
-        <Button layoutX="358.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToBuyTicket" text="Kjøp billett" />
-            <Button fx:id="editEvent" layoutX="210.0" layoutY="10.0" mnemonicParsing="false" text="Endre arrangement" onAction="#goToCreateEvent"/>
+        <Button layoutX="54.0" mnemonicParsing="false" onAction="#goToVisInfo" text="Vis mer info / vis reserverte billetter" />
+        <Button layoutX="431.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett arrangement" />
+        <Button layoutX="575.0" mnemonicParsing="false" onAction="#goToBuyTicket" text="Kjøp billett" />
+            <Button fx:id="editEvent" layoutX="279.0" mnemonicParsing="false" onAction="#goToCreateEvent" text="Endre arrangement" />
       </children>
     </Pane>
   </bottom>
