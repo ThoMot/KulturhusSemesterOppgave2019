@@ -80,10 +80,7 @@ public class ShowTicketsController implements MainController {
 
     public void initialize(){
 
-        opprett();
-        initCols();
-        loadData();
-
+        ObservableList<Ticket> observableList2 = FXCollections.observableList(thisEvent.boughtTickets());
 
 //        eventName.setText(thisEvent.getEventInfo().getEventName());
 //        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));

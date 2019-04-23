@@ -55,9 +55,13 @@
   <bottom>
     <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
+        <!--<Pane layoutX="200" layoutY="-500" accessibleText="HELLO">-->
+          <!--<Button text="Ja"></Button>-->
+          <!--<Button text="Nei"></Button>-->
+        <!--</Pane>-->
         <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Vis info" onAction="#goToVisInfo"/>
         <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett" />
-        <Button layoutX="257.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" />
+        <Button layoutX="257.0" layoutY="10.0" mnemonicParsing="false" text="Kjøp billett" onAction="#goToBuyTicket"/>
       </children>
     </Pane>
   </bottom>
