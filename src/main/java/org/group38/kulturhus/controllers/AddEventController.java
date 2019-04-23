@@ -62,6 +62,8 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
+        //get contactpersons add to list
+        //get facilities add to combobox
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
         }
@@ -85,20 +87,32 @@ public class AddEventController implements MainController {
     public void createEvent(ActionEvent event){
         EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), date.getValue(), LocalTime.parse(time.getText()));
         if(eventType.equals("Event med setereservasjon")){
+            //try catch som sender en errormelding dersom man putter inn feil input?
             //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
         }
         else if(eventType.equals("Event uten setereservasjon")){
+            //try catch med Alert feilmelding dersom man putter feil input?
             //getEvents().add(new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo));
         }
     }
     //dette må lagres, oppdateres ikke i showEvent
     public void updateEvent(ActionEvent event){
-        thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
-        thisEvent.getEventInfo().setEventName(eventName.toString());
-        thisEvent.getEventInfo().setDate(date.getValue());
-        thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
-        thisEvent.getEventInfo().setPerformers(artist.toString());
-        thisEvent.getEventInfo().setProgram(programInfo.toString());
+        if(thisEvent==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Kan ikke endre et objekt som ikke eksisterer");
+            alert.setHeaderText("Ingen arrangement valgt");
+            alert.setContentText("Gå til arrangementoversikten for å velge\n" +
+                    "et arrangement du vil redigere");
+            alert.show();
+        }
+        else {
+            thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
+            thisEvent.getEventInfo().setEventName(eventName.toString());
+            thisEvent.getEventInfo().setDate(date.getValue());
+            thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
+            thisEvent.getEventInfo().setPerformers(artist.toString());
+            thisEvent.getEventInfo().setProgram(programInfo.toString());
+        }
     }
 
     @Override
