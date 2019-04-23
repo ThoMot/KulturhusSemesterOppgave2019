@@ -7,7 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Popup;
+import org.group38.kulturhus.model.Event.EventFreeSeating;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
@@ -24,6 +28,8 @@ public class ShowEventController implements MainController{
     private ObservableList<Event> observableList;
     private static Event selectedEvent;
 
+    @FXML
+    private DialogPane dialogPane;
     @FXML
     private MenuBar menuBar;
     @FXML
@@ -82,6 +88,7 @@ public class ShowEventController implements MainController{
         eventsView.setItems(observableList);
     }
     public void deleteRow(ActionEvent event){
+        dialogPane.isVisible();
         //vil du virkelig slette dette eventet?
         observableList.remove(eventsView.getSelectionModel().getSelectedItem());
     }
@@ -94,6 +101,15 @@ public class ShowEventController implements MainController{
         else {
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
             SceneManager.navigate(SceneName.SHOWTICKET);
+        }
+    }
+    public void goToBuyTicket(ActionEvent event){
+        if(eventsView.getSelectionModel().getSelectedItem()==null){
+            //feilmelding
+        }
+        else{
+            setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.ADDTICKET);
         }
     }
 
@@ -109,5 +125,6 @@ public class ShowEventController implements MainController{
     @Override
     public void exit() {
     }
+
 }
 

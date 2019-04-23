@@ -80,8 +80,6 @@ public class ShowTicketsController implements MainController {
 
     public void initialize(){
 
-        thisEvent=getSelectedEvent();
-
         ObservableList<Ticket> observableList2 = FXCollections.observableList(thisEvent.boughtTickets());
 
         eventName.setText(thisEvent.getEventInfo().getEventName());
