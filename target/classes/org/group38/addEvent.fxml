@@ -28,6 +28,7 @@
             <Pane prefHeight="103.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="183.0" text="Legg til Arrangement" />
+                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="166.0" text="Oppdater arrangement" />
                </children>
             </Pane>
          </bottom>

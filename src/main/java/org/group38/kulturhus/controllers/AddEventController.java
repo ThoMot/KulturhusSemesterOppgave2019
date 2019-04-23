@@ -3,13 +3,13 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.group38.kulturhus.model.Event.Event;
+import org.group38.kulturhus.model.Event.EventFreeSeating;
+import org.group38.kulturhus.model.Event.EventInfo;
+import org.group38.kulturhus.model.Event.EventNumberedSeating;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
@@ -27,19 +27,11 @@ public class AddEventController implements MainController {
     @FXML private TextField programInfo;
     @FXML private DatePicker date;
     @FXML private ComboBox facility;
+    @FXML private ListView contactPerson;
+    @FXML private TextField time;
 
 
     public AddEventController() {
-    }
-
-    @FXML
-    private void goToAddTicket(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.ADDTICKET);
-    }
-
-    @FXML
-    private void goToShowTicket(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.SHOWTICKET);
     }
 
     @FXML
@@ -84,9 +76,19 @@ public class AddEventController implements MainController {
         artist.setText(thisEvent.getEventInfo().getPerformer());
         ticketPrice.setText(Double.toString(thisEvent.getTicketPrice()));
         programInfo.setText(thisEvent.getEventInfo().getProgram());
-        //setfacility
-        //setDate
+        date.setValue(thisEvent.getDate());
+        facility.getSelectionModel().select(thisEvent.getFacility());
+        //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
 
+    }
+    public void opprettEvent(ActionEvent event){
+        EventInfo eventInfo = new EventInfo(eventName.toString(), programInfo.toString(), artist.toString(), org.group38.kulturhus.Utilities.Converters.StringtoLocalDate(date.toString()), org.group38.kulturhus.Utilities.Converters.StringtoLocalTime(time.toString()));
+        if(eventType.toString()=="EventNumberedSeating"){
+            //EventNumberedSeating eventNumberedSeating= new EventNumberedSeating(contactPerson, facility, Double.parseDouble(ticketPrice.toString()), eventInfo);
+        }
+        else if(eventType.toString()=="EventFreeSeating"){
+            //EventFreeSeating eventFreeSeating =new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.toString()), eventInfo))
+        }
     }
 
     @Override

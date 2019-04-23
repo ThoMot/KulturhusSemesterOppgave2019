@@ -110,4 +110,8 @@ public abstract class Event {
     public AtomicInteger getEventId() {
         return eventId;
     }
+
+    public ContactPerson getContactPerson() {
+        return contactPerson;
+    }
 }
