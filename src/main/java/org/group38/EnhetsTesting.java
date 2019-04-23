@@ -39,13 +39,9 @@ public class EnhetsTesting {
         LocalTime t = LocalTime.of(22,00);
 
         ContactPerson ContactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com","11223344"));
-        EventInfo eventInfo = new EventInfo("Max Manus", "film",d, t);
-        ArrayList<Performer> performers= new ArrayList <Performer>();
-        performers.add(new Performer("Hans", "Langus"));
-        performers.add(new Performer("Kine", "Larsen"));
-        String performers2 = "Arne";
+        EventInfo eventInfo = new EventInfo("Max Manus", "film","Ane Dahl Torp",d, t);
 
-        EventNumberedSeating maxManus=new EventNumberedSeating(ContactPerson, facility, performers2, 100, eventInfo);
+        EventNumberedSeating maxManus=new EventNumberedSeating(ContactPerson, facility, 100, eventInfo);
 
 
         ContactInfo martinasInfo = new ContactInfo("test", "1010101010101");
@@ -203,7 +199,7 @@ public class EnhetsTesting {
         Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);
-        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe", "Chirag", d1, t1);
+        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", d1, t1);
         EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
         EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
 

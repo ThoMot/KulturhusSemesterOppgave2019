@@ -99,4 +99,15 @@ public class EventFreeSeating extends Event {
     public Ticket[] getTickets() {
         return tickets;
     }
+    public ArrayList<Ticket> boughtTickets(){
+        ArrayList<Ticket> bought = new ArrayList();
+        for (int i = 0; i < tickets.length; i++) {
+            if (tickets[i]==null) {
+            }
+            else{
+                bought.add(tickets[i]);
+            }
+        }
+        return bought;
+    }
 }

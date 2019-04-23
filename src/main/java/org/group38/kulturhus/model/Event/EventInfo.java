@@ -36,6 +36,14 @@ public class EventInfo {
         this.program=program;
     }
 
+    public String getPerformers() {
+        return performers;
+    }
+
+    public void setPerformers(String performers) {
+        this.performers = performers;
+    }
+
     public LocalDate getDate() {
         return date;
     }

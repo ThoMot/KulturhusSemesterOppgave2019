@@ -48,8 +48,8 @@ public class Kulturhus {
         event2.BuyTicket(1,4,"56743827");
 
 
-        Ticket ticket1 = new Ticket(200, "54353423", d1, t1);
-        Ticket ticket2 = new Ticket(150, "45761234", d, t);
+        Ticket ticket1 = new Ticket(200, "11111111", d1, t1);
+        Ticket ticket2 = new Ticket(150, "11111111", d, t);
         tickets = new ArrayList<>();
         tickets.add(ticket1);
         tickets.add(ticket2);
