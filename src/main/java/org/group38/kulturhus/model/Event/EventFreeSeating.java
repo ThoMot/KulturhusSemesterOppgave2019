@@ -16,7 +16,9 @@ public class EventFreeSeating extends Event {
         this.maxSeats=facility.getMaxAntSeats();
         tickets = new Ticket[maxSeats];
     }
-    public String BuyTicket(String phoneNumber){
+
+    //denne må returnere en void og ha throws
+    public String buyTicket(String phoneNumber){
         for(int i=0; i<tickets.length;i++){
             if(tickets[i]==null){
                 tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime());
@@ -26,7 +28,8 @@ public class EventFreeSeating extends Event {
         return "Dette arrangementet er fullt";
     }
 
-    public String DeleteTicket(String phoneNumber){
+    //void m,ed throws
+    public String deleteTicket(String phoneNumber){
         int numberDeleted=0;
         for(int i=0;i<maxSeats;i++){
             if(tickets[i].getPhonenumber()==phoneNumber){
