@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
@@ -114,6 +115,7 @@ public class ShowTicketsController implements MainController {
         ticketsView.setItems(observableList2);
 //        ticketsView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 //        ticketsView.getSelectionModel().selectFirst();
+        System.out.println(getSelectedEvent());
     }
 
 
