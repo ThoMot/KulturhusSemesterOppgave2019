@@ -88,7 +88,6 @@ public class ShowEventController implements MainController{
         eventsView.setItems(observableList);
     }
     public void deleteRow(ActionEvent event){
-        dialogPane.isVisible();
         //vil du virkelig slette dette eventet?
         observableList.remove(eventsView.getSelectionModel().getSelectedItem());
     }
