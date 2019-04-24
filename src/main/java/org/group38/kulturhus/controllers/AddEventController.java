@@ -24,13 +24,14 @@ import static org.group38.kulturhus.model.Kulturhus.getEvents;
 public class AddEventController implements MainController {
     private Event thisEvent;
 
-    @FXML private TextField eventName, artist, ticketPrice, programInfo, time;
+    @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type;
     @FXML private DatePicker date;
     @FXML private ComboBox facility, eventType;
     @FXML private ListView contactPerson;
 
-
-    public AddEventController() {
+    @FXML
+    private void goToAddContactPerson(ActionEvent event){
+        SceneManager.navigate(SceneName.NONE);
     }
 
     @FXML
@@ -94,7 +95,7 @@ public class AddEventController implements MainController {
             alert.show();
         }
         else {
-            //EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), eventType.getText(), date.getValue(), LocalTime.parse(time.getText()));
+            EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
             if (eventType.equals("Event med setereservasjon")) {
                 //try catch som sender en errormelding dersom man putter inn feil input?
                 //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
