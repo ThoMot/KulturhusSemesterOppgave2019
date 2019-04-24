@@ -109,6 +109,7 @@ public class SaveCsvInterface implements SaveDataInterface {
 
 //Skriver objerkter til fil
 
+
     public void writeObject(CsvBase object) {
         FileWriter fileWriter = null;
         final String nextline = "\n";
