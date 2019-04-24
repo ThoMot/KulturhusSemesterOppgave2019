@@ -37,6 +37,19 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         else throw new IllegalArgumentException("Setet er opptatt");
     }
 
+    public String allSeats(){
+        for(int i = 0; i <= getFacility().getRows(); i++){
+            if(getFacility().getRows() == getFacility().getRows()){
+                System.out.println("\n");
+                for(int j = 0; j <= getFacility().getColumns(); j++){
+
+                    System.out.print(i +" "+ j + ", ");
+                }
+            }
+        }
+        return columns + " " +rows;
+    }
+
     //Checks if there is any free seats in the matrix, and returns a String of available seats
     public String freeSeats() {
         StringJoiner s= new StringJoiner("\n ");
@@ -50,6 +63,8 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         }
         return s.toString();
     }
+
+
     public ArrayList<Ticket> boughtTickets(){
         ArrayList<Ticket> bought = new ArrayList();
         for (int i = 0; i < tickets.length; i++) {

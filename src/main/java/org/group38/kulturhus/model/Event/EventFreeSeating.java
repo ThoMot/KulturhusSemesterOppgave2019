@@ -68,6 +68,16 @@ public class EventFreeSeating extends Event {
         }
     }
 
+    public String allSeats(){
+        int numberofFreeSeats = 0;
+        for(Ticket ticket: tickets){
+            if(ticket==null){
+                numberofFreeSeats++;
+            }
+        }
+        return String.valueOf(numberofFreeSeats);
+    }
+
     //Checks if there is any free seats in the matrix, and returns a String of available seats
     public int FreeSeats() {
         int numberofFreeSeats = 0;

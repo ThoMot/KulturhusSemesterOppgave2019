@@ -91,6 +91,8 @@ public abstract class Event {
 
     public abstract ArrayList<Ticket> boughtTickets();
 
+    public abstract String allSeats();
+
     public void setFacility(){
         this.facility=facility;
     }
