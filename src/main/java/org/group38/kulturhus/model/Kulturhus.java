@@ -57,8 +57,8 @@ public class Kulturhus {
         return events;
     }
 
-    public static ArrayList<Facility> getFacility(){
-        return getFacility();
+    public static ArrayList<Facility> getFacilities(){
+        return facilities;
     }
 
 

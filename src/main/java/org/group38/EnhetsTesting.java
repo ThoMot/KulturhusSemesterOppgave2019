@@ -223,7 +223,7 @@ public class EnhetsTesting {
 //        SaveJobj jo = new SaveJobj();
 //        jo.writeEvent(en);
 
-//        SaveCsvInterface.writeObject(ticket);
+        SaveCsvInterface.writeObject(contactPerson);
 
     }
 }

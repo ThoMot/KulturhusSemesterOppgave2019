@@ -25,7 +25,8 @@ public class SaveCsvInterface {
                 method.getParameterTypes().length == 0) {
             if (method.getName().matches("^get[A-Z].*") &&
                     !method.getReturnType().equals(void.class) && !method.getReturnType().equals(Facility.class)
-                    && !method.getReturnType().equals(ContactPerson.class) && !method.getReturnType().equals(EventInfo.class))
+                    && !method.getReturnType().equals(ContactPerson.class) && !method.getReturnType().equals(EventInfo.class)
+                    && !method.getReturnType().equals(ContactInfo.class))
                 return true;
         }
         return false;
@@ -58,9 +59,14 @@ public class SaveCsvInterface {
                     }
             }
         }
+        System.out.println(Arrays.toString(mid));
         try {
             for (Method method : mid) {
-                sb.append(method.invoke(object).toString());
+                System.out.println(method.invoke(object));
+                if(method.invoke(object) == null){
+                    sb.append("0");
+                } else sb.append(method.invoke(object).toString());
+                System.out.println(method + " " + "denne funket");
                 sb.append(";");
             }
             sb.append("\n");
@@ -169,6 +175,9 @@ public class SaveCsvInterface {
             return patterns;
         } else if(clazz.getName().equals("org.group38.kulturhus.model.Event.Ticket")){
             patterns = new String[] { "getPhonenumber", "getPrice", "getSeat", "getRow", "getDate", "getTime"};
+            return patterns;
+        } else if(clazz.getName().equals("org.group38.kulturhus.model.ContactPerson.ContactPerson")){
+            patterns = new String[]{"getPhoneNr", "getFirstName", "getLastName", "getEmail", "getNotes", "getAffiliation", "getWebPage"};
             return patterns;
         } else return null;
     }

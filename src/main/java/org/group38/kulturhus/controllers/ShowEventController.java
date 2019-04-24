@@ -55,21 +55,6 @@ public class ShowEventController implements MainController{
         eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
         eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
     }
-//    private void editableCols(){
-//        eventsView.setEditable(true);
-//
-//        eventNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//        eventNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setEventName(e.getNewValue()));
-//
-//        eventDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//        eventDateColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setDate(StringtoLocalDate(e.getNewValue())));
-//
-//        eventTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//        eventTimeColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getEventInfo().setTime(StringtoLocalTime(e.getNewValue())));
-//
-//        eventFacilityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//        eventFacilityColumn.setOnEditCommit((TableColumn.CellEditEvent<Event, String> e) -> e.getTableView().getItems().get(e.getTablePosition().getRow()).getFacility().setFacilityName(e.getNewValue()));
-//    }
 
     private void loadData(){
         observableList = FXCollections.observableList(getEvents());
