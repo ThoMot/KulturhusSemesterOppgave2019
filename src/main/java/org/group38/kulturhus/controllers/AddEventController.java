@@ -1,6 +1,5 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +14,7 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
@@ -24,13 +24,15 @@ import java.time.LocalTime;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
+import static org.group38.kulturhus.model.Kulturhus.opprett;
 
 public class AddEventController implements MainController {
     private Event thisEvent;
     private ObservableList<ContactPerson> ol;
+    private ObservableList<Facility> ol2;
 
     @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type; //addEvent
-    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other;
+    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility, eventType;
     @FXML private ListView contactPerson;
@@ -64,6 +66,8 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
+        createLists();
+        opprett();
         loadInfo();
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
@@ -74,10 +78,11 @@ public class AddEventController implements MainController {
     }
     private void loadInfo(){
         ol = FXCollections.observableList(getContactPeople());
-        //contactPerson.setItems(ol);
-
+//       contactPerson.setItems(ol);
         //get contactpersons add to list
         //get facilities add to combobox
+        ol2 = FXCollections.observableList(getFacilities());
+        facility.setItems(ol2);
     }
     public void createContactPerson(){
         //try catch for feil input
@@ -95,6 +100,7 @@ public class AddEventController implements MainController {
         date.setValue(thisEvent.getDate());
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
+        type.setText(thisEvent.getType());
         //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
 
     }
