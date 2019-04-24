@@ -110,7 +110,8 @@ public class AddEventController implements MainController {
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
         type.setText(thisEvent.getType());
-        //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
+        contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
+
 
     }
     public void createEvent(ActionEvent event){
@@ -152,6 +153,20 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setPerformers(artist.toString());
             thisEvent.getEventInfo().setProgram(programInfo.toString());
         }
+    }
+    private void errorTommeFelter(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Alle felter er ikke utfylt");
+        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\nHusk å markere en kontaktperson");
+        alert.setTitle("Tomme felter");
+        alert.show();
+    }
+    private void errorFeilInput(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Feil input i et eller flere felter");
+        alert.setContentText("Vennligst sørg for at alle felter har riktig format");
+        alert.setTitle("Feil input");
+        alert.show();
     }
 
     @Override
