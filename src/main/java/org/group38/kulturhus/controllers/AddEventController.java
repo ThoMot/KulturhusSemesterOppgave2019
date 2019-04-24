@@ -161,10 +161,10 @@ public class AddEventController implements MainController {
         alert.setTitle("Tomme felter");
         alert.show();
     }
-    private void errorFeilInput(){
+    private void errorFeilInput(Exception e){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Feil input i et eller flere felter");
-        alert.setContentText("Vennligst sørg for at alle felter har riktig format");
+        alert.setContentText("Vennligst sørg for at alle felter har riktig format\n"+e);
         alert.setTitle("Feil input");
         alert.show();
     }
