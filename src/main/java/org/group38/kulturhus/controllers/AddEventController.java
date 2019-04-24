@@ -1,5 +1,6 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,7 +36,8 @@ public class AddEventController implements MainController {
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility, eventType;
-    @FXML private ListView contactPerson;
+    @FXML private TableView contactPerson;
+    @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
 
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
@@ -68,6 +70,7 @@ public class AddEventController implements MainController {
     public void initialize() {
         createLists();
         opprett();
+        initCols();
         loadInfo();
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
@@ -76,10 +79,16 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
+    private void initCols(){
+        firstNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstName()));
+        lastNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLastName()));
+        phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactInfo().getPhoneNr()));
+    }
     private void loadInfo(){
-        ol = FXCollections.observableList(getContactPeople());
-//       contactPerson.setItems(ol);
         //get contactpersons add to list
+        ol = FXCollections.observableList(getContactPeople());
+        contactPerson.setItems(ol);
+
         //get facilities add to combobox
         ol2 = FXCollections.observableList(getFacilities());
         facility.setItems(ol2);

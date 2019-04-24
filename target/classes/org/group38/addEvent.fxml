@@ -77,7 +77,12 @@
          <right>
           <AnchorPane minHeight="0.0" minWidth="600.0" prefHeight="724.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <ListView layoutX="123.0" layoutY="23.0" prefHeight="368.0" prefWidth="319.0" />
+                  <TableView fx:id="contactPerson" layoutX="123.0" layoutY="23.0" prefHeight="368.0" prefWidth="319.0">
+                     <columns>
+                        <TableColumn fx:id="firstNameColumn" prefWidth="109.0" text="Fornavn" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="104.0" text="Etternavn" />
+                        <TableColumn fx:id="phoneNumberColumn" prefWidth="105.0" text="Telefonnummer" />
+                     </columns></TableView>
                   <Button layoutX="168.0" layoutY="419.0" mnemonicParsing="false" onAction="#goToAddContactPerson" text="Opprett ny kontaktperson" />
                </children>
             </AnchorPane>

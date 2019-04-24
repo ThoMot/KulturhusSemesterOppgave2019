@@ -46,6 +46,7 @@ this.contactInfo = contactInfo;
 
     public String getLastName() { return super.getLastName(); }
 
+
     @Override
     public String toString() {
         return "ContactPerson{" + " firstname= " + super.getFirstName() + " lastname= " + super.getLastName() +
