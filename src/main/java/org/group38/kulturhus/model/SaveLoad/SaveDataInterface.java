@@ -6,6 +6,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SaveDataInterface {
-    boolean writeEvent(EventNumberedSeating numberedSeating) throws IOException;
+    void writeObject(CsvBase object) throws IOException;
 
     }

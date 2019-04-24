@@ -17,7 +17,8 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-public class SaveCsvInterface {
+public class SaveCsvInterface implements SaveDataInterface {
+
 
 
     public static boolean isGetter(Method method) {
@@ -107,7 +108,8 @@ public class SaveCsvInterface {
 
 
 //Skriver objerkter til fil
-    public static void writeObject(CsvBase object) {
+
+    public void writeObject(CsvBase object) {
         FileWriter fileWriter = null;
         final String nextline = "\n";
         String filename = null;

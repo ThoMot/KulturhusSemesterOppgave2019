@@ -5,10 +5,14 @@ import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.SaveLoad.ReadCSV;
+import org.group38.kulturhus.model.SaveLoad.SaveDataInterface;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.SaveLoad.SaveJobj;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -216,9 +220,16 @@ public class EnhetsTesting {
         SaveCsvInterface save = new SaveCsvInterface();
 
         SaveJobj jo = new SaveJobj();
-        jo.writeEvent(en);
+        jo.writeObject(en);
 
-        SaveCsvInterface.writeObject(contactPerson);
-
+//       SaveCsvInterface l = new SaveCsvInterface();
+//        l.writeObject(contactPerson);
+//
+//       try{
+//           ReadCSV.readObjects("ContactPerson.csv");
+//       } catch (IOException e){
+//           e.printStackTrace();
+//       }
     }
 }
+
