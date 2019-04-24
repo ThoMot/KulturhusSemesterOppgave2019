@@ -5,12 +5,15 @@ import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
 import org.group38.kulturhus.model.Event.Ticket;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class SaveJobj implements SaveDataInterface{
     String filename;
+
+public class SaveJobj implements org.group38.kulturhus.model.SaveLoad.SaveDataInterface {
 
     @Override
     public void writeObject(CsvBase object) {
@@ -29,7 +32,10 @@ public class SaveJobj implements SaveDataInterface{
         } catch(IOException e) {
             e.printStackTrace(); // This should not happen, so we print debug information here.
         }
+
     }
+
+
 }
 
 
