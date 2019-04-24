@@ -68,7 +68,7 @@ public class EventFreeSeating extends Event {
         }
     }
 
-    public String freeSeats(){
+    public String allSeats(){
         int numberofFreeSeats = 0;
         for(Ticket ticket: tickets){
             if(ticket==null){

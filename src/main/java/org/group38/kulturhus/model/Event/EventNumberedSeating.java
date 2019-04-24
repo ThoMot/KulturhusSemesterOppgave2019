@@ -37,7 +37,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         else throw new IllegalArgumentException("Setet er opptatt");
     }
 
-    public String freeSeter(){
+    public String allSeats(){
         for(int i = 0; i <= getFacility().getRows(); i++){
             if(getFacility().getRows() == getFacility().getRows()){
                 System.out.println("\n");
@@ -46,7 +46,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
                     System.out.print(i +" "+ j + ", ");
                 }
             }
-
         }
         return columns + " " +rows;
     }

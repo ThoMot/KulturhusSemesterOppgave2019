@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -18,6 +19,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TextArea?>
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
     <top>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
@@ -63,7 +65,8 @@
                                          <Font name="System Bold" size="15.0" />
                                      </font>
                                  </Label>
-                                 <Label fx:id="dateTime" prefHeight="17.0" prefWidth="158.0" text="eventDate" GridPane.rowIndex="1" />
+                                 <Label prefHeight="17.0" prefWidth="158.0" text="Dato/tid:" GridPane.rowIndex="1" />
+                                 <Label fx:id="dateTime"  text="eventDate" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
                                  <Label text="Valgte seter:" GridPane.rowIndex="2" />
                              </children>
                          </GridPane>
@@ -139,7 +142,7 @@
                     </GridPane>
                 </children>
             </Pane>
-            <Pane prefHeight="245.0" prefWidth="906.0">
+            <Pane prefHeight="48.0" prefWidth="766.0">
                 <children>
                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cdcdcd" height="40.0" layoutX="80.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
                     <Label alignment="CENTER" layoutX="112.0" layoutY="5.0" text="Scene/Lerret">
@@ -147,12 +150,9 @@
                             <Font size="26.0" />
                         </font>
                     </Label>
-                    <Pane layoutX="32.0" layoutY="54.0" prefHeight="227.0" prefWidth="318.0">
-                  <children>
-                     <GridPane id="freeSeatsView" layoutY="1.0" prefHeight="225.0" prefWidth="319.0" />
-                  </children></Pane>
                 </children>
             </Pane>
+         <TextArea id="seatsFlowPane" prefHeight="378.0" prefWidth="766.0" />
         </VBox>
     </center>
 </BorderPane>

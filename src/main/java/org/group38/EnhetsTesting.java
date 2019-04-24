@@ -216,7 +216,7 @@ public class EnhetsTesting {
         en.buyTicket(0,1,"22334455");
        //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
 
-       en.freeSeter();
+       en.allSeats();
 
 //        SaveCsvInterface save = new SaveCsvInterface();
 //
