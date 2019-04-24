@@ -84,7 +84,7 @@ public class AddTicketController implements MainController{
     setThisEvent(getSelectedEvent());
     setEventInfo();
 
-    seatsFlowPane.setText(thisEvent.allSeats());
+    //seatsFlowPane.setText(thisEvent.allSeats());
 
         System.out.println(getSelectedEvent().allSeats());
 
