@@ -212,13 +212,18 @@ public class EnhetsTesting {
        AtomicInteger nummer = new AtomicInteger();
         Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer);
 
+        en.buyTicket(0,0,"22334455");
+        en.buyTicket(0,1,"22334455");
+       //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
 
-        SaveCsvInterface save = new SaveCsvInterface();
+       en.freeSeter();
 
-        SaveJobj jo = new SaveJobj();
-        jo.writeEvent(en);
+//        SaveCsvInterface save = new SaveCsvInterface();
+//
+//        SaveJobj jo = new SaveJobj();
+//        jo.writeEvent(en);
 
-        SaveCsvInterface.writeObject(ticket);
+//        SaveCsvInterface.writeObject(ticket);
 
     }
 }

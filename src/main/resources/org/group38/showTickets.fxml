@@ -49,6 +49,69 @@
          </font>
       </Label>
 
+    <left>
+        <SplitPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints />
+                            </rowConstraints>
+                            <children>
+                                <Label fx:id="eventName" text="Tittel" GridPane.columnSpan="2">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Dato" GridPane.rowIndex="1" />
+                                <Label fx:id="eventDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label text="Klokken" GridPane.rowIndex="2" />
+                                <Label fx:id="eventTime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label text="Sted" GridPane.rowIndex="3" />
+                                <Label fx:id="eventFacility" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            </children>
+                        </GridPane>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label text="Artist/Deltaker/Skuespiller" GridPane.columnSpan="3">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="eventPerformers" GridPane.rowIndex="1" />
+                                <Label text="Program/Beskrivelse" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="eventProgram" GridPane.rowIndex="3" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+    </left>
+
     <center>
       <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER">
 
@@ -68,68 +131,6 @@
 
       </TableView>
     </center>
-   <left>
-      <SplitPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <items>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints />
-                    </rowConstraints>
-                     <children>
-                        <Label fx:id="eventName" text="Tittel" GridPane.columnSpan="2">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label text="Dato" GridPane.rowIndex="1" />
-                         <Label fx:id="eventDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                         <Label text="Klokken" GridPane.rowIndex="2" />
-                         <Label fx:id="eventTime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Sted" GridPane.rowIndex="3" />
-                         <Label fx:id="eventFacility" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                     </children>
-                  </GridPane>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Artist/Deltaker/Skuespiller" GridPane.columnSpan="3">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="eventPerformers" GridPane.rowIndex="1" />
-                        <Label text="Program/Beskrivelse" GridPane.columnSpan="3" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="eventProgram" GridPane.rowIndex="3" />
-                     </children>
-                  </GridPane>
-               </children>
-            </VBox>
-         </items>
-      </SplitPane>
-   </left>
    <bottom>
       <Pane prefHeight="48.0" prefWidth="792.0" BorderPane.alignment="CENTER">
          <children>
