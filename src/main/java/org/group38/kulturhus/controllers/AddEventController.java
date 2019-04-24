@@ -1,5 +1,6 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,7 +111,7 @@ public class AddEventController implements MainController {
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
         type.setText(thisEvent.getType());
-        contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
+        contactPerson.getSelectionModel().select(thisEvent.getContactPerson()); //Denne funker ikke
 
 
     }
