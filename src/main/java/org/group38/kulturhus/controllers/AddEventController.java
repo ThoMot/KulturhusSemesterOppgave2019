@@ -105,7 +105,7 @@ public class AddEventController implements MainController {
             }
         }
     }
-    //dette må lagres, oppdateres ikke i showEvent
+    //dette må lagres, oppdateres ikke i showEvent fordi man oppretter et nytt event i stedenfor
     public void updateEvent(ActionEvent event){
         if(thisEvent==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
