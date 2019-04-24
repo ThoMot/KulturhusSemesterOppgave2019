@@ -3,7 +3,9 @@
 
 package org.group38.kulturhus.model.ContactPerson;
 
-public class ContactPerson extends Person {
+import org.group38.kulturhus.model.SaveLoad.CsvBase;
+
+public class ContactPerson extends Person implements CsvBase {
     //Optional
     private String webPage;
     private String affiliation;
@@ -28,6 +30,8 @@ this.contactInfo = contactInfo;
         this.notes = notes;
     }
 
+
+
     public String getWebPage() {
         return webPage;
     }
@@ -42,9 +46,11 @@ this.contactInfo = contactInfo;
 
     public ContactInfo getContactInfo(){ return contactInfo; }
 
-    public String getFirstName() { return super.getFirstName(); }
+    public String getPhoneNr() { return getContactInfo().getPhoneNr(); }
 
-    public String getLastName() { return super.getLastName(); }
+    public String getEmail() { return getContactInfo().getEmail(); }
+
+
 
     @Override
     public String toString() {
@@ -54,6 +60,11 @@ this.contactInfo = contactInfo;
                 ", notes='" + notes + '\'' +
                 ", contactInfo=" + contactInfo.toString() +
                 '}';
+    }
+
+    @Override
+    public String toCSV() {
+        return null;
     }
 }
 
