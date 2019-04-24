@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
    <children>
       <Label layoutX="12.0" layoutY="59.0" text="Fornavn" />
       <Label graphicTextGap="10.0" layoutX="203.0" layoutY="23.0" prefHeight="21.0" prefWidth="154.0" text="Kontaktperson">
@@ -15,18 +19,18 @@
          </font>
       </Label>
       <Label layoutX="293.0" layoutY="59.0" text="Etternavn" />
-      <TextField layoutX="3.0" layoutY="143.0" prefHeight="26.0" prefWidth="218.0" />
-      <TextField layoutX="3.0" layoutY="75.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="email" layoutX="3.0" layoutY="143.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="firstName" layoutX="3.0" layoutY="75.0" prefHeight="26.0" prefWidth="218.0" />
       <Label layoutX="6.0" layoutY="119.0" text="Epost" />
       <Label layoutX="293.0" layoutY="127.0" text="Telefonnummer" />
-      <TextField layoutX="293.0" layoutY="75.0" prefHeight="26.0" prefWidth="218.0" />
-      <TextField layoutX="293.0" layoutY="143.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="lastName" layoutX="293.0" layoutY="75.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="phoneNumber" layoutX="293.0" layoutY="143.0" prefHeight="26.0" prefWidth="218.0" />
       <Label layoutX="11.0" layoutY="198.0" text="Nettside" />
       <Label layoutX="293.0" layoutY="198.0" text="Firma: " />
       <Label layoutX="12.0" layoutY="273.0" text="Andre opplysninger: " />
-      <TextField layoutX="3.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
-      <TextField layoutX="288.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
-      <TextField layoutX="12.0" layoutY="296.0" prefHeight="102.0" prefWidth="580.0" />
+      <TextField fx:id="webPage" layoutX="3.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="company" layoutX="288.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField fx:id="other" layoutX="12.0" layoutY="296.0" prefHeight="102.0" prefWidth="580.0" />
       <Button layoutX="203.0" layoutY="493.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="154.0" text="Lagre Kontaktperson" />
    </children>
 </AnchorPane>

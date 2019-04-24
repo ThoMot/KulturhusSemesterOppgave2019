@@ -14,55 +14,47 @@ import java.util.List;
 
 public class Kulturhus {
     private static ArrayList<Event> events;
-    private static ArrayList<Ticket> tickets;
-    public Kulturhus(){
-            ArrayList<Event> events = new ArrayList();
-            tickets = new ArrayList<Ticket>();
-            this.events=events;
+    private static ArrayList<ContactPerson> contactPeople;
+    private static ArrayList<Facility> facilities;
 
+    public static void createLists(){
+        contactPeople=new ArrayList<>();
+        facilities = new ArrayList<>();
+        events=new ArrayList<>();
     }
-
 
     //kun for testing
     public static void opprett() {
-        Facility facility = new Facility("Sal 1", "Kinosal", 10, 20);
+        facilities.add(new Facility("Sal 1", "Kinosal", 10, 20));
         LocalDate d = LocalDate.of(2019, Month.APRIL, 22);
-        LocalTime t = LocalTime.of(22,00);
-        ContactPerson contactPerson = new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344"));
-        EventInfo eventInfo = new EventInfo("Max Manus", "film", "Anne", "kino", d,t);
-        EventNumberedSeating maxManus=new EventNumberedSeating(contactPerson, facility, 100, eventInfo);
+        LocalTime t = LocalTime.of(22, 00);
+        contactPeople.add(new ContactPerson("Martina", "Førre", new ContactInfo("martina@gmail.com", "11223344")));
+        EventInfo eventInfo = new EventInfo("Max Manus", "film", "Anne", "kino", d, t);
+        EventNumberedSeating maxManus = new EventNumberedSeating(contactPeople.get(0), facilities.get(0), 100, eventInfo);
 
-        Facility facility1 = new Facility("Sal 2", "Teatersal", 10, 12);
+        facilities.add(new Facility("Sal 2", "Teatersal", 10, 12));
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-        LocalTime t1 = LocalTime.of(18,00);
-        ContactPerson contactPerson1 = new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455"));
+        LocalTime t1 = LocalTime.of(18, 00);
+        contactPeople.add(new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455")));
         EventInfo eventInfo1 = new EventInfo("Åpning", "Åpning av kinosalen", "Arild", "kino", d1, t1);
-        EventNumberedSeating event2 =new EventNumberedSeating(contactPerson1, facility1,  100, eventInfo1);
+        EventNumberedSeating event2 = new EventNumberedSeating(contactPeople.get(1), facilities.get(1), 100, eventInfo1);
 
 
-        event2.buyTicket(8,2,"90862870");
-        event2.buyTicket(2,3,"90862870");
-        event2.buyTicket(3,4,"90862870");
+        event2.buyTicket(8, 2, "90862870");
+        event2.buyTicket(2, 3, "90862870");
+        event2.buyTicket(3, 4, "90862870");
 
-        maxManus.buyTicket(1,2,"11223344");
-        maxManus.buyTicket(2,3,"11223344");
-        maxManus.buyTicket(3,4,"56743827");
+        maxManus.buyTicket(1, 2, "11223344");
+        maxManus.buyTicket(2, 3, "11223344");
+        maxManus.buyTicket(3, 4, "56743827");
 
-        events = new ArrayList<>();
         events.add(maxManus);
         events.add(event2);
-
-
-
-
     }
+    public static ArrayList<ContactPerson> getContactPeople(){ return contactPeople; }
 
     public static ArrayList<Event> getEvents() {
         return events;
-    }
-
-    public static ArrayList<Ticket> getTickets(){
-        return tickets;
     }
 
     public static ArrayList<Facility> getFacility(){

@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
-import static org.group38.kulturhus.model.Kulturhus.opprett;
+import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowEventController implements MainController{
     private ObservableList<Event> observableList;
@@ -43,6 +42,7 @@ public class ShowEventController implements MainController{
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
+        createLists();
         opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
         initCols();
         loadData();

@@ -1,11 +1,15 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
@@ -19,20 +23,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class AddEventController implements MainController {
     private Event thisEvent;
+    private ObservableList<ContactPerson> ol;
 
-    @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type;
+    @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type; //addEvent
+    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other;
     @FXML private DatePicker date;
     @FXML private ComboBox facility, eventType;
     @FXML private ListView contactPerson;
-
-    @FXML
-    private void goToAddContactPerson(ActionEvent event){
-        SceneManager.navigate(SceneName.NONE);
-    }
 
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
@@ -48,7 +49,7 @@ public class AddEventController implements MainController {
     BorderPane TEST;
 
     @FXML
-    private void test(ActionEvent event){
+    private void goToAddContactPerson(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
             loader.setController(this);
@@ -63,8 +64,7 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
-        //get contactpersons add to list
-        //get facilities add to combobox
+        loadInfo();
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
         }
@@ -72,6 +72,19 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
+    private void loadInfo(){
+        ol = FXCollections.observableList(getContactPeople());
+        //contactPerson.setItems(ol);
+
+        //get contactpersons add to list
+        //get facilities add to combobox
+    }
+    public void createContactPerson(){
+        //try catch for feil input
+        ContactInfo contactInfo= new ContactInfo(email.getText(), phoneNumber.getText());
+        getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+    }
+
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         if (thisEvent instanceof EventNumberedSeating)eventType.getSelectionModel().select("Event med setereservasjon");

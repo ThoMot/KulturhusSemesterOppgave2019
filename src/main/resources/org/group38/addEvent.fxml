@@ -29,8 +29,8 @@
          <bottom>
             <Pane prefHeight="103.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                   <Button layoutX="246.0" layoutY="14.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="58.0" prefWidth="257.0" text="Opprett arrangement" />
-                   <Button layoutX="638.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="58.0" prefWidth="247.0" text="Oppdater arrangement" />
+                   <Button layoutX="105.0" layoutY="14.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="58.0" prefWidth="257.0" text="Opprett arrangement" />
+                   <Button layoutX="420.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="58.0" prefWidth="247.0" text="Oppdater arrangement" />
                </children>
             </Pane>
          </bottom>
@@ -78,7 +78,7 @@
           <AnchorPane minHeight="0.0" minWidth="600.0" prefHeight="724.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <ListView layoutX="123.0" layoutY="23.0" prefHeight="368.0" prefWidth="319.0" />
-                  <Button layoutX="168.0" layoutY="419.0" mnemonicParsing="false" onAction="#test" text="Opprett ny kontaktperson" />
+                  <Button layoutX="168.0" layoutY="419.0" mnemonicParsing="false" onAction="#goToAddContactPerson" text="Opprett ny kontaktperson" />
                </children>
             </AnchorPane>
          </right>
