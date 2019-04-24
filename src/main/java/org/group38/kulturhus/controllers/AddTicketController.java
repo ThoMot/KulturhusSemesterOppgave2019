@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
+import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 
 public class AddTicketController implements MainController{
     private Event thisEvent;
@@ -26,6 +27,7 @@ public class AddTicketController implements MainController{
 
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
+        setSelectedEvent(null);
         SceneManager.navigate(SceneName.ADDEVENT);
     }
 

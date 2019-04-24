@@ -7,6 +7,7 @@ import javafx.scene.control.TableView;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
+import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.getEvents;
 
 public class ShowVenueController implements MainController {
@@ -41,6 +42,7 @@ public class ShowVenueController implements MainController {
 
     }
     public void initialize() {
+        setSelectedEvent(null);
 //        tableView.getItems().setAll(getEvents());
 //        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 //        tableView.getSelectionModel().selectFirst();

@@ -46,6 +46,7 @@ public class ShowEventController implements MainController{
         opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
         initCols();
         loadData();
+        setSelectedEvent(null);
 //        editableCols();
     }
     private void initCols(){
@@ -120,8 +121,8 @@ public class ShowEventController implements MainController{
         }
     }
 
-    public void setSelectedEvent(Event selectedEvent) {
-        this.selectedEvent = selectedEvent;
+    public static void setSelectedEvent(Event selectedEvent) {
+        ShowEventController.selectedEvent = selectedEvent;
     }
 
     public static Event getSelectedEvent() {
