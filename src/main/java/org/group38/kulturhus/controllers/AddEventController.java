@@ -1,16 +1,22 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
@@ -19,20 +25,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.*;
+import static org.group38.kulturhus.model.Kulturhus.opprett;
 
 public class AddEventController implements MainController {
     private Event thisEvent;
+    private ObservableList<ContactPerson> ol;
+    private ObservableList<Facility> ol2;
 
-    @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type;
+    @FXML private TextField eventName, artist, ticketPrice, programInfo, time, type; //addEvent
+    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility, eventType;
-    @FXML private ListView contactPerson;
-
-    @FXML
-    private void goToAddContactPerson(ActionEvent event){
-        SceneManager.navigate(SceneName.NONE);
-    }
+    @FXML private TableView contactPerson;
+    @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
 
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
@@ -48,7 +54,7 @@ public class AddEventController implements MainController {
     BorderPane TEST;
 
     @FXML
-    private void test(ActionEvent event){
+    private void goToAddContactPerson(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
             loader.setController(this);
@@ -63,8 +69,10 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
-        //get contactpersons add to list
-        //get facilities add to combobox
+        createLists();
+        opprett();
+        initCols();
+        loadInfo();
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
         }
@@ -72,6 +80,26 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
+    private void initCols(){
+        firstNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstName()));
+        lastNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLastName()));
+        phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactInfo().getPhoneNr()));
+    }
+    private void loadInfo(){
+        //get contactpersons add to list
+        ol = FXCollections.observableList(getContactPeople());
+        contactPerson.setItems(ol);
+
+        //get facilities add to combobox
+        ol2 = FXCollections.observableList(getFacilities());
+        facility.setItems(ol2);
+    }
+    public void createContactPerson(){
+        //try catch for feil input
+        ContactInfo contactInfo= new ContactInfo(email.getText(), phoneNumber.getText());
+        getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+    }
+
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         if (thisEvent instanceof EventNumberedSeating)eventType.getSelectionModel().select("Event med setereservasjon");
@@ -82,7 +110,9 @@ public class AddEventController implements MainController {
         date.setValue(thisEvent.getDate());
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
-        //contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
+        type.setText(thisEvent.getType());
+        contactPerson.getSelectionModel().select(thisEvent.getContactPerson()); //Denne funker ikke
+
 
     }
     public void createEvent(ActionEvent event){
@@ -124,6 +154,20 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setPerformers(artist.toString());
             thisEvent.getEventInfo().setProgram(programInfo.toString());
         }
+    }
+    private void errorTommeFelter(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Alle felter er ikke utfylt");
+        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\nHusk å markere en kontaktperson");
+        alert.setTitle("Tomme felter");
+        alert.show();
+    }
+    private void errorFeilInput(Exception e){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Feil input i et eller flere felter");
+        alert.setContentText("Vennligst sørg for at alle felter har riktig format\n"+e);
+        alert.setTitle("Feil input");
+        alert.show();
     }
 
     @Override
