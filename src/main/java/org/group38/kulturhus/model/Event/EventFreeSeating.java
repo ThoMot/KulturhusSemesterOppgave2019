@@ -18,6 +18,7 @@ public class EventFreeSeating extends Event {
         tickets = new Ticket[maxSeats];
     }
 
+
     //denne må returnere en void og ha throws
     public String buyTicket(String phoneNumber){
         for(int i=0; i<tickets.length;i++){
@@ -79,18 +80,19 @@ public class EventFreeSeating extends Event {
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
-    public int FreeSeats() {
+    public String freeSeats() {
         int numberofFreeSeats = 0;
         for (Ticket ticket : tickets) {
             if (tickets == null) {
                 numberofFreeSeats++;
             }
         }
-        return numberofFreeSeats;
+        return String.valueOf(numberofFreeSeats);
     }
 
+
     public boolean fullt(){
-        if (FreeSeats()==0) return true;
+        if (Integer.parseInt(freeSeats())==0) return true;
         else return false;
     }
     public ArrayList<Ticket> FindTickets(String phoneNumber){

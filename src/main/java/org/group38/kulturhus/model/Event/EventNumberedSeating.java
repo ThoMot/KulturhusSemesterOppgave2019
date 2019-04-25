@@ -27,6 +27,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         tickets = new Ticket[rows][columns];
     }
 
+
     //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
@@ -38,26 +39,29 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     }
 
     public String allSeats(){
-        for(int i = 0; i <= getFacility().getRows(); i++){
-            if(getFacility().getRows() == getFacility().getRows()){
-                System.out.println("\n");
-                for(int j = 0; j <= getFacility().getColumns(); j++){
+        StringJoiner s= new StringJoiner("  ");
+        for (int i = 0; i < tickets.length; i++) {
+            s.add("\n");
+            for (int j = 0; j < tickets[i].length; j++) {
 
-                    System.out.print(i +" "+ j + ", ");
-                }
+                    s.add("("+i+", "+j+")");
+
             }
         }
-        return columns + " " +rows;
+        return s.toString();
     }
 
     //Checks if there is any free seats in the matrix, and returns a String of available seats
     public String freeSeats() {
-        StringJoiner s= new StringJoiner("\n ");
+        StringJoiner s= new StringJoiner("\t");
         for (int i = 0; i < tickets.length; i++) {
             s.add("\n");
             for (int j = 0; j < tickets[i].length; j++) {
                 if (tickets[i][j]==null) {
-                    s.add("Rad:"+i+", Setenummer:"+j);
+                    s.add("("+i+", "+j+")");
+                }
+                else{
+                    s.add("Opptatt");
                 }
             }
         }
