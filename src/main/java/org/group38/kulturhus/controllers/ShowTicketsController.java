@@ -129,7 +129,6 @@ public class ShowTicketsController implements MainController {
         if(ticketsView.getSelectionModel().getSelectedItem() == null){
 
         } else{
-            ArrayList e= new ArrayList();
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
             mb.setTitle("Bekreft");
             mb.setHeaderText("Du har trykket slett på "+ ticketsView.getSelectionModel().getSelectedItem().getPhonenumber());
@@ -138,8 +137,7 @@ public class ShowTicketsController implements MainController {
                 if(response==ButtonType.OK){
                     observableList.remove(ticketsView.getSelectionModel().getSelectedItem());
                     if(thisEvent instanceof EventNumberedSeating){
-                        //((EventNumberedSeating) thisEvent).getTickets()=observableList;
-                        System.out.println(((EventNumberedSeating) thisEvent).boughtTickets());
+                        ((EventNumberedSeating)thisEvent).setTickets(new ArrayList<>(observableList));
                     }
                 }
             });

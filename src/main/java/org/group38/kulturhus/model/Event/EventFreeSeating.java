@@ -94,6 +94,10 @@ public class EventFreeSeating extends Event {
         return bought;
     }
 
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
     public String getType() {
         return type;
     }
