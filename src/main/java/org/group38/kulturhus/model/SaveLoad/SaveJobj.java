@@ -13,16 +13,14 @@ import java.io.ObjectOutputStream;
 public class SaveJobj implements SaveDataInterface{
     String filename;
 
-public class SaveJobj implements org.group38.kulturhus.model.SaveLoad.SaveDataInterface {
-
     @Override
     public void writeObject(CsvBase object) {
         if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
-            filename = "events.csv";
+            filename = "events.jobj";
         } else if (object instanceof ContactPerson) {
-            filename = "contactPerson.csv";
+            filename = "contactPerson.jobj";
         } else if (object instanceof Ticket) {
-            filename = "tickets.csv";
+            filename = "tickets.jobj";
         }
         try {
 
@@ -35,6 +33,9 @@ public class SaveJobj implements org.group38.kulturhus.model.SaveLoad.SaveDataIn
 
     }
 
+    class JObj{
+
+    }
 
 }
 
