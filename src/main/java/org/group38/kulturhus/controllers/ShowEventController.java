@@ -70,8 +70,6 @@ public class ShowEventController implements MainController{
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
-                    ArrayList e= getEvents();
-                    e=(ArrayList)observableList.stream().collect(Collectors.toList());
                 }
             });
         }

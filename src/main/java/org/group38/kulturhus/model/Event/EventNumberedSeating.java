@@ -207,10 +207,10 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
                 "Dato og tid: "+getEventInfo().getDate()+" "+getEventInfo().getTime()+"\n" +
                 "Type arrangement: setereservering";
     }
-
-    //public Ticket[][] getTickets() {
-    //    return tickets;
-    //}
+//DENNE ER LAGT INN I DAG
+    public Ticket[][] getTickets() {
+        return tickets;
+    }
 
     @Override
     public String toCSV() {

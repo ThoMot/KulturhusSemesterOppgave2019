@@ -135,4 +135,5 @@ public class EventFreeSeating extends Event {
     public double getTicketPrice() {
         return super.getTicketPrice();
     }
+
 }
