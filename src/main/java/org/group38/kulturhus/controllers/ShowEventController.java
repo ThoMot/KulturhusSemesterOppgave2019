@@ -19,10 +19,8 @@ import org.group38.kulturhus.model.Event.Event;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.group38.kulturhus.model.Kulturhus.*;
 
@@ -72,6 +70,8 @@ public class ShowEventController implements MainController{
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
+                    ArrayList e= getEvents();
+                    e=(ArrayList)observableList.stream().collect(Collectors.toList());
                 }
             });
         }
