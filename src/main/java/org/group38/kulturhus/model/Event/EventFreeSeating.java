@@ -24,7 +24,7 @@ public class EventFreeSeating extends Event {
         for(int i=0; i<tickets.length;i++){
             if(tickets[i]==null){
                 tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId());
-                return "Billett er reservert på telefonnummer: "+phoneNumber;
+                return "Billett er reservert på telefonnummer: "+ phoneNumber;
             }
         }
         return "Dette arrangementet er fullt";

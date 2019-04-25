@@ -55,6 +55,7 @@ public class AddTicketController implements MainController{
     public void setEventInfo(){
         eventTitle.setText(thisEvent.getEventInfo().getEventName());
         dateTime.setText(thisEvent.getEventInfo().getDate().toString()+", "+thisEvent.getEventInfo().getTime().toString());
+        ticketPrice.setText(String.valueOf(thisEvent.getTicketPrice()));
     }
 
     @FXML

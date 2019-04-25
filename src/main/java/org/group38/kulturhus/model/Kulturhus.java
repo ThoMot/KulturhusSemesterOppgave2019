@@ -40,7 +40,8 @@ public class Kulturhus {
         EventNumberedSeating event2 = new EventNumberedSeating(contactPeople.get(1), facilities.get(1), 100, eventInfo1);
 
 
-        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(1),22, eventInfo);
+        facilities.add(new Facility("Sal 3", "Teatersal", 34));
+        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(2),22, eventInfo);
 
         event2.buyTicket(8, 2, "90862870");
         event2.buyTicket(2, 3, "90862870");
