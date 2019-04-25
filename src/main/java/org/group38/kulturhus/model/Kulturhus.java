@@ -40,6 +40,8 @@ public class Kulturhus {
         EventNumberedSeating event2 = new EventNumberedSeating(contactPeople.get(1), facilities.get(1), 100, eventInfo1);
 
 
+        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(1),22, eventInfo);
+
         event2.buyTicket(8, 2, "90862870");
         event2.buyTicket(2, 3, "90862870");
         event2.buyTicket(3, 4, "90862870");
@@ -50,6 +52,7 @@ public class Kulturhus {
 
         events.add(maxManus);
         events.add(event2);
+        events.add(eventFreeSeating);
     }
     public static ArrayList<ContactPerson> getContactPeople(){ return contactPeople; }
 

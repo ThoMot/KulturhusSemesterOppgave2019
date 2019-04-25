@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="428.0" prefWidth="1092.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
+<BorderPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
     <top>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
         <menus>
@@ -63,9 +63,9 @@
                                  </Label>
                                  <Label prefHeight="17.0" prefWidth="158.0" text="Dato/tid:" GridPane.rowIndex="1" />
                                  <Label fx:id="dateTime" text="eventDate" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                                 <Label text="Velg sete (rad, setenummer):" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                  <TextField promptText="Rad" fx:id="row" GridPane.rowIndex="3" />
-                  <TextField promptText="Setenummer" fx:id="seatNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                 <Label fx:id="seatRowInfoText" text="Velg sete (rad, setenummer):" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="3" />
+                  <TextField fx:id="seatNumber" promptText="Setenummer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                              </children>
                <VBox.margin>
                   <Insets left="10.0" top="10.0" />
@@ -96,7 +96,7 @@
                                     <TextField fx:id="phoneNumber" prefHeight="27.0" prefWidth="104.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                                     <Label text="eventPrice" GridPane.columnIndex="1" />
                                     <Label text="kr" GridPane.columnIndex="2" />
-                                    <Button text="Opprett billett" GridPane.rowIndex="3" GridPane.columnSpan="3" onAction="#buyTicket" />
+                                    <Button onAction="#buyTicket" text="Opprett billett" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                            </children>

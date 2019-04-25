@@ -25,9 +25,7 @@ public class AddTicketController implements MainController{
     private Event event = getSelectedEvent();
 
     @FXML
-    private Label dateTime;
-    @FXML
-    private Label eventTitle;
+    private Label dateTime, eventTitle, ticketPrice;
 
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
@@ -60,6 +58,8 @@ public class AddTicketController implements MainController{
     }
 
     @FXML
+    private Label seatRowInfoText;
+    @FXML
     private TextField row;
 
     @FXML
@@ -82,6 +82,7 @@ public class AddTicketController implements MainController{
         else if(event instanceof EventFreeSeating){
             ((EventFreeSeating) event).buyTicket(phoneNumber.getText());
         }
+        System.out.println(getSelectedEvent().boughtTickets());
     }
 
     public void initialize() {
@@ -90,6 +91,7 @@ public class AddTicketController implements MainController{
     showFreeSeats();
 
     if(event instanceof EventFreeSeating){
+        seatRowInfoText.setVisible(false);
         row.setVisible(false);
         seatNumber.setVisible(false);
         seatsFlowPane.setVisible(false);
