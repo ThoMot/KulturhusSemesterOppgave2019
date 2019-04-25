@@ -126,12 +126,13 @@ public class AddEventController implements MainController {
         }
         else {
             EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-            if (eventType.equals("Event med setereservasjon")) {
+            if (eventType.getValue().equals("Event med setereservasjon")) {
                 //try catch som sender en errormelding dersom man putter inn feil input?
-                //getEvents().add(new EventNumberedSeating(contactPerson.getSelectionModel().getSelectedItem(), facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo)));
-            } else if (eventType.equals("Event uten setereservasjon")) {
+                getEvents().add(new EventNumberedSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                //teste om add fungerer ved å skrive ut getvents
+            } else if (eventType.getValue().equals("Event uten setereservasjon")) {
                 //try catch med Alert feilmelding dersom man putter feil input?
-                //getEvents().add(new EventFreeSeating(contactPerson, facility, Double.parseDouble(ticketPrice.getText()), eventInfo));
+                getEvents().add(new EventFreeSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
             }
         }
     }
