@@ -94,10 +94,11 @@ public class AddEventController implements MainController {
         ol2 = FXCollections.observableList(getFacilities());
         facility.setItems(ol2);
     }
-    public void createContactPerson(){
+    public void createContactPerson(ActionEvent event){
         //try catch for feil input
         ContactInfo contactInfo= new ContactInfo(email.getText(), phoneNumber.getText());
         getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+        System.out.println(getContactPeople());
     }
 
     private void setValues(){
@@ -112,8 +113,6 @@ public class AddEventController implements MainController {
         time.setText(thisEvent.getTime().toString());
         type.setText(thisEvent.getType());
         contactPerson.getSelectionModel().select(thisEvent.getContactPerson()); //Denne funker ikke
-
-
     }
     public void createEvent(ActionEvent event){
         if(thisEvent!=null){
