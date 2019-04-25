@@ -23,13 +23,13 @@
     <top>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Arrangement">
+          <Menu text="Arrangement">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#goToAddEvent" text="Legg til arrangement" />
-                  <MenuItem mnemonicParsing="false" onAction="#goToShowEvent" text="Vis arrangementer" />
+              <MenuItem onAction="#goToAddEvent" text="Legg til arrangement" />
+                  <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Lokale">
+          <Menu text="Lokale">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Se Lokaler" />
             </items>
