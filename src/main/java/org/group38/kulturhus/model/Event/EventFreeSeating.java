@@ -6,41 +6,28 @@ import org.group38.kulturhus.model.facility.Facility;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class EventFreeSeating extends Event {
-    private Ticket[] tickets;
+    private ArrayList<Ticket> tickets;
     private int maxSeats;
     private final String type="EventFreeSeating";
 
     public EventFreeSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
         this.maxSeats=facility.getMaxAntSeats();
-        tickets = new Ticket[maxSeats];
+        tickets = new ArrayList();
     }
 
 
     //denne må returnere en void og ha throws
-    public String buyTicket(String phoneNumber){
-        for(int i=0; i<tickets.length;i++){
-            if(tickets[i]==null){
-                tickets[i]=new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId());
-                return "Billett er reservert på telefonnummer: "+ phoneNumber;
-            }
+    public void buyTicket(String phoneNumber){
+        if(tickets.size()<maxSeats){
+            tickets.add(new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId()));
         }
-        return "Dette arrangementet er fullt";
-    }
-
-    //void m,ed throws
-    public String deleteTicket(String phoneNumber){
-        int numberDeleted=0;
-        for(int i=0;i<maxSeats;i++){
-            if(tickets[i].getPhonenumber()==phoneNumber){
-                tickets[i]=null;
-                numberDeleted++;
-            }
+        else{
+            throw new ArrayIndexOutOfBoundsException("Arrangementet er fullt");
         }
-        if(numberDeleted==0) return "Det finnes ingen billetter registrert på dette telefonnummeret";
-        else return numberDeleted+" billetter er slettet";
     }
 
     public void setDate(LocalDate date){
@@ -79,30 +66,9 @@ public class EventFreeSeating extends Event {
         return String.valueOf(numberofFreeSeats);
     }
 
-    //Checks if there is any free seats in the matrix, and returns a String of available seats
-    public String freeSeats() {
-        int numberofFreeSeats = 0;
-        for (Ticket ticket : tickets) {
-            if (tickets == null) {
-                numberofFreeSeats++;
-            }
-        }
-        return String.valueOf(numberofFreeSeats);
-    }
-
-
     public boolean fullt(){
-        if (Integer.parseInt(freeSeats())==0) return true;
+        if (Integer.parseInt(allSeats())==0) return true;
         else return false;
-    }
-    public ArrayList<Ticket> FindTickets(String phoneNumber){
-        ArrayList<Ticket> list = new ArrayList<>();
-        for(Ticket ticket : tickets){
-            if(ticket.getPhonenumber().equals(phoneNumber)){
-                list.add(ticket);
-            }
-        }
-        return list;
     }
     @Override
     public String toString() {
@@ -112,16 +78,17 @@ public class EventFreeSeating extends Event {
                 "Type arrangement: ingen setereservering";
     }
 
-    public Ticket[] getTickets() {
+    public ArrayList<Ticket> getTickets() {
         return tickets;
     }
+
     public ArrayList<Ticket> boughtTickets(){
         ArrayList<Ticket> bought = new ArrayList();
-        for (int i = 0; i < tickets.length; i++) {
-            if (tickets[i]==null) {
+        for (Ticket ticket: tickets) {
+            if (tickets==null) {
             }
             else{
-                bought.add(tickets[i]);
+                bought.add(ticket);
             }
         }
         return bought;

@@ -128,7 +128,6 @@ public class ShowTicketsController implements MainController {
     public void deleteRow(ActionEvent ticket){
         if(ticketsView.getSelectionModel().getSelectedItem() == null){
 
-
         } else{
             ArrayList e= new ArrayList();
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);

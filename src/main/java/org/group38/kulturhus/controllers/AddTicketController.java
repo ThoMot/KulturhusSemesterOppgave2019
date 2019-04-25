@@ -73,7 +73,7 @@ public class AddTicketController implements MainController{
     private Label seatsFlowPane;
 
     public void showFreeSeats(){
-        seatsFlowPane.setText(getSelectedEvent().freeSeats());
+        //seatsFlowPane.setText(getSelectedEvent().freeSeats());
     }
 
     public void buyTicket(){

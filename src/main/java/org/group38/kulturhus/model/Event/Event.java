@@ -93,8 +93,6 @@ public abstract class Event {
 
     public abstract String allSeats();
 
-    public abstract String freeSeats();
-
 
     public void setFacility(){
         this.facility=facility;
