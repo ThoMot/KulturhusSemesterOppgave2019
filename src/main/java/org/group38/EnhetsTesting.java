@@ -214,7 +214,7 @@ public class EnhetsTesting {
         //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
        AtomicInteger nummer = new AtomicInteger();
-        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer);
+        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer, 20);
 
         en.buyTicket(0,0,"22334455");
         en.buyTicket(0,1,"22334455");
