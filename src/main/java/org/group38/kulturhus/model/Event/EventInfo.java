@@ -3,6 +3,8 @@ package org.group38.kulturhus.model.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static org.group38.kulturhus.model.Validate.isOnlyLetters;
+
 public class EventInfo {
     private String eventName;
     private String program;

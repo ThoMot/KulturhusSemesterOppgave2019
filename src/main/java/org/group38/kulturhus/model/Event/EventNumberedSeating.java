@@ -17,7 +17,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     private ArrayList<Ticket> tickets;
     private int columns;
     private int rows;
-    private final String type="EventNumberedSeating";
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
