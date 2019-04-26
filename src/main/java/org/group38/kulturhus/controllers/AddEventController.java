@@ -145,11 +145,11 @@ public class AddEventController implements MainController {
         else {
             //try og catch med feilmeldinger ved feil input
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
-            thisEvent.getEventInfo().setEventName(eventName.toString());
+            thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
-            thisEvent.getEventInfo().setPerformers(artist.toString());
-            thisEvent.getEventInfo().setProgram(programInfo.toString());
+            thisEvent.getEventInfo().setPerformers(artist.getText());
+            thisEvent.getEventInfo().setProgram(programInfo.getText());
         }
     }
     private void errorTommeFelter(){

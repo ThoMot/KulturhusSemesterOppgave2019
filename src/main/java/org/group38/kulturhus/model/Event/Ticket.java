@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.group38.kulturhus.model.Validate.validatePhoneNr;
+
 public class Ticket implements CsvBase {
     //data field
     private AtomicInteger eventId;
@@ -21,6 +23,7 @@ public class Ticket implements CsvBase {
 
     //constructor
     public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId, double price) {
+        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
         this.phonenumber = phoneNumber;
         this.date=date;
@@ -29,8 +32,9 @@ public class Ticket implements CsvBase {
         this.eventId=eventId;
         this.price =price;
     }
-    public Ticket(double price, String phonenumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
-        this.phonenumber=phonenumber;
+    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
+        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
+        this.phonenumber=phoneNumber;
         this.price=price;
         this.date=date;
         this.time=time;
@@ -45,15 +49,9 @@ public class Ticket implements CsvBase {
     }
 
 
-    public void setPhonenumber(String phonenumber) {
-        if(phonenumber.length()!=8){
-            throw new IllegalArgumentException("Telefonnummeret inneholder ikke 8 symboler");
-        }
-        boolean numeric = phonenumber.matches("-?\\d+(\\.\\d+)?");
-        if(!numeric){
-            throw new IllegalArgumentException("Telefonnummer er på feil format, må inneholde bare tall");
-        }
-        else this.phonenumber = phonenumber;
+    public void setPhonenumber(String phoneNumber) {
+        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
+        this.phonenumber = phonenumber;
     }
 
     public void setPrice(double price) {
