@@ -93,10 +93,13 @@ public class AddEventController implements MainController {
         facility.setItems(ol2);
     }
     public void createContactPerson(ActionEvent event){
-        //try catch for feil input
-        ContactInfo contactInfo= new ContactInfo(email.getText(), phoneNumber.getText());
-        getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
-        System.out.println(getContactPeople());
+        try {
+            ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
+            getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+        }
+        catch (Exception e){
+            errorFeilInput(e);
+        }
     }
 
     private void setValues(){
@@ -125,14 +128,21 @@ public class AddEventController implements MainController {
             EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
             if (eventType.getValue().equals("Event med setereservasjon")) {
                 //try catch som sender en errormelding dersom man putter inn feil input?
-                getEvents().add(new EventNumberedSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                } else if (eventType.getValue().equals("Event uten setereservasjon")) {
-                //try catch med Alert feilmelding dersom man putter feil input?
-                getEvents().add(new EventFreeSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                try{
+                    getEvents().add(new EventNumberedSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                } catch (Exception e){
+                    errorFeilInput(e);
+                }
+                 } else if (eventType.getValue().equals("Event uten setereservasjon")) {
+                try{
+                    getEvents().add(new EventFreeSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                }
+                catch (Exception e){
+                    errorFeilInput(e);
+                }
             }
         }
     }
-    //dette må lagres, oppdateres ikke i showEvent fordi man oppretter et nytt event i stedenfor
     public void updateEvent(ActionEvent event){
         if(thisEvent==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -143,7 +153,7 @@ public class AddEventController implements MainController {
             alert.show();
         }
         else {
-            //try og catch med feilmeldinger ved feil input
+            //if else som sjekker ticketprice og time
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
             thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
@@ -152,13 +162,13 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setProgram(programInfo.getText());
         }
     }
-    private void errorTommeFelter(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Alle felter er ikke utfylt");
-        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\nHusk å markere en kontaktperson");
-        alert.setTitle("Tomme felter");
-        alert.show();
-    }
+//    private void errorTommeFelter(){
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setHeaderText("Alle felter er ikke utfylt");
+//        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\nHusk å markere en kontaktperson");
+//        alert.setTitle("Tomme felter");
+//        alert.show();
+//    }
     private void errorFeilInput(Exception e){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Feil input i et eller flere felter");
