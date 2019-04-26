@@ -69,7 +69,6 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
-        createLists();
         opprett();
         initCols();
         loadInfo();
@@ -128,8 +127,7 @@ public class AddEventController implements MainController {
             if (eventType.getValue().equals("Event med setereservasjon")) {
                 //try catch som sender en errormelding dersom man putter inn feil input?
                 getEvents().add(new EventNumberedSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                //teste om add fungerer ved å skrive ut getvents
-            } else if (eventType.getValue().equals("Event uten setereservasjon")) {
+                } else if (eventType.getValue().equals("Event uten setereservasjon")) {
                 //try catch med Alert feilmelding dersom man putter feil input?
                 getEvents().add(new EventFreeSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
             }

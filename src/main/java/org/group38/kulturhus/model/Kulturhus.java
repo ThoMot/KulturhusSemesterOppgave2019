@@ -13,15 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kulturhus {
-    private static ArrayList<Event> events;
-    private static ArrayList<ContactPerson> contactPeople;
-    private static ArrayList<Facility> facilities;
-
-    public static void createLists(){
-        contactPeople=new ArrayList<>();
-        facilities = new ArrayList<>();
-        events=new ArrayList<>();
-    }
+    private static ArrayList<Event> events=new ArrayList<>();
+    private static ArrayList<ContactPerson> contactPeople=new ArrayList<>();
+    private static ArrayList<Facility> facilities=new ArrayList<>();
 
     //kun for testing
     public static void opprett() {

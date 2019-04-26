@@ -40,12 +40,10 @@ public class ShowEventController implements MainController{
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
-        createLists();
         opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
         initCols();
         loadData();
         setSelectedEvent(null);
-//        editableCols();
     }
     private void initCols(){
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
