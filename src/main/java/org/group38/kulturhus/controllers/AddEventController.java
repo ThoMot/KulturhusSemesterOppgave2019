@@ -69,7 +69,6 @@ public class AddEventController implements MainController {
         this.thisEvent = thisEvent;
     }
     public void initialize() {
-        opprett();
         initCols();
         loadInfo();
         if(getSelectedEvent()!=null){
