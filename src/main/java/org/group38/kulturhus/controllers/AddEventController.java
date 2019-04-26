@@ -127,7 +127,6 @@ public class AddEventController implements MainController {
         else {
             EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
             if (eventType.getValue().equals("Event med setereservasjon")) {
-                //try catch som sender en errormelding dersom man putter inn feil input?
                 try{
                     getEvents().add(new EventNumberedSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
                 } catch (Exception e){
