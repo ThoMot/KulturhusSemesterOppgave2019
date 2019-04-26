@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.group38.kulturhus.model.Validate.validatePhoneNr;
+import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
 
 public class Ticket implements CsvBase {
     //data field
@@ -23,7 +23,7 @@ public class Ticket implements CsvBase {
 
     //constructor
     public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId, double price) {
-        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
+        if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
         this.phonenumber = phoneNumber;
         this.date=date;
@@ -33,7 +33,7 @@ public class Ticket implements CsvBase {
         this.price =price;
     }
     public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
-        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
+        if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber=phoneNumber;
         this.price=price;
         this.date=date;
@@ -50,7 +50,7 @@ public class Ticket implements CsvBase {
 
 
     public void setPhonenumber(String phoneNumber) {
-        if(!validatePhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
+        if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber = phonenumber;
     }
 

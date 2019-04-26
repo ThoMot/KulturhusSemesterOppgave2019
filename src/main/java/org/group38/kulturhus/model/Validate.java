@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Validate {
 
-    public static boolean validatePhoneNr(String phoneNr) {
+    public static boolean isValidPhoneNr(String phoneNr) {
         if (phoneNr.matches("-?\\d+(\\.\\d+)?")) {
             if (phoneNr.length() == 8) return true;
             else return false;
