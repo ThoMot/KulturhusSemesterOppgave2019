@@ -34,6 +34,7 @@ public class EventInfo {
     }
 
     public void setEventName(String eventName) {
+        if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");
         this.eventName=eventName;
     }
 
@@ -42,6 +43,7 @@ public class EventInfo {
     }
 
     public void setProgram(String program) {
+        if(!isNotEmptyString(program)) throw new NullPointerException("programFeltet kan ikke være tomt");
         this.program=program;
     }
 
@@ -50,6 +52,7 @@ public class EventInfo {
     }
 
     public void setPerformers(String performers) {
+        if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
         this.performer = performer;
     }
 
@@ -76,4 +79,9 @@ public class EventInfo {
         return type;
     }
 
+    //DENNE ER LAGT TIL I DAG, 18.04.19
+    public void setType(){
+        if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
+        this.type=type;
+    }
 }
