@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="12.0" layoutY="59.0" text="Fornavn" />
       <Label graphicTextGap="10.0" layoutX="203.0" layoutY="23.0" prefHeight="21.0" prefWidth="154.0" text="Kontaktperson">
@@ -31,6 +31,6 @@
       <TextField fx:id="webPage" layoutX="3.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
       <TextField fx:id="company" layoutX="288.0" layoutY="214.0" prefHeight="26.0" prefWidth="218.0" />
       <TextField fx:id="other" layoutX="12.0" layoutY="296.0" prefHeight="102.0" prefWidth="580.0" />
-      <Button layoutX="203.0" layoutY="493.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="154.0" text="Lagre Kontaktperson" />
+      <Button layoutX="203.0" layoutY="493.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="154.0" text="Lagre Kontaktperson" onAction="#createContactPerson"/>
    </children>
 </AnchorPane>

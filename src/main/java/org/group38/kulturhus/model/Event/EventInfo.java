@@ -3,6 +3,8 @@ package org.group38.kulturhus.model.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static org.group38.kulturhus.model.Validate.isNotEmptyString;
+
 public class EventInfo {
     private String eventName;
     private String program;
@@ -14,6 +16,10 @@ public class EventInfo {
 
 
     public EventInfo(String eventName, String program, String performer, String type, LocalDate date, LocalTime time) {
+        if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");
+        if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
+        if(!isNotEmptyString(program)) throw new NullPointerException("programFeltet kan ikke være tomt");
+        if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
         this.eventName = eventName;
         this.program = program;
         this.performer = performer;
@@ -27,6 +33,7 @@ public class EventInfo {
     }
 
     public void setEventName(String eventName) {
+        if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");
         this.eventName=eventName;
     }
 
@@ -35,6 +42,7 @@ public class EventInfo {
     }
 
     public void setProgram(String program) {
+        if(!isNotEmptyString(program)) throw new NullPointerException("programFeltet kan ikke være tomt");
         this.program=program;
     }
 
@@ -43,6 +51,7 @@ public class EventInfo {
     }
 
     public void setPerformers(String performers) {
+        if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
         this.performer = performer;
     }
 
@@ -69,4 +78,9 @@ public class EventInfo {
         return type;
     }
 
+    //DENNE ER LAGT TIL I DAG, 18.04.19
+    public void setType(){
+        if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
+        this.type=type;
+    }
 }

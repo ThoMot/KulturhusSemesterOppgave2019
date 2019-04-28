@@ -14,172 +14,78 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class EventNumberedSeating extends Event implements Serializable, CsvBase {
-    private Ticket[][] tickets;
+    private ArrayList<Ticket> tickets;
     private int columns;
     private int rows;
-    private final String type="EventNumberedSeating";
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
         this.columns = facility.getColumns();
         this.rows = facility.getRows();
-        tickets = new Ticket[rows][columns];
+        tickets = new ArrayList<>();
     }
 
-    //Checks if the seat choosen is taken, and returns an errormessage if so, otherwise it creates a new ticket
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
-        if(seatNumber>columns||seatNumber<0) throw new IllegalArgumentException( "Plassen du valgte er utenfor registeret, velg et setenummer mellom 0 og "+columns);
-        if(seatRow>rows|| seatRow<0) throw new IllegalArgumentException("Plassen du valgte er utenfor registeret, velg et radnummer mellom 0 og "+rows);
-        if (tickets[seatRow][seatNumber]==null) {
-            tickets[seatRow][seatNumber] = new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId());
+        if (tickets.size() < (rows * columns)) {
+            if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
+            for (Ticket ticket : tickets) {
+
+                if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
+                    throw new IllegalArgumentException("Setet er allerede opptatt");
+                }
+            }
+            tickets.add(new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId(), getTicketPrice()));
         }
-        else throw new IllegalArgumentException("Setet er opptatt");
+        else {
+            throw new IndexOutOfBoundsException("Arrangementet er fullt");
+        }
     }
 
     public String allSeats(){
-        for(int i = 0; i <= getFacility().getRows(); i++){
-            if(getFacility().getRows() == getFacility().getRows()){
-                System.out.println("\n");
-                for(int j = 0; j <= getFacility().getColumns(); j++){
-
-                    System.out.print(i +" "+ j + ", ");
-                }
-            }
-        }
-        return columns + " " +rows;
-    }
-
-    //Checks if there is any free seats in the matrix, and returns a String of available seats
-    public String freeSeats() {
-        StringJoiner s= new StringJoiner("\n ");
-        for (int i = 0; i < tickets.length; i++) {
-            s.add("\n");
-            for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j]==null) {
-                    s.add("Rad:"+i+", Setenummer:"+j);
-                }
-            }
+        StringJoiner s= new StringJoiner("\t");
+        for (Ticket ticket: tickets) {
+            s.add("("+ticket.getRow()+","+ticket.getSeat()+")");
         }
         return s.toString();
     }
 
-
     public ArrayList<Ticket> boughtTickets(){
         ArrayList<Ticket> bought = new ArrayList();
-        for (int i = 0; i < tickets.length; i++) {
-            for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j]==null) {
-                }
-                else{
-                    bought.add(tickets[i][j]);
-                }
-            }
+        for (Ticket ticket : tickets){
+            bought.add(ticket);
         }
         return bought;
     }
 
-    //deletes all tickets on one phonenumber, by removing them from the matrix, removing all references
-    public void deleteTicket(String phoneNumber) {
-        int numberDeleted=0;
-        for (int i = 0; i < tickets.length; i++) {
-            for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j]!=null) {
-                    if (tickets[i][j].getPhonenumber().equals(phoneNumber)) {
-                        tickets[i][j] = null;
-                        numberDeleted++;
-                    }
-                }
-            }
-        }
-        if(numberDeleted==0)throw new NoSuchElementException("Billetten(e) eksisterer ikke");
-    }
-
-    //Deletes tickets based on the seatrow and seatnumber
-    public void deleteTicket(int seatRow, int seatNumber){
-        if(tickets[seatRow][seatNumber]!=null){
-            tickets[seatRow][seatNumber]=null;
-        }
-        else throw new NoSuchElementException("Billetten finnes ikke");
-    }
-
-    //finds tickets based on the phonenumber and returns an arraylist of these tickets
-    public ArrayList<org.group38.kulturhus.model.Event.Ticket> FindTickets(String phoneNumber){
-        ArrayList<org.group38.kulturhus.model.Event.Ticket> list= new ArrayList<>();
-        for(int i=0;i<tickets.length;i++){
-            for(int j=0;j<tickets[i].length;j++){
-                if(tickets[i][j]!=null){
-                    if(tickets[i][j].equals(phoneNumber));
-                    list.add(tickets[i][j]);
-                }
-            }
-        }
-        return list;
-    }
-    //Returns the ticket based on seatnumber and row
-    public Ticket findTicket(int seatRow, int seatNumber){
-        if (tickets[seatRow][seatNumber]!=null){
-            return tickets[seatRow][seatNumber];
-        }
-        else throw new NoSuchElementException("Det finnes ingen billett med gitt plassering");
-    }
-
     //Checking if the Event is full, by going through the matrix searching for any available spots
     public boolean Full() {
-        for (int i = 0; i < tickets.length; i++) {
-            for (int j = 0; j < tickets[i].length; j++) {
-                if (tickets[i][j] == null) return false;
-            }
-        }
-        return true;
+        if(tickets.size()==rows*columns) return true;
+        else return false;
     }
     //Edit the date of an Event, also updating all bought tickets and eventinfo
     public void setDate(LocalDate date){
+        //Sjekke input
         super.getEventInfo().setDate(date);
-        for(Ticket[] tickets: tickets){
-            for(Ticket ticket: tickets){
-                if(ticket!=null){
-                    ticket.setDate(date);
-                }
-            }
+        for(Ticket ticket: tickets){
+            ticket.setDate(date);
         }
     }
     public void setTime(LocalTime time){
+        //sjekke for avvik
         super.getEventInfo().setTime(time);
-        for(Ticket[] tickets: tickets){
-            for(Ticket ticket: tickets){
-                if(ticket!=null){
-                    ticket.setTime(time);
-                }
-            }
+        for(Ticket tickets: tickets){
+            tickets.setTime(time);
         }
     }
 
     //Updates the ticketprice bought in the Event, and also for all bought tickets
     public void setTicketPrice(double price){
+        //sjekk input her
         super.setTicketPrice(price);
-        for(Ticket[] tickets: tickets){
-            for(Ticket ticket: tickets){
-                if(ticket!=null){
-                    ticket.setPrice(price);
-                }
-            }
+        for(Ticket tickets: tickets){
+            tickets.setPrice(price);
         }
-    }
-    public void editSeat(int oldRow,int oldSeat, int seatRow, int seatNumber) {
-        String phoneNumber = findTicket(oldRow, oldSeat).getPhonenumber();
-        try {
-            deleteTicket(oldRow, oldSeat);
-            buyTicket(seatRow, seatNumber, phoneNumber);
-        } catch (NoSuchElementException e) {
-            System.out.println(e);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
-    }
-    public String printTicket(int seatRow, int seatNumber){
-        Ticket t= findTicket(seatRow, seatNumber);
-        return t.toString()+"\nPlassering: ("+seatRow+","+seatNumber+")";
     }
 
     //brukes for lagring
@@ -192,10 +98,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return rows;
     }
 
-
-
-
-
     @Override
     public String toString() {
         return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
@@ -203,10 +105,10 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
                 "Dato og tid: "+getEventInfo().getDate()+" "+getEventInfo().getTime()+"\n" +
                 "Type arrangement: setereservering";
     }
-
-    //public Ticket[][] getTickets() {
-    //    return tickets;
-    //}
+//DENNE ER LAGT INN I DAG
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
 
     @Override
     public String toCSV() {
@@ -227,8 +129,29 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         this.rows = rows;
     }
 
-
-//    @Override
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+    public Ticket findTicket(int rows, int columns){
+        for(Ticket ticket:tickets){
+            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
+        }
+        return null;
+    }
+    public String availableSeats(){
+        StringJoiner sj = new StringJoiner("      ");
+        for(int i=1; i<rows+1;i++){
+            sj.add("\n");
+           for(int j=1;j<columns+1;j++){
+                if(findTicket(i, j)==null){
+                    sj.add("("+i+","+j+")");
+                }
+                else sj.add("opptatt");
+           }
+        }
+        return sj.toString();
+    }
+    //    @Override
 //    public double getTicketPrice() {
 //        return super.getTicketPrice();
 //    }

@@ -202,10 +202,11 @@ public class EnhetsTesting {
         ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
         ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
         Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
+        Facility facility3 = new Facility("Sal 1", "Kinosal", 30);
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-        LocalTime t1 = LocalTime.of(18, 00);
-        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe", "Megdi ++", "konsert", d1, t1);
-        EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
+        LocalTime t1 = LocalTime.of(18,00);
+        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", "konsert",d1, t1);
+        EventFreeSeating test = new EventFreeSeating(contactPerson, facility3, 150, eventInfo2);
         EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
 
         List<Object> events = new ArrayList<>();
@@ -214,14 +215,16 @@ public class EnhetsTesting {
         events.add(2, test);
         //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
-        AtomicInteger nummer = new AtomicInteger();
-        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer);
+       AtomicInteger nummer = new AtomicInteger();
+        Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer, 20);
 
         en.buyTicket(0, 0, "22334455");
         en.buyTicket(0, 1, "22334455");
         //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
 
-        //en.allSeats();
+       en.allSeats();
+       //System.out.println(test.buyTicket("11223344"));
+       System.out.println(test.boughtTickets());
 
 //        SaveCsvInterface save = new SaveCsvInterface();
 //

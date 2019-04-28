@@ -15,7 +15,9 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 import java.io.IOException;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
@@ -24,6 +26,7 @@ import static org.group38.kulturhus.model.Kulturhus.*;
 public class ShowTicketsController implements MainController {
     private ObservableList<Ticket> observableList;
     private static Ticket selectedTicket;
+    private Event thisEvent;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -78,24 +81,28 @@ public class ShowTicketsController implements MainController {
 
 
     public void initialize() {
-        opprett();
+        setThisEvent(getSelectedEvent());
         initCols();
         loadData();
         editableCols();
+
+    }
+    private void setThisEvent(Event thisEvent){
+        this.thisEvent=thisEvent;
     }
 
     private void loadData(){
-        observableList = FXCollections.observableList(getSelectedEvent().boughtTickets());
+        observableList = FXCollections.observableList(thisEvent.boughtTickets());
         ticketsView.setItems(observableList);
     }
 
     private void initCols(){
-        eventName.setText(getSelectedEvent().getEventInfo().getEventName());
-        eventDate.setText(getSelectedEvent().getEventInfo().getDate().format(dateFormatter));
-        eventTime.setText(getSelectedEvent().getEventInfo().getTime().format(timeFormatter));
-        eventFacility.setText(getSelectedEvent().getFacility().toString());
-        eventPerformers.setText(getSelectedEvent().getEventInfo().getPerformers());
-        eventProgram.setText(getSelectedEvent().getEventInfo().getProgram());
+        eventName.setText(thisEvent.getEventInfo().getEventName());
+        eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
+        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
+        eventFacility.setText(thisEvent.getFacility().toString());
+        eventPerformers.setText(thisEvent.getEventInfo().getPerformers());
+        eventProgram.setText(thisEvent.getEventInfo().getProgram());
 
         phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhonenumber()));
         seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRow().toString()));
@@ -118,10 +125,32 @@ public class ShowTicketsController implements MainController {
 
 
     public void deleteRow(ActionEvent ticket){
-        //vil du virkelig slette denne billetten?
-        observableList.remove(ticketsView.getSelectionModel().getSelectedItem());
+        if(ticketsView.getSelectionModel().getSelectedItem() == null){
+
+        } else{
+            Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
+            mb.setTitle("Bekreft");
+            mb.setHeaderText("Du har trykket slett på "+ ticketsView.getSelectionModel().getSelectedItem().getPhonenumber());
+            mb.setContentText("Ønsker du virkerlig å slette denne billetten?");
+            mb.showAndWait().ifPresent(response -> {
+                if(response==ButtonType.OK){
+                    observableList.remove(ticketsView.getSelectionModel().getSelectedItem());
+                    if(thisEvent instanceof EventNumberedSeating){
+                        ((EventNumberedSeating)thisEvent).setTickets(new ArrayList<>(observableList));
+                    }
+                }
+            });
+        }
+
     }
 
+    public void showErrorMessage(){
+        Alert mb = new Alert(Alert.AlertType.INFORMATION);
+        mb.setHeaderText("Det er ingen rader som er markert");
+        mb.setTitle("Feil");
+        mb.setContentText("Vennligst marker en rad i tabellen");
+        mb.show();
+    }
 
 
 

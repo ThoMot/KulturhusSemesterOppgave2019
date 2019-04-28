@@ -1,9 +1,8 @@
-//legge inn if else i alle setmetoder for å sjekke for riktig input
-//tostring metode
-
 package org.group38.kulturhus.model.ContactPerson;
 
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
+
+import static org.group38.kulturhus.model.Validate.*;
 
 public class ContactPerson extends Person implements CsvBase {
     //Optional
@@ -14,8 +13,8 @@ public class ContactPerson extends Person implements CsvBase {
 
 
 public ContactPerson(String firstName, String lastName, ContactInfo contactInfo){
-super(firstName, lastName);
-this.contactInfo = contactInfo;
+    super(firstName, lastName);
+    this.contactInfo = contactInfo;
 }
 
 private ContactPerson(){
@@ -23,6 +22,7 @@ private ContactPerson(){
 }
 
     public void setWebPage(String webPage) {
+    if(!isValidWebPage(webPage)) throw new IllegalArgumentException("Websiden er på feil format\n må avsluttes med feks .com/.no eller lignende");
         this.webPage = webPage;
     }
 
@@ -56,10 +56,6 @@ private ContactPerson(){
     }
 
     public ContactInfo getContactInfo(){ return contactInfo; }
-
-    public String getPhoneNr() { return getContactInfo().getPhoneNr(); }
-
-    public String getEmail() { return getContactInfo().getEmail(); }
 
 
 

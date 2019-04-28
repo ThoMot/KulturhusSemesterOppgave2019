@@ -14,15 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kulturhus {
-    private static ArrayList<Event> events;
-    private static ArrayList<ContactPerson> contactPeople;
-    private static ArrayList<Facility> facilities;
-
-    public static void createLists(){
-        contactPeople=new ArrayList<>();
-        facilities = new ArrayList<>();
-        events=new ArrayList<>();
-    }
+    private static ArrayList<Event> events = new ArrayList<>();
+    private static ArrayList<ContactPerson> contactPeople = new ArrayList<>();
+    private static ArrayList<Facility> facilities = new ArrayList<>();
 
     //kun for testing
     public static void opprett() {
@@ -41,6 +35,9 @@ public class Kulturhus {
         EventNumberedSeating event2 = new EventNumberedSeating(contactPeople.get(1), facilities.get(1), 100, eventInfo1);
 
 
+        facilities.add(new Facility("Sal 3", "Teatersal", 34));
+        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(2), 22, eventInfo);
+
         event2.buyTicket(8, 2, "90862870");
         event2.buyTicket(2, 3, "90862870");
         event2.buyTicket(3, 4, "90862870");
@@ -51,22 +48,28 @@ public class Kulturhus {
 
         events.add(maxManus);
         events.add(event2);
+        events.add(eventFreeSeating);
     }
-    public static ArrayList<ContactPerson> getContactPeople(){ return contactPeople; }
+
+    public static ArrayList<ContactPerson> getContactPeople() {
+        return contactPeople;
+    }
 
     public static ArrayList<Event> getEvents() {
         return events;
     }
 
-    public static ArrayList<Facility> getFacilities(){
+    public static ArrayList<Facility> getFacilities() {
         return facilities;
     }
 
-    public static void saveContactpeople(){
-        SaveCsvInterface csv = new SaveCsvInterface();
-        for (ContactPerson contactPerson : contactPeople){
-            csv.writeObject(contactPerson);
+    public static Facility findFacility(String facilityName) {
+        for (Facility facility : facilities) {
+            if (facility.getFacilityName().equals(facilityName)) {
+                return facility;
+            }
         }
+        return null;
     }
 
 }
