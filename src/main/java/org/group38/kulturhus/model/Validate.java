@@ -32,6 +32,12 @@ public class Validate {
         Matcher matcher=regex.matcher(webPage);
         return matcher.find();
     }
+    public static boolean isValidTime(String time){
+        if(time.matches("(?:[0-1][0-9]|2[0-4]):[0-5]\\d")){
+            return true;
+        }
+        else return false;
+    }
 
 }
 

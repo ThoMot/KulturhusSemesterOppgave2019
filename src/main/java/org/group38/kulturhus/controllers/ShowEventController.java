@@ -40,7 +40,6 @@ public class ShowEventController implements MainController{
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
     public void initialize(){
-        opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
         initCols();
         loadData();
         setSelectedEvent(null);
