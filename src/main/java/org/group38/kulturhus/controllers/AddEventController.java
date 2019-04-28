@@ -96,6 +96,8 @@ public class AddEventController implements MainController {
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
             getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            loadInfo();
         }
         catch (Exception e){
             errorFeilInput(e.toString());
@@ -117,12 +119,7 @@ public class AddEventController implements MainController {
     }
     public void createEvent(ActionEvent event) {
         if (thisEvent != null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Objektet eksisterer fra før");
-            alert.setHeaderText("Du kan ikke opprette et nytt objekt når et annet er valgt");
-            alert.setContentText("Gå til arrangementoversikten for å \n" +
-                    "tilbakestille valg av arrangement");
-            alert.show();
+            errorIngenArrangement();
         } else {
             if (!isValidTime(time.getText())) errorFeilInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
             else {
@@ -176,6 +173,14 @@ public class AddEventController implements MainController {
         alert.setHeaderText("Feil input i et eller flere felter");
         alert.setContentText("Vennligst sørg for at alle felter har riktig format\n"+e);
         alert.setTitle("Feil input");
+        alert.show();
+    }
+    private void errorIngenArrangement(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Objektet eksisterer fra før");
+        alert.setHeaderText("Du kan ikke opprette et nytt objekt når et annet er valgt");
+        alert.setContentText("Gå til arrangementoversikten for å \n" +
+                "tilbakestille valg av arrangement");
         alert.show();
     }
 
