@@ -28,7 +28,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
 
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if (tickets.size() < (rows * columns)) {
-            if(seatRow<0||seatNumber<0||seatRow>rows||seatNumber>columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
+            if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
             for (Ticket ticket : tickets) {
 
                 if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
@@ -98,10 +98,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return rows;
     }
 
-
-
-
-
     @Override
     public String toString() {
         return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
@@ -135,6 +131,25 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
 
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
+    }
+    public Ticket findTicket(int rows, int columns){
+        for(Ticket ticket:tickets){
+            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
+        }
+        return null;
+    }
+    public String availableSeats(){
+        StringJoiner sj = new StringJoiner("\t");
+        for(int i=1; i<=rows;i++){
+            sj.add("\n");
+            for(int j=1;i<=columns;j++){
+                if(findTicket(i, j)==null){
+                    sj.add("("+i+","+j+")");
+                }
+                else sj.add("opptatt");
+            }
+        }
+        return sj.toString();
     }
     //    @Override
 //    public double getTicketPrice() {
