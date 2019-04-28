@@ -44,8 +44,7 @@ public abstract class Event {
         return facility;
     }
 
-    public String getPhoneNr(){
-        return contactPerson.getContactInfo().getPhoneNr();
+    public String getPhoneNr(){ return contactPerson.getPhoneNr();
     }
 
     public String getEventName(){

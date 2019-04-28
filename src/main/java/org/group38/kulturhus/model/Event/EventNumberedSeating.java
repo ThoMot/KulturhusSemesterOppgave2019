@@ -110,15 +110,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return tickets;
     }
 
-    @Override
-    public String toCSV() {
-
-        StringBuilder sb = new StringBuilder();
-        String delimitter = ",";
-
-
-        return sb.toString();
-    }
 
 
     public void setColumns(int columns) {

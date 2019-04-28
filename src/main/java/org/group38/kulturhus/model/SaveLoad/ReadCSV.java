@@ -26,12 +26,12 @@ public class ReadCSV {
     }
 
 
-    private static List<String> toLowerCase(List<String> headers){
+    private static List<String> toLowerCase(List<String> headers) {
         List<String> fieldNames = new ArrayList<>();
         String firstLetter = null;
-        for(String header : headers){
-            firstLetter = header.substring(0,1).toLowerCase();
-            fieldNames.add(firstLetter+header.substring(1));
+        for (String header : headers) {
+            firstLetter = header.substring(0, 1).toLowerCase();
+            fieldNames.add(firstLetter + header.substring(1));
         }
         return fieldNames;
     }
@@ -92,7 +92,7 @@ public class ReadCSV {
         //TODO flytt
         Field[] parentFields = parentclazz.getDeclaredFields();
 
-        for (Field field : parentFields){
+        for (Field field : parentFields) {
             if (headers.contains(field.getName())) {
                 int index = headers.indexOf(field.getName());
                 System.out.println(field + " Dette er et parent field " + index);
@@ -103,8 +103,8 @@ public class ReadCSV {
         //TODO flytt
         int increment = 0;
 
-        for (String head : headers){
-            if(!settableValues.containsKey(head) && !parentValues.containsKey(head)){
+        for (String head : headers) {
+            if (!settableValues.containsKey(head) && !parentValues.containsKey(head)) {
                 otherValues.put(head, increment);
                 increment++;
             }
@@ -116,17 +116,15 @@ public class ReadCSV {
             System.out.println(entry.getValue());
         }
 
-        for(List objVal : records) {
+        for (List objVal : records) {
 
 
-
-            T test = (T)constructor.newInstance();
+            T test = (T) constructor.newInstance();
 
             ContactInfo contactInfo = new ContactInfo();
             Field field = clazz.getDeclaredField("contactInfo");
             field.setAccessible(true);
             field.set(test, contactInfo);
-
 
 
             //TODO Skill ut i egen metode
@@ -143,41 +141,36 @@ public class ReadCSV {
                 fieldToSet.set(test, (objVal.get(entry.getValue())));
             }
 
-           if(!otherValues.isEmpty()){
-               Type type;
-               for (Field checkField : fields){
-                   if(!checkField.getType().isPrimitive() && checkField.getType() != String.class){
-                       type = checkField.getType();
+            if (!otherValues.isEmpty()) {
+                List<Type> type = new ArrayList<>();
+                for (Field checkField : fields) {
+                    if (!checkField.getType().isPrimitive() && checkField.getType() != String.class && !type.contains(checkField.getType())) {
+                        type.add(checkField.getType());
+                    }
+                }
+                for (Type t : type)
+                    System.out.println(t);
+            }
 
-                   }
-               }
-               Field checkField;
-               int objectCounter;
-               for (Map.Entry<String, Integer> entry : parentValues.entrySet()){
+            Field checkField;
+            int objectCounter;
+            for (Map.Entry<String, Integer> entry : parentValues.entrySet()) {
 
 
-               }
-           }
-
+            }
 
 
             returnObj.add(test);
 
 
-
-
-
-
-
             //Opprettet en instans av hoveobjektet
-         //   T instance = (T)constructor.newInstance();
+            //   T instance = (T)constructor.newInstance();
 
 
-
-
-
-        } return returnObj;
+        }
+        return returnObj;
     }
+}
 
 
 
@@ -241,7 +234,7 @@ public class ReadCSV {
 
 
 
-}
+
 
 
 

@@ -57,6 +57,10 @@ private ContactPerson(){
 
     public ContactInfo getContactInfo(){ return contactInfo; }
 
+    public String getPhoneNr() { return getContactInfo().getPhoneNr(); }
+
+    public String getEmail() { return getContactInfo().getEmail(); }
+
 
 
 
@@ -70,10 +74,6 @@ private ContactPerson(){
                 '}';
     }
 
-    @Override
-    public String toCSV() {
-        return null;
-    }
 }
 
 

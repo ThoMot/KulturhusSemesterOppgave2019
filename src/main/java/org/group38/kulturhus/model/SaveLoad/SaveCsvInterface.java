@@ -37,7 +37,7 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
             if (method.getName().matches("^get[A-Z].*") &&
                     !method.getReturnType().equals(void.class) && !method.getReturnType().equals(Facility.class)
                     && !method.getReturnType().equals(ContactPerson.class) && !method.getReturnType().equals(EventInfo.class)
-                    && !method.getReturnType().equals(ContactInfo.class))
+                    && !method.getReturnType().equals(ContactInfo.class) && !method.getReturnType().equals(ArrayList.class))
                 return true;
         }
         return false;
@@ -70,17 +70,18 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
                     }
             }
         }
+        System.out.println("DENNE HER");
         System.out.println(Arrays.toString(mid));
         try {
-            sb.append(object.getClass().toString());
-            sb.append(";");
-            System.out.println(sb);
+            System.out.println(sb + "dette er stringen");
             for (Method method : mid) {
-                System.out.println(method.invoke(object));
+                System.out.println(Arrays.toString(mid));
+           //     System.out.println(method.invoke(object));
                 if(method.invoke(object) == null){
                     sb.append("-");
                 } else sb.append(method.invoke(object).toString());
                 System.out.println(method + " " + "denne funket");
+                System.out.println(sb);
                 sb.append(";");
             }
             sb.append("\n");
@@ -124,7 +125,7 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
 
 
 
-    public <T> void writeObjects(ObservableList<T> objects) {
+    public <T> void writeObjects(ObservableList<T> objects) throws IOException {
         FileWriter fileWriter = null;
         final String nextline = "\n";
         String filename = null;
@@ -132,13 +133,13 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
 
 
 //        //sjekk filnavn
-//        if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
-//            filename = "events.csv";
-//        } else if (object instanceof ContactPerson) {
-//            filename = "contactPerson.csv";
-//        } else if (object instanceof Ticket) {
-//            filename = "tickets.csv";
-//        }
+        if (objects.get(0) instanceof EventNumberedSeating || objects.get(0) instanceof EventFreeSeating) {
+            filename = "events.csv";
+        } else if (objects.get(0) instanceof ContactPerson) {
+            filename = "contactPerson.csv";
+        } else if (objects.get(0) instanceof Ticket) {
+            filename = "tickets.csv";
+        }
 
         for (T object : objects) {
 
@@ -164,6 +165,7 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
 
 //Skriv til fil
             try {
+                //TODO sjekk om filen er skrevet i fra før.
                 writeHeaders(object, filename);
                 save.deleteCharAt(save.length() - 1);
                 fileWriter = new FileWriter(filename, true);
