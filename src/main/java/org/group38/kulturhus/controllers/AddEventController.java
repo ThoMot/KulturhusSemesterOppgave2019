@@ -26,6 +26,7 @@ import java.time.LocalTime;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
+import static org.group38.kulturhus.model.Validate.isNotEmptyString;
 import static org.group38.kulturhus.model.Validate.isValidTime;
 
 public class AddEventController implements MainController {
@@ -96,6 +97,9 @@ public class AddEventController implements MainController {
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
             getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+            if(isNotEmptyString(company.getText())) getContactPeople().get(getContactPeople().size()-1).setAffiliation(company.getText());
+                if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
+                    if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
             //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
             loadInfo();
         }

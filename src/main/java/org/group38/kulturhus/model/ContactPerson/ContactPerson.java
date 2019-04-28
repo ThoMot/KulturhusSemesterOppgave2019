@@ -22,7 +22,7 @@ public ContactPerson(String firstName, String lastName, ContactInfo contactInfo)
 }
 
     public void setWebPage(String webPage) {
-    if(!isValidWebPage(webPage)) throw new IllegalArgumentException("Websiden er på feil format");
+    if(!isValidWebPage(webPage)) throw new IllegalArgumentException("Websiden er på feil format\n må avsluttes med feks .com/.no eller lignende");
         this.webPage = webPage;
     }
 

@@ -12,8 +12,8 @@ public class Validate {
         }
         else return false;
     }
-    public static boolean isOnlyLetters(String string){
-        char[] chars = string.toCharArray();
+    public static boolean isOnlyLetters(String str){
+        char[] chars = str.toCharArray();
         for(char c : chars){
             if(!Character.isLetter(c)){
                 return false;
@@ -36,6 +36,10 @@ public class Validate {
         if(time.matches("(?:[0-1][0-9]|2[0-4]):[0-5]\\d")){
             return true;
         }
+        else return false;
+    }
+    public static boolean isNotEmptyString(String str){
+        if(str != null && !str.isEmpty()) return true;
         else return false;
     }
 
