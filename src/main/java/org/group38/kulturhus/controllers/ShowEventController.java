@@ -1,27 +1,17 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Popup;
-import org.group38.kulturhus.model.Event.EventFreeSeating;
-import org.group38.kulturhus.model.Event.EventNumberedSeating;
+
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
 
+import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowEventController implements MainController{
@@ -57,7 +47,7 @@ public class ShowEventController implements MainController{
     }
     public void deleteRow(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            showErrorMessage();
+            errorNoMarkedEvent();
         }
         else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
@@ -75,7 +65,7 @@ public class ShowEventController implements MainController{
     //metode som bytter scene til visinfo og tar med seg eventet som er trykket på
     public void goToVisInfo(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            showErrorMessage();
+            errorNoMarkedEvent();
         }
         else {
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -84,7 +74,7 @@ public class ShowEventController implements MainController{
     }
     public void goToBuyTicket(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            showErrorMessage();
+            errorNoMarkedEvent();
         }
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -93,7 +83,7 @@ public class ShowEventController implements MainController{
     }
     public void goToCreateEvent(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            showErrorMessage();
+            errorNoMarkedEvent();
         }
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -107,14 +97,6 @@ public class ShowEventController implements MainController{
 
     public static Event getSelectedEvent() {
         return selectedEvent;
-    }
-    //method for opening an error if there is no selected fields
-    public void showErrorMessage(){
-        Alert mb = new Alert(Alert.AlertType.INFORMATION);
-        mb.setHeaderText("Det er ingen rader som er markert");
-        mb.setTitle("Feil");
-        mb.setContentText("Vennligst marker en rad i tabellen");
-        mb.show();
     }
 
     @Override

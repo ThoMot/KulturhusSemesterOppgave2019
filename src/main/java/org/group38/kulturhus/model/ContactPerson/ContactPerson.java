@@ -1,12 +1,8 @@
-//legge inn if else i alle setmetoder for å sjekke for riktig input
-//tostring metode
-
 package org.group38.kulturhus.model.ContactPerson;
 
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
 
-import static org.group38.kulturhus.model.Validate.isOnlyLetters;
-import static org.group38.kulturhus.model.Validate.isValidWebPage;
+import static org.group38.kulturhus.model.Validate.*;
 
 public class ContactPerson extends Person implements CsvBase {
     //Optional

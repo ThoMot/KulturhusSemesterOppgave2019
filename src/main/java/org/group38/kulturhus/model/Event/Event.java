@@ -1,9 +1,3 @@
-//er det mer som må kunne redigeres ved et arrangement enn billettpris og dato? skal vi feks kunne endre hvilket lokale det skjer i? da blir det mye som må endres
-//Hvordan skal utskrift av ledige seter se ut?
-//Trenger vi mer i tostringmetoden?
-//lage metoder som samsvarer med at lokalet ikke har sitteplasser også
-//legge inn abstarkte metoder som er felles for subklassene
-
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
@@ -17,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Event {
     private final AtomicInteger eventId=new AtomicInteger();
-    private ContactPerson contactPerson; //skal denne også være på eventinfo?
+    private ContactPerson contactPerson;
     private Facility facility;
     private EventInfo eventInfo;
     private double ticketPrice;
@@ -31,7 +25,6 @@ public abstract class Event {
         this.eventInfo = eventInfo;
     }
 
-    //er det interessant å skrive ut noe mer info om et arrangement?
     public String toString(){
         return eventInfo.toString() + eventInfo.getDate() + "\n\t\t\t" +
                 eventInfo.getEventName() + "\n\t\t\t" +

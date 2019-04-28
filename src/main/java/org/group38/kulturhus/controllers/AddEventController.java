@@ -1,6 +1,5 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import java.io.IOException;
+import java.time.LocalTime;
+
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.Event;
@@ -20,10 +21,7 @@ import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+import static org.group38.kulturhus.ErrorBoxes.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 import static org.group38.kulturhus.model.Validate.isNotEmptyString;
@@ -105,7 +103,7 @@ public class AddEventController implements MainController {
             loadInfo();
         }
         catch (Exception e){
-            errorFeilInput(e.toString());
+            errorWrongInput(e.toString());
         }
     }
 
@@ -124,68 +122,47 @@ public class AddEventController implements MainController {
     }
     public void createEvent(ActionEvent event) {
         if (thisEvent != null) {
-            errorIngenArrangement();
+            errorDuplicate();
         }
-        else if (!isValidTime(time.getText())) errorFeilInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+        else if (!isValidTime(time.getText())) errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
         else if (eventType.getValue().equals("Event med setereservasjon")) { //if(facility.getValue().getMaxAntSeats!=0)
             try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                 getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-            } catch(NumberFormatException e){ errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-            } catch(NullPointerException e){ errorTommeFelter(e);
-            } catch (Exception e) { errorFeilInput(e.toString());
+            } catch(NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch(NullPointerException e){ errorEmptyFields(e);
+            } catch (Exception e) { errorWrongInput(e.toString());
             }
         } else if (eventType.getValue().equals("Event uten setereservasjon")) { //if(facility.getValue().getMaxAntSeats==0)
             try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                 getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-            } catch(NumberFormatException e){errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-            } catch(NullPointerException e){ errorTommeFelter(e);
-            } catch (Exception e) { errorFeilInput(e.toString());
+            } catch(NumberFormatException e){errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch(NullPointerException e){ errorEmptyFields(e);
+            } catch (Exception e) { errorWrongInput(e.toString());
             }
 
         }
     }
-    public void updateEvent(ActionEvent event){
-        if(thisEvent==null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Kan ikke endre et objekt som ikke eksisterer");
-            alert.setHeaderText("Ingen arrangement valgt");
-            alert.setContentText("Gå til arrangementoversikten for å velge\n" +
-                    "et arrangement du vil redigere");
-            alert.show();
+    public void updateEvent(ActionEvent event) {
+        if (thisEvent == null) {
+            errorNoEvent();
+        } else {
+            if (!isValidTime(time.getText())) errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+            else {
+                try {
+                    thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
+                    thisEvent.getEventInfo().setEventName(eventName.getText());
+                    thisEvent.getEventInfo().setDate(date.getValue());
+                    thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
+                    thisEvent.getEventInfo().setPerformers(artist.getText());
+                    thisEvent.getEventInfo().setProgram(programInfo.getText());
+                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+                } catch(NullPointerException e){ errorEmptyFields(e);
+                } catch (Exception e){ errorWrongInput(event.toString());
+                }
+            }
         }
-        else {
-            //if else som sjekker ticketprice og time
-            thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
-            thisEvent.getEventInfo().setEventName(eventName.getText());
-            thisEvent.getEventInfo().setDate(date.getValue());
-            thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
-            thisEvent.getEventInfo().setPerformers(artist.getText());
-            thisEvent.getEventInfo().setProgram(programInfo.getText());
-        }
-    }
-    private void errorTommeFelter(Exception e){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Alle felter er ikke utfylt");
-        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\n"+e);
-        alert.setTitle("Tomme felter");
-        alert.show();
-    }
-    private void errorFeilInput(String e){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Feil input i et eller flere felter");
-        alert.setContentText("Vennligst sørg for at alle felter har riktig format\n"+e);
-        alert.setTitle("Feil input");
-        alert.show();
-    }
-    private void errorIngenArrangement(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Objektet eksisterer fra før");
-        alert.setHeaderText("Du kan ikke opprette et nytt objekt når et annet er valgt");
-        alert.setContentText("Gå til arrangementoversikten for å \n" +
-                "tilbakestille valg av arrangement");
-        alert.show();
     }
 
     @Override
