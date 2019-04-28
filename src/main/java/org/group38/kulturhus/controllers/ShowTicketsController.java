@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Popup;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -112,9 +113,18 @@ public class ShowTicketsController implements MainController {
 
     private void editableCols(){
         ticketsView.setEditable(true);
+            phoneNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        phoneNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        phoneNumberColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setPhonenumber(t.getNewValue()));
+
+            try{
+                phoneNumberColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setPhonenumber(t.getNewValue()));
+                phoneNumberColumn.getOnEditCommit();
+                System.out.println("billett opprettet");
+            } catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.show();
+                System.out.println("Feil");
+            }
 
         seatRowColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         seatRowColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setRow(Integer.parseInt(t.getNewValue())));
