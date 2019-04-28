@@ -16,6 +16,7 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Kulturhus;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -134,6 +135,7 @@ public class AddEventController implements MainController {
                 //try catch med Alert feilmelding dersom man putter feil input?
                 getEvents().add(new EventFreeSeating((ContactPerson)contactPerson.getSelectionModel().getSelectedItem(), (Facility)facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
             }
+            Kulturhus.saveContactpeople();
         }
     }
     //dette må lagres, oppdateres ikke i showEvent fordi man oppretter et nytt event i stedenfor

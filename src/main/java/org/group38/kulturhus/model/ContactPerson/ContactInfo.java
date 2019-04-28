@@ -9,6 +9,11 @@ public class ContactInfo {
         this.phoneNr = phoneNr;
 
     }
+
+    public ContactInfo(){
+
+    }
+
     public String getEmail() {
         return email;
     }

@@ -13,6 +13,7 @@ import org.group38.kulturhus.model.SaveLoad.SaveJobj;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -34,7 +35,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class EnhetsTesting {
-   public static void main(String[] args) {
+    public static void main(String[] args) {
 //        int antallFeil=0;
 //        Facility facility=new Facility("Sal1","kino", 10,10);
 //
@@ -202,25 +203,25 @@ public class EnhetsTesting {
         ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
         Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
-        LocalTime t1 = LocalTime.of(18,00);
-        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", "konsert",d1, t1);
+        LocalTime t1 = LocalTime.of(18, 00);
+        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe", "Megdi ++", "konsert", d1, t1);
         EventFreeSeating test = new EventFreeSeating(contactPerson, facility2, 150, eventInfo2);
         EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
 
         List<Object> events = new ArrayList<>();
-        events.add(0,(new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2)));
+        events.add(0, (new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2)));
         events.add(1, new EventNumberedSeating(contactPerson, facility2, 260, eventInfo2));
         events.add(2, test);
         //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
 
-       AtomicInteger nummer = new AtomicInteger();
+        AtomicInteger nummer = new AtomicInteger();
         Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer);
 
-        en.buyTicket(0,0,"22334455");
-        en.buyTicket(0,1,"22334455");
-       //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
+        en.buyTicket(0, 0, "22334455");
+        en.buyTicket(0, 1, "22334455");
+        //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
 
-       en.allSeats();
+        //en.allSeats();
 
 //        SaveCsvInterface save = new SaveCsvInterface();
 //
@@ -235,6 +236,29 @@ public class EnhetsTesting {
 //       } catch (IOException e){
 //           e.printStackTrace();
 //       }
+
+        Class clazz = contactPerson.getClass();
+//        Field[] fields = clazz.getDeclaredFields();
+//        for (Field field : fields) {
+//            Class t = field.getType();
+//            System.out.println(field.getName() + ": " +field.getType());
+//        }
+
+
+        ArrayList<ContactPerson> x = new ArrayList<>();
+
+       try{
+          x = ReadCSV.readObjects("contactPerson.csv", clazz);
+
+       } catch (IOException | ReflectiveOperationException e){
+           e.printStackTrace();
+       }
+
+       for (ContactPerson y : x){
+           System.out.println(y.getContactInfo());
+           System.out.println(y.getFirstName());
+       }
+
     }
-}
+    }
 

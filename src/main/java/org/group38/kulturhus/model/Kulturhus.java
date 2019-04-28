@@ -4,6 +4,7 @@ package org.group38.kulturhus.model;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
+import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.time.LocalDate;
@@ -61,5 +62,11 @@ public class Kulturhus {
         return facilities;
     }
 
+    public static void saveContactpeople(){
+        SaveCsvInterface csv = new SaveCsvInterface();
+        for (ContactPerson contactPerson : contactPeople){
+            csv.writeObject(contactPerson);
+        }
+    }
 
 }

@@ -62,10 +62,13 @@ public class SaveCsvInterface implements SaveDataInterface {
         }
         System.out.println(Arrays.toString(mid));
         try {
+            sb.append(object.getClass().toString());
+            sb.append(";");
+            System.out.println(sb);
             for (Method method : mid) {
                 System.out.println(method.invoke(object));
                 if(method.invoke(object) == null){
-                    sb.append("0");
+                    sb.append("-");
                 } else sb.append(method.invoke(object).toString());
                 System.out.println(method + " " + "denne funket");
                 sb.append(";");
@@ -80,7 +83,7 @@ public class SaveCsvInterface implements SaveDataInterface {
     //Skriver headere på filen første gang den opprettes
     public static void writeHeaders(CsvBase object, String filename){
         FileWriter fileWriter = null;
-        String[] patterns = checkClass(object.getClass());
+        String[] patterns = Templates.getterPattern(object.getClass());
         StringBuilder sb = new StringBuilder();
 
         for(String pattern : patterns){
@@ -131,7 +134,7 @@ public class SaveCsvInterface implements SaveDataInterface {
         StringBuilder save = new StringBuilder();
 
 
-        pattern = checkClass(object.getClass());
+        pattern = Templates.getterPattern(object.getClass());
         System.out.println(pattern);
 
 
@@ -167,23 +170,7 @@ public class SaveCsvInterface implements SaveDataInterface {
         }
     }
 
-    //Sjekker hvilket pattern objektet skal bruke
-    private static String[] checkClass(Class clazz) {
-        String[] patterns;
-        if (clazz.getName().equals("org.group38.kulturhus.model.Event.EventNumberedSeating")
-                || clazz.getName().equals("org.group.kulturhus.model.Event.EventFreeSeating")) {
-            patterns = new String[]{"getPhoneNr", "getEventId", "getEventName", "getType",
-                    "getProgram", "getPerformer", "getTicketPrice", "getFacilityName", "getMaxSeats",
-                    "getDate", "getTime", "getRows", "getColumns"};
-            return patterns;
-        } else if(clazz.getName().equals("org.group38.kulturhus.model.Event.Ticket")){
-            patterns = new String[] { "getPhonenumber", "getPrice", "getSeat", "getRow", "getDate", "getTime"};
-            return patterns;
-        } else if(clazz.getName().equals("org.group38.kulturhus.model.ContactPerson.ContactPerson")){
-            patterns = new String[]{"getPhoneNr", "getFirstName", "getLastName", "getEmail", "getNotes", "getAffiliation", "getWebPage"};
-            return patterns;
-        } else return null;
-    }
+
 
     //Sorterer metodelisten etter mønsteret
     private static Method[] sortMethods(String[] patterns, Method[] methods){

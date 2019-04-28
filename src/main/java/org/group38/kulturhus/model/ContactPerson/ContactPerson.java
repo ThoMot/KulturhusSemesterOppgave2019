@@ -18,6 +18,10 @@ super(firstName, lastName);
 this.contactInfo = contactInfo;
 }
 
+private ContactPerson(){
+    super();
+}
+
     public void setWebPage(String webPage) {
         this.webPage = webPage;
     }
@@ -29,6 +33,13 @@ this.contactInfo = contactInfo;
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    private void setContactInfo(String email, String phoneNr) {
+        contactInfo.setEmail(email);
+        contactInfo.setPhoneNr(phoneNr);
+    }
+
+
 
 
 

@@ -11,6 +11,9 @@ public abstract class Person {
         this.lastName = lastName;
     }
 
+    protected Person(){
+
+    }
 
     public String getFirstName() {
         return firstName;
