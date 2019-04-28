@@ -17,7 +17,7 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-public class SaveCsvInterface implements SaveDataInterface {
+public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
 
 
 
@@ -111,6 +111,7 @@ public class SaveCsvInterface implements SaveDataInterface {
 
 
 //Skriver objerkter til fil
+
 
 
     public void writeObject(CsvBase object) {
