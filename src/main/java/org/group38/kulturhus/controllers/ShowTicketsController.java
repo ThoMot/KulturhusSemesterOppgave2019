@@ -142,8 +142,6 @@ public class ShowTicketsController implements MainController {
             });
         }
 
-
-
     }
 
     public void showErrorMessage(){
