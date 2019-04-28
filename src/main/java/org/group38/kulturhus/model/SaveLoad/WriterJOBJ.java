@@ -1,5 +1,7 @@
 package org.group38.kulturhus.model.SaveLoad;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
@@ -16,7 +18,7 @@ public class WriterJOBJ implements SaveDataInterface {
 
     @Override
     public void writeObject(CsvBase obj) throws IOException {
-        ArrayList<Object> listToWrite = new ArrayList<>();
+        ObservableList<Object> listToWrite = FXCollections.observableArrayList();
         listToWrite.add(obj);
 
         writeObjects(listToWrite);
@@ -24,8 +26,9 @@ public class WriterJOBJ implements SaveDataInterface {
     }
 
     @Override
-    public <T> void writeObjects(ArrayList<T> objectList) throws IOException {
+    public <T> void writeObjects(ObservableList<T> objectList) throws IOException {
+        ArrayList<T> saveList = new ArrayList<>(objectList);
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("file.jobj"));
-        out.writeObject(objectList);
+        out.writeObject(saveList);
     }
 }
