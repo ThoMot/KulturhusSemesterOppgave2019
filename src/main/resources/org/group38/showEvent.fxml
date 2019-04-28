@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
+<BorderPane stylesheets="@styles.css" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
   <top>
     <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
       <menus>
@@ -37,7 +37,7 @@
   <bottom>
     <Pane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       <children>
-        <Button layoutX="54.0" mnemonicParsing="false" onAction="#goToVisInfo" text="Vis mer info / vis reserverte billetter" />
+        <Button fx:id="button" layoutX="54.0" mnemonicParsing="false" onAction="#goToVisInfo" text="Vis mer info / vis reserverte billetter" />
         <Button layoutX="431.0" mnemonicParsing="false" onAction="#deleteRow" text="Slett arrangement" />
         <Button layoutX="575.0" mnemonicParsing="false" onAction="#goToBuyTicket" text="Kjøp billett" />
             <Button fx:id="editEvent" layoutX="279.0" mnemonicParsing="false" onAction="#goToCreateEvent" text="Endre arrangement" />
