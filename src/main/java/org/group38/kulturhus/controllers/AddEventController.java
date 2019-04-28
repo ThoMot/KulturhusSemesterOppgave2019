@@ -129,18 +129,18 @@ public class AddEventController implements MainController {
             try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                 getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-            } catch(NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch (NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
             } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            } catch(NullPointerException e){ errorEmptyFields(e);
+            } catch (NullPointerException e){ errorEmptyFields(e);
             } catch (Exception e) { errorWrongInput(e.toString());
             }
         } else if (eventType.getValue().equals("Event uten setereservasjon")) { //if(facility.getValue().getMaxAntSeats==0)
             try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                 getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-            } catch(NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch (NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
             } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            } catch(NullPointerException e){ errorEmptyFields(e);
+            } catch (NullPointerException e){ errorEmptyFields(e);
             } catch (Exception e) { errorWrongInput(e.toString());
             }
 
@@ -158,7 +158,7 @@ public class AddEventController implements MainController {
                 thisEvent.getEventInfo().setPerformers(artist.getText());
                 thisEvent.getEventInfo().setProgram(programInfo.getText());
             } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-            } catch(NullPointerException e) { errorEmptyFields(e);
+            } catch (NullPointerException e) { errorEmptyFields(e);
             } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
             } catch (Exception e){ errorWrongInput(event.toString());
             }
