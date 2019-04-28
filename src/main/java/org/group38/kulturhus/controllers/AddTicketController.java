@@ -74,6 +74,7 @@ public class AddTicketController implements MainController{
 
     public void showFreeSeats(){
         //seatsFlowPane.setText(getSelectedEvent().freeSeats());
+        if(thisEvent instanceof EventNumberedSeating) seatsFlowPane.setText(((EventNumberedSeating) thisEvent).availableSeats());
     }
 
     public void buyTicket(){
