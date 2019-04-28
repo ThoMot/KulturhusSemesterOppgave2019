@@ -10,10 +10,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class SaveJobj implements SaveDataInterface{
+public class SaveJobj{
     String filename;
 
-    @Override
+   /* @Override
     public void writeObject(CsvBase object) {
         if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
             filename = "events.jobj";
@@ -31,7 +31,7 @@ public class SaveJobj implements SaveDataInterface{
             e.printStackTrace(); // This should not happen, so we print debug information here.
         }
 
-    }
+    } */
 
     class JObj{
 

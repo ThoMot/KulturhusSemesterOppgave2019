@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 public class EventFreeSeating extends Event {
     private ArrayList<Ticket> tickets;
     private int maxSeats;
-    private final String type="EventFreeSeating";
 
     public EventFreeSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
         super(contactPerson, facility, eventInfo, ticketPrice);
@@ -96,10 +95,6 @@ public class EventFreeSeating extends Event {
 
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
-    }
-
-    public String getType() {
-        return type;
     }
 
     @Override

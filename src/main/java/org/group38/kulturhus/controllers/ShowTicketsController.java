@@ -83,7 +83,6 @@ public class ShowTicketsController implements MainController {
 
     public void initialize() {
         setThisEvent(getSelectedEvent());
-        opprett();
         initCols();
         loadData();
         editableCols();
@@ -152,8 +151,6 @@ public class ShowTicketsController implements MainController {
                 }
             });
         }
-
-
 
     }
 

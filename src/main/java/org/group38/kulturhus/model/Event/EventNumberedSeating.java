@@ -17,7 +17,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
     private ArrayList<Ticket> tickets;
     private int columns;
     private int rows;
-    private final String type="EventNumberedSeating";
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {
@@ -29,7 +28,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
 
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if (tickets.size() < (rows * columns)) {
-            if(seatRow<0||seatNumber<0||seatRow>rows||seatNumber>columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
+            if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
             for (Ticket ticket : tickets) {
 
                 if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
@@ -99,10 +98,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return rows;
     }
 
-
-
-
-
     @Override
     public String toString() {
         return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
@@ -136,6 +131,25 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
 
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
+    }
+    public Ticket findTicket(int rows, int columns){
+        for(Ticket ticket:tickets){
+            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
+        }
+        return null;
+    }
+    public String availableSeats(){
+        StringJoiner sj = new StringJoiner("      ");
+        for(int i=1; i<rows+1;i++){
+            sj.add("\n");
+           for(int j=1;j<columns+1;j++){
+                if(findTicket(i, j)==null){
+                    sj.add("("+i+","+j+")");
+                }
+                else sj.add("opptatt");
+           }
+        }
+        return sj.toString();
     }
     //    @Override
 //    public double getTicketPrice() {

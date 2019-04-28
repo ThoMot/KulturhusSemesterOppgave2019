@@ -4,6 +4,7 @@ package org.group38.kulturhus.model;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
+import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.time.LocalDate;
@@ -13,15 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kulturhus {
-    private static ArrayList<Event> events;
-    private static ArrayList<ContactPerson> contactPeople;
-    private static ArrayList<Facility> facilities;
-
-    public static void createLists(){
-        contactPeople=new ArrayList<>();
-        facilities = new ArrayList<>();
-        events=new ArrayList<>();
-    }
+    private static ArrayList<Event> events = new ArrayList<>();
+    private static ArrayList<ContactPerson> contactPeople = new ArrayList<>();
+    private static ArrayList<Facility> facilities = new ArrayList<>();
 
     //kun for testing
     public static void opprett() {
@@ -41,7 +36,7 @@ public class Kulturhus {
 
 
         facilities.add(new Facility("Sal 3", "Teatersal", 34));
-        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(2),22, eventInfo);
+        EventFreeSeating eventFreeSeating = new EventFreeSeating(contactPeople.get(1), facilities.get(2), 22, eventInfo);
 
         event2.buyTicket(8, 2, "90862870");
         event2.buyTicket(2, 3, "90862870");
@@ -55,15 +50,26 @@ public class Kulturhus {
         events.add(event2);
         events.add(eventFreeSeating);
     }
-    public static ArrayList<ContactPerson> getContactPeople(){ return contactPeople; }
+
+    public static ArrayList<ContactPerson> getContactPeople() {
+        return contactPeople;
+    }
 
     public static ArrayList<Event> getEvents() {
         return events;
     }
 
-    public static ArrayList<Facility> getFacilities(){
+    public static ArrayList<Facility> getFacilities() {
         return facilities;
     }
 
+    public static Facility findFacility(String facilityName) {
+        for (Facility facility : facilities) {
+            if (facility.getFacilityName().equals(facilityName)) {
+                return facility;
+            }
+        }
+        return null;
+    }
 
 }
