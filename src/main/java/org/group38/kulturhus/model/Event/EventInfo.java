@@ -3,6 +3,7 @@ package org.group38.kulturhus.model.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static org.group38.kulturhus.model.Validate.isNotEmptyString;
 import static org.group38.kulturhus.model.Validate.isOnlyLetters;
 
 public class EventInfo {
@@ -16,6 +17,10 @@ public class EventInfo {
 
 
     public EventInfo(String eventName, String program, String performer, String type, LocalDate date, LocalTime time) {
+        if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");
+        if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
+        if(!isNotEmptyString(program)) throw new NullPointerException("programFeltet kan ikke være tomt");
+        if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
         this.eventName = eventName;
         this.program = program;
         this.performer = performer;

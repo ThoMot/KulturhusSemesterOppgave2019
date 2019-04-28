@@ -98,8 +98,9 @@ public class AddEventController implements MainController {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
             getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
             if(isNotEmptyString(company.getText())) getContactPeople().get(getContactPeople().size()-1).setAffiliation(company.getText());
-                if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
-                    if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
+            if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
+            if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
+            System.out.println(getContactPeople().get(getContactPeople().size()-1));
             //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
             loadInfo();
         }
@@ -124,26 +125,25 @@ public class AddEventController implements MainController {
     public void createEvent(ActionEvent event) {
         if (thisEvent != null) {
             errorIngenArrangement();
-        } else {
-            if (!isValidTime(time.getText())) errorFeilInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            else {
+        }
+        else if (!isValidTime(time.getText())) errorFeilInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+        else if (eventType.getValue().equals("Event med setereservasjon")) { //if(facility.getValue().getMaxAntSeats!=0)
+            try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-                if (eventType.getValue().equals("Event med setereservasjon")) { //if(facility.getValue().getMaxAntSeats!=0)
-                    try {
-                        getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    } catch(NumberFormatException e){ errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                    } catch(NullPointerException e){ errorTommeFelter();
-                    } catch (Exception e) { errorFeilInput(e.toString());
-                    }
-                } else if (eventType.getValue().equals("Event uten setereservasjon")) { //if(facility.getValue().getMaxAntSeats==0)
-                    try {
-                        getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    } catch(NumberFormatException e){errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                    } catch(NullPointerException e){ errorTommeFelter();
-                    } catch (Exception e) { errorFeilInput(e.toString());
-                    }
-                }
+                getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+            } catch(NumberFormatException e){ errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch(NullPointerException e){ errorTommeFelter(e);
+            } catch (Exception e) { errorFeilInput(e.toString());
             }
+        } else if (eventType.getValue().equals("Event uten setereservasjon")) { //if(facility.getValue().getMaxAntSeats==0)
+            try {
+                EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+            } catch(NumberFormatException e){errorFeilInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+            } catch(NullPointerException e){ errorTommeFelter(e);
+            } catch (Exception e) { errorFeilInput(e.toString());
+            }
+
         }
     }
     public void updateEvent(ActionEvent event){
@@ -165,10 +165,10 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setProgram(programInfo.getText());
         }
     }
-    private void errorTommeFelter(){
+    private void errorTommeFelter(Exception e){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Alle felter er ikke utfylt");
-        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\n");
+        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\n"+e);
         alert.setTitle("Tomme felter");
         alert.show();
     }
