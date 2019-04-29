@@ -17,18 +17,18 @@ public class WriterJOBJ implements SaveDataInterface {
     String filename;
 
     @Override
-    public void writeObject(CsvBase obj) throws IOException {
+    public void writeObject(CsvBase obj, String filename) throws IOException {
         ObservableList<Object> listToWrite = FXCollections.observableArrayList();
         listToWrite.add(obj);
 
-        writeObjects(listToWrite);
+        writeObjects(listToWrite, filename);
 
     }
 
     @Override
-    public <T> void writeObjects(ObservableList<T> objectList) throws IOException {
+    public <T> void writeObjects(ObservableList<T> objectList, String filename) throws IOException {
         ArrayList<T> saveList = new ArrayList<>(objectList);
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("file.jobj"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
         out.writeObject(saveList);
     }
 }

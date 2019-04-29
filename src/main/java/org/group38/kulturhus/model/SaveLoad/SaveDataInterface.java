@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SaveDataInterface {
 
-    void writeObject(CsvBase object) throws IOException;
+    void writeObject(CsvBase object, String filename) throws IOException;
 
-    <T> void writeObjects(ObservableList<T> objectList) throws IOException;
+    <T> void writeObjects(ObservableList<T> objectList, String filename) throws IOException;
     }

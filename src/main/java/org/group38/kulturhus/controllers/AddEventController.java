@@ -19,13 +19,17 @@ import java.time.format.DateTimeParseException;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Box;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import org.group38.frameworks.concurrency.WriterThread;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.SaveLoad.FileHandler;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -35,12 +39,20 @@ import static org.group38.kulturhus.controllers.ShowEventController.getSelectedE
 import static org.group38.kulturhus.model.Kulturhus.*;
 import static org.group38.kulturhus.model.Validate.isNotEmptyString;
 
+
+
+
+
+//TODO  skal det være mulig å lage flere helt like arrangementer?
+
+
 public class AddEventController implements MainController {
     //data field
     private Event thisEvent;
     private ContactPerson thisContactPerson;
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
+    private FileHandler fileHandler = new FileHandler();
     @FXML private TextField eventName, artist, ticketPrice, time, type; //addEvent
     @FXML private TextArea programInfo, other;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
@@ -132,17 +144,38 @@ public class AddEventController implements MainController {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
             if (f.getMaxAntSeats() == 0) {
                 try {
+
+
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+
+
+
                     createEvLb.setVisible(true);
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
                     visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
                     visiblePause.play();
+
+
+
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorEmptyFields();
                 } catch (Exception e) { errorWrongInput(e.toString());
                 }
+                //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
+                String fileName = fileHandler.saveToFile(create.getScene().getWindow());
+                if( fileName != null) {
+                    try {
+
+                        //TODO Ikke optimalt å gjøre denne om til observable list...?
+                        ObservableList<Event> events = FXCollections.observableArrayList(getEvents());
+                        WriterThreadRunner.WriterThreadRunner(events, fileName);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             } else if (f.getMaxAntSeats() != 0) {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
@@ -206,7 +239,7 @@ public class AddEventController implements MainController {
             visiblePause.play();
             //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
 
-
+            //TODO flytte dette over i Scene manager??
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
             loader.setController(this);
             contactPersonPane.setRight(loader.load());

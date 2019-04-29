@@ -3,6 +3,7 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
 
-public class Ticket implements CsvBase {
+public class Ticket implements CsvBase, Serializable {
     //data field
     private AtomicInteger eventId;
     private double price;

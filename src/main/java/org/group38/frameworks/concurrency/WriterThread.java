@@ -13,13 +13,16 @@ public class WriterThread implements Runnable {
 
     private CsvBase objectToWrite;
     private ObservableList objectsToWrite;
+    private String filename;
 
-    protected WriterThread(CsvBase objectToWrite) {
+    protected WriterThread(CsvBase objectToWrite, String filename) {
         this.objectToWrite = objectToWrite;
+        this.filename = filename;
     }
 
-    protected <T> WriterThread(ObservableList<T> objectsToWrite) {
+    protected <T> WriterThread(ObservableList<T> objectsToWrite, String filename) {
         this.objectsToWrite = objectsToWrite;
+        this.filename = filename;
     }
 
     @Override
@@ -41,9 +44,9 @@ public class WriterThread implements Runnable {
         //writer = new SaveCsvInterface();
 
         if (objectToWrite == null) {
-            writer.writeObjects(objectsToWrite);
+            writer.writeObjects(objectsToWrite, filename);
         } else {
-            writer.writeObject(objectToWrite);
+            writer.writeObject(objectToWrite, filename);
         }
     }
 }

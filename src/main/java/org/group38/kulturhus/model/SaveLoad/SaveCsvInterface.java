@@ -23,11 +23,11 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
 
 
     @Override
-    public void writeObject(CsvBase object) throws IOException {
+    public void writeObject(CsvBase object, String filename) throws IOException {
         ObservableList<Object> objects = FXCollections.observableArrayList();
         objects.add(object);
 
-        writeObjects(objects);
+        writeObjects(objects, filename);
 
     }
 
@@ -125,21 +125,14 @@ public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer i
 
 
 
-    public <T> void writeObjects(ObservableList<T> objects) throws IOException {
+    public <T> void writeObjects(ObservableList<T> objects, String filename) throws IOException {
         FileWriter fileWriter = null;
         final String nextline = "\n";
-        String filename = null;
         String[] pattern;
 
 
 //        //sjekk filnavn
-        if (objects.get(0) instanceof EventNumberedSeating || objects.get(0) instanceof EventFreeSeating) {
-            filename = "events.csv";
-        } else if (objects.get(0) instanceof ContactPerson) {
-            filename = "contactPerson.csv";
-        } else if (objects.get(0) instanceof Ticket) {
-            filename = "tickets.csv";
-        }
+
 
         for (T object : objects) {
 
