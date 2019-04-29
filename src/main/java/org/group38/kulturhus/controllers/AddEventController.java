@@ -7,12 +7,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Box;
 import javafx.util.Duration;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
@@ -43,7 +49,7 @@ public class AddEventController implements MainController {
     @FXML private TableView contactPerson;
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
-    @FXML private Label createContLb, createEvLb;
+    @FXML private Label createContLb, createEvLb, contLabel;
     @FXML private Button create, update, createCont, updateCont;
 
     //**Methods for opening to different scenes
@@ -199,6 +205,15 @@ public class AddEventController implements MainController {
             visiblePause.setOnFinished(click -> createContLb.setVisible(false));
             visiblePause.play();
             //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
+            loader.setController(this);
+            contactPersonPane.setRight(loader.load());
+            setThisContactPerson(null);
+            updateCont.setVisible(false);
+
+
             loadInfo();
         } catch (NullPointerException e) {
             errorEmptyFields();
@@ -247,6 +262,12 @@ public class AddEventController implements MainController {
             visiblePause.setOnFinished(click -> createContLb.setVisible(false));
             visiblePause.play();
             //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
+            loader.setController(this);
+            contactPersonPane.setRight(loader.load());
+            setThisContactPerson(null);
+            updateCont.setVisible(false);
         }
         catch (NullPointerException e) { errorEmptyFields();}
         catch (Exception e){ errorWrongInput(e.toString());

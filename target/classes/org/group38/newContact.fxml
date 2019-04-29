@@ -84,12 +84,12 @@
              </GridPane>
             <VBox prefHeight="152.0" prefWidth="460.0">
                <children>
-                  <Button fx:id="updateCont" mnemonicParsing="false" onAction="#updateContactPersonComplete" prefHeight="27.0" prefWidth="460.0" stylesheets="@styles.css" text="Oppdater kontakperson">
+                  <Button fx:id="updateContact" mnemonicParsing="false" onAction="#updateContactPersonComplete" prefHeight="27.0" prefWidth="460.0" stylesheets="@styles.css" text="Oppdater kontakperson">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                   <Button fx:id="createCont" mnemonicParsing="false" onAction="#createContactPerson" prefHeight="27.0" prefWidth="460.0" stylesheets="@styles.css" text="Lagre Kontaktperson" />
+                   <Button fx:id="createContact" mnemonicParsing="false" onAction="#createContactPerson" prefHeight="27.0" prefWidth="460.0" stylesheets="@styles.css" text="Lagre Kontaktperson" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
