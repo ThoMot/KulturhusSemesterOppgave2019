@@ -131,7 +131,7 @@ public class AddEventController implements MainController {
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
         type.setText(thisEvent.getType());
-        contactPerson.getSelectionModel().select(thisEvent.getContactPerson()); //Denne funker ikke
+        contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
     }
     /*
     createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
@@ -140,38 +140,47 @@ public class AddEventController implements MainController {
     public void createEvent(ActionEvent event) {
         if (thisEvent != null) {
             errorDuplicate();
-        }
-        if(contactPerson.getSelectionModel().getSelectedItem()==null) errorEmptyFields();
-        else{
-            Facility f= (Facility)facility.getSelectionModel().getSelectedItem();
-            if (f.getMaxAntSeats()==0) {
-            try {
-                EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-                getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                createEvLb.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                visiblePause.play();
-            } catch (NumberFormatException e){ errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-            } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            } catch (NullPointerException e){ errorEmptyFields();
-            } catch (Exception e) { errorWrongInput(e.toString());
-            }
-        } else if (f.getMaxAntSeats()!=0) {
-                try {
-                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-                    getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    createEvLb.setVisible(true);
-                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                    visiblePause.play();
-                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-                } catch (NullPointerException e) { errorEmptyFields();
-                } catch (Exception e) { errorWrongInput(e.toString());
+        } else {
+            if (contactPerson.getSelectionModel().getSelectedItem() == null) errorEmptyFields();
+            else {
+                Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
+                if (f.getMaxAntSeats() == 0) {
+                    try {
+                        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                        getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                        createEvLb.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                        visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
+                        visiblePause.play();
+                    } catch (NumberFormatException e) {
+                        errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+                    } catch (DateTimeParseException e) {
+                        errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                    } catch (NullPointerException e) {
+                        errorEmptyFields();
+                    } catch (Exception e) {
+                        errorWrongInput(e.toString());
+                    }
+                } else if (f.getMaxAntSeats() != 0) {
+                    try {
+                        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                        getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                        createEvLb.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                        visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
+                        visiblePause.play();
+                    } catch (NumberFormatException e) {
+                        errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+                    } catch (DateTimeParseException e) {
+                        errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                    } catch (NullPointerException e) {
+                        errorEmptyFields();
+                    } catch (Exception e) {
+                        errorWrongInput(e.toString());
+                    }
                 }
-            }
 
+            }
         }
     }
     /*
