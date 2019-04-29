@@ -3,10 +3,10 @@ package org.group38.kulturhus;
 import javafx.scene.control.Alert;
 
 public class ErrorBoxes {
-    public static void errorEmptyFields(Exception e){
+    public static void errorEmptyFields(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Alle felter er ikke utfylt");
-        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\n"+e);
+        alert.setContentText("Vennligst fyll ut alle felter før du fortsetter\n");
         alert.setTitle("Tomme felter");
         alert.show();
     }
