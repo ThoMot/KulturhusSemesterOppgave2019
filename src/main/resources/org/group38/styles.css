@@ -1,12 +1,60 @@
+.side-menu{
+    -fx-background-color: #d6d6d6;
+}
+
 .button {
+    -fx-background-color: #4780a8;
+    -fx-text-fill: white;
+    -fx-background-radius: 0;
+}
+
+.button:hover{
+    -fx-background-color: #568cac;
+}
+
+.menu-button{
+    -fx-background-color: none;
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+}
+
+.menu-button:hover{
+    -fx-background-color: none;
+    -fx-text-fill: #568cac;
+    -fx-alignment: center-left;
+}
+.menu-button-chosen{
     -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-text-fill: #4780a8;
 }
 
-.background{
+.eventsView:pressed{
+
 
 }
 
-.menubackground{
+.menuBackground{
     -fx-background-color: red;
 }
+
+.headerPane{
+    -fx-background-color: #4780a8;
+}
+
+.padding{
+
+}
+
+.seatScene{
+    -fx-background-color: #4780a8;
+    -fx-text-fill: white;
+}
+
+.seatView{
+    -fx-border-color: #4780a8;
+    -fx-border-width: 2;
+}
+
+
 

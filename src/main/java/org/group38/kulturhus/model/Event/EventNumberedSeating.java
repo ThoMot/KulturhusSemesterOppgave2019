@@ -139,7 +139,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return null;
     }
     public String availableSeats(){
-        StringJoiner sj = new StringJoiner("      ");
+        StringJoiner sj = new StringJoiner(" \t");
         for(int i=1; i<rows+1;i++){
             sj.add("\n");
            for(int j=1;j<columns+1;j++){

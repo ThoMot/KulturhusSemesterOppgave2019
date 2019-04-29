@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javafx.scene.layout.VBox;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
@@ -20,7 +21,6 @@ public class ShowEventController implements MainController{
 
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
-
     @FXML
     private void goToAddEvent(ActionEvent event){
        SceneManager.navigate(SceneName.ADDEVENT);
@@ -33,6 +33,7 @@ public class ShowEventController implements MainController{
         initCols();
         loadData();
         setSelectedEvent(null);
+
     }
     private void initCols(){
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));

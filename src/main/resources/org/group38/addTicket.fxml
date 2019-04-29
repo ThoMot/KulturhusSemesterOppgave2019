@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -12,14 +11,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController" >
+<BorderPane prefHeight="600" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
     <top>
+        <VBox>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
         <menus>
           <Menu text="Arrangement">
@@ -35,99 +35,20 @@
           </Menu>
         </menus>
       </MenuBar>
+        <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
+            <Label layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="19.0" />
+                </font></Label>
+        </Pane>
+    </VBox>
     </top>
 
 
     <left>
-                  <VBox prefHeight="571.0" prefWidth="258.0">
+                  <VBox prefHeight="571.0" prefWidth="16.0">
                      <children>
-            <Pane>
-               <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="96.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="104.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label fx:id="eventTitle" text="eventTitle" GridPane.columnSpan="3">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="10.0" />
-                           </padding>
-                           <rotationAxis>
-                              <Point3D />
-                           </rotationAxis>
-                        </Label>
-                        <Label text="Dato/tid:" GridPane.rowIndex="1" />
-                        <Label fx:id="dateTime" prefHeight="17.0" prefWidth="126.0" text="eventDate" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                     </children>
-                     <padding>
-                        <Insets left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </Pane>
-            <Pane>
-               <children>
-                  <GridPane layoutY="1.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="71.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="66.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="20.0" minHeight="30.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="20.0" minHeight="30.0" percentHeight="0.0" prefHeight="20.0" vgrow="ALWAYS" />
-                     </rowConstraints>
-                     <children>
-                        <Label fx:id="seatRowInfoText" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="3" />
-                        <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="1" />
-                        <TextField fx:id="seatNumber" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" />
-                     </children>
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </Pane>
-                        <Pane>
-                           <children>
-                              <GridPane layoutX="2.0" layoutY="2.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="64.0" />
-                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="55.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="75.0" />
-                        <ColumnConstraints />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label text="Billettpris:" />
-                                     <Label fx:id="ticketPrice" GridPane.columnIndex="1" GridPane.columnSpan="1" />
-                                     <Label text="kr" GridPane.columnIndex="2" />
-                                    <Label text="Telefonnummer til kjøper:" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                                    <TextField fx:id="phoneNumber" prefHeight="27.0" prefWidth="104.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                                    <Button onAction="#buyTicket" text="Opprett billett" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                                 </children>
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding>
-                              </GridPane>
-                           </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Pane>
+            <Pane />
 
                            </children>
                   </VBox>
@@ -135,35 +56,117 @@
 
     <center>
         <VBox layoutX="7.0" layoutY="6.0" prefHeight="399.0" prefWidth="782.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Pane>
+         <VBox prefHeight="67.0" prefWidth="984.0">
             <children>
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="741.0" text="Seteoversikt">
+               <Label fx:id="eventTitle" alignment="CENTER" prefHeight="33.0" prefWidth="984.0" text="eventTitle">
                   <font>
-                     <Font size="30.0" />
+                     <Font name="System Bold" size="18.0" />
                   </font>
+                  <padding>
+                     <Insets bottom="10.0" />
+                  </padding>
                </Label>
+               <HBox alignment="CENTER" prefHeight="0.0" prefWidth="984.0">
+                  <children>
+                     <Label text="Dato/tid:" HBox.hgrow="ALWAYS" />
+                     <Label fx:id="dateTime" alignment="TOP_LEFT" contentDisplay="CENTER" text="eventDateTime" HBox.hgrow="ALWAYS">
+                        <padding>
+                           <Insets left="10.0" />
+                        </padding>
+                     </Label>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+            <Pane fx:id="seatView" styleClass="seatView">
+            <children>
+               <VBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="255.0" prefWidth="987.0">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="982.0" text="Seteoversikt">
+                        <font>
+                           <Font size="20.0" />
+                        </font>
+                     </Label>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="1174.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER">
+                        <font>
+                           <Font size="28.0" />
+                        </font>
+                     </Label>
+                      <Label fx:id="seatsList" text="Seteoversikt med ledig og ikke ledige seter">
+                          <font>
+                              <Font size="10.0" />
+                          </font>
+                      </Label>
+                  </children>
+               </VBox>
             </children>
             </Pane>
-            <Pane>
+         <Label alignment="CENTER" prefHeight="17.0" prefWidth="1034.0" text="Reserver billett">
+            <font>
+               <Font size="21.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Label>
+         <Pane prefHeight="71.0" prefWidth="476.0">
             <children>
-               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e87a" height="45.0" layoutX="250.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="229.0" />
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="741.0" text="Scene/lerret" textAlignment="CENTER">
-                  <font>
-                     <Font size="28.0" />
-                  </font>
-               </Label>
-            </children>
-            </Pane>
-         <Pane prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Label fx:id="seatsFlowPane">
-                  <font>
-                     <Font size="10.0" />
-                  </font>
-               </Label>
+               <GridPane alignment="CENTER" layoutY="-5.0" prefHeight="85.0" prefWidth="985.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="152.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="144.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="30.0" minHeight="30.0" percentHeight="0.0" prefHeight="30.0" vgrow="ALWAYS" />
+                  </rowConstraints>
+                  <children>
+                     <Label fx:id="seatRowInfoText" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2" />
+                     <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="1" />
+                     <TextField fx:id="seatNumber" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+                        <GridPane.margin>
+                           <Insets left="3.0" />
+                        </GridPane.margin>
+                     </TextField>
+                  </children>
+                  <padding>
+                     <Insets left="10.0" top="10.0" />
+                  </padding>
+               </GridPane>
             </children>
          </Pane>
-         <Pane prefHeight="200.0" prefWidth="200.0" />
+                     <Pane>
+                        <children>
+                           <GridPane alignment="CENTER" layoutX="-4.0" layoutY="15.0" prefHeight="115.0" prefWidth="989.0">
+                             <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="64.0" />
+                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="55.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                              <children>
+                                  <Label fx:id="ticketPrice" GridPane.columnIndex="1" GridPane.columnSpan="1" />
+                                 <Label text="Telefonnummer til kjøper:" GridPane.columnSpan="2" />
+                                 <TextField fx:id="phoneNumber" prefHeight="27.0" prefWidth="104.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              </children>
+                  <padding>
+                     <Insets left="10.0" top="10.0" />
+                  </padding>
+                           </GridPane>
+                        </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+         </Pane>
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                           <Button alignment="CENTER" onAction="#buyTicket" text="Opprett billett" />
+            </children>
+         </HBox>
         </VBox>
     </center>
 </BorderPane>

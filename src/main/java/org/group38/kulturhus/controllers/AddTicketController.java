@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
@@ -70,11 +71,11 @@ public class AddTicketController implements MainController{
     private TextField phoneNumber;
 
     @FXML
-    private Label seatsFlowPane;
+    private Label seatsList;
 
     public void showFreeSeats(){
         //seatsFlowPane.setText(getSelectedEvent().freeSeats());
-        if(thisEvent instanceof EventNumberedSeating) seatsFlowPane.setText(((EventNumberedSeating) thisEvent).availableSeats());
+        if(thisEvent instanceof EventNumberedSeating) seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
     }
 
     public void buyTicket(){
@@ -96,7 +97,7 @@ public class AddTicketController implements MainController{
         seatRowInfoText.setVisible(false);
         row.setVisible(false);
         seatNumber.setVisible(false);
-        seatsFlowPane.setVisible(false);
+        seatsList.setVisible(false);
     }
 
     }
