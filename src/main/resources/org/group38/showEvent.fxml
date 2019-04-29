@@ -18,7 +18,6 @@
 <BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
   <top>
     <VBox styleClass="headerPane">
-
     <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
       <menus>
         <Menu mnemonicParsing="false" text="Arrangement">
