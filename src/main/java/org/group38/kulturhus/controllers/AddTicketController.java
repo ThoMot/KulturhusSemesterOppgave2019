@@ -58,7 +58,6 @@ public class AddTicketController implements MainController{
     public void setEventInfo(){
         eventTitle.setText(thisEvent.getEventInfo().getEventName());
         dateTime.setText(thisEvent.getEventInfo().getDate().toString()+", "+thisEvent.getEventInfo().getTime().toString());
-        ticketPrice.setText(String.valueOf(thisEvent.getTicketPrice()));
     }
 
     @FXML
@@ -89,11 +88,17 @@ public class AddTicketController implements MainController{
         }
         System.out.println(getSelectedEvent().boughtTickets());
     }
+    private void setTicketInfo(){
+        row.setText(thisTicket.getRow().toString());
+        seatNumber.setText(thisTicket.getSeat().toString());
+        phoneNumber.setText(thisTicket.getPhonenumber());
+    }
 
     public void initialize() {
     setThisEvent(getSelectedEvent());
-    if(thisTicket!=null)setEventInfo();
+    setEventInfo();
     showFreeSeats();
+    if(thisTicket!=null)setTicketInfo();
 
     if(event instanceof EventFreeSeating){
         seatRowInfoText.setVisible(false);

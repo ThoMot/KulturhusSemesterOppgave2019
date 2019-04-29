@@ -167,11 +167,12 @@ public class ShowTicketsController implements MainController {
             errorNoMarkedEvent();
         }
         else{
+            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
             SceneManager.navigate(SceneName.ADDTICKET);
         }
     }
     public static void setSelectedTicket(Ticket selectedTicket){
-        ShowTicketsController.setSelectedTicket(selectedTicket);
+        ShowTicketsController.selectedTicket=selectedTicket;
     }
     public static Ticket getSelectedTicket(){
         return selectedTicket;
