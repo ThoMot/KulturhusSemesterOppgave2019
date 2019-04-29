@@ -20,10 +20,12 @@ import java.io.IOException;
 
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
+import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
 
 public class AddTicketController implements MainController{
     private Event thisEvent;
     private Event event = getSelectedEvent();
+    private Ticket thisTicket=getSelectedTicket();
 
     @FXML
     private Label dateTime, eventTitle, ticketPrice;
@@ -90,15 +92,15 @@ public class AddTicketController implements MainController{
 
     public void initialize() {
     setThisEvent(getSelectedEvent());
-    setEventInfo();
+    if(thisTicket!=null)setEventInfo();
     showFreeSeats();
 
-//    if(event instanceof EventFreeSeating){
-//        seatRowInfoText.setVisible(false);
-//        row.setVisible(false);
-//        seatNumber.setVisible(false);
-//        seatsList.setVisible(false);
-//    }
+    if(event instanceof EventFreeSeating){
+        seatRowInfoText.setVisible(false);
+        row.setVisible(false);
+        seatNumber.setVisible(false);
+        seatsList.setVisible(false);
+    }
 
     }
 

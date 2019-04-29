@@ -173,7 +173,7 @@ public class ShowTicketsController implements MainController {
     public static void setSelectedTicket(Ticket selectedTicket){
         ShowTicketsController.setSelectedTicket(selectedTicket);
     }
-    public Ticket getSelectedTicket(){
+    public static Ticket getSelectedTicket(){
         return selectedTicket;
     }
 
