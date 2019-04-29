@@ -207,6 +207,10 @@ public class AddEventController implements MainController {
         }
     }
 
+    /*
+    The updateContactPerson goes to the scene for updating the contactPerson and runs the
+    setter method for selected contactPerson.
+     */
     public void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorNoMarkedContactPerson();
@@ -225,6 +229,10 @@ public class AddEventController implements MainController {
         }
         setValuesContactPerson();
     }
+    /*
+    The updateContactPersonComplete method tries to set the new values to the selected contactPerson
+    and throws exceptions for missing input and for wrong input
+     */
     public void updateContactPersonComplete(ActionEvent event){
         try{
             thisContactPerson.setFirstName(firstName.getText());
@@ -244,6 +252,10 @@ public class AddEventController implements MainController {
         catch (Exception e){ errorWrongInput(e.toString());
         }
     }
+    /*
+    The setValueContactPerson method is used for adding the information from
+    the selected contactperson to the editscene.
+     */
     private void setValuesContactPerson(){
         firstName.setText(thisContactPerson.getFirstName());
         lastName.setText(thisContactPerson.getLastName());
