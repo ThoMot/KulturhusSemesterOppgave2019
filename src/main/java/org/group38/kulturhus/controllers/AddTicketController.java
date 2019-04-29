@@ -93,12 +93,12 @@ public class AddTicketController implements MainController{
     setEventInfo();
     showFreeSeats();
 
-    if(event instanceof EventFreeSeating){
-        seatRowInfoText.setVisible(false);
-        row.setVisible(false);
-        seatNumber.setVisible(false);
-        seatsList.setVisible(false);
-    }
+//    if(event instanceof EventFreeSeating){
+//        seatRowInfoText.setVisible(false);
+//        row.setVisible(false);
+//        seatNumber.setVisible(false);
+//        seatsList.setVisible(false);
+//    }
 
     }
 
