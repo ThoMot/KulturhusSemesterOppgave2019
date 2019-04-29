@@ -148,8 +148,8 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-                   <Button mnemonicParsing="false" onAction="#createEvent" text="Opprett arrangement" />
-                   <Button mnemonicParsing="false" onAction="#updateEvent" text="Oppdater arrangement">
+                   <Button fx:id="create" mnemonicParsing="false" onAction="#createEvent" text="Opprett arrangement" />
+                   <Button fx:id="update" mnemonicParsing="false" onAction="#updateEvent" text="Oppdater arrangement">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

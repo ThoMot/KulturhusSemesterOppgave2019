@@ -44,6 +44,7 @@ public class AddEventController implements MainController {
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
     @FXML private Label createContLb, createEvLb;
+    @FXML private Button create, update, createCont, updateCont;
 
     //**Methods for opening to different scenes
     @FXML
@@ -57,6 +58,7 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
+            updateCont.setVisible(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +79,9 @@ public class AddEventController implements MainController {
         loadInfo();
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
+            create.setVisible(false);
         }
+        else update.setVisible(false);
         if(thisEvent!=null){
             setValues();
         }
@@ -116,48 +120,36 @@ public class AddEventController implements MainController {
     to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.
      */
     public void createEvent(ActionEvent event) {
-        if (thisEvent != null) {
-            errorDuplicate();
-        } else {
-            if (contactPerson.getSelectionModel().getSelectedItem() == null) errorEmptyFields();
-            else {
-                Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
-                if (f.getMaxAntSeats() == 0) {
-                    try {
-                        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-                        getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                        createEvLb.setVisible(true);
-                        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                        visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                        visiblePause.play();
-                    } catch (NumberFormatException e) {
-                        errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                    } catch (DateTimeParseException e) {
-                        errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-                    } catch (NullPointerException e) {
-                        errorEmptyFields();
-                    } catch (Exception e) {
-                        errorWrongInput(e.toString());
-                    }
-                } else if (f.getMaxAntSeats() != 0) {
-                    try {
-                        EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
-                        getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                        createEvLb.setVisible(true);
-                        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                        visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                        visiblePause.play();
-                    } catch (NumberFormatException e) {
-                        errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                    } catch (DateTimeParseException e) {
-                        errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-                    } catch (NullPointerException e) {
-                        errorEmptyFields();
-                    } catch (Exception e) {
-                        errorWrongInput(e.toString());
-                    }
-                }
 
+        if (contactPerson.getSelectionModel().getSelectedItem() == null) errorEmptyFields();
+        else {
+            Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
+            if (f.getMaxAntSeats() == 0) {
+                try {
+                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                    getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                    createEvLb.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
+                    visiblePause.play();
+                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+                } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                } catch (NullPointerException e) { errorEmptyFields();
+                } catch (Exception e) { errorWrongInput(e.toString());
+                }
+            } else if (f.getMaxAntSeats() != 0) {
+                try {
+                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                    getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+                    createEvLb.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
+                    visiblePause.play();
+                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+                } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                } catch (NullPointerException e) { errorEmptyFields();
+                } catch (Exception e) { errorWrongInput(e.toString());
+                }
             }
         }
     }
@@ -166,25 +158,21 @@ public class AddEventController implements MainController {
     This method throws exceptions for wrong input and missing input and displays it in an alert box.
      */
     public void updateEvent(ActionEvent event) {
-        if (thisEvent == null) {
-            errorNoEvent();
-        } else {
-            try {
-                thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
-                thisEvent.getEventInfo().setEventName(eventName.getText());
-                thisEvent.getEventInfo().setDate(date.getValue());
-                thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
-                thisEvent.getEventInfo().setPerformers(artist.getText());
-                thisEvent.getEventInfo().setProgram(programInfo.getText());
-                createEvLb.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                visiblePause.play();
-            } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-            } catch (NullPointerException e) { errorEmptyFields();
-            } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            } catch (Exception e){ errorWrongInput(e.toString());
-            }
+        try {
+            thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
+            thisEvent.getEventInfo().setEventName(eventName.getText());
+            thisEvent.getEventInfo().setDate(date.getValue());
+            thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
+            thisEvent.getEventInfo().setPerformers(artist.getText());
+            thisEvent.getEventInfo().setProgram(programInfo.getText());
+            createEvLb.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+            visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
+            visiblePause.play();
+        } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
+        } catch (NullPointerException e) { errorEmptyFields();
+        } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+        } catch (Exception e){ errorWrongInput(e.toString());
         }
     }
 
@@ -197,33 +185,32 @@ public class AddEventController implements MainController {
     contactPerson is created, the createContact scene is closed.
      */
     public void createContactPerson(ActionEvent event){
-        if(thisContactPerson!=null){
-            errorDuplicateContactPerson();
-        }
-        else {
-            try {
-                ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
-                getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
-                if (isNotEmptyString(company.getText()))
-                    getContactPeople().get(getContactPeople().size() - 1).setAffiliation(company.getText());
-                if (isNotEmptyString(webPage.getText()))
-                    getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
-                if (isNotEmptyString(other.getText()))
-                    getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
-                createContLb.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-                visiblePause.play();
-                //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
-                loadInfo();
-            } catch (NullPointerException e) {
-                errorEmptyFields();
-            } catch (Exception e) {
-                errorWrongInput(e.toString());
-            }
+        try {
+            ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
+            getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+            if (isNotEmptyString(company.getText()))
+                getContactPeople().get(getContactPeople().size() - 1).setAffiliation(company.getText());
+            if (isNotEmptyString(webPage.getText()))
+                getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
+            if (isNotEmptyString(other.getText()))
+                getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
+            createContLb.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
+            visiblePause.play();
+            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            loadInfo();
+        } catch (NullPointerException e) {
+            errorEmptyFields();
+        } catch (Exception e) {
+            errorWrongInput(e.toString());
         }
     }
 
+    /*
+    The updateContactPerson goes to the scene for updating the contactPerson and runs the
+    setter method for selected contactPerson.
+     */
     public void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorNoMarkedContactPerson();
@@ -234,6 +221,7 @@ public class AddEventController implements MainController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
                 loader.setController(this);
                 contactPersonPane.setRight(loader.load());
+                createCont.setVisible(false);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -241,29 +229,33 @@ public class AddEventController implements MainController {
         }
         setValuesContactPerson();
     }
+    /*
+    The updateContactPersonComplete method tries to set the new values to the selected contactPerson
+    and throws exceptions for missing input and for wrong input
+     */
     public void updateContactPersonComplete(ActionEvent event){
-        if(thisContactPerson==null) errorNoContactPerson();
-        else{
-            try{
-                thisContactPerson.setFirstName(firstName.getText());
-                thisContactPerson.setLastName(lastName.getText());
-                thisContactPerson.getContactInfo().setEmail(email.getText());
-                thisContactPerson.getContactInfo().setPhoneNr(phoneNumber.getText());
-                if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
-                if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
-                if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
-                createContLb.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-                visiblePause.play();
-                //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
-            }
-            catch (NullPointerException e) { errorEmptyFields();}
-            catch (Exception e){ errorWrongInput(e.toString());
-            }
-
+        try{
+            thisContactPerson.setFirstName(firstName.getText());
+            thisContactPerson.setLastName(lastName.getText());
+            thisContactPerson.getContactInfo().setEmail(email.getText());
+            thisContactPerson.getContactInfo().setPhoneNr(phoneNumber.getText());
+            if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
+            if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
+            if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
+            createContLb.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
+            visiblePause.play();
+            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+        }
+        catch (NullPointerException e) { errorEmptyFields();}
+        catch (Exception e){ errorWrongInput(e.toString());
         }
     }
+    /*
+    The setValueContactPerson method is used for adding the information from
+    the selected contactperson to the editscene.
+     */
     private void setValuesContactPerson(){
         firstName.setText(thisContactPerson.getFirstName());
         lastName.setText(thisContactPerson.getLastName());
