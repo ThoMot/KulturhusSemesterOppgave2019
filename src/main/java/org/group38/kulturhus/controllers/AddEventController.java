@@ -145,7 +145,8 @@ public class AddEventController implements MainController {
         }
         if(contactPerson.getSelectionModel().getSelectedItem()==null) errorEmptyFields();
         else{
-            if (eventType.getValue().equals("Event med setereservasjon")) { //if(facility.getValue().getMaxAntSeats!=0)
+            Facility f= (Facility)facility.getSelectionModel().getSelectedItem();
+            if (f.getMaxAntSeats()==0) {
             try {
                 EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                 getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
@@ -158,7 +159,7 @@ public class AddEventController implements MainController {
             } catch (NullPointerException e){ errorEmptyFields();
             } catch (Exception e) { errorWrongInput(e.toString());
             }
-        } else if (eventType.getValue().equals("Event uten setereservasjon")) { //if(facility.getValue().getMaxAntSeats==0)
+        } else if (f.getMaxAntSeats()!=0) {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
