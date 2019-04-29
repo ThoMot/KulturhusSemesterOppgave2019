@@ -17,8 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
+<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowTicketsController">
     <top>
+        <VBox>
         <MenuBar fx:id="menuBar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Arrangement">
@@ -40,6 +41,13 @@
                 </Menu>
             </menus>
         </MenuBar>
+            <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
+                <Label layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="19.0" />
+                    </font></Label>
+            </Pane>
+        </VBox>
     </top>
 
 
@@ -90,6 +98,9 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <Label text="Artist/Deltaker/Skuespiller" GridPane.columnSpan="3">
@@ -97,13 +108,13 @@
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="eventPerformers" GridPane.rowIndex="1" />
+                                <Label fx:id="eventPerformers" text="Artister/deltakere" GridPane.rowIndex="1" />
                                 <Label text="Program/Beskrivelse" GridPane.columnSpan="3" GridPane.rowIndex="2">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="eventProgram" GridPane.rowIndex="3" />
+                                <Label fx:id="eventProgram" text="Programmet til arrangementet" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="3" />
                             </children>
                         </GridPane>
                     </children>
@@ -113,23 +124,25 @@
     </left>
 
     <center>
-      <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER">
+        <VBox>
+              <TableView fx:id="ticketsView" layoutX="25.0" layoutY="68.0" prefHeight="318.0" prefWidth="552.0" BorderPane.alignment="CENTER">
 
-          <columns>
-              <TableColumn fx:id="phoneNumberColumn" text="Telefonnummer" />
-              <TableColumn fx:id="seatRowColumn" prefWidth="107.0" text="Seterad" />
-              <TableColumn fx:id="seatNumberColumn" prefWidth="263.0" text="Setenummer" />
-              <TableColumn text="Endre" />
-          </columns>
-         <padding>
-            <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
-         </padding>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
+                  <columns>
+                      <TableColumn fx:id="phoneNumberColumn" text="Telefonnummer" />
+                      <TableColumn fx:id="seatRowColumn" prefWidth="107.0" text="Seterad" />
+                      <TableColumn fx:id="seatNumberColumn" prefWidth="263.0" text="Setenummer" />
+                      <TableColumn text="Endre" />
+                  </columns>
+                 <padding>
+                    <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                 </padding>
+                 <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                 </columnResizePolicy>
 
 
-      </TableView>
+              </TableView>
+        </VBox>
     </center>
    <bottom>
       <Pane prefHeight="48.0" prefWidth="792.0" BorderPane.alignment="CENTER">

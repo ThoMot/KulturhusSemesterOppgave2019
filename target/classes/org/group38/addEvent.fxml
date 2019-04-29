@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="contactPersonPane" minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
+<BorderPane fx:id="contactPersonPane" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
 
     <top>
         <VBox>
@@ -71,7 +71,9 @@
                <Insets bottom="10.0" top="10.0" />
             </padding>
          </Label>
+                 <Pane>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToAddContactPerson" prefHeight="27.0" prefWidth="420.0" text="Opprett ny kontaktperson" />
+                 </Pane>
          <padding>
             <Insets left="10.0" right="20.0" top="20.0" />
          </padding>
