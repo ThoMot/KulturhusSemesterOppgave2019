@@ -18,7 +18,6 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Kulturhus;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -27,13 +26,12 @@ import static org.group38.kulturhus.ErrorBoxes.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 import static org.group38.kulturhus.model.Validate.isNotEmptyString;
-import static org.group38.kulturhus.model.Validate.isValidTime;
 
 public class AddEventController implements MainController {
+    //data field
     private Event thisEvent;
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
-
     @FXML private TextField eventName, artist, ticketPrice, time, type; //addEvent
     @FXML private TextArea programInfo;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
@@ -41,35 +39,34 @@ public class AddEventController implements MainController {
     @FXML private ComboBox facility, eventType;
     @FXML private TableView contactPerson;
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
+    @FXML BorderPane contactPersonPane;
 
+    //**Methods for opening to different scenes
     @FXML
-    private void goToShowEvent(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.SHOWEVENT);
-    }
-
+    private void goToShowEvent(ActionEvent event){ SceneManager.navigate(SceneName.SHOWEVENT); }
     @FXML
-    private void goToShowVenue(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.SHOWVENUE);
-    }
-
-    @FXML
-    BorderPane TEST;
-
+    private void goToShowVenue(ActionEvent event){ SceneManager.navigate(SceneName.SHOWVENUE); }
     @FXML
     private void goToAddContactPerson(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
             loader.setController(this);
-            TEST.setRight(loader.load());
+            contactPersonPane.setRight(loader.load());
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //**Setting the event to the event chosen in showEventController
     public void setThisEvent(Event thisEvent) {
         this.thisEvent = thisEvent;
     }
+    /*
+    The initialize method runs when the scene is opened,
+    * This method loads the info from other methods, and uses the setSelectedEvent()
+    * to add a reference to the event selected in the showEvent scene if chosen
+    */
     public void initialize() {
         initCols();
         loadInfo();
@@ -80,20 +77,25 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
+    //** initCols method is deciding what the table columns shall contain
     private void initCols(){
         firstNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLastName()));
         phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactInfo().getPhoneNr()));
     }
+    //**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview
     private void loadInfo(){
-        //get contactpersons add to list
         ol = FXCollections.observableList(getContactPeople());
         contactPerson.setItems(ol);
 
-        //get facilities add to combobox
         ol2 = FXCollections.observableList(getFacilities());
         facility.setItems(ol2);
     }
+    /*
+    The createContactPerson method tries to create a contactPerson and throws an exception
+    if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
+    contactPerson is created, the createContact scene is closed.
+     */
     public void createContactPerson(ActionEvent event){
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
@@ -110,6 +112,10 @@ public class AddEventController implements MainController {
         }
     }
 
+    /*
+    The setValue method adds the information from the event selected in showEvent scene if one was selected
+    and adds it to the boxes in the showEvent scene.
+     */
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         if (thisEvent instanceof EventNumberedSeating)eventType.getSelectionModel().select("Event med setereservasjon");
@@ -123,6 +129,10 @@ public class AddEventController implements MainController {
         type.setText(thisEvent.getType());
         contactPerson.getSelectionModel().select(thisEvent.getContactPerson()); //Denne funker ikke
     }
+    /*
+    createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
+    to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.
+     */
     public void createEvent(ActionEvent event) {
         if (thisEvent != null) {
             errorDuplicate();
@@ -148,6 +158,10 @@ public class AddEventController implements MainController {
 
         }
     }
+    /*
+    updateEvent tries to update an event if selected in showeEvent scene.
+    This method throws exceptions for wrong input and missing input and displays it in an alert box.
+     */
     public void updateEvent(ActionEvent event) {
         if (thisEvent == null) {
             errorNoEvent();
