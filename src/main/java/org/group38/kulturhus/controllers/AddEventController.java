@@ -236,7 +236,7 @@ public class AddEventController implements MainController {
         setValuesContactPerson();
     }
     public void updateContactPersonComplete(ActionEvent event){
-        if(contactPerson==null) errorNoContactPerson();
+        if(thisContactPerson==null) errorNoContactPerson();
         else{
             try{
                 thisContactPerson.setFirstName(firstName.getText());
