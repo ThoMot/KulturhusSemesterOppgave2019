@@ -24,7 +24,7 @@ public class ShowEventController implements MainController{
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
 
     /*
-    Methods for opening to different scenes, and setting the selected event if needed in the next scene.
+    Methods for opening different scenes, and setting the selected event if needed in the next scene.
     it also shows an errormessage in an alert if there is no selected event
      */
     @FXML
@@ -59,8 +59,6 @@ public class ShowEventController implements MainController{
             SceneManager.navigate(SceneName.ADDEVENT);
         }
     }
-
-
     /*
     The initialize method runs when the scene is opened. This method runs the
     initCols method and the loadData method. It also sets the selectedEvent to null
