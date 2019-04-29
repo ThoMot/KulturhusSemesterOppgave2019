@@ -38,7 +38,7 @@ public class AddEventController implements MainController {
     @FXML private TextArea programInfo;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
     @FXML private DatePicker date;
-    @FXML private ComboBox facility, eventType;
+    @FXML private ComboBox facility;
     @FXML private TableView contactPerson;
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
@@ -124,8 +124,6 @@ public class AddEventController implements MainController {
      */
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
-        if (thisEvent instanceof EventNumberedSeating)eventType.getSelectionModel().select("Event med setereservasjon");
-        if (thisEvent instanceof EventFreeSeating) eventType.getSelectionModel().select("Event uten setereservasjon");
         artist.setText(thisEvent.getEventInfo().getPerformer());
         ticketPrice.setText(Double.toString(thisEvent.getTicketPrice()));
         programInfo.setText(thisEvent.getEventInfo().getProgram());
