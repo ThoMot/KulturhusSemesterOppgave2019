@@ -12,6 +12,7 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
 import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
+import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowEventController implements MainController{
@@ -44,6 +45,7 @@ public class ShowEventController implements MainController{
             errorNoMarkedEvent();
         }
         else{
+            setSelectedTicket(null);
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
             SceneManager.navigate(SceneName.ADDTICKET);
         }
