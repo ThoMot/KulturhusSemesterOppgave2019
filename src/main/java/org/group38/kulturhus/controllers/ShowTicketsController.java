@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
@@ -136,6 +137,7 @@ public class ShowTicketsController implements MainController {
 
     public void deleteRow(ActionEvent ticket){
         if(ticketsView.getSelectionModel().getSelectedItem() == null){
+            errorNoMarkedEvent();
 
         } else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
@@ -160,6 +162,24 @@ public class ShowTicketsController implements MainController {
         mb.setTitle("Feil");
         mb.setContentText("Vennligst marker en rad i tabellen");
         mb.show();
+    }
+
+    public void goToCreateTicket(ActionEvent ticket){
+        if(ticketsView.getSelectionModel().getSelectedItem()==null){
+            errorNoMarkedEvent();
+        }
+        else{
+            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.ADDTICKET);
+        }
+    }
+
+    //**setter and getter for the selectedEvent
+    public static void setSelectedTicket(Ticket selectedTicket) {
+        ShowTicketsController.selectedTicket = selectedTicket;
+    }
+    public static Ticket getSelectedTicket() {
+        return selectedTicket;
     }
 
 
