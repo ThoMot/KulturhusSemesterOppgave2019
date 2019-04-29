@@ -15,10 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" minWidth="600" minHeight="600" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
+<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
   <top>
     <VBox styleClass="headerPane">
-
     <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
       <menus>
         <Menu mnemonicParsing="false" text="Arrangement">
