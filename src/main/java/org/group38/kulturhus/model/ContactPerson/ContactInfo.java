@@ -7,9 +7,9 @@ public class ContactInfo {
     private String phoneNr;
 
     public ContactInfo(String email, String phoneNr) {
-      if(!isValidEmail(email)) throw new IllegalArgumentException("Eposten er på feil format.\n Den skal bestå av to deler adskilt med @ \nog avslutte med .com/.no eller lignende");
+      if(!isValidEmail(email.toLowerCase())) throw new IllegalArgumentException("Eposten er på feil format.\n Den skal bestå av to deler adskilt med @ \nog avslutte med .com/.no eller lignende");
        if(!isValidPhoneNr(phoneNr)) throw new IllegalArgumentException("Telefonnummer er ikke gyldig.\n Det skal kun bestå av 8 tall");
-        this.email = email;
+        this.email = email.toLowerCase();
         this.phoneNr = phoneNr;
 
     }
@@ -23,8 +23,8 @@ public class ContactInfo {
     }
 
     public void setEmail(String email) {
-        if(!isValidEmail(email)) throw new IllegalArgumentException("Eposten er på feil format.\n Den skal bestå av to deler adskilt med @");
-    this.email = email;
+        if(!isValidEmail(email.toLowerCase())) throw new IllegalArgumentException("Eposten er på feil format.\n Den skal bestå av to deler adskilt med @");
+    this.email = email.toLowerCase();
     }
 
     public String getPhoneNr() {

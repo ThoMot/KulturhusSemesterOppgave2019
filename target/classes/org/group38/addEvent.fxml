@@ -89,8 +89,8 @@
             </Pane>
          <GridPane BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
            <columnConstraints>
-             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="467.20831298828125" minWidth="10.0" percentWidth="0.0" prefWidth="264.0" />
-             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="238.0" minWidth="10.0" prefWidth="236.0" />
+             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="467.20831298828125" minWidth="10.0" percentWidth="0.0" prefWidth="246.0" />
+             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="256.0" minWidth="10.0" prefWidth="256.0" />
            </columnConstraints>
            <rowConstraints>
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
