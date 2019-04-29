@@ -35,8 +35,8 @@ public class AddEventController implements MainController {
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
     @FXML private TextField eventName, artist, ticketPrice, time, type; //addEvent
-    @FXML private TextArea programInfo;
-    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage, other; //addcontactPerson
+    @FXML private TextArea programInfo, other;
+    @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility;
     @FXML private TableView contactPerson;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -7,17 +8,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.VBox?>
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <VBox>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <VBox prefHeight="399.0" prefWidth="490.0">
         <children>
+         <Pane prefHeight="55.0" prefWidth="460.0">
+            <children>
+                <Label alignment="CENTER" graphicTextGap="10.0" layoutY="14.0" prefHeight="22.0" prefWidth="490.0" text="Opprett ny kontaktperson">
+                   <font>
+                      <Font size="17.0" />
+                   </font>
+                </Label>
+            </children>
+         </Pane>
           <GridPane>
             <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="246.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="244.0" />
             </columnConstraints>
             <rowConstraints>
               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,13 +44,25 @@
             </rowConstraints>
              <children>
                 <Label text="Fornavn" />
-                <TextField fx:id="firstName" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="1" />
+                <TextField fx:id="firstName" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                     <Insets right="10.0" />
+                  </GridPane.margin></TextField>
                 <Label text="Epost" GridPane.rowIndex="2" />
-                <TextField fx:id="email" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="3" />
+                <TextField fx:id="email" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="3">
+                  <GridPane.margin>
+                     <Insets right="10.0" />
+                  </GridPane.margin></TextField>
                 <Label text="Nettside" GridPane.rowIndex="4" />
-                <TextField fx:id="webPage" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="5" />
+                <TextField fx:id="webPage" prefHeight="26.0" prefWidth="218.0" GridPane.rowIndex="5">
+                  <GridPane.margin>
+                     <Insets right="10.0" />
+                  </GridPane.margin></TextField>
                 <Label text="Etternavn" GridPane.columnIndex="1" />
-                <TextField fx:id="lastName" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="lastName" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets></TextField>
                 <Label text="Telefonnummer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="phoneNumber" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="Firma: " GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -48,12 +71,17 @@
                 <TextArea fx:id="other" prefHeight="98.0" prefWidth="484.0" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.rowSpan="3" />
              </children>
           </GridPane>
-          <Label graphicTextGap="10.0" layoutX="203.0" layoutY="23.0" prefHeight="21.0" prefWidth="154.0" text="Kontaktperson">
-             <font>
-                <Font size="17.0" />
-             </font>
-          </Label>
-          <Button layoutX="169.0" layoutY="422.0" mnemonicParsing="false" onAction="#createContactPerson" prefHeight="27.0" prefWidth="154.0" stylesheets="@styles.css" text="Lagre Kontaktperson" />
+         <Pane prefHeight="70.0" prefWidth="460.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#createContactPerson" prefHeight="27.0" prefWidth="460.0" stylesheets="@styles.css" text="Lagre Kontaktperson" />
+            </children>
+            <VBox.margin>
+               <Insets top="15.0" />
+            </VBox.margin>
+         </Pane>
        </children>
+      <padding>
+         <Insets left="20.0" right="10.0" />
+      </padding>
    </VBox>
 </AnchorPane>
