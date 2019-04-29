@@ -1,5 +1,7 @@
 package org.group38.kulturhus.model.SaveLoad;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
@@ -17,9 +19,17 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
+public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
 
 
+    @Override
+    public void writeObject(CsvBase object) throws IOException {
+        ObservableList<Object> objects = FXCollections.observableArrayList();
+        objects.add(object);
+
+        writeObjects(objects);
+
+    }
 
     public static boolean isGetter(Method method) {
         if (Modifier.isPublic(method.getModifiers()) &&
@@ -27,7 +37,7 @@ public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObje
             if (method.getName().matches("^get[A-Z].*") &&
                     !method.getReturnType().equals(void.class) && !method.getReturnType().equals(Facility.class)
                     && !method.getReturnType().equals(ContactPerson.class) && !method.getReturnType().equals(EventInfo.class)
-                    && !method.getReturnType().equals(ContactInfo.class))
+                    && !method.getReturnType().equals(ContactInfo.class) && !method.getReturnType().equals(ArrayList.class))
                 return true;
         }
         return false;
@@ -60,17 +70,18 @@ public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObje
                     }
             }
         }
+        System.out.println("DENNE HER");
         System.out.println(Arrays.toString(mid));
         try {
-            sb.append(object.getClass().toString());
-            sb.append(";");
-            System.out.println(sb);
+            System.out.println(sb + "dette er stringen");
             for (Method method : mid) {
-                System.out.println(method.invoke(object));
+                System.out.println(Arrays.toString(mid));
+           //     System.out.println(method.invoke(object));
                 if(method.invoke(object) == null){
                     sb.append("-");
                 } else sb.append(method.invoke(object).toString());
                 System.out.println(method + " " + "denne funket");
+                System.out.println(sb);
                 sb.append(";");
             }
             sb.append("\n");
@@ -81,7 +92,7 @@ public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObje
     }
 
     //Skriver headere på filen første gang den opprettes
-    public static void writeHeaders(CsvBase object, String filename){
+    private static void writeHeaders(Object object, String filename){
         FileWriter fileWriter = null;
         String[] patterns = Templates.getterPattern(object.getClass());
         StringBuilder sb = new StringBuilder();
@@ -114,59 +125,63 @@ public class SaveCsvInterface{ //TODO implementer interface. Gjør så WriteObje
 
 
 
-    public void writeObject(CsvBase object) {
+    public <T> void writeObjects(ObservableList<T> objects) throws IOException {
         FileWriter fileWriter = null;
         final String nextline = "\n";
         String filename = null;
         String[] pattern;
 
 
-        //sjekk filnavn
-        if (object instanceof EventNumberedSeating || object instanceof EventFreeSeating) {
+//        //sjekk filnavn
+        if (objects.get(0) instanceof EventNumberedSeating || objects.get(0) instanceof EventFreeSeating) {
             filename = "events.csv";
-        } else if (object instanceof ContactPerson) {
+        } else if (objects.get(0) instanceof ContactPerson) {
             filename = "contactPerson.csv";
-        } else if (object instanceof Ticket) {
+        } else if (objects.get(0) instanceof Ticket) {
             filename = "tickets.csv";
         }
 
-        Class<?> clazz = object.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
-        StringBuilder save = new StringBuilder();
+        for (T object : objects) {
+
+            Class<?> clazz = object.getClass();
+            Method[] methods = clazz.getDeclaredMethods();
+            StringBuilder save = new StringBuilder();
 
 
-        pattern = Templates.getterPattern(object.getClass());
-        System.out.println(pattern);
+            pattern = Templates.getterPattern(object.getClass());
+            System.out.println(pattern);
 
 
-        //sjekk om har superklasse og hent gettere
-        if (clazz.getSuperclass() != null && clazz.getSuperclass() != Object.class) {
-            Class parentClazz = clazz.getSuperclass();
-            Method[] parentmethods = parentClazz.getDeclaredMethods();
-            Method[] common = new Method[parentmethods.length + methods.length];
-            System.arraycopy(methods, 0, common, 0, methods.length);
-            System.arraycopy(parentmethods, 0, common, methods.length, parentmethods.length);
-            System.out.println("Denne" +Arrays.toString(common));
-            save.append(getterItteration(common, pattern, object));
-        } else save.append(getterItteration(methods, pattern, object));
+            //sjekk om har superklasse og hent gettere
+            if (clazz.getSuperclass() != null && clazz.getSuperclass() != Object.class) {
+                Class parentClazz = clazz.getSuperclass();
+                Method[] parentmethods = parentClazz.getDeclaredMethods();
+                Method[] common = new Method[parentmethods.length + methods.length];
+                System.arraycopy(methods, 0, common, 0, methods.length);
+                System.arraycopy(parentmethods, 0, common, methods.length, parentmethods.length);
+                System.out.println("Denne" + Arrays.toString(common));
+                save.append(getterItteration(common, pattern, object));
+            } else save.append(getterItteration(methods, pattern, object));
 
 //Skriv til fil
-        try {
-            writeHeaders(object, filename);
-            save.deleteCharAt(save.length() - 1);
-            fileWriter = new FileWriter(filename, true);
-            fileWriter.write(save.toString());
-            fileWriter.write(nextline);
-
-
-        } catch (IOException x) {
-            x.printStackTrace();
-        } finally {
             try {
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                //TODO sjekk om filen er skrevet i fra før.
+                writeHeaders(object, filename);
+                save.deleteCharAt(save.length() - 1);
+                fileWriter = new FileWriter(filename, true);
+                fileWriter.write(save.toString());
+                fileWriter.write(nextline);
+
+
+            } catch (IOException x) {
+                x.printStackTrace();
+            } finally {
+                try {
+                    fileWriter.flush();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

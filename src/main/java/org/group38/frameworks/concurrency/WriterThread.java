@@ -1,5 +1,6 @@
 package org.group38.frameworks.concurrency;
 
+import javafx.collections.ObservableList;
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.SaveLoad.SaveDataInterface;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 public class WriterThread implements Runnable {
 
     private CsvBase objectToWrite;
-    private ArrayList objectsToWrite;
+    private ObservableList objectsToWrite;
 
     protected WriterThread(CsvBase objectToWrite) {
         this.objectToWrite = objectToWrite;
     }
 
-    protected <T> WriterThread(ArrayList<T> objectsToWrite) {
+    protected <T> WriterThread(ObservableList<T> objectsToWrite) {
         this.objectsToWrite = objectsToWrite;
     }
 

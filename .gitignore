@@ -44,3 +44,5 @@ src/\.idea/vcs\.xml
 src/\.idea/src\.iml
 
 src/\.idea/workspace\.xml
+
+src/main/java/org/group38/EnhetsTesting\.java

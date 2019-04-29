@@ -1,15 +1,15 @@
 package org.group38;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.SaveLoad.ReadCSV;
-import org.group38.kulturhus.model.SaveLoad.SaveDataInterface;
+import org.group38.kulturhus.model.SaveLoad.*;
 import org.group38.kulturhus.model.facility.Facility;
-import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
-import org.group38.kulturhus.model.SaveLoad.SaveJobj;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -199,13 +199,13 @@ public class EnhetsTesting {
 //
 //        System.out.println("\nAntall feil i enhetstesting: "+antallFeil);
 //
-        ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
+       /* ContactInfo thorasInfo = new ContactInfo("Thora.marie@outlook.com", "12345");
         ContactPerson contactPerson = new ContactPerson("Thora", "Mothes", thorasInfo);
         Facility facility2 = new Facility("Sal 1", "Kinosal", 10, 20);
-        Facility facility3 = new Facility("Sal 1", "Kinosal", 30);
+        Facility facility3 = new Facility("Sal 1", "Kinosal", 30); */
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18,00);
-        EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", "konsert",d1, t1);
+        /*  EventInfo eventInfo2 = new EventInfo("Karpe", "konsert med karpe","Megdi ++", "konsert",d1, t1);
         EventFreeSeating test = new EventFreeSeating(contactPerson, facility3, 150, eventInfo2);
         EventNumberedSeating en = new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2);
 
@@ -213,18 +213,18 @@ public class EnhetsTesting {
         events.add(0, (new EventNumberedSeating(contactPerson, facility2, 150, eventInfo2)));
         events.add(1, new EventNumberedSeating(contactPerson, facility2, 260, eventInfo2));
         events.add(2, test);
-        //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2));
+        //System.out.println("hei" + events.get(0) + events.get(1) + events.get(2)); */
 
        AtomicInteger nummer = new AtomicInteger();
         Ticket ticket = new Ticket(2, 4, "22222345", d1, t1, nummer, 20);
 
-        en.buyTicket(0, 0, "22334455");
+        /*  en.buyTicket(0, 0, "22334455");
         en.buyTicket(0, 1, "22334455");
         //System.out.println(en.freeSeats() +"\n"+ en.boughtTickets());
 
        en.allSeats();
        //System.out.println(test.buyTicket("11223344"));
-       System.out.println(test.boughtTickets());
+       System.out.println(test.boughtTickets()); */
 
 //        SaveCsvInterface save = new SaveCsvInterface();
 //
@@ -240,7 +240,7 @@ public class EnhetsTesting {
 //           e.printStackTrace();
 //       }
 
-        Class clazz = contactPerson.getClass();
+      /*  Class clazz = contactPerson.getClass();
 //        Field[] fields = clazz.getDeclaredFields();
 //        for (Field field : fields) {
 //            Class t = field.getType();
@@ -260,7 +260,16 @@ public class EnhetsTesting {
        for (ContactPerson y : x){
            System.out.println(y.getContactInfo());
            System.out.println(y.getFirstName());
-       }
+       } */
+
+      ObservableList<AtomicInteger> listemann = FXCollections.observableArrayList();
+      listemann.add(nummer);
+
+      try {
+          WriterThreadRunner.WriterThreadRunner(listemann);
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
 
     }
     }

@@ -111,20 +111,4 @@ public class Ticket implements CsvBase {
     }
 
 
-
-    @Override
-    public String toCSV() {
-
-        StringBuilder sb = new StringBuilder();
-        String delimitter = ",";
-        sb.append((getPhonenumber()));
-        sb.append(delimitter);
-        sb.append(getDate());
-        sb.append(delimitter);
-        sb.append(getPrice());
-        sb.append(delimitter);
-        sb.append(getTime());
-
-        return sb.toString();
-    }
 }
