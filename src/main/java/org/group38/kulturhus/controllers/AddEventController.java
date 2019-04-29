@@ -32,6 +32,7 @@ import static org.group38.kulturhus.model.Validate.isNotEmptyString;
 public class AddEventController implements MainController {
     //data field
     private Event thisEvent;
+    private ContactPerson thisContactPerson;
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
     @FXML private TextField eventName, artist, ticketPrice, time, type; //addEvent
@@ -55,6 +56,7 @@ public class AddEventController implements MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
+            setThisContactPerson(null);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,30 +96,6 @@ public class AddEventController implements MainController {
         ol2 = FXCollections.observableList(getFacilities());
         facility.setItems(ol2);
     }
-    /*
-    The createContactPerson method tries to create a contactPerson and throws an exception
-    if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
-    contactPerson is created, the createContact scene is closed.
-     */
-    public void createContactPerson(ActionEvent event){
-        try {
-            ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
-            getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
-            if(isNotEmptyString(company.getText())) getContactPeople().get(getContactPeople().size()-1).setAffiliation(company.getText());
-            if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
-            if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
-            createContLb.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-            visiblePause.play();
-            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
-            loadInfo();
-        }
-        catch (Exception e){
-            errorWrongInput(e.toString());
-        }
-    }
-
     /*
     The setValue method adds the information from the event selected in showEvent scene if one was selected
     and adds it to the boxes in the showEvent scene.
@@ -205,9 +183,89 @@ public class AddEventController implements MainController {
             } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
             } catch (NullPointerException e) { errorEmptyFields();
             } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-            } catch (Exception e){ errorWrongInput(event.toString());
+            } catch (Exception e){ errorWrongInput(e.toString());
             }
         }
+    }
+
+    public void setThisContactPerson(ContactPerson thisContactPerson) {
+        this.thisContactPerson = thisContactPerson;
+    }
+    /*
+    The createContactPerson method tries to create a contactPerson and throws an exception
+    if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
+    contactPerson is created, the createContact scene is closed.
+     */
+    public void createContactPerson(ActionEvent event){
+        if(thisContactPerson!=null){
+            errorDuplicateContactPerson();
+        }
+        try {
+            ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
+            getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+            if(isNotEmptyString(company.getText())) getContactPeople().get(getContactPeople().size()-1).setAffiliation(company.getText());
+            if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
+            if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
+            createContLb.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
+            visiblePause.play();
+            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            loadInfo();
+        }
+        catch (NullPointerException e){ errorEmptyFields();}
+        catch (Exception e){ errorWrongInput(e.toString());
+        }
+    }
+
+    public void updateContactPerson(ActionEvent event){
+        if(contactPerson.getSelectionModel().getSelectedItem()==null){
+            errorNoMarkedContactPerson();
+        }
+        else{
+            setThisContactPerson((ContactPerson)contactPerson.getSelectionModel().getSelectedItem());
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
+                loader.setController(this);
+                contactPersonPane.setRight(loader.load());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        setValuesContactPerson();
+    }
+    public void updateContactPersonComplete(ActionEvent event){
+        if(contactPerson==null) errorNoContactPerson();
+        else{
+            try{
+                thisContactPerson.setFirstName(firstName.getText());
+                thisContactPerson.setLastName(lastName.getText());
+                thisContactPerson.getContactInfo().setEmail(email.getText());
+                thisContactPerson.getContactInfo().setPhoneNr(phoneNumber.getText());
+                if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
+                if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
+                if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
+                createContLb.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                visiblePause.setOnFinished(click -> createContLb.setVisible(false));
+                visiblePause.play();
+                //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            }
+            catch (NullPointerException e) { errorEmptyFields();}
+            catch (Exception e){ errorWrongInput(e.toString());
+            }
+
+        }
+    }
+    private void setValuesContactPerson(){
+        firstName.setText(thisContactPerson.getFirstName());
+        lastName.setText(thisContactPerson.getLastName());
+        email.setText(thisContactPerson.getEmail());
+        company.setText(thisContactPerson.getAffiliation());
+        phoneNumber.setText(thisContactPerson.getPhoneNr());
+        other.setText(thisContactPerson.getNotes());
+        webPage.setText(thisContactPerson.getWebPage());
     }
 
     @Override
