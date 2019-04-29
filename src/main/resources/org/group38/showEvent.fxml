@@ -96,7 +96,7 @@
                      <Insets left="10.0" />
                   </HBox.margin>
                </Button>
-          <Button fx:id="editEvent" mnemonicParsing="false" onAction="#goToCreateEvent" text="Endre arrangement" textAlignment="CENTER">
+          <Button mnemonicParsing="false" onAction="#goToCreateEvent" text="Endre arrangement" textAlignment="CENTER">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>

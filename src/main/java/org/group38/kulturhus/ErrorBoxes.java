@@ -41,4 +41,12 @@ public class ErrorBoxes {
         mb.show();
     }
 
+    public static void errorNoMarkedTicket(){
+        Alert mb = new Alert(Alert.AlertType.INFORMATION);
+        mb.setHeaderText("Det er ingen billett som er markert");
+        mb.setTitle("Feil");
+        mb.setContentText("Vennligst marker en rad i tabellen");
+        mb.show();
+    }
+
 }

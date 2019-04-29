@@ -51,6 +51,10 @@
     -fx-text-fill: white;
 }
 
+.seatList{
+    -fx-font-size: 10;
+}
+
 .seatView{
     -fx-border-color: #4780a8;
     -fx-border-width: 2;

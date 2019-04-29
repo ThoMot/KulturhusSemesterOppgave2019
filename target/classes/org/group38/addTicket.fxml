@@ -78,21 +78,26 @@
                </HBox>
             </children>
          </VBox>
-            <Pane fx:id="seatView" styleClass="seatView">
+            <Pane styleClass="seatView" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+               <Insets right="10.0" />
+            </VBox.margin>
             <children>
-               <VBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="255.0" prefWidth="987.0">
+               <VBox alignment="TOP_CENTER" prefHeight="297.0" prefWidth="974.0">
                   <children>
-                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="982.0" text="Seteoversikt">
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="974.0" text="Seteoversikt">
                         <font>
                            <Font size="20.0" />
                         </font>
                      </Label>
+                      <Label text="Seteoversikt med ledig og ikke ledige seter" textAlignment="CENTER">
+                      </Label>
                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="1174.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER">
                         <font>
                            <Font size="28.0" />
                         </font>
                      </Label>
-                      <Label fx:id="seatsList" text="Seteoversikt med ledig og ikke ledige seter">
+                      <Label fx:id="seatsList" text="oversikt over setene">
                           <font>
                               <Font size="10.0" />
                           </font>
@@ -109,7 +114,7 @@
                <Insets top="10.0" />
             </VBox.margin>
          </Label>
-         <Pane prefHeight="71.0" prefWidth="476.0">
+         <Pane prefHeight="125.0" prefWidth="990.0">
             <children>
                <GridPane alignment="CENTER" layoutY="-5.0" prefHeight="85.0" prefWidth="985.0">
                   <columnConstraints>
@@ -135,9 +140,9 @@
                </GridPane>
             </children>
          </Pane>
-                     <Pane>
+                     <Pane prefHeight="130.0" prefWidth="984.0">
                         <children>
-                           <GridPane alignment="CENTER" layoutX="-4.0" layoutY="15.0" prefHeight="115.0" prefWidth="989.0">
+                           <GridPane alignment="CENTER" layoutX="-2.0" layoutY="1.0" prefHeight="73.0" prefWidth="985.0">
                              <columnConstraints>
                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="64.0" />
                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="55.0" />
@@ -145,11 +150,8 @@
                              <rowConstraints>
                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                              </rowConstraints>
                               <children>
-                                  <Label fx:id="ticketPrice" GridPane.columnIndex="1" GridPane.columnSpan="1" />
                                  <Label text="Telefonnummer til kjøper:" GridPane.columnSpan="2" />
                                  <TextField fx:id="phoneNumber" prefHeight="27.0" prefWidth="104.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                               </children>
