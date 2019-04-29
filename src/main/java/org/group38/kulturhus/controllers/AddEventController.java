@@ -200,21 +200,27 @@ public class AddEventController implements MainController {
         if(thisContactPerson!=null){
             errorDuplicateContactPerson();
         }
-        try {
-            ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
-            getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
-            if(isNotEmptyString(company.getText())) getContactPeople().get(getContactPeople().size()-1).setAffiliation(company.getText());
-            if(isNotEmptyString(webPage.getText())) getContactPeople().get(getContactPeople().size()-1).setWebPage(webPage.getText());
-            if(isNotEmptyString(other.getText())) getContactPeople().get(getContactPeople().size()-1).setNotes(other.getText());
-            createContLb.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-            visiblePause.play();
-            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
-            loadInfo();
-        }
-        catch (NullPointerException e){ errorEmptyFields();}
-        catch (Exception e){ errorWrongInput(e.toString());
+        else {
+            try {
+                ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
+                getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
+                if (isNotEmptyString(company.getText()))
+                    getContactPeople().get(getContactPeople().size() - 1).setAffiliation(company.getText());
+                if (isNotEmptyString(webPage.getText()))
+                    getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
+                if (isNotEmptyString(other.getText()))
+                    getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
+                createContLb.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+                visiblePause.setOnFinished(click -> createContLb.setVisible(false));
+                visiblePause.play();
+                //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+                loadInfo();
+            } catch (NullPointerException e) {
+                errorEmptyFields();
+            } catch (Exception e) {
+                errorWrongInput(e.toString());
+            }
         }
     }
 
