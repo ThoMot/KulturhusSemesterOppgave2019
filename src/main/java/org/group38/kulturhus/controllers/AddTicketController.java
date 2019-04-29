@@ -1,23 +1,28 @@
 package org.group38.kulturhus.controllers;
 
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import org.group38.kulturhus.model.Event.Event;
-import org.group38.kulturhus.model.Event.EventFreeSeating;
-import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Event.Ticket;
+import javafx.util.Duration;
+import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.Event.*;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 
+import static org.group38.kulturhus.ErrorBoxes.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
@@ -107,6 +112,40 @@ public class AddTicketController implements MainController{
         seatsList.setVisible(false);
     }
 
+    }
+
+    public void updateTicket(ActionEvent event) {
+        if (thisTicket == null) {
+            errorNoEvent();
+        } else {
+            try {
+                thisTicket.setRow(Integer.parseInt(row.getText()));
+                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
+                thisTicket.setPhonenumber(phoneNumber.getText());
+                SceneManager.navigate(SceneName.SHOWTICKET);
+            } catch (NumberFormatException e) { errorWrongInput("Raden må være mellom 0 og " + thisEvent.getFacility().getRows() +
+                        " og setenummer mellom 0 og " + thisEvent.getFacility().getColumns());
+            } catch (NullPointerException e) { errorEmptyFields();
+            } catch (Exception e){ errorWrongInput(e.toString());
+            }
+        }
+    }
+
+    public void createTicket(ActionEvent event) {
+        if (thisTicket != null) {
+            errorDuplicate();
+        } else {
+            if(thisEvent instanceof EventFreeSeating){
+                ((EventFreeSeating) thisEvent).buyTicket(phoneNumber.getText());
+                SceneManager.navigate(SceneName.SHOWTICKET);
+            }
+
+            if(thisEvent instanceof EventNumberedSeating){
+                ((EventNumberedSeating) thisEvent).buyTicket(Integer.parseInt(row.getText()),Integer.parseInt(seatNumber.getText()),phoneNumber.getText());
+                SceneManager.navigate(SceneName.SHOWTICKET);
+            }
+
+        }
     }
 
     @Override

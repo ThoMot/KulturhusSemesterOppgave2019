@@ -114,9 +114,9 @@
                <Insets top="10.0" />
             </VBox.margin>
          </Label>
-         <Pane prefHeight="125.0" prefWidth="990.0">
+         <Pane prefHeight="125.0" prefWidth="791.0">
             <children>
-               <GridPane alignment="CENTER" layoutY="-5.0" prefHeight="85.0" prefWidth="985.0">
+               <GridPane alignment="CENTER" prefHeight="78.0" prefWidth="985.0">
                   <columnConstraints>
                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="152.0" />
                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="144.0" />
@@ -126,7 +126,10 @@
                      <RowConstraints maxHeight="30.0" minHeight="30.0" percentHeight="0.0" prefHeight="30.0" vgrow="ALWAYS" />
                   </rowConstraints>
                   <children>
-                     <Label fx:id="seatRowInfoText" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2" />
+                     <Label fx:id="seatRowInfoText" alignment="CENTER" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2">
+                        <GridPane.margin>
+                           <Insets />
+                        </GridPane.margin></Label>
                      <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="1" />
                      <TextField fx:id="seatNumber" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
                         <GridPane.margin>
@@ -139,6 +142,12 @@
                   </padding>
                </GridPane>
             </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
          </Pane>
                      <Pane prefHeight="130.0" prefWidth="984.0">
                         <children>
@@ -166,7 +175,12 @@
          </Pane>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                           <Button alignment="CENTER" onAction="#buyTicket" text="Opprett billett" />
+                           <Button alignment="CENTER" onAction="#createTicket" text="Opprett billett" />
+               <Button onAction="#updateTicket" mnemonicParsing="false" text="Oppdater billett">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
+               </Button>
             </children>
          </HBox>
         </VBox>
