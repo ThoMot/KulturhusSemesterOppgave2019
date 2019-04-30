@@ -1,0 +1,4 @@
+PhoneNr;EventId;EventName;Type;Program;Performer;TicketPrice;FacilityName;MaxSeats;Date;Time;Rows;Columns
+12345234;0;Karpe;konsert;konsert med karpe;Megdi ++;150.0;Sal 1;0;2019-05-10;18:00;10;20;
+12345234;0;Karpe;konsert;konsert med karpe;Megdi ++;260.0;Sal 1;0;2019-05-10;18:00;10;20;
+12345234;0;Karpe;konsert;konsert med karpe;Megdi ++;150.0;Sal 1;30;2019-05-10;18:00;

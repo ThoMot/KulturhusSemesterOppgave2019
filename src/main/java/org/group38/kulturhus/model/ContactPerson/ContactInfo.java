@@ -1,8 +1,10 @@
 package org.group38.kulturhus.model.ContactPerson;
 
+import java.io.Serializable;
+
 import static org.group38.kulturhus.model.Validate.*;
 
-public class ContactInfo {
+public class ContactInfo implements Serializable {
     private String email;
     private String phoneNr;
 
