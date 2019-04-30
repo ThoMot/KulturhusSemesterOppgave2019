@@ -27,7 +27,7 @@ public class EventInfo {
         this.time = time;
         this.type = type;
     }
-
+//**getter and setter methods that also checks for valid input
 
     public String getEventName() {
         return eventName;

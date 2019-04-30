@@ -91,7 +91,7 @@ public class AddTicketController implements MainController{
         else if(event instanceof EventFreeSeating){
             ((EventFreeSeating) event).buyTicket(phoneNumber.getText());
         }
-        System.out.println(getSelectedEvent().boughtTickets());
+        System.out.println(getSelectedEvent().getTickets());
     }
     private void setTicketInfo(){
         row.setText(thisTicket.getRow().toString());

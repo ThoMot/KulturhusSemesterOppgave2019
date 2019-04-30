@@ -20,7 +20,10 @@ public class EventFreeSeating extends Event implements Serializable {
     }
 
 
-    //denne må returnere en void og ha throws
+    /*
+    First the method checks if the event is full with the maxSeats variable
+    and if it's not full, adds a ticket to the ArrayList of tickets.
+     */
     public void buyTicket(String phoneNumber){
         if(tickets.size()<maxSeats){
             tickets.add(new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId()));
@@ -29,6 +32,10 @@ public class EventFreeSeating extends Event implements Serializable {
             throw new ArrayIndexOutOfBoundsException("Arrangementet er fullt");
         }
     }
+   /*
+   these setter methods(setDate, setTicketPrice and setTime) makes sure to update both the eventInfo
+   and also all the already bought tickets
+    */
 
     public void setDate(LocalDate date){
         super.getEventInfo().setDate(date);
@@ -55,7 +62,7 @@ public class EventFreeSeating extends Event implements Serializable {
             }
         }
     }
-
+//**this method returns a string containing the number of available tickets
     public String allSeats(){
         int numberofFreeSeats = 0;
         for(Ticket ticket: tickets){
@@ -65,11 +72,7 @@ public class EventFreeSeating extends Event implements Serializable {
         }
         return String.valueOf(numberofFreeSeats);
     }
-
-    public boolean fullt(){
-        if (Integer.parseInt(allSeats())==0) return true;
-        else return false;
-    }
+    //**This tostring method returns the eventname, the facility, date and time and what kind of event it is
     @Override
     public String toString() {
         return "Eventnavn: " + getEventInfo().getEventName() + "\n" +
@@ -78,22 +81,10 @@ public class EventFreeSeating extends Event implements Serializable {
                 "Type arrangement: ingen setereservering";
     }
 
+    //** getter and settermethods
     public ArrayList<Ticket> getTickets() {
         return tickets;
     }
-
-    public ArrayList<Ticket> boughtTickets(){
-        ArrayList<Ticket> bought = new ArrayList();
-        for (Ticket ticket: tickets) {
-            if (tickets==null) {
-            }
-            else{
-                bought.add(ticket);
-            }
-        }
-        return bought;
-    }
-
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
     }
