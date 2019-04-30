@@ -161,6 +161,7 @@ public class AddEventController implements MainController {
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorEmptyFields();
+                } catch (IllegalArgumentException e){ errorDuplicateEvent();
                 } catch (Exception e) { errorWrongInput(e.toString());
                 }
                 //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
@@ -187,6 +188,7 @@ public class AddEventController implements MainController {
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorEmptyFields();
+                } catch (IllegalArgumentException e){ errorDuplicateEvent();
                 } catch (Exception e) { errorWrongInput(e.toString());
                 }
             }

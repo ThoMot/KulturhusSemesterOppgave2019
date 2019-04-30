@@ -21,7 +21,7 @@ public abstract class Event {
 
     //constructor
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
-        checkOverlap(eventInfo, facility);
+        if(!checkOverlap(eventInfo, facility)) throw new IllegalArgumentException("Du kan ikke lage to arrangementer i samme lokale\n til samme tid");
         this.facility=facility;
         this.ticketPrice = ticketPrice;
         this.contactPerson = contactPerson;
