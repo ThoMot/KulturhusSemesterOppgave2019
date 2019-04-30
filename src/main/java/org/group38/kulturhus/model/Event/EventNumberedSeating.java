@@ -110,8 +110,6 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         return tickets;
     }
 
-
-
     public void setColumns(int columns) {
         this.columns = columns;
     }

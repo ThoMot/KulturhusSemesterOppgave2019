@@ -94,7 +94,7 @@ public class ShowTicketsController implements MainController {
     }
 
     private void loadData(){
-        observableList = FXCollections.observableList(thisEvent.boughtTickets());
+        observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
     }
 

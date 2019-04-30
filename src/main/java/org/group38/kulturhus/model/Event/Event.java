@@ -19,7 +19,10 @@ public abstract class Event {
     private double ticketPrice;
 
 
-    //constructor
+    /*
+    In this constructor we specifically check for overLaps between other already created events.
+    This constructor creates an event with the given input
+     */
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
         if(!checkOverlap(eventInfo, facility)) throw new IllegalArgumentException("Du kan ikke lage to arrangementer i samme lokale\n til samme tid");
         this.facility=facility;
@@ -27,6 +30,10 @@ public abstract class Event {
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;
     }
+    /*
+    This method checks for already existing events in the given time in the given facility
+    and returns true or false
+     */
     private boolean checkOverlap(EventInfo eventInfo2,Facility facility2){
         ArrayList<Event> events = getEvents();
         for(Event event: events){
@@ -36,13 +43,13 @@ public abstract class Event {
         }
         return true;
     }
-
+//**toStringMethod that contains the eventInfo, the date, the eventname and the facility.
     public String toString(){
         return eventInfo.toString() + eventInfo.getDate() + "\n\t\t\t" +
                 eventInfo.getEventName() + "\n\t\t\t" +
                 facility.toString();
     }
-
+//**Getters and setters
     public double getTicketPrice(){
         return ticketPrice;
     }
@@ -92,11 +99,6 @@ public abstract class Event {
         this.ticketPrice = ticketPrice;
     }
 
-    public abstract ArrayList<Ticket> boughtTickets();
-
-    public abstract String allSeats();
-
-
     public void setFacility(){
         this.facility=facility;
     }
@@ -109,4 +111,8 @@ public abstract class Event {
     public ContactPerson getContactPerson() {
         return contactPerson;
     }
+
+    public abstract ArrayList getTickets();
+
+    public abstract String allSeats();
 }
