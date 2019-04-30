@@ -6,7 +6,7 @@ package org.group38.kulturhus.model.SaveLoad;
     private static final String ticket = "org.group38.kulturhus.model.Event.Ticket";
     private static final String contact = "org.group38.kulturhus.model.ContactPerson.ContactPerson";
     private static final String contactInfo = "org.group38.kulturhus.model.ContactPerson.ContactInfo";
-    private static final String eventInfo = "org.group38.kulturhus.model.Event.EventInfo";
+    private static final String facility = "org.group38.kulturhus.model.facility.facility";
     private static final String person = "org.group38.kulturhus.model.ContactPerson.Person";
 
 
@@ -27,11 +27,22 @@ package org.group38.kulturhus.model.SaveLoad;
         } else if(clazz.getName().equals(ticket)){
             patterns = new String[] { "getPhonenumber", "getPrice", "getSeat", "getRow", "getDate", "getTime"};
             return patterns;
-        } else if(clazz.getName().equals(contact)){
+        } else if(clazz.getName().equals(contact)) {
             patterns = new String[]{"getPhoneNr", "getFirstName", "getLastName", "getEmail", "getNotes", "getAffiliation", "getWebPage"};
+            return patterns;
+        } else if(clazz.getName().equals(facility)) {
+            patterns = new String[]{"getFacilityName", "getFacilityType", "getMaxAntSeats", "getRows", "getColumns"};
             return patterns;
         } else return null;
     }
+
+     private String facilityName;
+     private String facilityType;
+     private int maxAntSeats;
+     private int rows;
+     private int columns;
+
+
 
     static String[] setterPattern(Class clazz){
             String[] patterns;

@@ -105,7 +105,7 @@ public class ReadCSV {
 
         for (String head : headers) {
             if (!settableValues.containsKey(head) && !parentValues.containsKey(head)) {
-                otherValues.put(head, increment);
+                otherValues.put(head, headers.indexOf(head));
                 increment++;
             }
         }
@@ -121,10 +121,10 @@ public class ReadCSV {
 
             T test = (T) constructor.newInstance();
 
-            ContactInfo contactInfo = new ContactInfo();
-            Field field = clazz.getDeclaredField("contactInfo");
-            field.setAccessible(true);
-            field.set(test, contactInfo);
+//            ContactInfo contactInfo = new ContactInfo();
+//            Field field = clazz.getDeclaredField("contactInfo");
+//            field.setAccessible(true);
+//            field.set(test, contactInfo);
 
 
             //TODO Skill ut i egen metode
@@ -132,7 +132,6 @@ public class ReadCSV {
                 Field fieldToSet = clazz.getDeclaredField(entry.getKey());
                 fieldToSet.setAccessible(true);
                 fieldToSet.set(test, (objVal.get(entry.getValue())));
-
             }
 
             for (Map.Entry<String, Integer> entry : parentValues.entrySet()) {
@@ -142,63 +141,69 @@ public class ReadCSV {
             }
 
             if (!otherValues.isEmpty()) {
-                List<Type> type = new ArrayList<>();
+                System.out.println(otherValues + "Other Values");
+                HashMap<Field, Class> subClazz = new HashMap<>();
                 for (Field checkField : fields) {
-                    if (!checkField.getType().isPrimitive() && checkField.getType() != String.class && !type.contains(checkField.getType())) {
-                        type.add(checkField.getType());
+                    if (!checkField.getType().isPrimitive() && checkField.getType() != String.class && !subClazz.containsKey(checkField.getType())) {
+                        subClazz.put(checkField, checkField.getType());
                     }
                 }
-                for (Type t : type)
-                    System.out.println(t);
+
+                for (Map.Entry<Field, Class> entry : subClazz.entrySet()) {
+                    System.out.println(entry.getValue().getName() + " Dette er sub");
+                    Field field = clazz.getDeclaredField(entry.getKey().getName());
+                    field.setAccessible(true);
+                    field.set(test, getCompObj(otherValues, entry.getValue(), objVal));
+                }
+
+
+
             }
 
-            Field checkField;
-            int objectCounter;
-            for (Map.Entry<String, Integer> entry : parentValues.entrySet()) {
-
-
-            }
 
 
             returnObj.add(test);
 
 
-            //Opprettet en instans av hoveobjektet
-            //   T instance = (T)constructor.newInstance();
-
-
         }
         return returnObj;
     }
-}
+
+    public static boolean isComplex(Field[] fields){
+        for(Field field : fields){
+            if (!field.getType().isPrimitive() && field.getType() != String.class){
+                return true;
+            }
+        }
+      return false;
+    }
 
 
+    private static  <T> T getCompObj(HashMap<String, Integer> otherValues, Class sub, List objVal) throws NoSuchMethodException, ReflectiveOperationException {
+
+        Constructor<T> constructor = sub.getDeclaredConstructor();
+        Field[] fields = sub.getDeclaredFields();
+        constructor.setAccessible(true);
+        T obj = (T) constructor.newInstance();
 
 
+        for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
+            Field fieldToSet = sub.getDeclaredField(entry.getKey());
+            fieldToSet.setAccessible(true);
+            fieldToSet.set(obj, (objVal.get(entry.getValue())));
+        }
 
 
-
-
-//    public <T> T getCompObj(HashMap<String, Integer> otherValues) throws NoSuchMethodException, ReflectiveOperationException {
-//
-//        for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
-//
-//
-//
-//        }
-//
-//
-//
-//
 //        Class clazz = field.getType();
 //        Constructor constructor = clazz.getDeclaredConstructor();
 //        constructor.setAccessible(true);
 //        Field[] fields = clazz.getDeclaredFields();
 //
 //        T t = (T)constructor.newInstance(field);
-//
-//        return t;
-//    }
+
+        return obj;
+    }
+}
 
 
 

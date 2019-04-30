@@ -2,9 +2,11 @@ package org.group38.kulturhus.model.ContactPerson;
 
 import org.group38.kulturhus.model.SaveLoad.CsvBase;
 
+import java.io.Serializable;
+
 import static org.group38.kulturhus.model.Validate.*;
 
-public class ContactPerson extends Person implements CsvBase {
+public class ContactPerson extends Person implements CsvBase, Serializable {
     //Optional
     private String webPage;
     private String affiliation;

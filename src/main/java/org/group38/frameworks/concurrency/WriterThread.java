@@ -6,6 +6,7 @@ import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.SaveLoad.SaveDataInterface;
 import org.group38.kulturhus.model.SaveLoad.WriterJOBJ;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,8 +41,19 @@ public class WriterThread implements Runnable {
 
     private void writeObjects() throws IOException {
         SaveDataInterface writer;
-        writer = new WriterJOBJ(); //TODO Finn en måte å sjekke på om filen det skrives til er JOBJ eller CSV.
-        //writer = new SaveCsvInterface();
+        String ext = filename.substring(filename.lastIndexOf(".")+1);
+        System.out.println(ext);
+
+        switch (ext){
+            case "jobj":
+                writer = new WriterJOBJ();
+                break;
+            case "csv":
+                writer = new SaveCsvInterface();
+                break;
+            default:
+                throw new NullPointerException();
+        }
 
         if (objectToWrite == null) {
             writer.writeObjects(objectsToWrite, filename);
