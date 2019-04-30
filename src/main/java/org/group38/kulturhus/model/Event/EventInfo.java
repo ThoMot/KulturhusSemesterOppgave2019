@@ -28,6 +28,7 @@ public class EventInfo {
         this.type = type;
     }
 
+
     public String getEventName() {
         return eventName;
     }

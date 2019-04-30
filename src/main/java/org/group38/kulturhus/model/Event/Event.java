@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
+
 
 public abstract class Event {
     private final AtomicInteger eventId=new AtomicInteger();
@@ -19,10 +21,20 @@ public abstract class Event {
 
     //constructor
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){
+        checkOverlap(eventInfo, facility);
         this.facility=facility;
         this.ticketPrice = ticketPrice;
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;
+    }
+    private boolean checkOverlap(EventInfo eventInfo2,Facility facility2){
+        ArrayList<Event> events = getEvents();
+        for(Event event: events){
+            if(eventInfo2.getTime()==event.getTime()&&eventInfo2.getDate()==event.getDate()&&facility2==event.getFacility()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public String toString(){
@@ -30,7 +42,6 @@ public abstract class Event {
                 eventInfo.getEventName() + "\n\t\t\t" +
                 facility.toString();
     }
-
 
     public double getTicketPrice(){
         return ticketPrice;
