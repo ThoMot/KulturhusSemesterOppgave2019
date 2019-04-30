@@ -1,12 +1,12 @@
 package org.group38.kulturhus.model.SaveLoad;
 
- abstract class Templates {
-    private static final String ens = "org.group38.kulturhus.model.Event.EventNumberedSeating";
-    private static final String efs = "org.group38.kulturhus.model.Event.EventFreeSeating";
+ public abstract class Templates {
+    public static final String ens = "org.group38.kulturhus.model.Event.EventNumberedSeating";
+    public static final String efs = "org.group38.kulturhus.model.Event.EventFreeSeating";
     private static final String ticket = "org.group38.kulturhus.model.Event.Ticket";
     private static final String contact = "org.group38.kulturhus.model.ContactPerson.ContactPerson";
     private static final String contactInfo = "org.group38.kulturhus.model.ContactPerson.ContactInfo";
-    private static final String facility = "org.group38.kulturhus.model.facility.facility";
+    private static final String facility = "org.group38.kulturhus.model.facility.Facility";
     private static final String person = "org.group38.kulturhus.model.ContactPerson.Person";
 
 

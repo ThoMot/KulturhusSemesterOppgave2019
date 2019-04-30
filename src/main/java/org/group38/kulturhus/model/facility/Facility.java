@@ -4,7 +4,10 @@
 //lage setmetoder som også sjekker at det blir gitt riktig type input
 package org.group38.kulturhus.model.facility;
 
-public class Facility {
+
+import java.io.Serializable;
+
+public class Facility implements Serializable {
     private String facilityName;
     private String facilityType;
     private int maxAntSeats;
@@ -62,6 +65,7 @@ public class Facility {
     }
 
     public int getMaxAntSeats() { return maxAntSeats; }
+
 
     @Override
     public String toString() {

@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.model.Event.Ticket;
 
@@ -13,10 +12,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class EventNumberedSeating extends Event implements Serializable, CsvBase {
+public class EventNumberedSeating extends Event implements Serializable {
     private ArrayList<Ticket> tickets;
     private int columns;
     private int rows;
+
+    private EventNumberedSeating(){
+        super();
+    }
 
     //constructor
     public EventNumberedSeating(ContactPerson contactPerson, Facility facility, double ticketPrice, EventInfo eventInfo) {

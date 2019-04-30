@@ -1,7 +1,6 @@
 package org.group38.kulturhus.model.Event;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class EventFreeSeating extends Event implements CsvBase, Serializable {
+public class EventFreeSeating extends Event implements Serializable {
     private ArrayList<Ticket> tickets;
     private int maxSeats;
 

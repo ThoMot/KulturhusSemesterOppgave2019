@@ -4,14 +4,12 @@ package org.group38.kulturhus.model;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Kulturhus {
     private static ArrayList<Event> events = new ArrayList<>();

@@ -18,6 +18,9 @@ public abstract class Event {
     private EventInfo eventInfo;
     private double ticketPrice;
 
+    public Event(){
+
+    }
 
     //constructor
     public Event(ContactPerson contactPerson, Facility facility, EventInfo eventInfo, double ticketPrice){

@@ -1,22 +1,20 @@
 package org.group38.frameworks.concurrency;
 
 import javafx.collections.ObservableList;
-import org.group38.kulturhus.model.SaveLoad.CsvBase;
-import org.group38.kulturhus.model.SaveLoad.SaveCsvInterface;
-import org.group38.kulturhus.model.SaveLoad.SaveDataInterface;
-import org.group38.kulturhus.model.SaveLoad.WriterJOBJ;
+import org.group38.kulturhus.model.SaveLoad.Save.WriteToCSV;
+import org.group38.kulturhus.model.SaveLoad.Save.WriterInterface;
+import org.group38.kulturhus.model.SaveLoad.Save.WriterJOBJ;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class WriterThread implements Runnable {
 
-    private CsvBase objectToWrite;
+    private Object objectToWrite;
     private ObservableList objectsToWrite;
     private String filename;
 
-    protected WriterThread(CsvBase objectToWrite, String filename) {
+    protected WriterThread(Object objectToWrite, String filename) {
         this.objectToWrite = objectToWrite;
         this.filename = filename;
     }
@@ -40,7 +38,7 @@ public class WriterThread implements Runnable {
     }
 
     private void writeObjects() throws IOException {
-        SaveDataInterface writer;
+        WriterInterface writer;
         String ext = filename.substring(filename.lastIndexOf(".")+1);
         System.out.println(ext);
 
@@ -49,7 +47,7 @@ public class WriterThread implements Runnable {
                 writer = new WriterJOBJ();
                 break;
             case "csv":
-                writer = new SaveCsvInterface();
+                writer = new WriteToCSV();
                 break;
             default:
                 throw new NullPointerException();

@@ -1,6 +1,5 @@
 package org.group38.kulturhus.model.Event;
 
-import org.group38.kulturhus.model.SaveLoad.CsvBase;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.io.Serializable;
@@ -12,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
 
-public class Ticket implements CsvBase, Serializable {
+public class Ticket implements Serializable {
     //data field
     private AtomicInteger eventId;
     private double price;
@@ -22,6 +21,8 @@ public class Ticket implements CsvBase, Serializable {
     LocalDate date;
     LocalTime time;
 
+    private Ticket(){
+    }
     //constructor
     public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId, double price) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");

@@ -1,16 +1,13 @@
-package org.group38.kulturhus.model.SaveLoad;
+package org.group38.kulturhus.model.SaveLoad.Save;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
-import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Event.Ticket;
+import org.group38.kulturhus.model.SaveLoad.Templates;
 import org.group38.kulturhus.model.facility.Facility;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -19,11 +16,11 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-public class SaveCsvInterface implements SaveDataInterface{ //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
+public class WriteToCSV implements WriterInterface { //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
 
 
     @Override
-    public void writeObject(CsvBase object, String filename) throws IOException {
+    public void writeObject(Object object, String filename) throws IOException {
         ObservableList<Object> objects = FXCollections.observableArrayList();
         objects.add(object);
 
