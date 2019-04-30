@@ -319,9 +319,24 @@ public class AddEventController implements MainController {
         other.setText(thisContactPerson.getNotes());
         webPage.setText(thisContactPerson.getWebPage());
     }
+    public void deleteRow(ActionEvent event){
+        if(contactPerson.getSelectionModel().getSelectedItem()==null){
+            errorNoMarkedEvent();
+        }
+        else{
+            Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
+            mb.setTitle("Bekreft");
+            mb.setHeaderText("Du har trykket slett på "+ contactPerson.getSelectionModel().getSelectedItem());
+            mb.setContentText("Ønsker du virkerlig å slette dette arrangementet?");
+            mb.showAndWait().ifPresent(response -> {
+                if(response==ButtonType.OK){
+                    ol.remove(contactPerson.getSelectionModel().getSelectedItem());
+                }
+            });
+        }
+    }
 
     @Override
     public void exit() {
-
     }
 }
