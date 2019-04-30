@@ -111,7 +111,7 @@ public class ReadCSV {
         }
 
 
-        for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
+        for (Map.Entry<String, Integer> entry : settableValues.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
             System.out.println(entry.getValue());
         }
@@ -132,7 +132,6 @@ public class ReadCSV {
                 Field fieldToSet = clazz.getDeclaredField(entry.getKey());
                 fieldToSet.setAccessible(true);
                 fieldToSet.set(test, (objVal.get(entry.getValue())));
-
             }
 
             for (Map.Entry<String, Integer> entry : parentValues.entrySet()) {
@@ -142,14 +141,19 @@ public class ReadCSV {
             }
 
             if (!otherValues.isEmpty()) {
-                List<Type> type = new ArrayList<>();
+                System.out.println(otherValues + "Other Values");
+                List<Class> subClazz = new ArrayList<>();
                 for (Field checkField : fields) {
-                    if (!checkField.getType().isPrimitive() && checkField.getType() != String.class && !type.contains(checkField.getType())) {
-                        type.add(checkField.getType());
+                    if (!checkField.getType().isPrimitive() && checkField.getType() != String.class && !subClazz.contains(checkField.getType())) {
+                        subClazz.add(checkField.getType());
                     }
                 }
-                for (Type t : type)
-                    System.out.println(t);
+
+                for (Class sub : subClazz) {
+
+                }
+
+
             }
 
             Field checkField;
@@ -163,42 +167,38 @@ public class ReadCSV {
             returnObj.add(test);
 
 
-            //Opprettet en instans av hoveobjektet
-            //   T instance = (T)constructor.newInstance();
-
-
         }
         return returnObj;
     }
-}
 
 
+    public <T> T getCompObj(HashMap<String, Integer> otherValues, Class sub) throws NoSuchMethodException, ReflectiveOperationException {
+
+        Constructor<T> constructor = sub.getDeclaredConstructor();
+        Field[] fields = sub.getDeclaredFields();
+        constructor.setAccessible(true);
+        T obj = (T) constructor.newInstance();
 
 
+        for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
+            Field fieldToSet = sub.getDeclaredField(entry.getKey());
+            fieldToSet.setAccessible(true);
+            //fieldToSet.set(obj, (objVal.get(entry.getValue())));
 
 
+        }
 
 
-//    public <T> T getCompObj(HashMap<String, Integer> otherValues) throws NoSuchMethodException, ReflectiveOperationException {
-//
-//        for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
-//
-//
-//
-//        }
-//
-//
-//
-//
 //        Class clazz = field.getType();
 //        Constructor constructor = clazz.getDeclaredConstructor();
 //        constructor.setAccessible(true);
 //        Field[] fields = clazz.getDeclaredFields();
 //
 //        T t = (T)constructor.newInstance(field);
-//
-//        return t;
-//    }
+
+        return obj;
+    }
+}
 
 
 
