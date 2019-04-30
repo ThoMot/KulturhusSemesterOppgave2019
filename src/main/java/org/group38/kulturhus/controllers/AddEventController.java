@@ -62,7 +62,7 @@ public class AddEventController implements MainController {
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
     @FXML private Label createContLb, createEvLb, contLabel;
-    @FXML private Button create, update, createCont, updateCont;
+    @FXML private Button create, update, createContact, updateContact;
 
     //**Methods for opening to different scenes
     @FXML
@@ -76,7 +76,7 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
+            updateContact.setVisible(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,7 +244,6 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
 
 
             loadInfo();
@@ -269,13 +268,13 @@ public class AddEventController implements MainController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
                 loader.setController(this);
                 contactPersonPane.setRight(loader.load());
-                createCont.setVisible(false);
+                setValuesContactPerson();
+                createContact.setVisible(false);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        setValuesContactPerson();
     }
     /*
     The updateContactPersonComplete method tries to set the new values to the selected contactPerson
@@ -300,7 +299,6 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
         }
         catch (NullPointerException e) { errorEmptyFields();}
         catch (Exception e){ errorWrongInput(e.toString());
@@ -326,11 +324,12 @@ public class AddEventController implements MainController {
         else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
             mb.setTitle("Bekreft");
-            mb.setHeaderText("Du har trykket slett på "+ contactPerson.getSelectionModel().getSelectedItem());
-            mb.setContentText("Ønsker du virkerlig å slette dette arrangementet?");
+            mb.setHeaderText("Du har trykket på slett kontaktperson");
+            mb.setContentText("Ønsker du virkerlig å slette denne kontaktpersonen?");
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     ol.remove(contactPerson.getSelectionModel().getSelectedItem());
+                    System.out.println(getContactPeople());
                 }
             });
         }
