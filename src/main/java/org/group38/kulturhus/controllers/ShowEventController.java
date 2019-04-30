@@ -3,6 +3,8 @@ package org.group38.kulturhus.controllers;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,6 +24,7 @@ public class ShowEventController implements MainController{
 
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
+    @FXML private TextField filtering;
 
     /*
     Methods for opening different scenes, and setting the selected event if needed in the next scene.
@@ -68,7 +71,36 @@ public class ShowEventController implements MainController{
         initCols();
         loadData();
         setSelectedEvent(null);
+        filtering();
 
+    }
+    private void filtering(){
+        FilteredList<Event> filteredList = new FilteredList<>(observableList);
+        filtering.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredList.setPredicate(event -> {
+                if(newValue ==null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFiler = newValue.toLowerCase();
+
+                if(event.getEventInfo().getEventName().toLowerCase().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(event.getDate().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(event.getTime().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(event.getFacility().getFacilityName().toLowerCase().contains(lowerCaseFiler)){
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<Event> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(eventsView.comparatorProperty());
+        eventsView.setItems(sortedList);
     }
     //** initCols method is deciding what the table columns shall contain
     private void initCols(){
