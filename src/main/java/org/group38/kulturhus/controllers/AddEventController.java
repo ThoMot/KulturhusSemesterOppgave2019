@@ -62,7 +62,7 @@ public class AddEventController implements MainController {
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
     @FXML private Label createContLb, createEvLb, contLabel;
-    @FXML private Button create, update, createCont, updateCont;
+    @FXML private Button create, update, createContact, updateContact;
 
     //**Methods for opening to different scenes
     @FXML
@@ -76,7 +76,7 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
+            updateContact.setVisible(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -161,6 +161,7 @@ public class AddEventController implements MainController {
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorEmptyFields();
+                } catch (IllegalArgumentException e){ errorDuplicateEvent();
                 } catch (Exception e) { errorWrongInput(e.toString());
                 }
                 //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
@@ -187,6 +188,7 @@ public class AddEventController implements MainController {
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorEmptyFields();
+                } catch (IllegalArgumentException e){ errorDuplicateEvent();
                 } catch (Exception e) { errorWrongInput(e.toString());
                 }
             }
@@ -244,7 +246,6 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
 
 
             loadInfo();
@@ -269,13 +270,13 @@ public class AddEventController implements MainController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/newContact.fxml"));
                 loader.setController(this);
                 contactPersonPane.setRight(loader.load());
-                createCont.setVisible(false);
+                setValuesContactPerson();
+                createContact.setVisible(false);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        setValuesContactPerson();
     }
     /*
     The updateContactPersonComplete method tries to set the new values to the selected contactPerson
@@ -300,7 +301,6 @@ public class AddEventController implements MainController {
             loader.setController(this);
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
-            updateCont.setVisible(false);
         }
         catch (NullPointerException e) { errorEmptyFields();}
         catch (Exception e){ errorWrongInput(e.toString());
@@ -319,9 +319,25 @@ public class AddEventController implements MainController {
         other.setText(thisContactPerson.getNotes());
         webPage.setText(thisContactPerson.getWebPage());
     }
+    public void deleteRow(ActionEvent event){
+        if(contactPerson.getSelectionModel().getSelectedItem()==null){
+            errorNoMarkedEvent();
+        }
+        else{
+            Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
+            mb.setTitle("Bekreft");
+            mb.setHeaderText("Du har trykket på slett kontaktperson");
+            mb.setContentText("Ønsker du virkerlig å slette denne kontaktpersonen?");
+            mb.showAndWait().ifPresent(response -> {
+                if(response==ButtonType.OK){
+                    ol.remove(contactPerson.getSelectionModel().getSelectedItem());
+                    System.out.println(getContactPeople());
+                }
+            });
+        }
+    }
 
     @Override
     public void exit() {
-
     }
 }

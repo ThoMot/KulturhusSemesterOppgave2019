@@ -70,4 +70,12 @@ public class ErrorBoxes {
         mb.show();
     }
 
+    public static void errorDuplicateEvent(){
+        Alert mb = new Alert(Alert.AlertType.INFORMATION);
+        mb.setHeaderText("Dette lokalet er opptatt til angitt tid");
+        mb.setTitle("Opptatt lokale");
+        mb.setContentText("Vennligst velg et annet tidspunkt eller et annet lokale");
+        mb.show();
+    }
+
 }
