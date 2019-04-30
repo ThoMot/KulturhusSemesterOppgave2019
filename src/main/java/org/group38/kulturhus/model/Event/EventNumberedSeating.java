@@ -25,7 +25,10 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
         this.rows = facility.getRows();
         tickets = new ArrayList<>();
     }
-
+/*
+buyTicket method that adds a new ticket to the ArrayList of tickets
+this method also checks if the seat is already taken or if the event is full
+ */
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if (tickets.size() < (rows * columns)) {
             if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
@@ -41,7 +44,7 @@ public class EventNumberedSeating extends Event implements Serializable, CsvBase
             throw new IndexOutOfBoundsException("Arrangementet er fullt");
         }
     }
-
+//**method that retrusn a string of all seats
     public String allSeats(){
         StringJoiner s= new StringJoiner("\t");
         for (Ticket ticket: tickets) {
