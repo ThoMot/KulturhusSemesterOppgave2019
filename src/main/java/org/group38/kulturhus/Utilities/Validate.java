@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model;
+package org.group38.kulturhus.Utilities;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

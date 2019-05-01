@@ -1,16 +1,11 @@
 package org.group38.kulturhus.model.Event;
 
-import org.group38.kulturhus.model.facility.Facility;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
+import static org.group38.kulturhus.Utilities.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
     //data field

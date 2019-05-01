@@ -4,25 +4,16 @@ import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Box;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import org.group38.frameworks.concurrency.WriterThread;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
@@ -35,10 +26,10 @@ import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
-import static org.group38.kulturhus.model.Validate.isNotEmptyString;
+import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
 
 
 
@@ -128,7 +119,7 @@ public class AddEventController implements MainController {
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
     public void createEvent(ActionEvent event) {
 
-        if (contactPerson.getSelectionModel().getSelectedItem() == null) errorEmptyFields();
+        if (contactPerson.getSelectionModel().getSelectedItem() == null) errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         else {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
             if (f.getMaxAntSeats() == 0) {
@@ -147,11 +138,11 @@ public class AddEventController implements MainController {
 
 
 
-                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-                } catch (NullPointerException e) { errorEmptyFields();
-                } catch (IllegalArgumentException e){ errorDuplicateEvent();
-                } catch (Exception e) { errorWrongInput(e.toString());
+                } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
+                } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
+                } catch (IllegalArgumentException e){ errorBox("Opptatt lokale", "Dette lokalet er opptatt til angitt tid", "Vennligst velg et annet tidspunkt eller et annet lokale");
+                } catch (Exception e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
                 }
                 //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
                 String fileName = fileHandler.saveToFile(create.getScene().getWindow());
@@ -174,11 +165,11 @@ public class AddEventController implements MainController {
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
                     visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
                     visiblePause.play();
-                } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-                } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-                } catch (NullPointerException e) { errorEmptyFields();
-                } catch (IllegalArgumentException e){ errorDuplicateEvent();
-                } catch (Exception e) { errorWrongInput(e.toString());
+                } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
+                } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+                } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
+                } catch (IllegalArgumentException e){errorBox("Opptatt lokale", "Dette lokalet er opptatt til angitt tid", "Vennligst velg et annet tidspunkt eller et annet lokale");
+                } catch (Exception e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
                 }
             }
         }
@@ -197,10 +188,10 @@ public class AddEventController implements MainController {
             PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
             visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
             visiblePause.play();
-        } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
-        } catch (NullPointerException e) { errorEmptyFields();
-        } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-        } catch (Exception e){ errorWrongInput(e.toString());
+        } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
+        } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
+        } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
+        } catch (Exception e){ errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
         }
     }
 
@@ -235,9 +226,9 @@ public class AddEventController implements MainController {
 
             loadInfo();
         } catch (NullPointerException e) {
-            errorEmptyFields();
+            errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         } catch (Exception e) {
-            errorWrongInput(e.toString());
+            errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
         }
     }
 
@@ -245,7 +236,7 @@ public class AddEventController implements MainController {
     setter method for selected contactPerson.*/
     public void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedContactPerson();
+            errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }
         else{
             setThisContactPerson((ContactPerson)contactPerson.getSelectionModel().getSelectedItem());
@@ -283,8 +274,8 @@ public class AddEventController implements MainController {
             contactPersonPane.setRight(loader.load());
             setThisContactPerson(null);
         }
-        catch (NullPointerException e) { errorEmptyFields();}
-        catch (Exception e){ errorWrongInput(e.toString());
+        catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");}
+        catch (Exception e){ errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
         }
     }
     /**The setValueContactPerson method is used for adding the information from
@@ -302,7 +293,7 @@ public class AddEventController implements MainController {
      * if the user presses ok, the contactPerson selected is deleted */
     public void deleteRow(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }
         else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);

@@ -13,7 +13,7 @@ import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
-import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
+import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
@@ -34,7 +34,7 @@ public class ShowEventController implements MainController{
     private void goToShowVenue(ActionEvent event){ SceneManager.navigate(SceneName.SHOWVENUE); }
     public void goToVisInfo(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
         }
         else {
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -43,7 +43,7 @@ public class ShowEventController implements MainController{
     }
     public void goToBuyTicket(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
         }
         else{
             setSelectedTicket(null);
@@ -53,7 +53,7 @@ public class ShowEventController implements MainController{
     }
     public void goToCreateEvent(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
         }
         else{
             setSelectedEvent(eventsView.getSelectionModel().getSelectedItem());
@@ -119,7 +119,7 @@ public class ShowEventController implements MainController{
     *user presses the ok button.*/
     public void deleteRow(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
         }
         else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);

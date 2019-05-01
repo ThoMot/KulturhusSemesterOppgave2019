@@ -1,28 +1,18 @@
 package org.group38.kulturhus.controllers;
 
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
-import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 
-import static org.group38.kulturhus.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
@@ -116,24 +106,26 @@ public class AddTicketController implements MainController{
 
     public void updateTicket(ActionEvent event) {
         if (thisTicket == null) {
-            errorNoEvent();
+            errorBox("Kan ikke endre et objekt som ikke eksisterer", "Ingen arrangement valgt", "Gå til arrangementoversikten for å velge\n" +
+                    "et arrangement du vil redigere");
         } else {
             try {
                 thisTicket.setRow(Integer.parseInt(row.getText()));
                 thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
                 thisTicket.setPhonenumber(phoneNumber.getText());
                 SceneManager.navigate(SceneName.SHOWTICKET);
-            } catch (NumberFormatException e) { errorWrongInput("Raden må være mellom 0 og " + thisEvent.getFacility().getRows() +
-                        " og setenummer mellom 0 og " + thisEvent.getFacility().getColumns());
-            } catch (NullPointerException e) { errorEmptyFields();
-            } catch (Exception e){ errorWrongInput(e.toString());
+            } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\n\"Raden må være mellom 0 og" + thisEvent.getFacility().getRows() +"\n" +
+                    "                        og setenummer mellom 0 og "+ thisEvent.getFacility().getColumns());
+            } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
+            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
             }
         }
     }
 
     public void createTicket(ActionEvent event) {
         if (thisTicket != null) {
-            errorDuplicate();
+            errorBox("Feil", "Et objekt er allerede valg", "Du kan ikke opprette et nytt objekt når et annet er valgt \n " +
+                    "vennligst gå tilbake til arrangementoversikten\n for å fjerne markering av billetten");
         } else {
             if(thisEvent instanceof EventFreeSeating){
                 ((EventFreeSeating) thisEvent).buyTicket(phoneNumber.getText());
