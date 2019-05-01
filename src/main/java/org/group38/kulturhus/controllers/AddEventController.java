@@ -54,7 +54,7 @@ public class AddEventController implements MainController {
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
     private FileHandler fileHandler = new FileHandler();
-    @FXML private TextField eventName, artist, ticketPrice, time, type; //addEvent
+    @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
     @FXML private TextArea programInfo, other;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
     @FXML private DatePicker date;
@@ -131,7 +131,6 @@ public class AddEventController implements MainController {
         date.setValue(thisEvent.getDate());
         facility.getSelectionModel().select(thisEvent.getFacility());
         time.setText(thisEvent.getTime().toString());
-        type.setText(thisEvent.getType());
         contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
     }
     /*
@@ -147,7 +146,7 @@ public class AddEventController implements MainController {
                 try {
 
 
-                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
 
@@ -180,7 +179,7 @@ public class AddEventController implements MainController {
 
             } else if (f.getMaxAntSeats() != 0) {
                 try {
-                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), type.getText(), date.getValue(), LocalTime.parse(time.getText()));
+                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
                     createEvLb.setVisible(true);
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
