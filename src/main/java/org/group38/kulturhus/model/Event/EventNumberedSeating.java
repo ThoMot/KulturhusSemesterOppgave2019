@@ -111,13 +111,6 @@ public class EventNumberedSeating extends Event implements Serializable {
         }
     }
     /** remaining setter and getter methods*/
-    public int getColumns() {
-        return columns;
-    }
-
-    public int getRows() {
-        return rows;
-    }
 
     public ArrayList<Ticket> getTickets() {
         return tickets;

@@ -1,2 +1,3 @@
-FacilityName;FacilityType;MaxAntSeats;Rows;Columns
-Sal 1;Kinosal;0;10;20;
+Class;FacilityName;FacilityType;MaxAntSeats;Rows;Columns
+org.group38.kulturhus.model.facility.Facility;Sal 1;Kinosal;0;10;20;
+org.group38.kulturhus.model.facility.Facility;Sal 2;Kinosal;30;0;0;

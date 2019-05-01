@@ -15,6 +15,9 @@ public class EventInfo implements Serializable {
     private String type;
 
 
+    private EventInfo(){
+    }
+
 /** this constructor checks for valid input before creating an object*/
     public EventInfo(String eventName, String program, String performer, String type, LocalDate date, LocalTime time) {
         if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");

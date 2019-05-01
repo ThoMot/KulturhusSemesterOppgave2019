@@ -90,10 +90,6 @@ public abstract class Event implements Serializable {
         return facility.getFacilityName();
     }
 
-    public int getMaxSeats(){
-        return facility.getMaxAntSeats();
-    }
-
     public String getType() { return getEventInfo().getType(); }
 
     public void setTicketPrice(double ticketPrice) {
