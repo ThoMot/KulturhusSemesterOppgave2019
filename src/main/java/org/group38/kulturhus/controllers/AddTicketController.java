@@ -28,14 +28,21 @@ import static org.group38.kulturhus.controllers.ShowEventController.setSelectedE
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
 
 public class AddTicketController implements MainController{
-    private Event thisEvent;
     private Event event = getSelectedEvent();
     private Ticket thisTicket=getSelectedTicket();
-
+    private Event thisEvent;
 
     @FXML
-    private Label dateTime, eventTitle, ticketPrice;
+    private Label dateTime, eventTitle, seatRowInfoText, seatsList;
 
+    @FXML
+    private TextField row, seatNumber, phoneNumber;
+
+    @FXML
+    private Button create, update;
+
+    /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
+     *it also shows an errormessage in an alert if there is no selected event*/
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
         setSelectedEvent(null);
@@ -58,49 +65,19 @@ public class AddTicketController implements MainController{
     }
 
 
-    public void setThisEvent(Event thisEvent) {
-        this.thisEvent = thisEvent;
-    }
-    public void setEventInfo(){
-        eventTitle.setText(thisEvent.getEventInfo().getEventName());
-        dateTime.setText(thisEvent.getEventInfo().getDate().toString()+", "+thisEvent.getEventInfo().getTime().toString());
-    }
 
-    @FXML
-    private Label seatRowInfoText;
-    @FXML
-    private TextField row;
+    /*SLETTES?*/
+//    public void buyTicket(){
+//        if(event instanceof EventNumberedSeating){
+//            ((EventNumberedSeating) event).buyTicket(Integer.parseInt(row.getText()),Integer.parseInt(seatNumber.getText()),phoneNumber.getText());
+//        }
+//        else if(event instanceof EventFreeSeating){
+//            ((EventFreeSeating) event).buyTicket(phoneNumber.getText());
+//        }
+//        System.out.println(getSelectedEvent().getTickets());
+//    }
 
-    @FXML
-    private TextField seatNumber;
 
-    @FXML
-    private TextField phoneNumber;
-
-    @FXML
-    private Label seatsList;
-
-    @FXML private Button create, update;
-
-    public void showFreeSeats(){
-        //seatsFlowPane.setText(getSelectedEvent().freeSeats());
-        if(thisEvent instanceof EventNumberedSeating) seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
-    }
-
-    public void buyTicket(){
-        if(event instanceof EventNumberedSeating){
-            ((EventNumberedSeating) event).buyTicket(Integer.parseInt(row.getText()),Integer.parseInt(seatNumber.getText()),phoneNumber.getText());
-        }
-        else if(event instanceof EventFreeSeating){
-            ((EventFreeSeating) event).buyTicket(phoneNumber.getText());
-        }
-        System.out.println(getSelectedEvent().getTickets());
-    }
-    private void setTicketInfo(){
-        row.setText(thisTicket.getRow().toString());
-        seatNumber.setText(thisTicket.getSeat().toString());
-        phoneNumber.setText(thisTicket.getPhonenumber());
-    }
 
     public void initialize() {
     setThisEvent(getSelectedEvent());
@@ -124,94 +101,31 @@ public class AddTicketController implements MainController{
         }
 
     }
-
-//    public void createEvent(ActionEvent event) {
-//
-//        if (thisTicket != null) {
-//            errorBox("Feil", "Et objekt er allerede valg", "Du kan ikke opprette et nytt objekt når et annet er valgt \n " +
-//                    "vennligst gå tilbake til arrangementoversikten\n for å fjerne markering av billetten");
-//        } else {
-//            Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
-//            if (f.getMaxAntSeats() == 0) {
-//                try {
-//
-//                    if(thisEvent instanceof EventFreeSeating){
-//                        ((EventFreeSeating) thisEvent).buyTicket(phoneNumber.getText());
-//                        SceneManager.navigate(SceneName.SHOWTICKET);
-//                    }
-//                    if(thisEvent instanceof EventNumberedSeating){
-//                        ((EventNumberedSeating) thisEvent).buyTicket(Integer.parseInt(row.getText()),
-//                                Integer.parseInt(seatNumber.getText()),phoneNumber.getText());
-//                        SceneManager.navigate(SceneName.SHOWTICKET);
-//                    }
-//
-
-//                    createEvLb.setVisible(true);
-//                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-//                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-//                    visiblePause.play();
-
-
-
-//                } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
-//                } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-//                } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
-//                } catch (IllegalArgumentException e){ errorBox("Opptatt lokale", "Dette lokalet er opptatt til angitt tid", "Vennligst velg et annet tidspunkt eller et annet lokale");
-//                } catch (Exception e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
-//                }
-//                //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
-//                String fileName = fileHandler.saveToFile(create.getScene().getWindow());
-//                if( fileName != null) {
-//                    try {
-//
-//                        //TODO Ikke optimalt å gjøre denne om til observable list...?
-//                        ObservableList<Event> events = FXCollections.observableArrayList(geTickets());
-//                        WriterThreadRunner.WriterThreadRunner(events, fileName);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//            } else if (f.getMaxAntSeats() != 0) {
-//                try {
-//                    EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
-//                    getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-//                    createEvLb.setVisible(true);
-//                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-//                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-//                    visiblePause.play();
-//                } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
-//                } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
-//                } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
-//                } catch (IllegalArgumentException e){errorBox("Opptatt lokale", "Dette lokalet er opptatt til angitt tid", "Vennligst velg et annet tidspunkt eller et annet lokale");
-//                } catch (Exception e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
-//                }
-//            }
-//        }
-//    }
-
-    public void updateTicket(ActionEvent event) {
-        if (thisTicket == null) {
-            errorBox("Kan ikke endre et objekt som ikke eksisterer", "Ingen arrangement valgt", "Gå til arrangementoversikten for å velge\n" +
-                    "et arrangement du vil redigere");
-        } else {
-            try {
-                thisTicket.setRow(Integer.parseInt(row.getText()));
-                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
-                thisTicket.setPhonenumber(phoneNumber.getText());
-                SceneManager.navigate(SceneName.SHOWTICKET);
-            } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\n\"Raden må være mellom 0 og" + thisEvent.getFacility().getRows() +"\n" +
-                    "                        og setenummer mellom 0 og "+ thisEvent.getFacility().getColumns());
-            } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
-            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
-            }
-        }
+    public void setThisEvent(Event thisEvent) {
+        this.thisEvent = thisEvent;
     }
 
+    public void setEventInfo(){
+        eventTitle.setText(thisEvent.getEventInfo().getEventName());
+        dateTime.setText(thisEvent.getEventInfo().getDate().toString()+", "+thisEvent.getEventInfo().getTime().toString());
+    }
+    private void setTicketInfo(){
+        row.setText(thisTicket.getRow().toString());
+        seatNumber.setText(thisTicket.getSeat().toString());
+        phoneNumber.setText(thisTicket.getPhonenumber());
+    }
+    public void showFreeSeats(){
+        if(thisEvent instanceof EventNumberedSeating) seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
+    }
+
+    /**createEvent checks if there was already an event selected and in that case shows an error.
+     * If not the method proceeds to check what kind of event is created. The method throws exceptions from missing
+     * input, and wrong input. If no exceptions are thrown, an event is created.*/
     public void createTicket(ActionEvent event) {
         if  (thisTicket != null) {
-            errorBox("Feil", "Et objekt er allerede valg", "Du kan ikke opprette et nytt objekt når et annet er valgt \n " +
-                    "vennligst gå tilbake til arrangementoversikten\n for å fjerne markering av billetten");
+            errorBox("Feil", "Et objekt er allerede valg", "Du kan ikke opprette et nytt objekt " +
+                    "når et annet er valgt \nvennligst gå tilbake til arrangementoversikten" +
+                    "\n for å fjerne markering av billetten");
         } else {
             try {
                 if (thisEvent instanceof EventFreeSeating) {
@@ -239,7 +153,30 @@ public class AddTicketController implements MainController{
             } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format");
             }
+        }
+    }
 
+    /** updateEvent() tries to update an event if selected in showEvent scene.
+     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
+    public void updateTicket(ActionEvent event) {
+        if (thisTicket == null) {
+            errorBox("Kan ikke endre et objekt som ikke eksisterer", "Ingen arrangement valgt",
+                    "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
+        } else {
+            try {
+                thisTicket.setRow(Integer.parseInt(row.getText()));
+                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
+                thisTicket.setPhonenumber(phoneNumber.getText());
+                SceneManager.navigate(SceneName.SHOWTICKET);
+            } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
+                    "Vennligst sørg for at alle felter har riktig format" +
+                            "\nRaden må være mellom 0 og" + thisEvent.getFacility().getRows() +
+                            "\nog setenummer mellom 0 og "+ thisEvent.getFacility().getColumns());
+            } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt",
+                    "Vennligst fyll ut alle felter før du fortsetter");
+            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
+                    "Vennligst sørg for at alle felter har riktig format");
+            }
         }
     }
 
