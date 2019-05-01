@@ -65,6 +65,7 @@ public class AddEventController implements MainController {
     @FXML private Label createContLb, createEvLb, contLabel;
     @FXML private Button create, update, createContact, updateContact;
 
+
     /**Methods for opening to different scenes*/
     @FXML
     private void goToShowEvent(ActionEvent event){ SceneManager.navigate(SceneName.SHOWEVENT); }
@@ -83,6 +84,8 @@ public class AddEventController implements MainController {
             e.printStackTrace();
         }
     }
+
+
     /**The initialize method runs when the scene is opened,
     * This method loads the info from other methods, and uses the setSelectedEvent()
     * to add a reference to the event selected in the showEvent scene if chosen*/
@@ -133,19 +136,13 @@ public class AddEventController implements MainController {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
             if (f.getMaxAntSeats() == 0) {
                 try {
-
-
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-
-
 
                     createEvLb.setVisible(true);
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
                     visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
                     visiblePause.play();
-
-
 
                 } catch (NumberFormatException e) { errorWrongInput("Billettprisen må være en double \n Skriv prisen på følgende format\n 000.0");
                 } catch (DateTimeParseException e) { errorWrongInput("Tiden er på feil format\n Tiden skal være på følgende format\n TT:mm");

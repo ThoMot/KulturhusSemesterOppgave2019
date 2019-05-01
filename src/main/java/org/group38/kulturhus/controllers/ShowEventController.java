@@ -9,9 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
+
+import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
@@ -111,8 +116,15 @@ public class ShowEventController implements MainController{
 
     /**The loadData method adds all the events from the list in Kulturhus to the tableview*/
     private void loadData(){
-        observableList = FXCollections.observableList(getEvents());
-        eventsView.setItems(observableList);
+        observableList = eventsView.getItems();
+
+        try {
+            observableList.addAll(ReaderThreadRunner.startReader("Event.csv"));
+            System.out.println(observableList);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
     /**The deleteRow method checks if an event is selected, or else shows an errorMessage.
     *If a field is selected, shows a confirmation alert, and then deletes the event if the
@@ -129,9 +141,19 @@ public class ShowEventController implements MainController{
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
+
+                    File file = new File("Event.csv");
+                    file.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(observableList, "Event.csv");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
+
+
     }
     /**setter and getter for the selectedEvent*/
     public static void setSelectedEvent(Event selectedEvent) {

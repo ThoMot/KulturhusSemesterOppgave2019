@@ -101,10 +101,14 @@ public class Ticket implements Serializable {
         this.seat = seat;
     }
 
+    public UUID getEventId() { return eventId; }
+
+
     @Override
     public String toString() {
         return "Ticket{" +
-                "price=" + price +
+                "eventId=" + eventId +
+                ", price=" + price +
                 ", phonenumber='" + phonenumber + '\'' +
                 ", row=" + row +
                 ", seat=" + seat +
@@ -112,6 +116,4 @@ public class Ticket implements Serializable {
                 ", time=" + time +
                 '}';
     }
-
-
 }
