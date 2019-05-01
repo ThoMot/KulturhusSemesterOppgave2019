@@ -7,13 +7,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
     //data field
-    private AtomicInteger eventId;
+    private UUID eventId;
     private double price;
     private String phonenumber;
     private int row;
@@ -24,7 +25,7 @@ public class Ticket implements Serializable {
     private Ticket(){
     }
     //constructor
-    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId, double price) {
+    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
         this.phonenumber = phoneNumber;
@@ -34,7 +35,7 @@ public class Ticket implements Serializable {
         this.eventId=eventId;
         this.price =price;
     }
-    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, AtomicInteger eventId) {
+    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber=phoneNumber;
         this.price=price;

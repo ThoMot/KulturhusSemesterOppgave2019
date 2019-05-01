@@ -79,5 +79,10 @@ package org.group38.kulturhus.model.SaveLoad;
         } else return null;
     }
 
+    public static boolean isBigObject(Class clazz) {
+        return  (clazz.getName().equals(ens) || clazz.getName().equals(efs));
+    }
+
+
 
 }

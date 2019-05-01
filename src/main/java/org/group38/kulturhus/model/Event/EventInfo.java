@@ -1,11 +1,12 @@
 package org.group38.kulturhus.model.Event;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.group38.kulturhus.model.Validate.isNotEmptyString;
 
-public class EventInfo {
+public class EventInfo implements Serializable {
     private String eventName;
     private String program;
     private String performer;

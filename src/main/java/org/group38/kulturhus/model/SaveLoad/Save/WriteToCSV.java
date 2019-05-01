@@ -8,6 +8,7 @@ import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.SaveLoad.Templates;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -67,18 +68,13 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
                     }
             }
         }
-        System.out.println("DENNE HER");
-        System.out.println(Arrays.toString(mid));
         try {
-            System.out.println(sb + "dette er stringen");
+            sb.append(object.getClass().getName());
+            sb.append(";");
             for (Method method : mid) {
-                System.out.println(Arrays.toString(mid));
-           //     System.out.println(method.invoke(object));
                 if(method.invoke(object) == null){
                     sb.append("-");
                 } else sb.append(method.invoke(object).toString());
-                System.out.println(method + " " + "denne funket");
-                System.out.println(sb);
                 sb.append(";");
             }
             sb.append("\n");
@@ -93,6 +89,8 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
         FileWriter fileWriter = null;
         String[] patterns = Templates.getterPattern(object.getClass());
         StringBuilder sb = new StringBuilder();
+        sb.append("Class");
+        sb.append(";");
 
         for(String pattern : patterns){
             sb.append(pattern.substring(3));
@@ -123,6 +121,9 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
 
 
     public <T> void writeObjects(ObservableList<T> objects, String filename) throws IOException {
+        File file = new File(filename);
+
+
         FileWriter fileWriter = null;
         final String nextline = "\n";
         String[] pattern;
@@ -156,7 +157,9 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
 //Skriv til fil
             try {
                 //TODO sjekk om filen er skrevet i fra før.
-                writeHeaders(object, filename);
+                if (file.length() == 0) {
+                    writeHeaders(object, filename);
+                }
                 save.deleteCharAt(save.length() - 1);
                 fileWriter = new FileWriter(filename, true);
                 fileWriter.write(save.toString());

@@ -30,9 +30,13 @@ public class CsvParser {
             headers = Arrays.asList(head);
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(";");
-                if (values.length == headers.size()) {
+                System.out.println(values.length + " values " + headers.size() + " header size");
+                System.out.println(Arrays.toString(values));
+                System.out.println(headers);
+                //TODO FINN EN MÅTE Å SJEKKE FOR BEGGE DE TO EVENT TYPENE
+              //  if (values.length == headers.size()) {
                     records.add(Arrays.asList(values));
-                } else throw new ParsingException("CSV-File has wrong format");
+                //} else throw new ParsingException("CSV-File has wrong format");
             }
 
         } catch (IOException e) {

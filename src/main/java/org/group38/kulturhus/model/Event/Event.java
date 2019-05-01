@@ -3,16 +3,17 @@ package org.group38.kulturhus.model.Event;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.UUID;
 
 import static org.group38.kulturhus.model.Kulturhus.getEvents;
 
 
-public abstract class Event {
-    private final AtomicInteger eventId=new AtomicInteger();
+public abstract class Event implements Serializable {
+    private UUID eventId;
     private ContactPerson contactPerson;
     private Facility facility;
     private EventInfo eventInfo;
@@ -32,6 +33,7 @@ public abstract class Event {
         this.ticketPrice = ticketPrice;
         this.contactPerson = contactPerson;
         this.eventInfo = eventInfo;
+        this.eventId = UUID.randomUUID();
     }
     /*
     This method checks for already existing events in the given time in the given facility
@@ -107,7 +109,7 @@ public abstract class Event {
     }
 
 
-    public AtomicInteger getEventId() {
+    public UUID getEventId() {
         return eventId;
     }
 
