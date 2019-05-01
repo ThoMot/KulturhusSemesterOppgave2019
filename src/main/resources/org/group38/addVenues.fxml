@@ -23,15 +23,21 @@
         <VBox alignment="TOP_CENTER">
             <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
                 <menus>
-                    <Menu text="Arrangement">
+                    <Menu mnemonicParsing="false" text="Arrangement">
                         <items>
-                            <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
-                            <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Opprett arrangement" />
+                            <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Add..." />
+                            <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Billett">
+                        <items>
+                            <MenuItem fx:id="addTicket" mnemonicParsing="false" onAction="#goToAddTicket" text="Add.." />
+                            <MenuItem fx:id="showTicket" mnemonicParsing="false" onAction="#goToShowTicket" text="Show..." />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Lokale">
                         <items>
-                            <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
+                            <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Show..." />
                         </items>
                     </Menu>
                 </menus>
@@ -54,8 +60,8 @@
             </Label>
             <GridPane prefHeight="92.0" prefWidth="748.0">
               <columnConstraints>
-                <ColumnConstraints fillWidth="false" maxWidth="495.0" minWidth="0.0" prefWidth="99.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="873.0" minWidth="10.0" prefWidth="281.5" />
+                <ColumnConstraints fillWidth="false" maxWidth="495.0" minWidth="0.0" prefWidth="112.93667602539062" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="873.0" minWidth="10.0" prefWidth="268.0633239746094" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="873.0" minWidth="10.0" prefWidth="559.3484802246094" />
               </columnConstraints>
               <rowConstraints>
@@ -77,28 +83,21 @@
             </GridPane>
             <HBox prefHeight="79.0" prefWidth="960.0">
                <children>
-                  <GridPane prefHeight="76.0" prefWidth="342.0">
+                  <GridPane prefHeight="80.0" prefWidth="261.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.04977416992188" minWidth="10.0" prefWidth="103.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.04977416992188" minWidth="10.0" prefWidth="90.5" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.1764144897461" minWidth="10.0" prefWidth="88.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.1764144897461" minWidth="10.0" prefWidth="65.5" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.04977416992188" minWidth="10.0" prefWidth="97.21483612060547" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.1764144897461" minWidth="10.0" prefWidth="100.61528015136719" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.1764144897461" minWidth="10.0" prefWidth="81.38471984863281" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="45.049774169921875" minHeight="10.0" prefHeight="31.436676025390625" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="68.56332397460938" minHeight="10.0" prefHeight="68.56332397460938" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Antall rader" GridPane.columnIndex="1" />
-                        <Label prefHeight="15.0" prefWidth="177.0" text="Antall seter per rad" GridPane.columnIndex="2" GridPane.columnSpan="2">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin></Label>
+                        <Label text="Antall rader" />
+                        <Label text="Antall seter per rad" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                        <Spinner GridPane.rowIndex="1" />
                         <Spinner GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Spinner GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin></Spinner>
                      </children>
                   </GridPane>
                   <GridPane prefHeight="102.0" prefWidth="153.0">
@@ -119,7 +118,7 @@
                   </GridPane>
                </children>
             </HBox>
-             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+             <HBox prefHeight="100.0" prefWidth="200.0">
                  <children>
                      <Button text="Opprett billett" />
                      <Button mnemonicParsing="false" text="Oppdater billett">
