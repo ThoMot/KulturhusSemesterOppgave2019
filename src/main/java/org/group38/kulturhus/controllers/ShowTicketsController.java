@@ -144,13 +144,13 @@ public class ShowTicketsController implements MainController {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if(thisTicket.getPhonenumber().toLowerCase().contains(lowerCaseFilter)){
+                if(ticket.getPhonenumber().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getRow().toString().contains(lowerCaseFilter)){
+                else if(ticket.getRow().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getSeat().toString().contains(lowerCaseFilter)){
+                else if(ticket.getSeat().toString().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;
