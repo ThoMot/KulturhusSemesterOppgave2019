@@ -85,18 +85,18 @@ public class ShowEventController implements MainController{
                 if(newValue ==null || newValue.isEmpty()){
                     return true;
                 }
-                String lowerCaseFiler = newValue.toLowerCase();
+                String lowerCaseFilter = newValue.toLowerCase();
 
-                if(event.getEventInfo().getEventName().toLowerCase().contains(lowerCaseFiler)){
+                if(event.getEventInfo().getEventName().toLowerCase().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getDate().toString().contains(lowerCaseFiler)){
+                else if(event.getDate().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getTime().toString().contains(lowerCaseFiler)){
+                else if(event.getTime().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getFacility().getFacilityName().toLowerCase().contains(lowerCaseFiler)){
+                else if(event.getFacility().getFacilityName().toLowerCase().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;
