@@ -1,19 +1,30 @@
 package org.group38.kulturhus.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import org.group38.kulturhus.model.Event.Event;
+import org.group38.kulturhus.model.Event.Ticket;
+import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
 public class ShowVenueController implements MainController {
+    private ObservableList<Facility> observableList;
+    private Event thisEvent;
 
     @FXML
-    private TableView tableView;
+    private TableView<Facility> facilitiesView;
+
+    @FXML
+    private TableColumn<Ticket,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn;
 
     @FXML
     private void goToAddTicket(ActionEvent event){
@@ -36,16 +47,32 @@ public class ShowVenueController implements MainController {
         SceneManager.navigate(SceneName.SHOWEVENT);
     }
 
+    @FXML
+    private void goToAddVenue(ActionEvent event){
+        SceneManager.navigate(SceneName.ADDVENUE);
+    }
+
+
+
 
     @Override
     public void exit() {
 
     }
     public void initialize() {
-        setSelectedEvent(null);
-//        tableView.getItems().setAll(getEvents());
-//        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        tableView.getSelectionModel().selectFirst();
+        loadData();
+
+
+    }
+
+    /** loadData() adds all the tickets from the list in Kulturhus into TableView */
+    private void loadData(){
+        observableList = FXCollections.observableList(getFacilities());
+        facilitiesView.setItems(observableList);
+    }
+
+    /** initCols() inputs information gathered in load to place where in scene/fxml-file */
+    private void initCols(){
 
     }
 }

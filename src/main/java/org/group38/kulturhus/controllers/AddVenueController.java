@@ -27,4 +27,6 @@ public class AddVenueController {
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
+
+
 }
