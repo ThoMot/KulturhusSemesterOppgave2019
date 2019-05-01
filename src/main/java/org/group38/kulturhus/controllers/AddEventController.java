@@ -184,10 +184,12 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
             thisEvent.getEventInfo().setPerformers(artist.getText());
             thisEvent.getEventInfo().setProgram(programInfo.getText());
+
             createEvLb.setVisible(true);
             PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
             visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
             visiblePause.play();
+
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
         } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
