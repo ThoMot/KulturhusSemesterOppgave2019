@@ -1,5 +1,14 @@
 package org.group38.kulturhus.Utilities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,5 +52,8 @@ public class Validate {
         if(str != null && !str.isEmpty()) return true;
         else return false;
     }
+    public static boolean isValidDate(String date) {
+            return true;
+        }
 }
 

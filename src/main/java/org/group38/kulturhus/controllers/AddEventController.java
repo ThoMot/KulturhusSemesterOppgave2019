@@ -136,7 +136,7 @@ public class AddEventController implements MainController {
                     visiblePause.play();
 
 
-
+                } catch (IllegalStateException e){errorBox("Feil dato format", "Formatet du har valgt for dato er feil", "Vennligst benytt datovelgeren for å bestemme en dato");
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
                 } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -164,6 +164,7 @@ public class AddEventController implements MainController {
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
                     visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
                     visiblePause.play();
+                } catch (IllegalStateException e){errorBox("Feil dato format", "Formatet du har valgt for dato er feil", "Vennligst benytt datovelgeren for å bestemme en dato");
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
                 } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -188,7 +189,7 @@ public class AddEventController implements MainController {
             PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
             visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
             visiblePause.play();
-
+        } catch (IllegalStateException e){errorBox("Feil dato format", "Formatet du har valgt for dato er feil", "Vennligst benytt datovelgeren for å bestemme en dato");
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
         } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
