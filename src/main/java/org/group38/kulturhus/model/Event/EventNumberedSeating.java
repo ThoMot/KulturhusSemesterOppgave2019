@@ -39,7 +39,7 @@ public class EventNumberedSeating extends Event implements Serializable {
                     throw new IllegalArgumentException("Setet er allerede opptatt");
                 }
             }
-            tickets.add(new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId(), getTicketPrice()));
+            tickets.add(new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId(), getTicketPrice(),getFacility().getFacilityName()));
         }
         else {
             throw new IndexOutOfBoundsException("Arrangementet er fullt");

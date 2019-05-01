@@ -3,6 +3,8 @@ package org.group38.kulturhus.controllers;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,6 +27,7 @@ public class ShowTicketsController implements MainController {
     private ObservableList<Ticket> observableList;
     private static Ticket selectedTicket;
     private Event thisEvent;
+    private Ticket thisTicket=getSelectedTicket();
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -33,6 +36,9 @@ public class ShowTicketsController implements MainController {
 
     @FXML
     private TableView<Ticket> ticketsView;
+
+    @FXML
+    private TextField filtering;
 
 
     @FXML
@@ -173,6 +179,32 @@ public class ShowTicketsController implements MainController {
     }
     public static Ticket getSelectedTicket(){
         return selectedTicket;
+    }
+
+    private void filtering(){
+        FilteredList<Ticket> filteredList = new FilteredList<>(observableList);
+        filtering.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredList.setPredicate(ticket -> {
+                if(newValue ==null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFiler = newValue.toLowerCase();
+
+                if(thisTicket.getPhonenumber().toLowerCase().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(thisTicket.getRow().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(thisTicket.getSeat().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<Ticket> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(ticketsView.comparatorProperty());
+        ticketsView.setItems(sortedList);
     }
 
 

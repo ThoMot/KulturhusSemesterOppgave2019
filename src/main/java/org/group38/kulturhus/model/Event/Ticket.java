@@ -14,13 +14,14 @@ public class Ticket implements Serializable {
     private String phonenumber;
     private int row;
     private int seat;
+    private String facility;
     LocalDate date;
     LocalTime time;
 
     private Ticket(){
     }
     //constructor
-    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price) {
+    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
         this.phonenumber = phoneNumber;
@@ -29,14 +30,16 @@ public class Ticket implements Serializable {
         this.time=time;
         this.eventId=eventId;
         this.price =price;
+        this.facility = facility;
     }
-    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId) {
+    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber=phoneNumber;
         this.price=price;
         this.date=date;
         this.time=time;
         this.eventId=eventId;
+        this.facility = facility;
     }
 
     public String getPhonenumber() {

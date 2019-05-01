@@ -175,8 +175,8 @@
          </Pane>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                           <Button alignment="CENTER" onAction="#createTicket" text="Opprett billett" />
-               <Button onAction="#updateTicket" mnemonicParsing="false" text="Oppdater billett">
+                <Button fx:id="create" alignment="CENTER" onAction="#createTicket" text="Opprett billett" />
+                <Button fx:id="update" onAction="#updateTicket" mnemonicParsing="false" text="Oppdater billett">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>

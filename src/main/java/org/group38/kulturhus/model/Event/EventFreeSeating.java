@@ -24,7 +24,7 @@ public class EventFreeSeating extends Event implements Serializable {
     *and if it's not full, adds a ticket to the ArrayList of tickets.*/
     public void buyTicket(String phoneNumber){
         if(tickets.size()<maxSeats){
-            tickets.add(new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId()));
+            tickets.add(new Ticket(getTicketPrice(), phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId(),getFacility().getFacilityName()));
         }
         else{
             throw new ArrayIndexOutOfBoundsException("Arrangementet er fullt");
