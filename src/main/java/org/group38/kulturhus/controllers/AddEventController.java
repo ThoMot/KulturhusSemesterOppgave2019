@@ -65,7 +65,7 @@ public class AddEventController implements MainController {
     @FXML private Label createContLb, createEvLb, contLabel;
     @FXML private Button create, update, createContact, updateContact;
 
-    //**Methods for opening to different scenes
+    /**Methods for opening to different scenes*/
     @FXML
     private void goToShowEvent(ActionEvent event){ SceneManager.navigate(SceneName.SHOWEVENT); }
     @FXML
@@ -83,16 +83,9 @@ public class AddEventController implements MainController {
             e.printStackTrace();
         }
     }
-
-    //**Setting the event to the event chosen in showEventController
-    public void setThisEvent(Event thisEvent) {
-        this.thisEvent = thisEvent;
-    }
-    /*
-    The initialize method runs when the scene is opened,
+    /**The initialize method runs when the scene is opened,
     * This method loads the info from other methods, and uses the setSelectedEvent()
-    * to add a reference to the event selected in the showEvent scene if chosen
-    */
+    * to add a reference to the event selected in the showEvent scene if chosen*/
     public void initialize() {
         initCols();
         loadInfo();
@@ -105,13 +98,13 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
-    //** initCols method is deciding what the table columns shall contain
+    /** initCols method is deciding what the table columns shall contain*/
     private void initCols(){
         firstNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLastName()));
         phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getContactInfo().getPhoneNr()));
     }
-    //**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview
+    /**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview*/
     private void loadInfo(){
         ol = FXCollections.observableList(getContactPeople());
         contactPerson.setItems(ol);
@@ -119,10 +112,8 @@ public class AddEventController implements MainController {
         ol2 = FXCollections.observableList(getFacilities());
         facility.setItems(ol2);
     }
-    /*
-    The setValue method adds the information from the event selected in showEvent scene if one was selected
-    and adds it to the boxes in the showEvent scene.
-     */
+    /**The setValue method adds the information from the event selected in showEvent scene if one was selected
+    *and adds it to the boxes in the showEvent scene.*/
     private void setValues(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         artist.setText(thisEvent.getEventInfo().getPerformer());
@@ -133,10 +124,8 @@ public class AddEventController implements MainController {
         time.setText(thisEvent.getTime().toString());
         contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
     }
-    /*
-    createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
-    to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.
-     */
+    /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
+    *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
     public void createEvent(ActionEvent event) {
 
         if (contactPerson.getSelectionModel().getSelectedItem() == null) errorEmptyFields();
@@ -194,10 +183,8 @@ public class AddEventController implements MainController {
             }
         }
     }
-    /*
-    updateEvent tries to update an event if selected in showeEvent scene.
-    This method throws exceptions for wrong input and missing input and displays it in an alert box.
-     */
+    /**updateEvent tries to update an event if selected in showeEvent scene.
+    *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
     public void updateEvent(ActionEvent event) {
         try {
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
@@ -220,11 +207,9 @@ public class AddEventController implements MainController {
     public void setThisContactPerson(ContactPerson thisContactPerson) {
         this.thisContactPerson = thisContactPerson;
     }
-    /*
-    The createContactPerson method tries to create a contactPerson and throws an exception
-    if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
-    contactPerson is created, the createContact scene is closed.
-     */
+    /**The createContactPerson method tries to create a contactPerson and throws an exception
+    *if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
+    *contactPerson is created, the createContact scene is closed.*/
     public void createContactPerson(ActionEvent event){
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
@@ -256,10 +241,8 @@ public class AddEventController implements MainController {
         }
     }
 
-    /*
-    The updateContactPerson goes to the scene for updating the contactPerson and runs the
-    setter method for selected contactPerson.
-     */
+    /**The updateContactPerson goes to the scene for updating the contactPerson and runs the
+    setter method for selected contactPerson.*/
     public void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorNoMarkedContactPerson();
@@ -278,10 +261,8 @@ public class AddEventController implements MainController {
             }
         }
     }
-    /*
-    The updateContactPersonComplete method tries to set the new values to the selected contactPerson
-    and throws exceptions for missing input and for wrong input
-     */
+    /**The updateContactPersonComplete method tries to set the new values to the selected contactPerson
+    *and throws exceptions for missing input and for wrong input*/
     public void updateContactPersonComplete(ActionEvent event){
         try{
             thisContactPerson.setFirstName(firstName.getText());
@@ -306,10 +287,8 @@ public class AddEventController implements MainController {
         catch (Exception e){ errorWrongInput(e.toString());
         }
     }
-    /*
-    The setValueContactPerson method is used for adding the information from
-    the selected contactperson to the editscene.
-     */
+    /**The setValueContactPerson method is used for adding the information from
+    *the selected contactperson to the editscene.*/
     private void setValuesContactPerson(){
         firstName.setText(thisContactPerson.getFirstName());
         lastName.setText(thisContactPerson.getLastName());
@@ -319,6 +298,8 @@ public class AddEventController implements MainController {
         other.setText(thisContactPerson.getNotes());
         webPage.setText(thisContactPerson.getWebPage());
     }
+    /**checks if a row is selected, and then asks for permission to delete the object
+     * if the user presses ok, the contactPerson selected is deleted */
     public void deleteRow(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorNoMarkedEvent();
@@ -335,6 +316,10 @@ public class AddEventController implements MainController {
                 }
             });
         }
+    }
+    /**Setting the event to the event chosen in showEventController*/
+    public void setThisEvent(Event thisEvent) {
+        this.thisEvent = thisEvent;
     }
 
     @Override

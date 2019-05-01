@@ -28,10 +28,8 @@ public class EventNumberedSeating extends Event implements Serializable {
         this.rows = facility.getRows();
         tickets = new ArrayList<>();
     }
-/*
-buyTicket method that adds a new ticket to the ArrayList of tickets
-this method also checks if the seat is already taken or if the event is full
- */
+/**buyTicket method that adds a new ticket to the ArrayList of tickets
+*this method also checks if the seat is already taken or if the event is full*/
     public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
         if (tickets.size() < (rows * columns)) {
             if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
@@ -47,7 +45,8 @@ this method also checks if the seat is already taken or if the event is full
             throw new IndexOutOfBoundsException("Arrangementet er fullt");
         }
     }
-//**method that retrusn a string of all seats
+
+    /**method that returns a string of all seats*/
     public String allSeats(){
         StringJoiner s= new StringJoiner("\t");
         for (Ticket ticket: tickets) {
@@ -56,54 +55,33 @@ this method also checks if the seat is already taken or if the event is full
         return s.toString();
     }
 
-    public ArrayList<Ticket> boughtTickets(){
-        ArrayList<Ticket> bought = new ArrayList();
-        for (Ticket ticket : tickets){
-            bought.add(ticket);
+    /** the findTicket method is used for finding a ticket
+     *based on the seat*/
+    public Ticket findTicket(int rows, int columns){
+        for(Ticket ticket:tickets){
+            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
         }
-        return bought;
+        return null;
     }
-
-    //Checking if the Event is full, by going through the matrix searching for any available spots
-    public boolean Full() {
-        if(tickets.size()==rows*columns) return true;
-        else return false;
-    }
-    //Edit the date of an Event, also updating all bought tickets and eventinfo
-    public void setDate(LocalDate date){
-        //Sjekke input
-        super.getEventInfo().setDate(date);
-        for(Ticket ticket: tickets){
-            ticket.setDate(date);
+    /** the availableSeats method returns is used to create a string
+     * of all possible seats and add "opptatt" if the seat is taken
+     * creating an overview of all seats for the user*/
+    public String availableSeats(){
+        StringJoiner sj = new StringJoiner(" \t");
+        for(int i=1; i<rows+1;i++){
+            sj.add("\n");
+            for(int j=1;j<columns+1;j++){
+                if(findTicket(i, j)==null){
+                    sj.add("("+i+","+j+")");
+                }
+                else sj.add("opptatt");
+            }
         }
-    }
-    public void setTime(LocalTime time){
-        //sjekke for avvik
-        super.getEventInfo().setTime(time);
-        for(Ticket tickets: tickets){
-            tickets.setTime(time);
-        }
+        return sj.toString();
     }
 
-    //Updates the ticketprice bought in the Event, and also for all bought tickets
-    public void setTicketPrice(double price){
-        //sjekk input her
-        super.setTicketPrice(price);
-        for(Ticket tickets: tickets){
-            tickets.setPrice(price);
-        }
-    }
-
-    //brukes for lagring
-    public int getColumns() {
-        return columns;
-    }
-
-    //brukes for lagring
-    public int getRows() {
-        return rows;
-    }
-
+    /**this toStrng method returns a string with lastname,
+     * firstname, date, time and what type of event it is*/
     @Override
     public String toString() {
         return "Eventnavn: "+getEventInfo().getEventName()+"\n" +
@@ -111,7 +89,36 @@ this method also checks if the seat is already taken or if the event is full
                 "Dato og tid: "+getEventInfo().getDate()+" "+getEventInfo().getTime()+"\n" +
                 "Type arrangement: setereservering";
     }
-//DENNE ER LAGT INN I DAG
+    /**these setter method is used for updating the event and also updating the
+     *tickets that are already bought*/
+    public void setDate(LocalDate date){
+        super.getEventInfo().setDate(date);
+        for(Ticket ticket: tickets){
+            ticket.setDate(date);
+        }
+    }
+    public void setTime(LocalTime time){
+        super.getEventInfo().setTime(time);
+        for(Ticket tickets: tickets){
+            tickets.setTime(time);
+        }
+    }
+
+    public void setTicketPrice(double price){
+        super.setTicketPrice(price);
+        for(Ticket tickets: tickets){
+            tickets.setPrice(price);
+        }
+    }
+    /** remaining setter and getter methods*/
+    public int getColumns() {
+        return columns;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
     public ArrayList<Ticket> getTickets() {
         return tickets;
     }
@@ -127,27 +134,5 @@ this method also checks if the seat is already taken or if the event is full
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
     }
-    public Ticket findTicket(int rows, int columns){
-        for(Ticket ticket:tickets){
-            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
-        }
-        return null;
-    }
-    public String availableSeats(){
-        StringJoiner sj = new StringJoiner(" \t");
-        for(int i=1; i<rows+1;i++){
-            sj.add("\n");
-           for(int j=1;j<columns+1;j++){
-                if(findTicket(i, j)==null){
-                    sj.add("("+i+","+j+")");
-                }
-                else sj.add("opptatt");
-           }
-        }
-        return sj.toString();
-    }
-    //    @Override
-//    public double getTicketPrice() {
-//        return super.getTicketPrice();
-//    }
+
 }

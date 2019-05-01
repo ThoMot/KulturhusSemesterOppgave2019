@@ -26,10 +26,8 @@ public class ShowEventController implements MainController{
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
     @FXML private TextField filtering;
 
-    /*
-    Methods for opening different scenes, and setting the selected event if needed in the next scene.
-    it also shows an errormessage in an alert if there is no selected event
-     */
+    /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
+    *it also shows an errormessage in an alert if there is no selected event*/
     @FXML
     private void goToAddEvent(ActionEvent event){ SceneManager.navigate(SceneName.ADDEVENT); }
     @FXML
@@ -62,11 +60,9 @@ public class ShowEventController implements MainController{
             SceneManager.navigate(SceneName.ADDEVENT);
         }
     }
-    /*
-    The initialize method runs when the scene is opened. This method runs the
-    initCols method and the loadData method. It also sets the selectedEvent to null
-    for not bringing an old selected item to the next scene.
-     */
+    /**The initialize method runs when the scene is opened. This method runs the
+    *initCols method and the loadData method. It also sets the selectedEvent to null
+    *for not bringing an old selected item to the next scene.*/
     public void initialize(){
         initCols();
         loadData();
@@ -74,6 +70,9 @@ public class ShowEventController implements MainController{
         filtering();
 
     }
+    /**the filtering method is run when the scene is opened and adds a listener to the textfield filtering,
+     * it takes the input from the user and compares to the tableview items and hides objects that does not
+     * contain the input from the user*/
     private void filtering(){
         FilteredList<Event> filteredList = new FilteredList<>(observableList);
         filtering.textProperty().addListener((observable, oldValue, newValue) ->{
@@ -102,7 +101,7 @@ public class ShowEventController implements MainController{
         sortedList.comparatorProperty().bind(eventsView.comparatorProperty());
         eventsView.setItems(sortedList);
     }
-    //** initCols method is deciding what the table columns shall contain
+    /** initCols method is deciding what the table columns shall contain*/
     private void initCols(){
         eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
         eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
@@ -110,16 +109,14 @@ public class ShowEventController implements MainController{
         eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
     }
 
-    //**The loadData method adds all the events from the list in Kulturhus to the tableview
+    /**The loadData method adds all the events from the list in Kulturhus to the tableview*/
     private void loadData(){
         observableList = FXCollections.observableList(getEvents());
         eventsView.setItems(observableList);
     }
-    /*
-    The deleteRow method checks if an event is selected, or else shows an errorMessage.
-    If a field is selected, shows a confirmation alert, and then deletes the event if the
-    user presses the ok button.
-     */
+    /**The deleteRow method checks if an event is selected, or else shows an errorMessage.
+    *If a field is selected, shows a confirmation alert, and then deletes the event if the
+    *user presses the ok button.*/
     public void deleteRow(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
             errorNoMarkedEvent();
@@ -136,7 +133,7 @@ public class ShowEventController implements MainController{
             });
         }
     }
-    //**setter and getter for the selectedEvent
+    /**setter and getter for the selectedEvent*/
     public static void setSelectedEvent(Event selectedEvent) {
         ShowEventController.selectedEvent = selectedEvent;
     }

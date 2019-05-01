@@ -15,7 +15,7 @@ public class EventInfo implements Serializable {
     private String type;
 
 
-
+/** this constructor checks for valid input before creating an object*/
     public EventInfo(String eventName, String program, String performer, String type, LocalDate date, LocalTime time) {
         if(!isNotEmptyString(eventName)) throw new NullPointerException("EventNavn kan ikke være tomt");
         if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
@@ -28,7 +28,7 @@ public class EventInfo implements Serializable {
         this.time = time;
         this.type = type;
     }
-//**getter and setter methods that also checks for valid input
+/**getter and setter methods that also checks for valid input*/
 
     public String getEventName() {
         return eventName;
@@ -80,7 +80,6 @@ public class EventInfo implements Serializable {
         return type;
     }
 
-    //DENNE ER LAGT TIL I DAG, 18.04.19
     public void setType(){
         if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
         this.type=type;
