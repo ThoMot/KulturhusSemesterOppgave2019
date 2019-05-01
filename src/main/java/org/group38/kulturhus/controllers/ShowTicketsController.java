@@ -8,16 +8,12 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
-
-import java.io.IOException;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
@@ -25,14 +21,12 @@ import static org.group38.kulturhus.controllers.ShowEventController.setSelectedE
 
 public class ShowTicketsController implements MainController {
     private ObservableList<Ticket> observableList;
+    private Ticket thisTicket = getSelectedTicket();
     private static Ticket selectedTicket;
     private Event thisEvent;
-    private Ticket thisTicket=getSelectedTicket();
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-    private List<Ticket> tickets;
 
     @FXML
     private TableView<Ticket> ticketsView;
@@ -40,10 +34,14 @@ public class ShowTicketsController implements MainController {
     @FXML
     private TextField filtering;
 
+    @FXML
+    private TableColumn<Ticket,String> phoneNumberColumn, seatRowColumn, seatNumberColumn;
 
     @FXML
-    private MenuBar menuBar;
+    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers, eventFacility;
 
+    /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
+     *it also shows an errormessage in an alert if there is no selected event*/
     @FXML
     private void goToAddTicket(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.ADDTICKET);
@@ -54,52 +52,36 @@ public class ShowTicketsController implements MainController {
         SceneManager.navigate(SceneName.SHOWTICKET);
     }
 
-
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
         setSelectedEvent(null);
         SceneManager.navigate(SceneName.ADDEVENT);
     }
-
     @FXML
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
 
-
-
-    @FXML
-    private TableColumn<Ticket,String> phoneNumberColumn;
-
-    @FXML
-    private TableColumn<Ticket,String> seatRowColumn;
-
-    @FXML
-    private TableColumn<Ticket,String> seatNumberColumn;
-
-    @FXML
-    private TableColumn<ShowTicketsController,Button> deleteTicketColumn;
-
-    @FXML
-    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers, eventFacility;
-
-
+    /** initialize() runs when scene is opened. This method runs the
+     *initCols method and the loadData method. */
     public void initialize() {
         setThisEvent(getSelectedEvent());
         initCols();
         loadData();
-        editableCols();
-
     }
+
+    /** setThisEvent() registers the Ticket on the selected Event */
     private void setThisEvent(Event thisEvent){
         this.thisEvent=thisEvent;
     }
 
+    /** loadData() adds all the tickets from the list in Kulturhus into TableView */
     private void loadData(){
         observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
     }
 
+    /** initCols() inputs information gathered in load to place where in scene/fxml-file */
     private void initCols(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
@@ -113,30 +95,19 @@ public class ShowTicketsController implements MainController {
         seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeat().toString()));
     }
 
-    private void editableCols(){
-        ticketsView.setEditable(true);
-            phoneNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
-            try{
-                phoneNumberColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setPhonenumber(t.getNewValue()));
-                phoneNumberColumn.getOnEditCommit();
-                System.out.println("billett opprettet");
-            } catch (Exception e){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.show();
-                System.out.println("Feil");
-            }
-
-        seatRowColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        seatRowColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setRow(Integer.parseInt(t.getNewValue())));
-
-        seatNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        seatNumberColumn.setOnEditCommit((TableColumn.CellEditEvent<Ticket, String> t) -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setSeat(Integer.parseInt(t.getNewValue())));
-
+    /** gotoCreateTicket() is run if user selects item and selects add ticket.
+     * Opens new window to add a ticket if item is selected */
+    public void goToCreateTicket(ActionEvent event){
+        if(ticketsView.getSelectionModel().getSelectedItem()==null){
+            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
+        }
+        else{
+            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.ADDTICKET);
+        }
     }
 
-
+    /** deleteRow() removes item from TicketsList if item from TableView is selected*/
     public void deleteRow(ActionEvent ticket){
         if(ticketsView.getSelectionModel().getSelectedItem() == null){
             errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
@@ -155,32 +126,11 @@ public class ShowTicketsController implements MainController {
                 }
             });
         }
-
     }
 
-    public void showErrorMessage(){
-        Alert mb = new Alert(Alert.AlertType.INFORMATION);
-        mb.setHeaderText("Det er ingen rader som er markert");
-        mb.setTitle("Feil");
-        mb.setContentText("Vennligst marker en rad i tabellen");
-        mb.show();
-    }
-    public void goToCreateTicket(ActionEvent event){
-        if(ticketsView.getSelectionModel().getSelectedItem()==null){
-            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
-        }
-        else{
-            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
-            SceneManager.navigate(SceneName.ADDTICKET);
-        }
-    }
-    public static void setSelectedTicket(Ticket selectedTicket){
-        ShowTicketsController.selectedTicket=selectedTicket;
-    }
-    public static Ticket getSelectedTicket(){
-        return selectedTicket;
-    }
-
+    /**the filtering method is run when the scene is opened and adds a listener to the TextField filtering,
+     * it takes the input from the user and compares to the TableView items and hides objects that does not
+     * contain the input from the user*/
     private void filtering(){
         FilteredList<Ticket> filteredList = new FilteredList<>(observableList);
         filtering.textProperty().addListener((observable, oldValue, newValue) ->{
@@ -207,10 +157,16 @@ public class ShowTicketsController implements MainController {
         ticketsView.setItems(sortedList);
     }
 
+    /** Getter and setter for the selected ticket from Event*/
+    public static void setSelectedTicket(Ticket selectedTicket){
+        ShowTicketsController.selectedTicket=selectedTicket;
+    }
+    public static Ticket getSelectedTicket(){
+        return selectedTicket;
+    }
 
 
     @Override
     public void exit() {
-
     }
 }
