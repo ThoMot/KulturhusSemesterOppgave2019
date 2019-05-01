@@ -101,6 +101,7 @@ public class Ticket implements Serializable {
 
     public UUID getEventId() { return eventId; }
 
+    public String getFacility() { return facility; }
 
     @Override
     public String toString() {

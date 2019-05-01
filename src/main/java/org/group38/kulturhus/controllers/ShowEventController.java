@@ -15,6 +15,9 @@ import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
+import java.io.File;
+import java.util.concurrent.ExecutionException;
+
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
 import static org.group38.kulturhus.model.Kulturhus.*;

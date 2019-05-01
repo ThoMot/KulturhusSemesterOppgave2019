@@ -194,6 +194,7 @@ public class ReadCSV implements ReaderInterface {
         Field[] parentFields = parentclazz.getDeclaredFields();
 
         headers = (convertToLowerCase(headers));
+        System.out.println(headers);
 
         HashMap<String, Integer> settableValues;
         HashMap<String, Integer> parentValues;
@@ -222,6 +223,7 @@ public class ReadCSV implements ReaderInterface {
                 setComplexFields(fields, clazz, test, otherValues, objVal);
             }
 
+            System.out.println(settableValues);
             returnObj.add(test);
         }
         return returnObj;
@@ -281,7 +283,6 @@ public class ReadCSV implements ReaderInterface {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             Field fieldToSet = clazz.getDeclaredField(entry.getKey());
             fieldToSet.setAccessible(true);
-            System.out.println(fieldToSet + " " + fieldToSet.getType() + "Dette er verdien som skal castes");
             if (fieldToSet.getType().isPrimitive()) {
                 setPrimitive(instance, fieldToSet, csvObject.get((entry.getValue())));
             } else setNonPrimitive(instance, fieldToSet, csvObject.get((entry.getValue())));
