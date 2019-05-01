@@ -71,6 +71,7 @@ public class ShowTicketsController implements MainController {
         setThisEvent(getSelectedEvent());
         initCols();
         loadData();
+        filtering();
     }
 
     /** setThisEvent() registers the Ticket on the selected Event */
@@ -141,15 +142,15 @@ public class ShowTicketsController implements MainController {
                 if(newValue ==null || newValue.isEmpty()){
                     return true;
                 }
-                String lowerCaseFiler = newValue.toLowerCase();
+                String lowerCaseFilter = newValue.toLowerCase();
 
-                if(thisTicket.getPhonenumber().toLowerCase().contains(lowerCaseFiler)){
+                if(ticket.getPhonenumber().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getRow().toString().contains(lowerCaseFiler)){
+                else if(ticket.getRow().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getSeat().toString().contains(lowerCaseFiler)){
+                else if(ticket.getSeat().toString().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;

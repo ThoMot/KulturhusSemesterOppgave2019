@@ -1,10 +1,12 @@
 package org.group38.kulturhus.model.Event;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
+import static org.group38.kulturhus.Utilities.Validate.isValidDate;
 
 public class EventInfo implements Serializable {
     private String eventName;
@@ -24,6 +26,7 @@ public class EventInfo implements Serializable {
         if(!isNotEmptyString(performer)) throw new NullPointerException("Artistfeltet kan ikke være tomt");
         if(!isNotEmptyString(program)) throw new NullPointerException("programFeltet kan ikke være tomt");
         if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
+        if(!isValidDate(date.toString())) throw new IllegalStateException("Dato er på feil format");
         this.eventName = eventName;
         this.program = program;
         this.performer = performer;
@@ -68,6 +71,7 @@ public class EventInfo implements Serializable {
 
 
     public void setDate(LocalDate date) {
+        if(!isValidDate(date.toString())) throw new IllegalStateException("Dato er på feil format");
         this.date=date;
     }
     public LocalTime getTime() {
