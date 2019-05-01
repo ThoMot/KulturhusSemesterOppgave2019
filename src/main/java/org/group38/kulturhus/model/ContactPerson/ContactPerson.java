@@ -2,7 +2,7 @@ package org.group38.kulturhus.model.ContactPerson;
 
 import java.io.Serializable;
 
-import static org.group38.kulturhus.model.Validate.*;
+import static org.group38.kulturhus.Utilities.Validate.*;
 
 public class ContactPerson extends Person implements Serializable {
     //Optional

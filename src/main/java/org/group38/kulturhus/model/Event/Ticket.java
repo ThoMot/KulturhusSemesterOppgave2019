@@ -1,16 +1,11 @@
 package org.group38.kulturhus.model.Event;
 
-import org.group38.kulturhus.model.facility.Facility;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.group38.kulturhus.model.Validate.isValidPhoneNr;
+import static org.group38.kulturhus.Utilities.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
     //data field
@@ -19,13 +14,14 @@ public class Ticket implements Serializable {
     private String phonenumber;
     private int row;
     private int seat;
+    private String facility;
     LocalDate date;
     LocalTime time;
 
     private Ticket(){
     }
     //constructor
-    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price) {
+    public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
         this.phonenumber = phoneNumber;
@@ -34,14 +30,16 @@ public class Ticket implements Serializable {
         this.time=time;
         this.eventId=eventId;
         this.price =price;
+        this.facility = facility;
     }
-    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId) {
+    public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber=phoneNumber;
         this.price=price;
         this.date=date;
         this.time=time;
         this.eventId=eventId;
+        this.facility = facility;
     }
 
     public String getPhonenumber() {

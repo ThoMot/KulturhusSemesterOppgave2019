@@ -1,10 +1,10 @@
-package org.group38.kulturhus.model;
+package org.group38.kulturhus.Utilities;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validate {
-/** thi validation methods checks if the input matches a regex
+/** the validation methods checks if the input matches a regex
  * or some ither criteria and returns true or false based on the outcome*/
     public static boolean isValidPhoneNr(String phoneNr) {
         if (phoneNr.matches("-?\\d+(\\.\\d+)?")) {

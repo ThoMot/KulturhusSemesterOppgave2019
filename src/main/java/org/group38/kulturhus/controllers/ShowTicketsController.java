@@ -1,14 +1,14 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Popup;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -18,17 +18,16 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.group38.kulturhus.ErrorBoxes.errorNoMarkedEvent;
+import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
-import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowTicketsController implements MainController {
     private ObservableList<Ticket> observableList;
     private static Ticket selectedTicket;
     private Event thisEvent;
+    private Ticket thisTicket=getSelectedTicket();
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -37,6 +36,9 @@ public class ShowTicketsController implements MainController {
 
     @FXML
     private TableView<Ticket> ticketsView;
+
+    @FXML
+    private TextField filtering;
 
 
     @FXML
@@ -137,7 +139,8 @@ public class ShowTicketsController implements MainController {
 
     public void deleteRow(ActionEvent ticket){
         if(ticketsView.getSelectionModel().getSelectedItem() == null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
+
         } else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
             mb.setTitle("Bekreft");
@@ -164,7 +167,7 @@ public class ShowTicketsController implements MainController {
     }
     public void goToCreateTicket(ActionEvent event){
         if(ticketsView.getSelectionModel().getSelectedItem()==null){
-            errorNoMarkedEvent();
+            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }
         else{
             setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
@@ -176,6 +179,32 @@ public class ShowTicketsController implements MainController {
     }
     public static Ticket getSelectedTicket(){
         return selectedTicket;
+    }
+
+    private void filtering(){
+        FilteredList<Ticket> filteredList = new FilteredList<>(observableList);
+        filtering.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredList.setPredicate(ticket -> {
+                if(newValue ==null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFiler = newValue.toLowerCase();
+
+                if(thisTicket.getPhonenumber().toLowerCase().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(thisTicket.getRow().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                else if(thisTicket.getSeat().toString().contains(lowerCaseFiler)){
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<Ticket> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(ticketsView.comparatorProperty());
+        ticketsView.setItems(sortedList);
     }
 
 
