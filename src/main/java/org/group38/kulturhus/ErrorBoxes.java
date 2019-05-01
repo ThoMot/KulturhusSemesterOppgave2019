@@ -3,6 +3,9 @@ package org.group38.kulturhus;
 import javafx.scene.control.Alert;
 
 public class ErrorBoxes {
+    /** these errorboxes are used to displat different errors to the
+     * user based on wrong input, empty fields that needs to be filled out,
+     * duplicates, no selected object and no existing objects*/
     public static void errorEmptyFields(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Alle felter er ikke utfylt");

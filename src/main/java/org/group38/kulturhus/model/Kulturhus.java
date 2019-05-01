@@ -25,7 +25,7 @@ public class Kulturhus {
         EventInfo eventInfo = new EventInfo("Max Manus", "film", "Anne", "kino", d, t);
         EventNumberedSeating maxManus = new EventNumberedSeating(contactPeople.get(0), facilities.get(0), 100, eventInfo);
 
-        facilities.add(new Facility("Sal 2", "Teatersal", 10, 12));
+        facilities.add(new Facility("Sal 2", "Teatersal", 30, 12));
         LocalDate d1 = LocalDate.of(2019, Month.MAY, 10);
         LocalTime t1 = LocalTime.of(18, 00);
         contactPeople.add(new ContactPerson("Tor", "Mare", new ContactInfo("mail@gmail.com", "22334455")));
@@ -49,7 +49,7 @@ public class Kulturhus {
         events.add(event2);
         events.add(eventFreeSeating);
     }
-
+/** getter methods*/
     public static ArrayList<ContactPerson> getContactPeople() {
         return contactPeople;
     }
@@ -62,13 +62,5 @@ public class Kulturhus {
         return facilities;
     }
 
-    public static Facility findFacility(String facilityName) {
-        for (Facility facility : facilities) {
-            if (facility.getFacilityName().equals(facilityName)) {
-                return facility;
-            }
-        }
-        return null;
-    }
 
 }
