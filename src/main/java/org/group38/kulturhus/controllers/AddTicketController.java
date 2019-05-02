@@ -137,10 +137,6 @@ public class AddTicketController implements MainController{
             }catch (IllegalArgumentException e) {
                 errorBox("Feil i telefonnummer", "Feil input i telefonnummerfeltet",
                         "Telefonnummer må bestå av nøyaktig 8 siffer");
-            }catch (IndexOutOfBoundsException e){ errorBox("Feil i seterad eller setenummer","Feil input i et eller flere felter",
-                    "Vennligst sørg for at alle felter har riktig format" +
-                            "\n\"Raden må være mellom 0 og " + thisEvent.getFacility().getRows() +
-                            "\n og setenummer mellom 0 og " + thisEvent.getFacility().getColumns());
             } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format");
             }
