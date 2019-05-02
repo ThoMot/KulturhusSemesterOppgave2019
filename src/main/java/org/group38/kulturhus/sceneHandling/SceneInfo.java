@@ -3,18 +3,18 @@ package org.group38.kulturhus.sceneHandling;
 import org.group38.frameworks.Strings;
 
 public class SceneInfo {
-    private final String title;
+    private final String sceneTitle;
     private final String viewpath;
 
 
 
     public SceneInfo(String title, String viewpath){
-        this.title = title;
+        this.sceneTitle = title;
         this.viewpath = Strings.requireNonNullAndNotEmpty(viewpath);
     }
 
-    public String getTitle() {
-        return title;
+    public String getSceneTitle() {
+        return sceneTitle;
     }
 
     public String getViewpath() {
@@ -22,10 +22,12 @@ public class SceneInfo {
     }
 
 
+
+
     @Override
     public String toString() {
         return "SceneInfo{" +
-                "title='" + title + '\'' +
+                "title='" + sceneTitle + '\'' +
                 ", viewpath='" + viewpath + '\'' +
                 '}';
     }

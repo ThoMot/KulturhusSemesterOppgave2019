@@ -12,14 +12,17 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import javafx.util.Duration;
+import org.group38.frameworks.concurrency.ReaderThread;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.DefaultFiles;
+import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
@@ -100,34 +103,33 @@ public class AddEventController implements MainController {
         }
     }
 
-    public void refresh(String fileName, String fileName2){
+    @Override
+    public void refresh(){
         ol.clear();
-        ol2.clear();
 
-        try {
-            ol.addAll(ReaderThreadRunner.startReader(fileName));
-            ol2.addAll(ReaderThreadRunner.startReader(fileName2));
-            System.out.println(ol);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ol.addAll(ReaderThreadRunner.startReader(fileName));
+//
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    public void readFromJOBJ(ActionEvent event){
-        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
-            fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
-            fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
-            refresh(fileNameC, fileNameF);
-        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligst velg annet alternativ");
-    }
-
-    public void readFromCSV(ActionEvent event){
-        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
-            fileNameC = DefaultFiles.CONTACTCSV.getFileName();
-            fileNameF = DefaultFiles.FACILITYCSV.getFileName();
-            refresh(fileNameC, fileNameF);
-        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligst velg annet alternativ");
-    }
+//    public void readFromJOBJ(ActionEvent event){
+//        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
+//            fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
+//            fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
+//            refresh(fileNameC, fileNameF);
+//        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligst velg annet alternativ");
+//    }
+//
+//    public void readFromCSV(ActionEvent event){
+//        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
+//            fileNameC = DefaultFiles.CONTACTCSV.getFileName();
+//            fileNameF = DefaultFiles.FACILITYCSV.getFileName();
+//            refresh(fileNameC, fileNameF);
+//        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligst velg annet alternativ");
+//    }
 
     /** initCols method is deciding what the table columns shall contain*/
     private void initCols(){
@@ -140,13 +142,17 @@ public class AddEventController implements MainController {
         ol = contactPerson.getItems();
         ol2 = facility.getItems();
 
+        fileNameC = EditedFiles.getActiveContactFile();
+        fileNameF = EditedFiles.getActiveFacilityFile();
+
         try {
             ol.addAll(ReaderThreadRunner.startReader(fileNameC));
             ol2.addAll(ReaderThreadRunner.startReader(fileNameF));
-            System.out.println(ol);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+        
+        facility.setItems(ol2);
 
     }
     /**The setValue method adds the information from the event selected in showEvent scene if one was selected

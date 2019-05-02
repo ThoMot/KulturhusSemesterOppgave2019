@@ -6,11 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
@@ -54,6 +56,19 @@ public class ShowVenueController implements MainController {
         loadData();
         initCols();
     }
+
+    @Override
+    public void refresh(){
+        observableList.clear();
+
+//        try {
+//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
+//
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+    }
+
 
     /** loadData() adds all the facilites from the list in Kulturhus into TableView */
     private void loadData(){

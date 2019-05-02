@@ -12,8 +12,6 @@ import org.group38.kulturhus.model.EditedFiles;
 
 import java.io.File;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
-
 public class FileHandler {
     FileChooser fileChooser;
     File file;
