@@ -53,7 +53,7 @@ public class Validate {
         else return false;
     }
     public static boolean isValidNumber(int number){
-        if(number>1) return true;
+        if(number>=0) return true;
         else return false;
     }
 }

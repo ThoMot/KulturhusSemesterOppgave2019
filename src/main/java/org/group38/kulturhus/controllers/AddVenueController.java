@@ -89,7 +89,7 @@ public class AddVenueController implements MainController{
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(maxSeats.getText())));
                     showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
-                } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
+                } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
                 }
             }
             else{
@@ -97,7 +97,7 @@ public class AddVenueController implements MainController{
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(row.getText()), Integer.parseInt(columns.getText())));
                     showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
-                } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
+                } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
                 }
             }
         }
@@ -108,20 +108,14 @@ public class AddVenueController implements MainController{
         if(facilityType.getSelectionModel().getSelectedItem()==null) errorBox("Ikke valgt type facility", "Du har ikke valgt en lokaltype", "Vennligst velg en type fra nedtrekksmenyen");
         else{
             try{
-                if(false){
-                    //hvis type lokale endres, slett og oppdater
-                }
-                else {
-                    thisFacility.setFacilityName(facilityName.getText());
-                    thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
-                    //if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")) thisFacility.setMaxAntSeats(maxSeats);
-//                    else{
-//                        thisFacility.setRows(Integer.parseInt(row.getText()));
-//                        thisFacility.setColumns(Integer.parseInt(columns.getText()));
-//                    }
-                }
+                thisFacility.setFacilityName(facilityName.getText());
+                thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
+
+                //thisFacility.setMaxAntSeats(maxSeats);
+                thisFacility.setRows(Integer.parseInt(row.getText()));
+                thisFacility.setColumns(Integer.parseInt(columns.getText()));
             } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
-            } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
+            } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
             }
         }
     }

@@ -215,7 +215,6 @@ public class AddEventController implements MainController {
     @FXML
     private void updateEvent(ActionEvent event) {
         try {
-            System.out.println(date.getValue());
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
             thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
