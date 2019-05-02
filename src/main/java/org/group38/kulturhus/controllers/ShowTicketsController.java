@@ -33,12 +33,14 @@ public class ShowTicketsController implements MainController {
 
     @FXML
     private TextField filtering;
+    @FXML
+    private TextArea eventPerformers, eventProgram;
 
     @FXML
     private TableColumn<Ticket,String> phoneNumberColumn, seatRowColumn, seatNumberColumn;
 
     @FXML
-    private Label eventName, eventDate, eventTime, eventProgram, eventPerformers, eventFacility;
+    private Label eventName, eventDate, eventTime, eventFacility;
 
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
      *it also shows an errormessage in an alert if there is no selected event*/
@@ -63,6 +65,12 @@ public class ShowTicketsController implements MainController {
     @FXML
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
+    }
+
+    public void goToBuyTicket(ActionEvent event){
+            setSelectedTicket(thisTicket);
+            setSelectedEvent(getSelectedEvent());
+            SceneManager.navigate(SceneName.ADDTICKET);
     }
 
     /** initialize() runs when scene is opened. This method runs the

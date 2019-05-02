@@ -12,11 +12,14 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.concurrent.ExecutionException;
 
 import javafx.util.Duration;
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.DefaultFiles;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
@@ -45,6 +48,7 @@ public class AddEventController implements MainController {
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
     private FileHandler fileHandler = new FileHandler();
+    private String fileName = DefaultFiles.CONTACTJOBJ.getFileName();
     @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
     @FXML private TextArea programInfo, other;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
@@ -92,6 +96,32 @@ public class AddEventController implements MainController {
             setValues();
         }
     }
+
+    public void refresh(String fileName){
+        ol.clear();
+
+        try {
+            ol.addAll(ReaderThreadRunner.startReader(fileName));
+            System.out.println(ol);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromJOBJ(ActionEvent event){
+        if(!ol.equals(DefaultFiles.EVENTJOBJ.getFileName())){
+            fileName = DefaultFiles.EVENTJOBJ.getFileName();
+            refresh(fileName);
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void readFromCSV(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
+            fileName = DefaultFiles.EVENTCSV.getFileName();
+            refresh(fileName);
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
     /** initCols method is deciding what the table columns shall contain*/
     private void initCols(){
         firstNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirstName()));
