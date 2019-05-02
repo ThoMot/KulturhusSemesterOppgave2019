@@ -31,7 +31,7 @@ public abstract class Templates {
                     "getDate", "getTime"};
             return patterns;
         } else if(clazz.getName().equals(ticket)){
-            patterns = new String[] { "getPhonenumber", "getEventId", "getPrice", "getSeat", "getRow", "getDate", "getTime", "getFacility"};
+            patterns = new String[] { "getPhoneNumber", "getEventId", "getTicketPrice", "getSeatNumber", "getSeatRow", "getDate", "getTime", "getFacility"};
             return patterns;
         } else if(clazz.getName().equals(contact)) {
             patterns = new String[]{"getPhoneNr", "getFirstName", "getLastName", "getEmail", "getNotes", "getAffiliation", "getWebPage"};
@@ -59,7 +59,7 @@ public abstract class Templates {
                         "setDate", "setTime", "setRows", "setColumns"};
                 return patterns;
             } else if(clazz.getName().equals(ticket)){
-                patterns = new String[] { "setPhonenumber", "setPrice", "setSeat", "setRow", "setDate", "setTime"};
+                patterns = new String[] { "setPhoneNumber", "setTicketPrice", "setSeatNumber", "setSeatRow", "setDate", "setTime"};
                 return patterns;
             } else if(clazz.getName().equals(contact)){
                 patterns = new String[]{"setPhoneNr", "setFirstName", "setLastName", "setEmail", "setNotes", "setAffiliation", "setWebPage"};
@@ -77,7 +77,7 @@ public abstract class Templates {
                     "setDate", "setTime", "setRows", "setColumns"};
             return patterns;
         } else if(clazz.getName().equals(ticket)){
-            patterns = new String[] { "setPhonenumber", "setPrice", "setSeat", "setRow", "setDate", "setTime"};
+            patterns = new String[] { "setPhoneNumber", "setTicketPrice", "setSeatNumber", "setSeatRow", "setDate", "setTime"};
             return patterns;
         } else if(clazz.getName().equals(contact)){
             patterns = new String[]{contactInfo, person, person, contactInfo, contact, contact, contact};

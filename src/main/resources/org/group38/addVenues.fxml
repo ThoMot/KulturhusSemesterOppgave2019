@@ -110,7 +110,7 @@
                      <children>
                         <Label fx:id="seating" text="Antall rader" />
                         <Label fx:id="seating2" text="Antall seter per rad" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                        <TextField fx:id="row" GridPane.rowIndex="1" />
+                        <TextField fx:id="seatRow" GridPane.rowIndex="1" />
                         <TextField fx:id="columns" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>

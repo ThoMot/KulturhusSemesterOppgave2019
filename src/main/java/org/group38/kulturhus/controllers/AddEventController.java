@@ -1,8 +1,6 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +12,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.concurrent.ExecutionException;
 
-import javafx.util.Duration;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
-import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.DefaultFiles;
@@ -24,7 +20,6 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.SaveLoad.FileHandler;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -206,7 +201,7 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
-            thisEvent.getEventInfo().setPerformers(artist.getText());
+            thisEvent.getEventInfo().setPerformer(artist.getText());
             thisEvent.getEventInfo().setProgram(programInfo.getText());
             showLabel(createEvLb);
 

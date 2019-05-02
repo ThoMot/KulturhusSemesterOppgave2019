@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class EventFreeSeating extends Event implements Serializable {
     private ArrayList<Ticket> tickets;
@@ -54,7 +53,7 @@ public class EventFreeSeating extends Event implements Serializable {
         super.setTicketPrice(price);
         for(Ticket ticket : tickets){
             if(ticket!=null){
-                ticket.setPrice(price);
+                ticket.setTicketPrice(price);
             }
         }
     }

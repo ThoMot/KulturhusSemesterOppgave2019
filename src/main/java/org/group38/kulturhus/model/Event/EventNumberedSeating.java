@@ -1,11 +1,7 @@
 package org.group38.kulturhus.model.Event;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
-import org.group38.kulturhus.model.Event.Ticket;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -35,7 +31,7 @@ public class EventNumberedSeating extends Event implements Serializable {
             if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
             for (Ticket ticket : tickets) {
 
-                if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
+                if (ticket.getSeatRow() == seatRow && ticket.getSeatNumber() == seatNumber) {
                     throw new IllegalArgumentException("Setet er allerede opptatt");
                 }
             }
@@ -50,7 +46,7 @@ public class EventNumberedSeating extends Event implements Serializable {
     public String allSeats(){
         StringJoiner s= new StringJoiner("\t");
         for (Ticket ticket: tickets) {
-            s.add("("+ticket.getRow()+","+ticket.getSeat()+")");
+            s.add("("+ticket.getSeatRow()+","+ticket.getSeatNumber()+")");
         }
         return s.toString();
     }
@@ -59,7 +55,7 @@ public class EventNumberedSeating extends Event implements Serializable {
      *based on the seat*/
     public Ticket findTicket(int rows, int columns){
         for(Ticket ticket:tickets){
-            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
+            if(ticket.getSeatNumber()==columns&&ticket.getSeatRow()==rows) return ticket;
         }
         return null;
     }
@@ -107,7 +103,7 @@ public class EventNumberedSeating extends Event implements Serializable {
     public void setTicketPrice(double price){
         super.setTicketPrice(price);
         for(Ticket tickets: tickets){
-            tickets.setPrice(price);
+            tickets.setTicketPrice(price);
         }
     }
     /** remaining setter and getter methods*/

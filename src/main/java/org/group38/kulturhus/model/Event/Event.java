@@ -75,7 +75,7 @@ public abstract class Event implements Serializable {
     }
 
     public String getPerformer(){
-        return eventInfo.getPerformers();
+        return eventInfo.getPerformer();
     }
 
     public LocalDate getDate(){
