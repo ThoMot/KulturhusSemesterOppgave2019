@@ -26,17 +26,14 @@ public class AddVenueController implements MainController{
     @FXML private Label maxSeats2, seating, seating2;
     @FXML private ComboBox facilityType;
     @FXML private Label updated, created;
-
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.ADDEVENT);
     }
-
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWEVENT);
     }
-
     @FXML
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
@@ -49,7 +46,8 @@ public class AddVenueController implements MainController{
             create.setVisible(false);
         }
     }
-    @FXML private void editView(){
+    @FXML
+    private void editView(){
         if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")){
             maxSeats2.setVisible(true);
             maxSeats.setVisible(true);
@@ -101,7 +99,6 @@ public class AddVenueController implements MainController{
                 }
             }
         }
-
     }
     @FXML
     private void updateVenue(){

@@ -58,20 +58,10 @@ public class ShowVenueController implements MainController {
             SceneManager.navigate(SceneName.ADDVENUE);
         }
     }
-
-
-
-
-    @Override
-    public void exit() {
-
-    }
     public void initialize() {
         setThisFacility(null);
         loadData();
         initCols();
-
-
     }
 
     /** loadData() adds all the tickets from the list in Kulturhus into TableView */
@@ -120,5 +110,10 @@ public class ShowVenueController implements MainController {
 
     public static Facility getThisFacility() {
         return thisFacility;
+    }
+
+    @Override
+    public void exit() {
+
     }
 }
