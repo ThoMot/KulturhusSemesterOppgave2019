@@ -52,8 +52,5 @@ public class Validate {
         if(str != null && !str.isEmpty()) return true;
         else return false;
     }
-    public static boolean isValidDate(String date) {
-            return true;
-        }
 }
 

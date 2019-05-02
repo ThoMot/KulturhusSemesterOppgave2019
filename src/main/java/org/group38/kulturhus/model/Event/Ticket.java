@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
-
-import static org.group38.kulturhus.Utilities.Validate.isValidDate;
 import static org.group38.kulturhus.Utilities.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
@@ -24,7 +22,6 @@ public class Ticket implements Serializable {
     //constructor
     public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
-        if(!isValidDate(date.toString())) throw new IllegalStateException("Dato er på feil format");
         this.seat = seat;
         this.phonenumber = phoneNumber;
         this.date=date;
@@ -36,7 +33,6 @@ public class Ticket implements Serializable {
     }
     public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
-        if(!isValidDate(date.toString())) throw new IllegalStateException("Dato er på feil format");
         this.phonenumber=phoneNumber;
         this.price=price;
         this.date=date;
@@ -63,7 +59,6 @@ public class Ticket implements Serializable {
     }
 
     public void setDate(LocalDate date){
-        if(!isValidDate(date.toString())) throw new IllegalStateException("Dato er på feil format");
         this.date=date;
     }
     public void setTime(LocalTime time){

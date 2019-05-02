@@ -121,12 +121,12 @@ public class AddEventController implements MainController {
     /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
     public void createEvent(ActionEvent event) {
-
         if (contactPerson.getSelectionModel().getSelectedItem() == null) errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         else {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
             if (f.getMaxAntSeats() == 0) {
                 try {
+                    if(date.getValue()==null) throw new IllegalStateException();
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
@@ -158,6 +158,7 @@ public class AddEventController implements MainController {
 
             } else if (f.getMaxAntSeats() != 0) {
                 try {
+                    if(date.getValue()==null) throw new IllegalStateException();
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
                     createEvLb.setVisible(true);
@@ -189,6 +190,7 @@ public class AddEventController implements MainController {
             PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
             visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
             visiblePause.play();
+
         } catch (IllegalStateException e){errorBox("Feil dato format", "Formatet du har valgt for dato er feil", "Vennligst benytt datovelgeren for å bestemme en dato");
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
         } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
