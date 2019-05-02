@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
+<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
     <top>
         <VBox>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
@@ -33,6 +33,12 @@
               <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Se Lokaler" />
             </items>
           </Menu>
+               <Menu mnemonicParsing="false" text="ChangeFiles">
+                  <items>
+                     <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="ReadFromJobj" />
+                     <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="ReadFromCsv" />
+                  </items>
+               </Menu>
         </menus>
       </MenuBar>
         <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
@@ -176,7 +182,7 @@
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
                 <Button fx:id="create" alignment="CENTER" onAction="#createTicket" text="Opprett billett" />
-                <Button fx:id="update" onAction="#updateTicket" mnemonicParsing="false" text="Oppdater billett">
+                <Button fx:id="update" mnemonicParsing="false" onAction="#updateTicket" text="Oppdater billett">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>
