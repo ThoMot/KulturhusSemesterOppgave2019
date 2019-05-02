@@ -3,13 +3,11 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.showLabel;
@@ -19,7 +17,7 @@ import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 public class AddVenueController implements MainController{
     private Facility thisFacility;
     @FXML private Button create, update;
-    @FXML private TextField facilityName, row, columns, maxSeats;
+    @FXML private TextField facilityName, seatRow, columns, maxSeats;
     @FXML private Label maxSeats2, seating, seating2;
     @FXML private ComboBox facilityType;
     @FXML private Label updated, created;
@@ -69,17 +67,17 @@ public class AddVenueController implements MainController{
             maxSeats.setVisible(true);
             seating2.setVisible(false);
             seating.setVisible(false);
-            row.setVisible(false);
+            seatRow.setVisible(false);
             columns.setVisible(false);
             columns.setText(String.valueOf(0));
-            row.setText(String.valueOf(0));
+            seatRow.setText(String.valueOf(0));
         }
        else{
             maxSeats2.setVisible(false);
             maxSeats.setVisible(false);
             seating2.setVisible(true);
             seating.setVisible(true);
-            row.setVisible(true);
+            seatRow.setVisible(true);
             columns.setVisible(true);
             maxSeats.setText(String.valueOf(0));
         }
@@ -88,7 +86,7 @@ public class AddVenueController implements MainController{
     private void loadValues(){
         facilityName.setText(thisFacility.getFacilityName());
         maxSeats.setText(Integer.toString(thisFacility.getMaxAntSeats()));
-        row.setText(Integer.toString(thisFacility.getRows()));
+        seatRow.setText(Integer.toString(thisFacility.getRows()));
         columns.setText(Integer.toString(thisFacility.getColumns()));
         facilityType.getSelectionModel().select(thisFacility.getFacilityType());
         editView();
@@ -110,7 +108,7 @@ public class AddVenueController implements MainController{
             }
             else{
                 try {
-                    getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(row.getText()), Integer.parseInt(columns.getText())));
+                    getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(seatRow.getText()), Integer.parseInt(columns.getText())));
                     showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
                 } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
@@ -129,7 +127,7 @@ public class AddVenueController implements MainController{
                 thisFacility.setFacilityName(facilityName.getText());
                 thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
                 //thisFacility.setMaxAntSeats(maxSeats);
-                thisFacility.setRows(Integer.parseInt(row.getText()));
+                thisFacility.setRows(Integer.parseInt(seatRow.getText()));
                 thisFacility.setColumns(Integer.parseInt(columns.getText()));
                 showLabel(updated);
             } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
