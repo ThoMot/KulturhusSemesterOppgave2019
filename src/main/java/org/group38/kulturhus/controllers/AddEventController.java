@@ -48,7 +48,8 @@ public class AddEventController implements MainController {
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
     private FileHandler fileHandler = new FileHandler();
-    private String fileName = DefaultFiles.CONTACTJOBJ.getFileName();
+    private String fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
+    private String fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
     @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
     @FXML private TextArea programInfo, other;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
@@ -97,11 +98,13 @@ public class AddEventController implements MainController {
         }
     }
 
-    public void refresh(String fileName){
+    public void refresh(String fileName, String fileName2){
         ol.clear();
+        ol2.clear();
 
         try {
             ol.addAll(ReaderThreadRunner.startReader(fileName));
+            ol2.addAll(ReaderThreadRunner.startReader(fileName2));
             System.out.println(ol);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -109,17 +112,19 @@ public class AddEventController implements MainController {
     }
 
     public void readFromJOBJ(ActionEvent event){
-        if(!ol.equals(DefaultFiles.EVENTJOBJ.getFileName())){
-            fileName = DefaultFiles.EVENTJOBJ.getFileName();
-            refresh(fileName);
-        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
+            fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
+            fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
+            refresh(fileNameC, fileNameF);
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligst velg annet alternativ");
     }
 
     public void readFromCSV(ActionEvent event){
-        if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
-            fileName = DefaultFiles.EVENTCSV.getFileName();
-            refresh(fileName);
-        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
+            fileNameC = DefaultFiles.CONTACTCSV.getFileName();
+            fileNameF = DefaultFiles.FACILITYCSV.getFileName();
+            refresh(fileNameC, fileNameF);
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligst velg annet alternativ");
     }
 
     /** initCols method is deciding what the table columns shall contain*/
@@ -130,11 +135,17 @@ public class AddEventController implements MainController {
     }
     /**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview*/
     private void loadInfo(){
-        ol = FXCollections.observableList(getContactPeople());
-        contactPerson.setItems(ol);
+        ol = contactPerson.getItems();
+        ol2 = facility.getItems();
 
-        ol2 = FXCollections.observableList(getFacilities());
-        facility.setItems(ol2);
+        try {
+            ol.addAll(ReaderThreadRunner.startReader(fileNameC));
+            ol2.addAll(ReaderThreadRunner.startReader(fileNameF));
+            System.out.println(ol);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
     /**The setValue method adds the information from the event selected in showEvent scene if one was selected
     *and adds it to the boxes in the showEvent scene.*/
