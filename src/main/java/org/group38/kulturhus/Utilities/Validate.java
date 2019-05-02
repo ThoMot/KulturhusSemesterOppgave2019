@@ -58,6 +58,5 @@ public class Validate {
         if(number>=0) return true;
         else return false;
     }
-
 }
 
