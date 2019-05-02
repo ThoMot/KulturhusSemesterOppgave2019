@@ -1,5 +1,7 @@
 package org.group38.kulturhus.Utilities;
 
+import org.group38.kulturhus.model.Event.Ticket;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
@@ -50,6 +52,10 @@ public class Validate {
     }
     public static boolean isNotEmptyString(String str){
         if(str != null && !str.isEmpty()) return true;
+        else return false;
+    }
+    public static boolean isValidNumber(int number){
+        if(number>=0) return true;
         else return false;
     }
 }

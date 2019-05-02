@@ -7,7 +7,7 @@ import java.util.UUID;
 import static org.group38.kulturhus.Utilities.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
-    //data field
+    //data fields
     private UUID eventId;
     private double price;
     private String phonenumber;
@@ -17,9 +17,13 @@ public class Ticket implements Serializable {
     LocalDate date;
     LocalTime time;
 
+
+    /** Construcors are overloaded to check for which type of event the Ticket belongs to,
+     * whether its a numberedSeating event og freeSeated event.
+     * The empty constructor is used to read and write to/from files*/
     private Ticket(){
     }
-    //constructor
+    /** Constructor for EventNumberedSeating */
     public Ticket(int seat, int row, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, double price, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.seat = seat;
@@ -31,6 +35,7 @@ public class Ticket implements Serializable {
         this.price =price;
         this.facility = facility;
     }
+    /** Constructor for EventFreeSeating */
     public Ticket(double price, String phoneNumber, LocalDate date, LocalTime time, UUID eventId, String facility) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber=phoneNumber;
@@ -41,49 +46,49 @@ public class Ticket implements Serializable {
         this.facility = facility;
     }
 
+    /** Getter and setter for phoneNumber. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getPhonenumber() {
         return phonenumber;
     }
-    public double getPrice(){
-        return price;
-    }
-
-
     public void setPhonenumber(String phoneNumber) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
         this.phonenumber = phonenumber;
+    }
+
+    /** Getter and setter for ticketPrice*/
+    public double getPrice(){
+        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /** Getter and setter for events date*/
     public void setDate(LocalDate date){
         this.date=date;
-    }
-    public void setTime(LocalTime time){
-        this.time=time;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
+    /** Getter and setter for events time*/
+    public void setTime(LocalTime time){
+        this.time=time;
+    }
+
     public LocalTime getTime() {
         return time;
     }
-//    public String setSeatNumber(int seatNumber) {
-//        this.seatNumber = seatNumber;
-//        return "Setenummer er endret";
-//    }
-//
-//    public String setSeatRow(int seatRow){
-//        this.seatRow=seatRow;
-//        return "Seterad er oppdatert";
-//    }
-//
+
+    /** Getter and setter for seat and row in NumberedSeating event */
     public Integer getSeat() {
         return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
     }
 
     public Integer getRow() {
@@ -94,12 +99,10 @@ public class Ticket implements Serializable {
         this.row = row;
     }
 
-    public void setSeat(int seat) {
-        this.seat = seat;
-    }
-
+    /** Gets the uniqe identifyer for the event to connect the event to the ticket */
     public UUID getEventId() { return eventId; }
 
+    /** Gets the facility to connect the ticket to events facility */
     public String getFacility() { return facility; }
 
     @Override

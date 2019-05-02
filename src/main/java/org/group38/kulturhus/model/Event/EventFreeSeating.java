@@ -84,6 +84,4 @@ public class EventFreeSeating extends Event implements Serializable {
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
     }
-
-
 }

@@ -5,35 +5,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
-import org.group38.kulturhus.model.Event.Event;
-import org.group38.kulturhus.model.Event.Ticket;
+import javafx.scene.control.*;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
+import java.io.File;
+
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
 public class ShowVenueController implements MainController {
     private ObservableList<Facility> observableList;
-    private Event thisEvent;
+    private static Facility thisFacility;
 
-    @FXML
-    private TableView<Facility> facilitiesView;
+    @FXML private TableView<Facility> facilitiesView;
+    @FXML private TableColumn<Facility,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn, totalSeats;
 
-    @FXML
-    private TableColumn<Ticket,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn;
 
-    @FXML
-    private void goToAddTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.ADDTICKET);
-    }
-    @FXML
-    private void goToShowTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.SHOWTICKET);
-    }
+ /** these methods is switching between the scenes and setting thisFacility if needed*/
     @FXML
     private void goToAddEvent(ActionEvent event){
         SceneManager.navigate(SceneName.ADDEVENT);
@@ -48,31 +38,74 @@ public class ShowVenueController implements MainController {
     }
 
     @FXML
-    private void goToAddVenue(ActionEvent event){
-        SceneManager.navigate(SceneName.ADDVENUE);
-    }
+    private void goToAddVenue(ActionEvent event){ SceneManager.navigate(SceneName.ADDVENUE); }
 
-
-
-
-    @Override
-    public void exit() {
-
+    @FXML
+    private void goToEditVenue() {
+        if (facilitiesView.getSelectionModel().getSelectedItem() == null) {
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
+        } else {
+            setThisFacility(facilitiesView.getSelectionModel().getSelectedItem());
+            SceneManager.navigate(SceneName.ADDVENUE);
+        }
     }
     public void initialize() {
+        setThisFacility(null);
         loadData();
-
-
+        initCols();
     }
 
-    /** loadData() adds all the tickets from the list in Kulturhus into TableView */
+    /** loadData() adds all the facilites from the list in Kulturhus into TableView */
     private void loadData(){
         observableList = FXCollections.observableList(getFacilities());
         facilitiesView.setItems(observableList);
     }
 
-    /** initCols() inputs information gathered in load to place where in scene/fxml-file */
+    /** initCols() decides what data should be in each column of the tableView */
     private void initCols(){
+        facilityNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacilityName()));
+        facilityTypeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacilityType()));
+        seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(Integer.toString(data.getValue().getRows())));
+        seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(Integer.toString(data.getValue().getColumns())));
+        totalSeats.setCellValueFactory(data-> new SimpleStringProperty(Integer.toString(data.getValue().getMaxAntSeats())));
+    }
+    /** the deleteRow method checks if a row is marked and asks permission befoire deleting the object*/
+    @FXML
+    private void deleteRow(ActionEvent event){
+        if(facilitiesView.getSelectionModel().getSelectedItem()==null){
+            errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
+        }
+        else{
+            Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
+            mb.setTitle("Bekreft");
+            mb.setHeaderText("Du har trykket slett på "+ facilitiesView.getSelectionModel().getSelectedItem().getFacilityName());
+            mb.setContentText("Ønsker du virkerlig å slette dette lokalet?");
+            mb.showAndWait().ifPresent(response -> {
+                if(response== ButtonType.OK){
+                    observableList.remove(facilitiesView.getSelectionModel().getSelectedItem());
+
+                    File file = new File("Event.csv");
+                    file.delete();
+//                    try {
+//                        WriterThreadRunner.WriterThreadRunner(observableList, "Event.csv");
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                }
+            });
+        }
+    }
+/** setter and getter methods*/
+    public void setThisFacility(Facility thisFacility) {
+        this.thisFacility = thisFacility;
+    }
+
+    public static Facility getThisFacility() {
+        return thisFacility;
+    }
+
+    @Override
+    public void exit() {
 
     }
 }

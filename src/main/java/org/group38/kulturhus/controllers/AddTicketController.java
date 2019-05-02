@@ -1,30 +1,21 @@
 package org.group38.kulturhus.controllers;
 
 
-import javafx.animation.PauseTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
-import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.UUID;
 
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
@@ -87,21 +78,26 @@ public class AddTicketController implements MainController{
         else  {
             update.setVisible(false);
         }
-
     }
+
+    /** setThisEvent sets the ticket to the event chosen in showEventController*/
     public void setThisEvent(Event thisEvent) {
         this.thisEvent = thisEvent;
     }
 
+    /** setEventInfo sets information from the event method to show the user which event the Ticket is connected to*/
     public void setEventInfo(){
         eventTitle.setText(thisEvent.getEventInfo().getEventName());
         dateTime.setText(thisEvent.getEventInfo().getDate().toString()+", "+thisEvent.getEventInfo().getTime().toString());
     }
+
+    /** setTicketInfo sets information about all tickets in TableView */
     private void setTicketInfo(){
         row.setText(thisTicket.getRow().toString());
         seatNumber.setText(thisTicket.getSeat().toString());
         phoneNumber.setText(thisTicket.getPhonenumber());
     }
+    /** showFreeSeats shows all seats in a facility if event is a seatingNumbered event*/
     public void showFreeSeats(){
         if(thisEvent instanceof EventNumberedSeating)
             seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
@@ -119,22 +115,16 @@ public class AddTicketController implements MainController{
         } else {
             try {
                 if (thisEvent instanceof EventFreeSeating) {
-                    Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getFacilityName());
-                    thisEvent.getTickets().add(ticket);
+                    String newPhoneNumber = phoneNumber.getText();
+                    ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
                     int newSeat = Integer.parseInt(seatNumber.getText());
                     int newRow = Integer.parseInt(row.getText());
-                    String newPhone = phoneNumber.getText();
-                    LocalDate date = thisEvent.getDate();
-                    LocalTime time = thisEvent.getTime();
-                    Double ticketPrice = thisEvent.getTicketPrice();
-                    String facilityName = thisEvent.getFacilityName();
-
-                    Ticket ticket = new Ticket(newSeat, newRow, newPhone, date, time, thisEvent.getEventId(), ticketPrice, facilityName);
-                    thisEvent.getTickets().add(ticket);
+                    String newPhoneNumber = phoneNumber.getText();
+                    ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
             }catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",

@@ -1,8 +1,11 @@
 package org.group38.kulturhus.Utilities;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
 
-public class ErrorBoxes {
+public class ErrorBoxesAndLabel {
     /** this errorbox is used for displaying different errors to the
      * user based on wrong input, empty fields that needs to be filled out,
      * duplicates, no selected object and no existing objects*/
@@ -13,5 +16,10 @@ public class ErrorBoxes {
         alert.setTitle(title);
         alert.show();
     }
-
+    public static void showLabel(Label label){
+        label.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
+        visiblePause.setOnFinished(click -> label.setVisible(false));
+        visiblePause.play();
+    }
 }

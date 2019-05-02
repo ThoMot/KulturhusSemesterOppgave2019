@@ -29,7 +29,7 @@ import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
@@ -50,14 +50,14 @@ public class AddEventController implements MainController {
     private String fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
     private String fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
     @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
-    @FXML private TextArea programInfo, other;
+    @FXML private TextArea programInfo, other, editFacility;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility;
     @FXML private TableView contactPerson;
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
-    @FXML private Label createContLb, createEvLb, contLabel;
+    @FXML private Label createContLb, createEvLb, contLabel, facilityLb;
     @FXML private Button create, update, createContact, updateContact;
 
 
@@ -90,6 +90,9 @@ public class AddEventController implements MainController {
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
             create.setVisible(false);
+            facility.setVisible(false);
+            facilityLb.setVisible(false);
+            editFacility.setVisible(true);
         }
         else update.setVisible(false);
         if(thisEvent!=null){
@@ -160,7 +163,8 @@ public class AddEventController implements MainController {
     }
     /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
-    public void createEvent(ActionEvent event) {
+    @FXML
+    private void createEvent(ActionEvent event) {
         if (contactPerson.getSelectionModel().getSelectedItem() == null) errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         else {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
@@ -169,10 +173,7 @@ public class AddEventController implements MainController {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
-                    createEvLb.setVisible(true);
-                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                    visiblePause.play();
+                    showLabel(createEvLb);
 
 
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
@@ -186,10 +187,7 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    createEvLb.setVisible(true);
-                    PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-                    visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-                    visiblePause.play();
+                    showLabel(createEvLb);
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
                 } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -201,20 +199,16 @@ public class AddEventController implements MainController {
     }
     /**updateEvent tries to update an event if selected in showeEvent scene.
     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
-    public void updateEvent(ActionEvent event) {
+    @FXML
+    private void updateEvent(ActionEvent event) {
         try {
-            System.out.println(date.getValue());
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
             thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
             thisEvent.getEventInfo().setPerformers(artist.getText());
             thisEvent.getEventInfo().setProgram(programInfo.getText());
-
-            createEvLb.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-            visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-            visiblePause.play();
+            showLabel(createEvLb);
 
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
         } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -229,7 +223,8 @@ public class AddEventController implements MainController {
     /**The createContactPerson method tries to create a contactPerson and throws an exception
     *if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
     *contactPerson is created, the createContact scene is closed.*/
-    public void createContactPerson(ActionEvent event){
+    @FXML
+    private void createContactPerson(ActionEvent event){
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
             getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
@@ -239,11 +234,7 @@ public class AddEventController implements MainController {
                 getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
             if (isNotEmptyString(other.getText()))
                 getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
-            createContLb.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-            visiblePause.play();
-            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            showLabel(createContLb);
 
             //TODO flytte dette over i Scene manager??
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
@@ -262,7 +253,8 @@ public class AddEventController implements MainController {
 
     /**The updateContactPerson goes to the scene for updating the contactPerson and runs the
     setter method for selected contactPerson.*/
-    public void updateContactPerson(ActionEvent event){
+    @FXML
+    private void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }
@@ -282,7 +274,8 @@ public class AddEventController implements MainController {
     }
     /**The updateContactPersonComplete method tries to set the new values to the selected contactPerson
     *and throws exceptions for missing input and for wrong input*/
-    public void updateContactPersonComplete(ActionEvent event){
+    @FXML
+    private void updateContactPersonComplete(ActionEvent event){
         try{
             thisContactPerson.setFirstName(firstName.getText());
             thisContactPerson.setLastName(lastName.getText());
@@ -291,11 +284,7 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
             if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
-            createContLb.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-            visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-            visiblePause.play();
-            //Må LEGGE INN AT KONTAKTPERSONSCENEN LUKKES HER THORA
+            showLabel(createContLb);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
             loader.setController(this);
@@ -319,7 +308,8 @@ public class AddEventController implements MainController {
     }
     /**checks if a row is selected, and then asks for permission to delete the object
      * if the user presses ok, the contactPerson selected is deleted */
-    public void deleteRow(ActionEvent event){
+    @FXML
+    private void deleteRow(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -42,7 +46,7 @@
                 </MenuBar>
                 <Pane prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
                     <children>
-                        <Label styleClass="headerPane-txt" layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus"/>
+                        <Label layoutX="16.0" layoutY="6.0" styleClass="headerPane-txt" text="Asbjørnsen og Moe Kulturhus" />
                     </children>
                 </Pane>
             </children>
@@ -107,7 +111,7 @@
                         <Label text="Velg dato:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="artist" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="3" />
                         <DatePicker fx:id="date" editable="false" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Lokale" GridPane.rowIndex="4" />
+                        <Label fx:id="facilityLb" text="Lokale" GridPane.rowIndex="4" />
                         <ComboBox fx:id="facility" prefHeight="26.0" prefWidth="229.0" promptText="Velg et lokale" GridPane.rowIndex="5" />
                         <Label text="Billettpris" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="ticketPrice" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -115,12 +119,31 @@
                         <TextField fx:id="time" prefHeight="26.0" prefWidth="229" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Program for arrangementet: " wrapText="true" GridPane.rowIndex="7" />
                         <TextArea fx:id="programInfo" prefHeight="88.0" prefWidth="497.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="3" />
-                        <Label styleClass="h4" fx:id="createContLb" text="Kontaktperson er opprettet/oppdatert" textFill="#3bb20c" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2"/>
-                        <Label styleClass="h4" fx:id="createEvLb" text="Arrangement er opprettet/oppdatert" textFill="#0fa407" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2"/>
+                        <Label fx:id="createContLb" styleClass="h4" text="Kontaktperson er opprettet/oppdatert" textFill="#3bb20c" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2" />
+                        <Label fx:id="createEvLb" styleClass="h4" text="Arrangement er opprettet/oppdatert" textFill="#0fa407" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2" />
+                  <TextArea fx:id="editFacility" prefHeight="73.0" prefWidth="246.0" text="Du kan dessverre ikke endre lokalet når &#10;arrangemnetet er opprettet. Da må du&#10;slette arrangementet og opprette et nytt" visible="false" GridPane.rowIndex="15" />
                     </children>
                     <VBox.margin>
                         <Insets left="10.0" />
                     </VBox.margin>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
                 </GridPane>
             </children>
             <BorderPane.margin>

@@ -64,7 +64,7 @@
                 <TableColumn  fx:id="facilityTypeColumn" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="seatRowColumn" prefWidth="75.0" text="Rader" />
                   <TableColumn fx:id="seatNumberColumn" prefWidth="75.0" text="Seter per rad" />
-                  <TableColumn prefWidth="75.0" text="Totalt antall seter" />
+                  <TableColumn fx:id="totalSeats" prefWidth="75.0" text="Ståplasser" />
               </columns>
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
@@ -75,8 +75,8 @@
             </TableView>
              <HBox alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="800.0">
                  <children>
-                     <Button mnemonicParsing="false" text="Slett lokale" />
-                     <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Endre lokale">
+                     <Button onAction="#deleteRow" mnemonicParsing="false" text="Slett lokale" />
+                     <Button onAction="#goToEditVenue" alignment="TOP_LEFT" mnemonicParsing="false" text="Endre lokale">
                          <HBox.margin>
                              <Insets left="10.0" />
                          </HBox.margin>

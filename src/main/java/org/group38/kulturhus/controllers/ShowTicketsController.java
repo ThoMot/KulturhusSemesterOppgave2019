@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 
@@ -42,21 +42,12 @@ public class ShowTicketsController implements MainController {
     @FXML
     private Label eventName, eventDate, eventTime, eventFacility;
 
-    /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
+    /** goTo.. methods are for opening different scenes, and setting the selected event if needed in the next scene.
      *it also shows an errormessage in an alert if there is no selected event*/
     @FXML
-    private void goToShowEvent(ActionEvent event){ SceneManager.navigate(SceneName.SHOWEVENT); }
-
-    @FXML
-    private void goToAddTicket(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.ADDTICKET);
+    private void goToShowEvent(ActionEvent event){
+        SceneManager.navigate(SceneName.SHOWEVENT);
     }
-
-    @FXML
-    private void goToShowTicket(ActionEvent event) throws IOException {
-        SceneManager.navigate(SceneName.SHOWTICKET);
-    }
-
     @FXML
     private void goToAddEvent(ActionEvent event) throws IOException {
         setSelectedEvent(null);
@@ -66,11 +57,24 @@ public class ShowTicketsController implements MainController {
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
+    @FXML
+    public void goToBuyTicket(ActionEvent event) throws IOException {
+        setSelectedTicket(thisTicket);
+        setSelectedEvent(getSelectedEvent());
+        SceneManager.navigate(SceneName.ADDTICKET);
+    }
 
-    public void goToBuyTicket(ActionEvent event){
-            setSelectedTicket(thisTicket);
-            setSelectedEvent(getSelectedEvent());
+    /** gotoChangeTicket() is run if user selects item and selects add ticket.
+     * Opens new window to change a ticket if item is selected */
+    @FXML
+    public void goToChangeTicket(ActionEvent event){
+        if(ticketsView.getSelectionModel().getSelectedItem()==null){
+            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
+        }
+        else{
+            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
             SceneManager.navigate(SceneName.ADDTICKET);
+        }
     }
 
     /** initialize() runs when scene is opened. This method runs the
@@ -105,18 +109,6 @@ public class ShowTicketsController implements MainController {
         phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhonenumber()));
         seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRow().toString()));
         seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeat().toString()));
-    }
-
-    /** gotoCreateTicket() is run if user selects item and selects add ticket.
-     * Opens new window to add a ticket if item is selected */
-    public void goToCreateTicket(ActionEvent event){
-        if(ticketsView.getSelectionModel().getSelectedItem()==null){
-            errorBox("Feil", "Det er ingen billett som er markert", "Vennligst marker en kontaktperson du vil redigere");
-        }
-        else{
-            setSelectedTicket(ticketsView.getSelectionModel().getSelectedItem());
-            SceneManager.navigate(SceneName.ADDTICKET);
-        }
     }
 
     /** deleteRow() removes item from TicketsList if item from TableView is selected*/
