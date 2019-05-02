@@ -128,20 +128,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
-                     <TextField fx:id="eventName" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="1" />
                      <Label text="Tittel på arrangement:" />
                      <Label text="Artist/Annet" GridPane.rowIndex="2" />
                      <Label text="Velg dato:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     <TextField fx:id="artist" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="3" />
-                     <DatePicker fx:id="date" editable="false" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      <Label text="Lokale" GridPane.rowIndex="4" />
-                     <ComboBox fx:id="facility" prefHeight="26.0" prefWidth="229.0" promptText="Velg et lokale" GridPane.rowIndex="5" />
                      <Label text="Billettpris" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                     <TextField fx:id="ticketPrice" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      <Label text="Tidspunkt" GridPane.columnIndex="1" />
-                     <TextField fx:id="time" prefHeight="26.0" prefWidth="229" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      <Label text="Program for arrangementet: " wrapText="true" GridPane.rowIndex="7" />
-                     <TextArea fx:id="programInfo" prefHeight="88.0" prefWidth="497.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="3" />
                 <Label fx:id="createContLb" text="Kontaktperson er opprettet/oppdatert" textFill="#3bb20c" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2">
                      <font>
                         <Font size="12.0" />
@@ -150,6 +143,13 @@
                      <font>
                         <Font size="12.0" />
                      </font></Label>
+                     <TextField fx:id="eventName" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="1" />
+                     <TextField fx:id="time" prefHeight="26.0" prefWidth="229" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <TextField fx:id="artist" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="3" />
+                     <DatePicker fx:id="date" editable="false" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     <ComboBox fx:id="facility" prefHeight="26.0" prefWidth="229.0" promptText="Velg et lokale" GridPane.rowIndex="5" />
+                     <TextField fx:id="ticketPrice" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                     <TextArea fx:id="programInfo" prefHeight="88.0" prefWidth="497.0" wrapText="true" GridPane.rowIndex="8" />
 
             </children>
                <VBox.margin>
