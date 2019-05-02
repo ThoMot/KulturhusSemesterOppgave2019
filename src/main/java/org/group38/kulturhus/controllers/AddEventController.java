@@ -51,14 +51,14 @@ public class AddEventController implements MainController {
     private String fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
     private String fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
     @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
-    @FXML private TextArea programInfo, other;
+    @FXML private TextArea programInfo, other, editFacility;
     @FXML private TextField firstName, lastName, email, company, phoneNumber, webPage; //addcontactPerson
     @FXML private DatePicker date;
     @FXML private ComboBox facility;
     @FXML private TableView contactPerson;
     @FXML private TableColumn<ContactPerson, String> firstNameColumn, lastNameColumn, phoneNumberColumn;
     @FXML private BorderPane contactPersonPane;
-    @FXML private Label createContLb, createEvLb, contLabel;
+    @FXML private Label createContLb, createEvLb, contLabel, facilityLb;
     @FXML private Button create, update, createContact, updateContact;
 
 
@@ -91,6 +91,9 @@ public class AddEventController implements MainController {
         if(getSelectedEvent()!=null){
             setThisEvent(getSelectedEvent());
             create.setVisible(false);
+            facility.setVisible(false);
+            facilityLb.setVisible(false);
+            editFacility.setVisible(true);
         }
         else update.setVisible(false);
         if(thisEvent!=null){

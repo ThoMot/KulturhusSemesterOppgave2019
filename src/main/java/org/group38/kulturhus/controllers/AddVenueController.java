@@ -57,6 +57,8 @@ public class AddVenueController implements MainController{
             seating.setVisible(false);
             row.setVisible(false);
             columns.setVisible(false);
+            columns.setText(String.valueOf(0));
+            row.setText(String.valueOf(0));
         }
        else{
             maxSeats2.setVisible(false);
@@ -65,12 +67,11 @@ public class AddVenueController implements MainController{
             seating.setVisible(true);
             row.setVisible(true);
             columns.setVisible(true);
+            maxSeats.setText(String.valueOf(0));
         }
-
     }
 
     private void loadValues(){
-
         facilityName.setText(thisFacility.getFacilityName());
         maxSeats.setText(Integer.toString(thisFacility.getMaxAntSeats()));
         row.setText(Integer.toString(thisFacility.getRows()));
@@ -104,7 +105,25 @@ public class AddVenueController implements MainController{
     }
     @FXML
     private void updateVenue(){
-
+        if(facilityType.getSelectionModel().getSelectedItem()==null) errorBox("Ikke valgt type facility", "Du har ikke valgt en lokaltype", "Vennligst velg en type fra nedtrekksmenyen");
+        else{
+            try{
+                if(false){
+                    //hvis type lokale endres, slett og oppdater
+                }
+                else {
+                    thisFacility.setFacilityName(facilityName.getText());
+                    thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
+                    //if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")) thisFacility.setMaxAntSeats(maxSeats);
+//                    else{
+//                        thisFacility.setRows(Integer.parseInt(row.getText()));
+//                        thisFacility.setColumns(Integer.parseInt(columns.getText()));
+//                    }
+                }
+            } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
+            } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
+            }
+        }
     }
 
     public void setThisFacility(Facility thisFacility) {
