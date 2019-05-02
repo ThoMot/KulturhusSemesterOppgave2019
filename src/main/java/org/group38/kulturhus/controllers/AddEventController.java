@@ -120,7 +120,8 @@ public class AddEventController implements MainController {
     }
     /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
-    public void createEvent(ActionEvent event) {
+    @FXML
+    private void createEvent(ActionEvent event) {
         if (contactPerson.getSelectionModel().getSelectedItem() == null) errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         else {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
@@ -173,7 +174,8 @@ public class AddEventController implements MainController {
     }
     /**updateEvent tries to update an event if selected in showeEvent scene.
     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
-    public void updateEvent(ActionEvent event) {
+    @FXML
+    private void updateEvent(ActionEvent event) {
         try {
             System.out.println(date.getValue());
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
@@ -201,7 +203,8 @@ public class AddEventController implements MainController {
     /**The createContactPerson method tries to create a contactPerson and throws an exception
     *if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
     *contactPerson is created, the createContact scene is closed.*/
-    public void createContactPerson(ActionEvent event){
+    @FXML
+    private void createContactPerson(ActionEvent event){
         try {
             ContactInfo contactInfo = new ContactInfo(email.getText(), phoneNumber.getText());
             getContactPeople().add(new ContactPerson(firstName.getText(), lastName.getText(), contactInfo));
@@ -234,7 +237,8 @@ public class AddEventController implements MainController {
 
     /**The updateContactPerson goes to the scene for updating the contactPerson and runs the
     setter method for selected contactPerson.*/
-    public void updateContactPerson(ActionEvent event){
+    @FXML
+    private void updateContactPerson(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }
@@ -254,7 +258,8 @@ public class AddEventController implements MainController {
     }
     /**The updateContactPersonComplete method tries to set the new values to the selected contactPerson
     *and throws exceptions for missing input and for wrong input*/
-    public void updateContactPersonComplete(ActionEvent event){
+    @FXML
+    private void updateContactPersonComplete(ActionEvent event){
         try{
             thisContactPerson.setFirstName(firstName.getText());
             thisContactPerson.setLastName(lastName.getText());
@@ -291,7 +296,8 @@ public class AddEventController implements MainController {
     }
     /**checks if a row is selected, and then asks for permission to delete the object
      * if the user presses ok, the contactPerson selected is deleted */
-    public void deleteRow(ActionEvent event){
+    @FXML
+    private void deleteRow(ActionEvent event){
         if(contactPerson.getSelectionModel().getSelectedItem()==null){
             errorBox("Feil", "Det er ingen kontaktperson som er markert", "Vennligst marker en kontaktperson du vil redigere");
         }

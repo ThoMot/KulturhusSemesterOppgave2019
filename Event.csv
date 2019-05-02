@@ -1,2 +1,0 @@
-Class;PhoneNr;FacilityName;EventId;EventName;Type;Program;Performer;TicketPrice;Date;Time
-org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;a86516d3-3354-4fac-902d-ab2e2d0c4d71;Karpe;konsert;konsert med karpe;Megdi ++;260.0;2019-05-10;18:00;
