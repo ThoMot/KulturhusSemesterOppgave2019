@@ -27,38 +27,32 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="contactPersonPane" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddEventController">
-
     <top>
         <VBox>
-           <children>
-               <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
-                   <menus>
-                       <Menu text="Arrangement">
-                           <items>
-                               <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
-                               <MenuItem fx:id="addEvent" disable="true" text="Opprett arrangement" />
-                           </items>
-                       </Menu>
-                       <Menu mnemonicParsing="false" text="Lokale">
-                           <items>
-                               <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
-                           </items>
-                       </Menu>
-                   </menus>
-               </MenuBar>
-               <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
-                  <children>
-                      <Label layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus" textFill="WHITE">
-                          <font>
-                              <Font name="System Bold" size="19.0" />
-                          </font>
-                  </Label>
-                  </children>
-               </Pane>
-           </children>
+            <children>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu text="Arrangement">
+                            <items>
+                                <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
+                                <MenuItem disable="true" text="Opprett arrangement" />
+                            </items>
+                        </Menu>
+                        <Menu text="Lokale">
+                            <items>
+                                <MenuItem onAction="#goToShowVenue" text="Oversikt over lokaler" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Pane prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
+                    <children>
+                        <Label styleClass="headerPane-txt" layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus"/>
+                    </children>
+                </Pane>
+            </children>
         </VBox>
     </top>
-
     <right>
         <VBox prefHeight="434.0" prefWidth="450.0">
             <children>
@@ -79,8 +73,8 @@
                 </TableView>
                 <Label alignment="CENTER" prefHeight="37.0" prefWidth="448.0" text="eller..">
                     <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
                 </Label>
                 <Button fx:id="updateCont" alignment="CENTER" mnemonicParsing="false" onAction="#updateContactPerson" prefHeight="27.0" prefWidth="420.0" text="Oppdater kontaktperson">
                     <VBox.margin>
@@ -105,73 +99,50 @@
                     <children>
                         <Label alignment="TOP_LEFT" graphicTextGap="10.0" layoutY="6.0" prefHeight="32.0" prefWidth="563.0" styleClass="h1" text="Opprett nytt arrangement" />
                     </children>
-            </Pane>
-         <GridPane BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
-           <columnConstraints>
-             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="467.20831298828125" minWidth="10.0" percentWidth="0.0" prefWidth="246.0" />
-             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="256.0" minWidth="10.0" prefWidth="256.0" />
-           </columnConstraints>
-           <rowConstraints>
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-           </rowConstraints>
-            <children>
-                     <TextField fx:id="eventName" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="1" />
-                     <Label text="Tittel på arrangement:" />
-                     <Label text="Artist/Annet" GridPane.rowIndex="2" />
-                     <Label text="Velg dato:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     <TextField fx:id="artist" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="3" />
-                     <DatePicker fx:id="date" editable="false" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                     <Label text="Lokale" GridPane.rowIndex="4" />
-                     <ComboBox fx:id="facility" prefHeight="26.0" prefWidth="229.0" promptText="Velg et lokale" GridPane.rowIndex="5" />
-                     <Label text="Billettpris" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                     <TextField fx:id="ticketPrice" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                     <Label text="Tidspunkt" GridPane.columnIndex="1" />
-                     <TextField fx:id="time" prefHeight="26.0" prefWidth="229" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <Label text="Program for arrangementet: " wrapText="true" GridPane.rowIndex="7" />
-                     <TextArea fx:id="programInfo" prefHeight="88.0" prefWidth="497.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="3" />
-                <Label fx:id="createContLb" text="Kontaktperson er opprettet/oppdatert" textFill="#3bb20c" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2">
-                     <font>
-                        <Font size="12.0" />
-                     </font></Label>
-                <Label fx:id="createEvLb" text="Arrangement er opprettet/oppdatert" textFill="#0fa407" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2">
-                     <font>
-                        <Font size="12.0" />
-                     </font></Label>
-
+                </Pane>
+                <GridPane BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="467.20831298828125" minWidth="10.0" percentWidth="0.0" prefWidth="246.0" />
+                        <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="256.0" minWidth="10.0" prefWidth="256.0" />
+                    </columnConstraints>
+                    <children>
+                        <TextField fx:id="eventName" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="1" />
+                        <Label text="Tittel på arrangement:" />
+                        <Label text="Artist/Annet" GridPane.rowIndex="2" />
+                        <Label text="Velg dato:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="artist" prefHeight="26.0" prefWidth="229.0" GridPane.rowIndex="3" />
+                        <DatePicker fx:id="date" editable="false" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Lokale" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="facility" prefHeight="26.0" prefWidth="229.0" promptText="Velg et lokale" GridPane.rowIndex="5" />
+                        <Label text="Billettpris" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="ticketPrice" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Tidspunkt" GridPane.columnIndex="1" />
+                        <TextField fx:id="time" prefHeight="26.0" prefWidth="229" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Program for arrangementet: " wrapText="true" GridPane.rowIndex="7" />
+                        <TextArea fx:id="programInfo" prefHeight="88.0" prefWidth="497.0" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="3" />
+                        <Label styleClass="h4" fx:id="createContLb" text="Kontaktperson er opprettet/oppdatert" textFill="#3bb20c" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2"/>
+                        <Label styleClass="h4" fx:id="createEvLb" text="Arrangement er opprettet/oppdatert" textFill="#0fa407" textOverrun="CLIP" visible="false" GridPane.rowIndex="12" GridPane.rowSpan="2"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </GridPane>
             </children>
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-         </GridPane>
-          </children>
-         <BorderPane.margin>
-            <Insets left="20.0" top="10.0" />
-         </BorderPane.margin>
-       </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-                   <Button fx:id="create" onAction="#createEvent" text="Opprett arrangement" />
-                   <Button fx:id="update" onAction="#updateEvent" text="Oppdater arrangement">
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
+            <BorderPane.margin>
+                <Insets left="20.0" top="10.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="create" onAction="#createEvent" text="Opprett arrangement" />
+                <Button fx:id="update" onAction="#updateEvent" text="Oppdater arrangement">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>

@@ -115,7 +115,9 @@ public class AddTicketController implements MainController{
         phoneNumber.setText(thisTicket.getPhonenumber());
     }
     public void showFreeSeats(){
-        if(thisEvent instanceof EventNumberedSeating) seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
+        if(thisEvent instanceof EventNumberedSeating)
+            seatsList.setText(((EventNumberedSeating) thisEvent).availableSeats());
+
     }
 
     /**createEvent checks if there was already an event selected and in that case shows an error.

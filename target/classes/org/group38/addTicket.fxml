@@ -88,7 +88,7 @@
                        <content>
                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="957.0">
                               <children>
-                                  <Label fx:id="seatsList" alignment="TOP_LEFT" prefHeight="151.0" prefWidth="962.0" text="oversikt over setene" wrapText="true">
+                                  <Label fx:id="seatsList" alignment="TOP_CENTER" prefHeight="151.0" prefWidth="962.0" text="oversikt over setene" wrapText="true">
                                       <font>
                                           <Font size="10.0" />
                                       </font>

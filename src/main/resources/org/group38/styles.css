@@ -26,8 +26,17 @@
     -fx-background-color: #4780a8;
 }
 
+.headerPane-txt{
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
 .h1{
     -fx-font-size: 20;
+}
+
+.h4{
+    -fx-font-size: 12;
 }
 
 .padding{
