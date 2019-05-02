@@ -1,30 +1,21 @@
 package org.group38.kulturhus.controllers;
 
 
-import javafx.animation.PauseTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
-import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.UUID;
 
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;

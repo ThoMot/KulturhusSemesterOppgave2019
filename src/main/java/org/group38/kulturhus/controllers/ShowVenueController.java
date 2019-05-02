@@ -6,17 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.Event.Event;
-import org.group38.kulturhus.model.Event.Ticket;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.File;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
 public class ShowVenueController implements MainController {

@@ -1,23 +1,18 @@
 package org.group38.kulturhus.controllers;
 
-import javafx.animation.PauseTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Duration;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.showLabel;
 import static org.group38.kulturhus.controllers.ShowVenueController.getThisFacility;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
@@ -91,7 +86,7 @@ public class AddVenueController implements MainController{
             if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")){
                 try{
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(maxSeats.getText())));
-                    showLabel();
+                    showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
                 } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
                 }
@@ -99,19 +94,13 @@ public class AddVenueController implements MainController{
             else{
                 try {
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(row.getText()), Integer.parseInt(columns.getText())));
-                    showLabel();
+                    showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
                 } catch (IllegalArgumentException e){ errorBox("null eller færre plasser","Lokalet må minst ha en plass", "Vennligst legg inn et gyldig tall" );
                 }
             }
         }
 
-    }
-    private void showLabel(){
-        created.setVisible(true);
-        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-        visiblePause.setOnFinished(click -> created.setVisible(false));
-        visiblePause.play();
     }
     @FXML
     private void updateVenue(){

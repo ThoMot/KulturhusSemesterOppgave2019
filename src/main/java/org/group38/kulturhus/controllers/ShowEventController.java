@@ -16,10 +16,9 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
 import java.io.File;
-import java.util.SplittableRandom;
 import java.util.concurrent.ExecutionException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
 
 public class ShowEventController implements MainController{

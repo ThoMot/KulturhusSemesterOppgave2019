@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 

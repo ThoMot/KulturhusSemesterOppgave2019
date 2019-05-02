@@ -29,7 +29,7 @@ import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
+import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
 import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
@@ -159,18 +159,6 @@ public class AddEventController implements MainController {
         time.setText(thisEvent.getTime().toString());
         contactPerson.getSelectionModel().select(thisEvent.getContactPerson());
     }
-    private void showLabel(){
-        createEvLb.setVisible(true);
-        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-        visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
-        visiblePause.play();
-    }
-    private void showLabelContact(){
-        createContLb.setVisible(true);
-        PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
-        visiblePause.setOnFinished(click -> createContLb.setVisible(false));
-        visiblePause.play();
-    }
     /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
     @FXML
@@ -183,7 +171,7 @@ public class AddEventController implements MainController {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
-                    showLabel();
+                    showLabel(createEvLb);
 
 
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
@@ -209,7 +197,7 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    showLabel();
+                    showLabel(createEvLb);
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
                 } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -231,7 +219,7 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
             thisEvent.getEventInfo().setPerformers(artist.getText());
             thisEvent.getEventInfo().setProgram(programInfo.getText());
-            showLabel();
+            showLabel(createEvLb);
 
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
         } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -257,7 +245,7 @@ public class AddEventController implements MainController {
                 getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
             if (isNotEmptyString(other.getText()))
                 getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
-            showLabelContact();
+            showLabel(createContLb);
 
             //TODO flytte dette over i Scene manager??
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
@@ -307,7 +295,7 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
             if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
-            showLabelContact();
+            showLabel(createContLb);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
             loader.setController(this);
