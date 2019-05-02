@@ -19,20 +19,11 @@ public class ShowVenueController implements MainController {
     private ObservableList<Facility> observableList;
     private static Facility thisFacility;
 
-    @FXML
-    private TableView<Facility> facilitiesView;
+    @FXML private TableView<Facility> facilitiesView;
+    @FXML private TableColumn<Facility,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn, totalSeats;
 
-    @FXML
-    private TableColumn<Facility,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn, totalSeats;
 
-    @FXML
-    private void goToAddTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.ADDTICKET);
-    }
-    @FXML
-    private void goToShowTicket(ActionEvent event){
-        SceneManager.navigate(SceneName.SHOWTICKET);
-    }
+ /** these methods is switching between the scenes and setting thisFacility if needed*/
     @FXML
     private void goToAddEvent(ActionEvent event){
         SceneManager.navigate(SceneName.ADDEVENT);
@@ -64,13 +55,13 @@ public class ShowVenueController implements MainController {
         initCols();
     }
 
-    /** loadData() adds all the tickets from the list in Kulturhus into TableView */
+    /** loadData() adds all the facilites from the list in Kulturhus into TableView */
     private void loadData(){
         observableList = FXCollections.observableList(getFacilities());
         facilitiesView.setItems(observableList);
     }
 
-    /** initCols() inputs information gathered in load to place where in scene/fxml-file */
+    /** initCols() decides what data should be in each column of the tableView */
     private void initCols(){
         facilityNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacilityName()));
         facilityTypeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacilityType()));
@@ -78,6 +69,7 @@ public class ShowVenueController implements MainController {
         seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(Integer.toString(data.getValue().getColumns())));
         totalSeats.setCellValueFactory(data-> new SimpleStringProperty(Integer.toString(data.getValue().getMaxAntSeats())));
     }
+    /** the deleteRow method checks if a row is marked and asks permission befoire deleting the object*/
     @FXML
     private void deleteRow(ActionEvent event){
         if(facilitiesView.getSelectionModel().getSelectedItem()==null){
@@ -103,7 +95,7 @@ public class ShowVenueController implements MainController {
             });
         }
     }
-
+/** setter and getter methods*/
     public void setThisFacility(Facility thisFacility) {
         this.thisFacility = thisFacility;
     }
