@@ -18,24 +18,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
+<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.AddTicketController">
     <top>
         <VBox>
-            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
-                <menus>
-                    <Menu text="Arrangement">
-                        <items>
-                            <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
-                            <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Opprett arrangement" />
-                        </items>
-                    </Menu>
-                    <Menu text="Lokale">
-                        <items>
-                            <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
-                        </items>
-                    </Menu>
-                </menus>
-            </MenuBar>
+      <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="1200.0">
+        <menus>
+          <Menu text="Arrangement">
+            <items>
+              <MenuItem onAction="#goToAddEvent" text="Legg til arrangement" />
+                  <MenuItem onAction="#goToShowEvent" text="Vis arrangementer" />
+            </items>
+          </Menu>
+          <Menu text="Lokale">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#goToShowVenue" text="Se Lokaler" />
+            </items>
+          </Menu>
+               <Menu mnemonicParsing="false" text="ChangeFiles">
+                  <items>
+                     <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="ReadFromJobj" />
+                     <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="ReadFromCsv" />
+                  </items>
+               </Menu>
+        </menus>
+      </MenuBar>
         <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
             <Label layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus" textFill="WHITE">
                 <font>

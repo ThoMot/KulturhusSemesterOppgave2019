@@ -31,6 +31,12 @@
                <MenuItem onAction="#goToShowVenue" text="Oversikt over lokaler" />
              </items>
            </Menu>
+                  <Menu mnemonicParsing="false" text="ChangeFiles">
+                     <items>
+                        <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="ReadFromJobj" />
+                        <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="ReadFromCsv" />
+                     </items>
+                  </Menu>
          </menus>
        </MenuBar>
        <Pane prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">

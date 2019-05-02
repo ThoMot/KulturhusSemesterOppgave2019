@@ -10,11 +10,13 @@ import javafx.scene.control.*;
 
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.DefaultFiles;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
 import java.io.File;
+import java.util.SplittableRandom;
 import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
@@ -24,10 +26,12 @@ public class ShowEventController implements MainController{
     //data field
     private ObservableList<Event> observableList;
     private static Event selectedEvent;
+    private String fileName = DefaultFiles.EVENTJOBJ.getFileName();
 
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
     @FXML private TextField filtering;
+
 
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
     *it also shows an errormessage in an alert if there is no selected event*/
@@ -63,6 +67,32 @@ public class ShowEventController implements MainController{
             SceneManager.navigate(SceneName.ADDEVENT);
         }
     }
+
+    public void refresh(String fileName){
+        observableList.clear();
+
+        try {
+            observableList.addAll(ReaderThreadRunner.startReader(fileName));
+            System.out.println(observableList);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromJOBJ(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.EVENTJOBJ.getFileName())){
+            fileName = DefaultFiles.EVENTJOBJ.getFileName();
+            refresh(fileName);
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void readFromCSV(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
+            fileName = DefaultFiles.EVENTCSV.getFileName();
+            refresh(fileName);
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
     /**The initialize method runs when the scene is opened. This method runs the
     *initCols method and the loadData method. It also sets the selectedEvent to null
     *for not bringing an old selected item to the next scene.*/
@@ -71,6 +101,7 @@ public class ShowEventController implements MainController{
         loadData();
         setSelectedEvent(null);
         filtering();
+        System.out.println(fileName);
 
     }
     /**the filtering method is run when the scene is opened and adds a listener to the textfield filtering,
@@ -117,7 +148,7 @@ public class ShowEventController implements MainController{
         observableList = eventsView.getItems();
 
         try {
-            observableList.addAll(ReaderThreadRunner.startReader("Event.csv"));
+            observableList.addAll(ReaderThreadRunner.startReader(fileName));
             System.out.println(observableList);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -140,10 +171,10 @@ public class ShowEventController implements MainController{
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
 
-                    File file = new File("Event.csv");
+                    File file = new File("Events.csv");
                     file.delete();
                     try {
-                        WriterThreadRunner.WriterThreadRunner(observableList, "Event.csv");
+                        WriterThreadRunner.WriterThreadRunner(observableList, "Events.csv");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
