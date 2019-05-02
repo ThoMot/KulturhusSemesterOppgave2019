@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
+<BorderPane minHeight="600.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowEventController">
   <top>
     <VBox>
        <children>
@@ -31,10 +31,14 @@
                <MenuItem onAction="#goToShowVenue" text="Oversikt over lokaler" />
              </items>
            </Menu>
-                  <Menu mnemonicParsing="false" text="ChangeFiles">
+                  <Menu mnemonicParsing="false" text="Bytt Fil">
                      <items>
-                        <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="ReadFromJobj" />
-                        <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="ReadFromCsv" />
+                        <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="Les fra standard jobj" />
+                        <MenuItem fx:id="readFromCSV1" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til standard Jobj" />
+                        <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="Les fra standard Csv" />
+                        <MenuItem fx:id="readFromCSV11" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til standard Csv" />
+                        <MenuItem fx:id="readFromCSV111" mnemonicParsing="false" onAction="#readFromCSV" text="Les fra egen fil" />
+                        <MenuItem fx:id="readFromCSV1111" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til egen fil" />
                      </items>
                   </Menu>
          </menus>

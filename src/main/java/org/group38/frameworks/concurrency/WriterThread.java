@@ -40,7 +40,6 @@ public class WriterThread implements Runnable {
     private void writeObjects() throws IOException {
         WriterInterface writer;
         String ext = filename.substring(filename.lastIndexOf(".")+1);
-        System.out.println(ext);
 
         switch (ext){
             case "jobj":
