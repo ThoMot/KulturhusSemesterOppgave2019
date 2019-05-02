@@ -7,5 +7,6 @@ public enum SceneName {
     ADDTICKET,
     SHOWTICKET,
     SHOWVENUE,
-    ADDVENUE
+    ADDVENUE,
+    FILEEDITOR
 }

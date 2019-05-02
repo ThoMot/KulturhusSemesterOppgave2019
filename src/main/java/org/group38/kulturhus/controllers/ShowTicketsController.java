@@ -8,12 +8,14 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
@@ -85,6 +87,19 @@ public class ShowTicketsController implements MainController {
         loadData();
         filtering();
     }
+
+    @Override
+    public void refresh(){
+        observableList.clear();
+
+//        try {
+//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
+//
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+    }
+
 
     /** setThisEvent() registers the Ticket on the selected Event */
     private void setThisEvent(Event thisEvent){

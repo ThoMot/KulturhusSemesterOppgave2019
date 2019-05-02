@@ -6,11 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.concurrent.ExecutionException;
 
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
@@ -76,6 +80,17 @@ public class AddTicketController implements MainController{
         else  {
             update.setVisible(false);
         }
+    }
+
+    @Override
+    public void refresh(){
+
+//        try {
+//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
+//
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /** setThisEvent sets the ticket to the event chosen in showEventController*/

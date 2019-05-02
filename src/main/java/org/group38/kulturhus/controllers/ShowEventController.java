@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.DefaultFiles;
@@ -34,10 +35,10 @@ public class ShowEventController implements MainController{
     private static Event selectedEvent;
     private String fileName;
     private FileHandler fileHandler = new FileHandler();
+    private SceneManager sceneManager = SceneManager.INSTANCE;
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
     @FXML private TextField filtering;
-    @FXML private Button changeEvent;
 
 
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
@@ -46,6 +47,7 @@ public class ShowEventController implements MainController{
     private void goToAddEvent(ActionEvent event){ SceneManager.navigate(SceneName.ADDEVENT); }
     @FXML
     private void goToShowVenue(ActionEvent event){ SceneManager.navigate(SceneName.SHOWVENUE); }
+
     public void goToVisInfo(ActionEvent event){
         if(eventsView.getSelectionModel().getSelectedItem()==null){
             errorBox("Feil", "Det er ingen rader som er markert", "Vennligst marker en rad i tabellen");
@@ -75,7 +77,9 @@ public class ShowEventController implements MainController{
         }
     }
 
-    public void refresh(String fileName){
+    @Override
+    public void refresh(){
+        fileName = EditedFiles.getActiveEventFile();
         observableList.clear();
 
         try {
@@ -84,7 +88,6 @@ public class ShowEventController implements MainController{
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(fileName + " Dette er filnavnet");
     }
 
 
@@ -100,7 +103,7 @@ public class ShowEventController implements MainController{
                 }
 
             fileName = DefaultFiles.EVENTJOBJ.getFileName();
-            refresh(fileName);
+            refresh();
         } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
     }
 
@@ -114,38 +117,17 @@ public class ShowEventController implements MainController{
 
             fileName = DefaultFiles.EVENTCSV.getFileName();
             System.out.println(fileName);
-            refresh(fileName);
+            refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
 
-    public void readFromOwnCSVFile(ActionEvent event){
-        fileName = fileHandler.chooseFile(null);
-        if( fileName == null) {
-                return;
-        }
-        try {
-            EditedFiles.setEventsCSV(fileName);
-        } catch (WrongFileFormatException e){
-            errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
-        }
-        refresh(fileName);
-        System.out.println(fileName);
-    }
+    public void chooseFile(ActionEvent event){
+        //TODO TRY her???
+                sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR,2 ,3);
 
-    //TODO Duplicate code kan puttes i en metode
-    public void readFromOwnJOBJFile(ActionEvent event){
-        fileName = fileHandler.chooseFile(null);
-        if( fileName == null) {
-            return;
         }
-        try {
-            EditedFiles.setEventsJOBJ(fileName);
-        } catch (WrongFileFormatException e){
-            errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
-        }
-        refresh(fileName);
-        System.out.println(fileName);
-    }
+
+
 
     /**The initialize method runs when the scene is opened. This method runs the
     *initCols method and the loadData method. It also sets the selectedEvent to null

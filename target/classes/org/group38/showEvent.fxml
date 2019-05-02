@@ -35,8 +35,7 @@
                      <items>
                         <MenuItem fx:id="JOBJ" mnemonicParsing="false" onAction="#defaultJOBJ" text="Les/Skriv standard Jobj for Arrangementer" />
                         <MenuItem fx:id="CSV" mnemonicParsing="false" onAction="#defaultCSV" text="Les/Skriv standard Csv for Arrangementer" />
-                        <MenuItem fx:id="chooseFile" mnemonicParsing="false" onAction="#readFromOwnCSVFile" text="Velg egen CSV fil for Arrangementer" />
-                        <MenuItem fx:id="chooseFile1" mnemonicParsing="false" onAction="#readFromOwnJOBJFile" text="Velg egen JOBJ fil for Arrangementer" />
+                        <MenuItem fx:id="chooseFile" mnemonicParsing="false" onAction="#chooseFile" text="Velg egne filer" />
                      </items>
                   </Menu>
          </menus>
