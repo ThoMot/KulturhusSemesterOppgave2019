@@ -33,12 +33,10 @@
            </Menu>
                   <Menu mnemonicParsing="false" text="Bytt Fil">
                      <items>
-                        <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="Les fra standard jobj" />
-                        <MenuItem fx:id="readFromCSV1" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til standard Jobj" />
-                        <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="Les fra standard Csv" />
-                        <MenuItem fx:id="readFromCSV11" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til standard Csv" />
-                        <MenuItem fx:id="readFromCSV111" mnemonicParsing="false" onAction="#readFromCSV" text="Les fra egen fil" />
-                        <MenuItem fx:id="readFromCSV1111" mnemonicParsing="false" onAction="#readFromCSV" text="Skriv til egen fil" />
+                        <MenuItem fx:id="JOBJ" mnemonicParsing="false" onAction="#defaultJOBJ" text="Les/Skriv standard Jobj for Arrangementer" />
+                        <MenuItem fx:id="CSV" mnemonicParsing="false" onAction="#defaultCSV" text="Les/Skriv standard Csv for Arrangementer" />
+                        <MenuItem fx:id="chooseFile" mnemonicParsing="false" onAction="#readFromOwnCSVFile" text="Velg egen CSV fil for Arrangementer" />
+                        <MenuItem fx:id="chooseFile1" mnemonicParsing="false" onAction="#readFromOwnJOBJFile" text="Velg egen JOBJ fil for Arrangementer" />
                      </items>
                   </Menu>
          </menus>
@@ -107,7 +105,7 @@
    <bottom>
       <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="795.0" BorderPane.alignment="CENTER">
          <children>
-             <Button onAction="#goToCreateEvent" text="Endre arrangement" textAlignment="CENTER">
+             <Button fx:id="changeEvent" onAction="#goToCreateEvent" text="Endre arrangement" textAlignment="CENTER">
                  <HBox.margin>
                   <Insets left="10.0" />
                  </HBox.margin>

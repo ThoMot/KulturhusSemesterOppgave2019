@@ -1,10 +1,18 @@
 package org.group38.kulturhus.model.SaveLoad;
 
+import javafx.beans.value.ObservableNumberValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.DefaultFiles;
+import org.group38.kulturhus.model.EditedFiles;
 
 import java.io.File;
+
+import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 
 public class FileHandler {
     FileChooser fileChooser;
@@ -12,20 +20,18 @@ public class FileHandler {
 
 
 
-    public String saveToFile(Window window){
+    public String chooseFile(Window window){
         fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Save File");
-        FileChooser.ExtensionFilter saveFilter = new FileChooser.ExtensionFilter("Save Files", "*.jobj", "*.csv");
-        fileChooser.getExtensionFilters().add(saveFilter);
+        fileChooser.setTitle("Choose Files");
+        FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("Files", "*.jobj", "*.csv");
+        fileChooser.getExtensionFilters().add(fileFilter);
         file = fileChooser.showOpenDialog(window);
 
         if (file != null) {
-            System.out.println(file.getName());
-            return file.getName();
+            return file.toString();
         } else return null;
 
 
     }
-
 
 }

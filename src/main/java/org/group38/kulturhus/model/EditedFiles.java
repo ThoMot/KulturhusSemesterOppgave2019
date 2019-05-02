@@ -1,10 +1,6 @@
 package org.group38.kulturhus.model;
 
 import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
-import org.group38.kulturhus.model.SaveLoad.Save.WriteToCSV;
-import org.group38.kulturhus.model.SaveLoad.Save.WriterJOBJ;
-
-import java.util.SplittableRandom;
 
 public class EditedFiles {
 
@@ -16,6 +12,10 @@ public class EditedFiles {
     private static String facilityJOBJ;
     private static String ticketCSV;
     private static String ticketJOBJ;
+    private static String activeEventFile;
+    private static String activeFacilityFile;
+    private static String activeContactFile;
+    private static String activeTicketFile;
 
     public static void setEventsCSV(String fileName) throws WrongFileFormatException {
         if(fileName == null){
@@ -24,6 +24,7 @@ public class EditedFiles {
         }
         if(isCSV(fileName)){
             eventCSV = fileName;
+            activeEventFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en CSV fil");
     }
 
@@ -34,6 +35,7 @@ public class EditedFiles {
         }
         if(isJOBJ(fileName)){
             eventJOBJ = fileName;
+            activeEventFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en JOBJ fil");
     }
 
@@ -44,6 +46,7 @@ public class EditedFiles {
         }
         if(isCSV(fileName)){
             contactCSV = fileName;
+            activeContactFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en CSV fil");
     }
 
@@ -54,6 +57,7 @@ public class EditedFiles {
         }
         if(isJOBJ(fileName)){
             contactJOBJ = fileName;
+            activeContactFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en JOBJ fil");
     }
 
@@ -64,6 +68,7 @@ public class EditedFiles {
         }
         if(isCSV(fileName)){
             facilityCSV = fileName;
+            activeFacilityFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en CSV fil");
     }
 
@@ -74,6 +79,7 @@ public class EditedFiles {
         }
         if(isJOBJ(fileName)){
             facilityJOBJ = fileName;
+            activeFacilityFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en JOBJ fil");
     }
 
@@ -84,6 +90,7 @@ public class EditedFiles {
         }
         if(isCSV(fileName)){
             ticketCSV = fileName;
+            activeTicketFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en CSV fil");
     }
 
@@ -94,6 +101,7 @@ public class EditedFiles {
         }
         if(isJOBJ(fileName)){
             ticketJOBJ = fileName;
+            activeTicketFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en JOBJ fil");
     }
 
@@ -107,8 +115,31 @@ public class EditedFiles {
     private static boolean isJOBJ(String fileName){
         String ext = fileName.substring(fileName.lastIndexOf(".")+1);
         return (ext.equals("jobj"));
-        }
+    }
 
+    public static String getActiveEventFile(){
+        if(activeEventFile !=null){
+            return activeEventFile;
+        } else return DefaultFiles.EVENTJOBJ.getFileName();
+    }
+
+    public static String getActiveFacilityFile(){
+        if(activeFacilityFile !=null){
+            return activeFacilityFile;
+        } else return DefaultFiles.FACILITYJOBJ.getFileName();
+    }
+
+    public static String getActiveContactFile(){
+        if(activeContactFile !=null){
+            return activeContactFile;
+        } else return DefaultFiles.CONTACTJOBJ.getFileName();
+    }
+
+    public static String getActiveTicketFile(){
+        if(activeTicketFile !=null){
+            return activeTicketFile;
+        } else return DefaultFiles.TICKETJOBJ.getFileName();
+    }
 
     public static String getEventCSV(){
         if(eventCSV != null){
@@ -161,7 +192,5 @@ public class EditedFiles {
         } else return DefaultFiles.TICKETJOBJ.getFileName();
 
     }
-
-
 
 }

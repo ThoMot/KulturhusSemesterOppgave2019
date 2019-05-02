@@ -1,6 +1,7 @@
 package org.group38.kulturhus.model.SaveLoad.Load;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
+import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.Ticket;
 import org.group38.kulturhus.model.Exeptions.NoSuchSubclassException;
 import org.group38.kulturhus.model.Exeptions.ParsingException;
@@ -126,9 +127,10 @@ public class ReadCSV implements ReaderInterface {
                 System.out.println("TESTER2");
             }
 
-            ArrayList<ContactPerson> ContactPerson = readSmallObjects("contactPerson.csv");
-            ArrayList<Facility> Facility = readSmallObjects("Facility.csv");
-            ArrayList<Ticket> Tickets = readSmallObjects("Tickets.csv");
+            ArrayList<ContactPerson> ContactPerson = readSmallObjects(EditedFiles.getContactCSV());
+            ArrayList<Facility> Facility = readSmallObjects(EditedFiles.getFacilityCSV());
+            ArrayList<Ticket> Tickets = readSmallObjects(EditedFiles.getTicketCSV());
+            System.out.println(EditedFiles.getContactCSV() + "   hehhehehehehehhehehe");
 
 
             for(ContactPerson c : ContactPerson){

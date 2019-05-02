@@ -1,6 +1,7 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -8,29 +9,36 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javafx.stage.FileChooser;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.DefaultFiles;
+import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
+import org.group38.kulturhus.model.SaveLoad.FileHandler;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.util.SplittableRandom;
 import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
 
 public class ShowEventController implements MainController{
     //data field
     private ObservableList<Event> observableList;
     private static Event selectedEvent;
-    private String fileName = DefaultFiles.EVENTJOBJ.getFileName();
-
+    private String fileName;
+    private FileHandler fileHandler = new FileHandler();
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
     @FXML private TextField filtering;
+    @FXML private Button changeEvent;
 
 
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
@@ -73,24 +81,71 @@ public class ShowEventController implements MainController{
 
         try {
             observableList.addAll(ReaderThreadRunner.startReader(fileName));
-            System.out.println(observableList);
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(fileName + " Dette er filnavnet");
     }
 
-    public void readFromJOBJ(ActionEvent event){
+
+    public void defaultJOBJ(ActionEvent event){
         if(!fileName.equals(DefaultFiles.EVENTJOBJ.getFileName())){
+            File file = new File(fileName);
+            file.delete();
+
+            try {
+                WriterThreadRunner.WriterThreadRunner(observableList, fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+                }
+
             fileName = DefaultFiles.EVENTJOBJ.getFileName();
             refresh(fileName);
         } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
     }
 
-    public void readFromCSV(ActionEvent event){
+    public void defaultCSV(ActionEvent event){
         if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
+            try {
+                WriterThreadRunner.WriterThreadRunner(observableList, fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
             fileName = DefaultFiles.EVENTCSV.getFileName();
+            System.out.println(fileName);
             refresh(fileName);
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void readFromOwnCSVFile(ActionEvent event){
+        fileName = fileHandler.chooseFile(null);
+        if( fileName == null) {
+                return;
+        }
+        try {
+            EditedFiles.setEventsCSV(fileName);
+        } catch (WrongFileFormatException e){
+            errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
+        }
+        refresh(fileName);
+        System.out.println(fileName);
+    }
+
+    //TODO Duplicate code kan puttes i en metode
+    public void readFromOwnJOBJFile(ActionEvent event){
+        fileName = fileHandler.chooseFile(null);
+        if( fileName == null) {
+            return;
+        }
+        try {
+            EditedFiles.setEventsJOBJ(fileName);
+        } catch (WrongFileFormatException e){
+            errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
+        }
+        refresh(fileName);
+        System.out.println(fileName);
     }
 
     /**The initialize method runs when the scene is opened. This method runs the
@@ -101,7 +156,6 @@ public class ShowEventController implements MainController{
         loadData();
         setSelectedEvent(null);
         filtering();
-        System.out.println(fileName);
 
     }
     /**the filtering method is run when the scene is opened and adds a listener to the textfield filtering,
@@ -136,16 +190,19 @@ public class ShowEventController implements MainController{
         eventsView.setItems(sortedList);
     }
     /** initCols method is deciding what the table columns shall contain*/
-    private void initCols(){
-        eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
-        eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
-        eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
-        eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
+    private void initCols() {
+        try {
+            eventNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getEventName()));
+            eventTimeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getTime().toString()));
+            eventDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventInfo().getDate().toString()));
+            eventFacilityColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFacility().getFacilityName()));
+        } catch (ClassCastException e){ errorBox("Feil informasjon", "Feil info er lastet inn", "pass på at du laster rett fil");
+        }
     }
-
-    /**The loadData method adds all the events from the list in Kulturhus to the tableview*/
+    /**The loadData method adds all the events read from JOBJ file by default to the tableview*/
     private void loadData(){
         observableList = eventsView.getItems();
+        fileName = EditedFiles.getActiveEventFile();
 
         try {
             observableList.addAll(ReaderThreadRunner.startReader(fileName));
@@ -153,8 +210,8 @@ public class ShowEventController implements MainController{
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
+
     /**The deleteRow method checks if an event is selected, or else shows an errorMessage.
     *If a field is selected, shows a confirmation alert, and then deletes the event if the
     *user presses the ok button.*/
@@ -171,10 +228,10 @@ public class ShowEventController implements MainController{
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
 
-                    File file = new File("Events.csv");
+                    File file = new File(EditedFiles.getEventCSV());
                     file.delete();
                     try {
-                        WriterThreadRunner.WriterThreadRunner(observableList, "Events.csv");
+                        WriterThreadRunner.WriterThreadRunner(observableList, EditedFiles.getEventCSV());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

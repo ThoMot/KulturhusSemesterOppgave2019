@@ -47,7 +47,6 @@ public class AddEventController implements MainController {
     private ContactPerson thisContactPerson;
     private ObservableList<ContactPerson> ol;
     private ObservableList<Facility> ol2;
-    private FileHandler fileHandler = new FileHandler();
     private String fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
     private String fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
     @FXML private TextField eventName, artist, ticketPrice, time; //addEvent
@@ -181,18 +180,6 @@ public class AddEventController implements MainController {
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
                 } catch (IllegalArgumentException e){ errorBox("Opptatt lokale", "Dette lokalet er opptatt til angitt tid", "Vennligst velg et annet tidspunkt eller et annet lokale");
                 } catch (Exception e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format");
-                }
-                //TODO Hva skal vi gjøre med file handler?? OBS nå kallse chooser før feilmelding vises
-                String fileName = fileHandler.saveToFile(create.getScene().getWindow());
-                if( fileName != null) {
-                    try {
-
-                        //TODO Ikke optimalt å gjøre denne om til observable list...?
-                        ObservableList<Event> events = FXCollections.observableArrayList(getEvents());
-                        WriterThreadRunner.WriterThreadRunner(events, fileName);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
 
             } else if (f.getMaxAntSeats() != 0) {
