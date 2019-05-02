@@ -119,9 +119,9 @@ public class AddTicketController implements MainController{
         } else {
             try {
                 if (thisEvent instanceof EventFreeSeating) {
-                        Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getFacilityName());
-                        thisEvent.getTickets().add(ticket);
-                        SceneManager.navigate(SceneName.SHOWTICKET);
+                    Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getFacilityName());
+                    thisEvent.getTickets().add(ticket);
+                    SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
