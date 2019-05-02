@@ -10,11 +10,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Kulturhus {
-    private static ArrayList<Event> events = new ArrayList<>();
-    private static ArrayList<ContactPerson> contactPeople = new ArrayList<>();
-    private static ArrayList<Facility> facilities = new ArrayList<>();
+    private static List<Event> events = new ArrayList<>();
+    private static List<ContactPerson> contactPeople = new ArrayList<>();
+    private static List<Facility> facilities = new ArrayList<>();
 
     //kun for testing
     public static void opprett() {
@@ -50,15 +51,15 @@ public class Kulturhus {
         events.add(eventFreeSeating);
     }
 /** getter methods*/
-    public static ArrayList<ContactPerson> getContactPeople() {
+    public static List<ContactPerson> getContactPeople() {
         return contactPeople;
     }
 
-    public static ArrayList<Event> getEvents() {
+    public static List<Event> getEvents() {
         return events;
     }
 
-    public static ArrayList<Facility> getFacilities() {
+    public static List<Facility> getFacilities() {
         return facilities;
     }
 
