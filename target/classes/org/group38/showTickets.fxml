@@ -74,11 +74,6 @@
                             </children>
                         </GridPane>
                         <GridPane>
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints />
-                            </columnConstraints>
                             <children>
                                 <Label text="Artist/Deltaker/Skuespiller" GridPane.columnSpan="3">
                                     <font>

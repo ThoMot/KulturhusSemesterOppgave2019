@@ -46,6 +46,7 @@
 .seatScene{
     -fx-background-color: #4780a8;
     -fx-text-fill: white;
+    -fx-font-size: 28;
 }
 
 .seatList{
