@@ -110,22 +110,16 @@ public class AddTicketController implements MainController{
         } else {
             try {
                 if (thisEvent instanceof EventFreeSeating) {
-                    Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getFacilityName());
-                    thisEvent.getTickets().add(ticket);
+                    String newPhoneNumber = phoneNumber.getText();
+                    ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
                     int newSeat = Integer.parseInt(seatNumber.getText());
                     int newRow = Integer.parseInt(row.getText());
-                    String newPhone = phoneNumber.getText();
-                    LocalDate date = thisEvent.getDate();
-                    LocalTime time = thisEvent.getTime();
-                    Double ticketPrice = thisEvent.getTicketPrice();
-                    String facilityName = thisEvent.getFacilityName();
-
-                    Ticket ticket = new Ticket(newSeat, newRow, newPhone, date, time, thisEvent.getEventId(), ticketPrice, facilityName);
-                    thisEvent.getTickets().add(ticket);
+                    String newPhoneNumber = phoneNumber.getText();
+                    ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
             }catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",

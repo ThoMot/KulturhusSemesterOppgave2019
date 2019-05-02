@@ -72,16 +72,7 @@ public class Ticket implements Serializable {
     public LocalTime getTime() {
         return time;
     }
-//    public String setSeatNumber(int seatNumber) {
-//        this.seatNumber = seatNumber;
-//        return "Setenummer er endret";
-//    }
-//
-//    public String setSeatRow(int seatRow){
-//        this.seatRow=seatRow;
-//        return "Seterad er oppdatert";
-//    }
-//
+
     public Integer getSeat() {
         return seat;
     }
