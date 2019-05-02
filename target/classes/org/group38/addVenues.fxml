@@ -39,7 +39,7 @@
                        </Menu>
                        <Menu mnemonicParsing="false" text="Lokale">
                            <items>
-                               <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Vis lokaler" />
+                               <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
                            </items>
                        </Menu>
                    </menus>
@@ -134,14 +134,24 @@
             </HBox>
              <HBox prefHeight="100.0" prefWidth="200.0">
                  <children>
-                     <Button fx:id="create" text="Opprett billett" />
-                     <Button fx:id="update" mnemonicParsing="false" text="Oppdater billett">
+                     <Button fx:id="create" onAction="#createVenue" text="Opprett lokale" />
+                     <Button fx:id="update" mnemonicParsing="false" onAction="#updateVenue" text="Oppdater lokale">
                          <HBox.margin>
                              <Insets left="10.0" />
                          </HBox.margin>
                      </Button>
                  </children>
              </HBox>
+            <Label fx:id="created" alignment="CENTER" prefHeight="27.0" prefWidth="424.0" text="Lokalet har blitt opprettet" textFill="#3b8d30" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="updated" alignment="CENTER" prefHeight="27.0" prefWidth="431.0" text="Lokalet har blitt oppdatert" textFill="#619a61" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets left="20.0" right="20.0" top="10.0" />

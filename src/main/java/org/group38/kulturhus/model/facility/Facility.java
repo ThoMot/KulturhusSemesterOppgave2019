@@ -7,6 +7,9 @@ package org.group38.kulturhus.model.facility;
 
 import java.io.Serializable;
 
+import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
+import static org.group38.kulturhus.Utilities.Validate.isValidNumber;
+
 public class Facility implements Serializable {
     private String facilityName;
     private String facilityType;
@@ -20,12 +23,19 @@ public class Facility implements Serializable {
     }
 
     public Facility(String facilityName, String facilityType, int maxAntSeats){
+        if(!isNotEmptyString(facilityName))throw new NullPointerException();
+        if(!isNotEmptyString(facilityType))throw new NullPointerException();
+        if(!isValidNumber(maxAntSeats)) throw new IllegalArgumentException();
         this.facilityName = facilityName;
         this.facilityType = facilityType;
         this.maxAntSeats = maxAntSeats;
     }
 
     public Facility(String facilityName, String facilityType, int numRows, int seatsPerRow){
+        if(!isNotEmptyString(facilityName))throw new NullPointerException();
+        if(!isNotEmptyString(facilityType))throw new NullPointerException();
+        if(!isValidNumber(numRows)) throw new IllegalArgumentException();
+        if(!isValidNumber(seatsPerRow)) throw new IllegalArgumentException();
         this.facilityName = facilityName;
         this.facilityType = facilityType;
         this.rows = numRows;
@@ -37,6 +47,7 @@ public class Facility implements Serializable {
     }
 
     public void setFacilityName(String facilityName) {
+        if(!isNotEmptyString(facilityName))throw new NullPointerException();
         this.facilityName = facilityName;
     }
 
@@ -45,6 +56,7 @@ public class Facility implements Serializable {
     }
 
     public void setFacilityType(String facilityType) {
+        if(!isNotEmptyString(facilityType))throw new NullPointerException();
         this.facilityType = facilityType;
     }
 
@@ -53,7 +65,8 @@ public class Facility implements Serializable {
     }
 
     public void setRows(int rows) {
-        this.rows = rows;
+
+        if(!isValidNumber(rows)) throw new IllegalArgumentException();this.rows = rows;
     }
 
     public int getColumns() {
@@ -61,10 +74,17 @@ public class Facility implements Serializable {
     }
 
     public void setColumns(int columns) {
-        this.columns = columns;
+
+        if(!isValidNumber(columns)) throw new IllegalArgumentException();this.columns = columns;
     }
 
     public int getMaxAntSeats() { return maxAntSeats; }
+
+    //Denne er ny
+//    public void setMaxAntSeats(int maxAntSeats){
+//        if(!isValidNumber(maxAntSeats)) throw new IllegalArgumentException();
+//        this.maxAntSeats=maxAntSeats;
+//    }
 
 
     @Override
