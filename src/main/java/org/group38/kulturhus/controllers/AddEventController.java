@@ -195,7 +195,7 @@ public class AddEventController implements MainController {
         }
     }
 
-    public void setThisContactPerson(ContactPerson thisContactPerson) {
+    private void setThisContactPerson(ContactPerson thisContactPerson) {
         this.thisContactPerson = thisContactPerson;
     }
     /**The createContactPerson method tries to create a contactPerson and throws an exception
@@ -303,13 +303,12 @@ public class AddEventController implements MainController {
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     ol.remove(contactPerson.getSelectionModel().getSelectedItem());
-                    System.out.println(getContactPeople());
                 }
             });
         }
     }
     /**Setting the event to the event chosen in showEventController*/
-    public void setThisEvent(Event thisEvent) {
+    private void setThisEvent(Event thisEvent) {
         this.thisEvent = thisEvent;
     }
 

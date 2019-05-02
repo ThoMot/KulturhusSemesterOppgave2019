@@ -1,7 +1,6 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -20,7 +19,6 @@ import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
-import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowEventController implements MainController{
     //data field
