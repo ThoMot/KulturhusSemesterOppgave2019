@@ -31,7 +31,7 @@ public class AddTicketController implements MainController{
     private Label dateTime, eventTitle, seatRowInfoText, seatsList;
 
     @FXML
-    private TextField row, seatNumber, phoneNumber;
+    private TextField seatRow, seatNumber, phoneNumber;
 
     @FXML
     private Button create, update;
@@ -68,7 +68,7 @@ public class AddTicketController implements MainController{
 
     if(event instanceof EventFreeSeating){
         seatRowInfoText.setVisible(false);
-        row.setVisible(false);
+        seatRow.setVisible(false);
         seatNumber.setVisible(false);
         seatsList.setVisible(false);
     }
@@ -106,7 +106,7 @@ public class AddTicketController implements MainController{
 
     /** setTicketInfo sets information about all tickets in TableView */
     private void setTicketInfo(){
-        row.setText(thisTicket.getSeatRow().toString());
+        seatRow.setText(thisTicket.getSeatRow().toString());
         seatNumber.setText(thisTicket.getSeatNumber().toString());
         phoneNumber.setText(thisTicket.getPhoneNumber());
     }
@@ -136,7 +136,7 @@ public class AddTicketController implements MainController{
 
                 if (thisEvent instanceof EventNumberedSeating) {
                     int newSeat = Integer.parseInt(seatNumber.getText());
-                    int newRow = Integer.parseInt(row.getText());
+                    int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
                     goToShowTicket(event);
@@ -166,7 +166,7 @@ public class AddTicketController implements MainController{
                     "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
         } else {
             try {
-                thisTicket.setSeatRow(Integer.parseInt(row.getText()));
+                thisTicket.setSeatRow(Integer.parseInt(seatRow.getText()));
                 thisTicket.setSeatNumber(Integer.parseInt(seatNumber.getText()));
                 thisTicket.setPhoneNumber(phoneNumber.getText());
                 SceneManager.navigate(SceneName.SHOWTICKET);
