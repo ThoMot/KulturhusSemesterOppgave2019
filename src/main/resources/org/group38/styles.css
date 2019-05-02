@@ -26,6 +26,10 @@
     -fx-background-color: #4780a8;
 }
 
+.h1{
+    -fx-font-size: 20;
+}
+
 .padding{
 
 }
@@ -44,5 +48,7 @@
     -fx-border-width: 2;
 }
 
+.bp-center{
+}
 
 

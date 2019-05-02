@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -43,25 +44,11 @@
         </Pane>
     </VBox>
     </top>
-
-
-    <left>
-                  <VBox prefHeight="571.0" prefWidth="16.0">
-                     <children>
-            <Pane />
-
-                           </children>
-                  </VBox>
-   </left>
-
     <center>
-        <VBox layoutX="7.0" layoutY="6.0" prefHeight="399.0" prefWidth="782.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="7.0" layoutY="6.0" prefHeight="399.0" prefWidth="782.0">
          <VBox prefHeight="67.0" prefWidth="984.0">
             <children>
-               <Label fx:id="eventTitle" alignment="CENTER" prefHeight="33.0" prefWidth="984.0" text="eventTitle">
-                  <font>
-                     <Font name="System Bold" size="18.0" />
-                  </font>
+               <Label fx:id="eventTitle" alignment="CENTER" prefHeight="33.0" prefWidth="984.0" styleClass="h1" text="eventTitle">
                   <padding>
                      <Insets bottom="10.0" />
                   </padding>
@@ -78,12 +65,12 @@
                </HBox>
             </children>
          </VBox>
-            <Pane styleClass="seatView" VBox.vgrow="ALWAYS">
+            <Pane prefHeight="293.0" prefWidth="1013.0" styleClass="seatView" VBox.vgrow="ALWAYS">
             <VBox.margin>
                <Insets right="10.0" />
             </VBox.margin>
             <children>
-               <VBox alignment="TOP_CENTER" prefHeight="297.0" prefWidth="974.0">
+               <VBox alignment="TOP_CENTER" prefHeight="285.0" prefWidth="970.0">
                   <children>
                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="974.0" text="Seteoversikt">
                         <font>
@@ -92,16 +79,24 @@
                      </Label>
                       <Label text="Seteoversikt med ledig og ikke ledige seter" textAlignment="CENTER">
                       </Label>
-                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="1174.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER">
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="976.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER">
                         <font>
                            <Font size="28.0" />
                         </font>
                      </Label>
-                      <Label fx:id="seatsList" text="oversikt over setene">
-                          <font>
-                              <Font size="10.0" />
-                          </font>
-                      </Label>
+                     <ScrollPane prefHeight="155.0" prefWidth="950.0">
+                       <content>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="957.0">
+                              <children>
+                                  <Label fx:id="seatsList" alignment="TOP_LEFT" prefHeight="151.0" prefWidth="962.0" text="oversikt over setene" wrapText="true">
+                                      <font>
+                                          <Font size="10.0" />
+                                      </font>
+                                  </Label>
+                              </children>
+                           </AnchorPane>
+                       </content>
+                     </ScrollPane>
                   </children>
                </VBox>
             </children>
@@ -176,13 +171,16 @@
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
                 <Button fx:id="create" alignment="CENTER" onAction="#createTicket" text="Opprett billett" />
-                <Button fx:id="update" onAction="#updateTicket" mnemonicParsing="false" text="Oppdater billett">
+                <Button fx:id="update" mnemonicParsing="false" onAction="#updateTicket" text="Oppdater billett">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>
                </Button>
             </children>
          </HBox>
+         <BorderPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </BorderPane.margin>
         </VBox>
     </center>
 </BorderPane>

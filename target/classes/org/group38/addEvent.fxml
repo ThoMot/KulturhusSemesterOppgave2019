@@ -53,59 +53,53 @@
            </children>
         </VBox>
     </top>
-         <right>
-             <VBox prefHeight="434.0" prefWidth="450.0">
-                <children>
-            <Label fx:id="contLabel" text="Velg eksisterende kontaktperson">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-               <TableView fx:id="contactPerson" prefHeight="368.0" prefWidth="319.0" BorderPane.alignment="BOTTOM_CENTER">
-                  <columns>
-                     <TableColumn fx:id="firstNameColumn" prefWidth="109.0" text="Fornavn" />
-                     <TableColumn fx:id="lastNameColumn" prefWidth="104.0" text="Etternavn" />
-                     <TableColumn fx:id="phoneNumberColumn" prefWidth="105.0" text="Telefonnummer" />
-                  </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <Label alignment="CENTER" prefHeight="37.0" prefWidth="448.0" text="eller..">
-               <padding>
+
+    <right>
+        <VBox prefHeight="434.0" prefWidth="450.0">
+            <children>
+                <Label fx:id="contLabel" text="Velg eksisterende kontaktperson">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </Label>
+                <TableView fx:id="contactPerson" prefHeight="368.0" prefWidth="319.0" BorderPane.alignment="BOTTOM_CENTER">
+                    <columns>
+                        <TableColumn fx:id="firstNameColumn" prefWidth="109.0" text="Fornavn" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="104.0" text="Etternavn" />
+                        <TableColumn fx:id="phoneNumberColumn" prefWidth="105.0" text="Telefonnummer" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <Label alignment="CENTER" prefHeight="37.0" prefWidth="448.0" text="eller..">
+                    <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
-            </Label>
-               <Button fx:id="updateCont" alignment="CENTER" mnemonicParsing="false" onAction="#updateContactPerson" prefHeight="27.0" prefWidth="420.0" text="Oppdater kontaktperson">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin></Button>
-            <Button fx:id="createCont" alignment="CENTER" layoutX="20.0" layoutY="395.0" mnemonicParsing="false" onAction="#goToAddContactPerson" prefHeight="27.0" prefWidth="420.0" text="Opprett ny kontaktperson" />
-            <Button fx:id="deleteContact" alignment="CENTER" layoutX="20.0" layoutY="346.0" mnemonicParsing="false" onAction="#deleteRow" prefHeight="27.0" prefWidth="420.0" text="Slett kontaktperson">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-                </children>
-         <padding>
-            <Insets left="10.0" right="20.0" top="20.0" />
-         </padding>
-             </VBox>
-         </right>
-   <center>
-       <VBox prefHeight="399.0" prefWidth="613.0">
-          <children>
-            <Pane prefHeight="42.0" prefWidth="530.0">
-               <children>
-                        <Label alignment="TOP_LEFT" graphicTextGap="10.0" layoutY="6.0" prefHeight="32.0" prefWidth="563.0" text="Opprett nytt arrangement">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                        </Label>
-               </children>
+                </Label>
+                <Button fx:id="updateCont" alignment="CENTER" mnemonicParsing="false" onAction="#updateContactPerson" prefHeight="27.0" prefWidth="420.0" text="Oppdater kontaktperson">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin></Button>
+                <Button fx:id="createCont" alignment="CENTER" layoutX="20.0" layoutY="395.0" mnemonicParsing="false" onAction="#goToAddContactPerson" prefHeight="27.0" prefWidth="420.0" text="Opprett ny kontaktperson" />
+                <Button fx:id="deleteContact" alignment="CENTER" layoutX="20.0" layoutY="346.0" mnemonicParsing="false" onAction="#deleteRow" prefHeight="27.0" prefWidth="420.0" text="Slett kontaktperson">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+            <padding>
+                <Insets left="10.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </right>
+    <center>
+        <VBox prefHeight="399.0" prefWidth="613.0">
+            <children>
+                <Pane prefHeight="42.0" prefWidth="530.0">
+                    <children>
+                        <Label alignment="TOP_LEFT" styleClass="h1" graphicTextGap="10.0" layoutY="6.0" prefHeight="32.0" prefWidth="563.0" text="Opprett nytt arrangement"/>
+                    </children>
             </Pane>
          <GridPane BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
            <columnConstraints>
@@ -166,8 +160,8 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-                   <Button fx:id="create" mnemonicParsing="false" onAction="#createEvent" text="Opprett arrangement" />
-                   <Button fx:id="update" mnemonicParsing="false" onAction="#updateEvent" text="Oppdater arrangement">
+                   <Button fx:id="create" onAction="#createEvent" text="Opprett arrangement" />
+                   <Button fx:id="update" onAction="#updateEvent" text="Oppdater arrangement">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
