@@ -18,8 +18,10 @@ import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.UUID;
 
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.*;
@@ -48,37 +50,23 @@ public class AddTicketController implements MainController{
         setSelectedEvent(null);
         SceneManager.navigate(SceneName.ADDEVENT);
     }
-
     @FXML
     private void goToShowTicket(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWTICKET);
     }
-
     @FXML
     private void goToShowEvent(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWEVENT);
     }
-
     @FXML
     private void goToShowVenue(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.SHOWVENUE);
     }
 
-
-
-    /*SLETTES?*/
-//    public void buyTicket(){
-//        if(event instanceof EventNumberedSeating){
-//            ((EventNumberedSeating) event).buyTicket(Integer.parseInt(row.getText()),Integer.parseInt(seatNumber.getText()),phoneNumber.getText());
-//        }
-//        else if(event instanceof EventFreeSeating){
-//            ((EventFreeSeating) event).buyTicket(phoneNumber.getText());
-//        }
-//        System.out.println(getSelectedEvent().getTickets());
-//    }
-
-
-
+    /**initialize runs when nagivated to scene,
+     * This method loads the info from other methods, and uses the setSelectedEvent()
+     * to add a reference to the event selected in the showEvent scene if chosen.
+     * Methos aldo hides elements depending on type of event(seating or not)*/
     public void initialize() {
     setThisEvent(getSelectedEvent());
     setEventInfo();
@@ -131,13 +119,21 @@ public class AddTicketController implements MainController{
         } else {
             try {
                 if (thisEvent instanceof EventFreeSeating) {
-                    Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(),thisEvent.getFacilityName());
-                    thisEvent.getTickets().add(ticket);
-                    SceneManager.navigate(SceneName.SHOWTICKET);
+                        Ticket ticket = new Ticket(thisEvent.getTicketPrice(), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getFacilityName());
+                        thisEvent.getTickets().add(ticket);
+                        SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
-                    Ticket ticket = new Ticket(Integer.parseInt(seatNumber.getText()), Integer.parseInt(row.getText()), phoneNumber.getText(), thisEvent.getDate(), thisEvent.getTime(), thisEvent.getEventId(), thisEvent.getTicketPrice(),thisEvent.getFacilityName());
+                    int newSeat = Integer.parseInt(seatNumber.getText());
+                    int newRow = Integer.parseInt(row.getText());
+                    String newPhone = phoneNumber.getText();
+                    LocalDate date = thisEvent.getDate();
+                    LocalTime time = thisEvent.getTime();
+                    Double ticketPrice = thisEvent.getTicketPrice();
+                    String facilityName = thisEvent.getFacilityName();
+
+                    Ticket ticket = new Ticket(newSeat, newRow, newPhone, date, time, thisEvent.getEventId(), ticketPrice, facilityName);
                     thisEvent.getTickets().add(ticket);
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
@@ -148,10 +144,13 @@ public class AddTicketController implements MainController{
             } catch (NullPointerException e) {
                 errorBox("Tomme felter", "Alle felter er ikke utfylt",
                         "Vennligst fyll ut alle felter før du fortsetter");
-            }catch (IllegalArgumentException e){
+            }catch (IllegalArgumentException e) {
                 errorBox("Feil i telefonnummer", "Feil input i telefonnummerfeltet",
                         "Telefonnummer må bestå av nøyaktig 8 siffer");
-
+            }catch (IndexOutOfBoundsException e){ errorBox("Feil i seterad eller setenummer","Feil input i et eller flere felter",
+                    "Vennligst sørg for at alle felter har riktig format" +
+                            "\n\"Raden må være mellom 0 og " + thisEvent.getFacility().getRows() +
+                            "\n og setenummer mellom 0 og " + thisEvent.getFacility().getColumns());
             } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format");
             }
