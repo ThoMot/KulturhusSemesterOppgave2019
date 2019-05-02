@@ -66,7 +66,8 @@ public class Facility implements Serializable {
 
     public void setRows(int rows) {
 
-        if(!isValidNumber(rows)) throw new IllegalArgumentException();this.rows = rows;
+        if(!isValidNumber(rows)) throw new IllegalArgumentException();
+        this.rows = rows;
     }
 
     public int getColumns() {
@@ -75,7 +76,8 @@ public class Facility implements Serializable {
 
     public void setColumns(int columns) {
 
-        if(!isValidNumber(columns)) throw new IllegalArgumentException();this.columns = columns;
+        if(!isValidNumber(columns)) throw new IllegalArgumentException();
+        this.columns = columns;
     }
 
     public int getMaxAntSeats() { return maxAntSeats; }
