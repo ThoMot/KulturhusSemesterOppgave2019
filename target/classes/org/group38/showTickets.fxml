@@ -139,7 +139,7 @@
             <HBox alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="800.0">
                 <children>
                     <Button onAction="#deleteRow" text="Slett billett" />
-                    <Button alignment="TOP_LEFT" onAction="#goToCreateTicket" text="Endre Billett">
+                    <Button alignment="TOP_LEFT" onAction="#goToChangeTicket" text="Endre Billett">
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin>
