@@ -105,6 +105,7 @@ public class AddVenueController implements MainController{
     }
     /** updateVenue checks if a facility is selected and tries to update the variables
      * if the input is wrong, it shows an errorbox*/
+    //TODO bli ferdig med denne
     @FXML
     private void updateVenue(){
         if(facilityType.getSelectionModel().getSelectedItem()==null) errorBox("Ikke valgt type facility", "Du har ikke valgt en lokaltype", "Vennligst velg en type fra nedtrekksmenyen");
