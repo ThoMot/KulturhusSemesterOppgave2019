@@ -33,13 +33,13 @@
                    <menus>
                        <Menu mnemonicParsing="false" text="Arrangement">
                            <items>
-                               <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Add..." />
-                               <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Show..." />
+                               <MenuItem fx:id="addEvent" mnemonicParsing="false" onAction="#goToAddEvent" text="Legg til arrangement" />
+                               <MenuItem fx:id="showEvent" mnemonicParsing="false" onAction="#goToShowEvent" text="Vis arrangemneter" />
                            </items>
                        </Menu>
                        <Menu mnemonicParsing="false" text="Lokale">
                            <items>
-                               <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Show..." />
+                               <MenuItem fx:id="showVenue" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
                            </items>
                        </Menu>
                    </menus>
