@@ -121,7 +121,6 @@ public class AddEventController implements MainController {
     /**createEvent checks if there was already an event selected and in that case shows an error. If not the method proceeds
     *to check what kind of event is created. The method throws exceptions from missing input, and wrong input. If no exceptions are thrown, an event is created.*/
     public void createEvent(ActionEvent event) {
-
         if (contactPerson.getSelectionModel().getSelectedItem() == null) errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
         else {
             Facility f = (Facility) facility.getSelectionModel().getSelectedItem();
@@ -134,7 +133,6 @@ public class AddEventController implements MainController {
                     PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));
                     visiblePause.setOnFinished(click -> createEvLb.setVisible(false));
                     visiblePause.play();
-
 
 
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
@@ -177,6 +175,7 @@ public class AddEventController implements MainController {
     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
     public void updateEvent(ActionEvent event) {
         try {
+            System.out.println(date.getValue());
             thisEvent.setTicketPrice(Double.parseDouble(ticketPrice.getText()));
             thisEvent.getEventInfo().setEventName(eventName.getText());
             thisEvent.getEventInfo().setDate(date.getValue());
@@ -196,7 +195,7 @@ public class AddEventController implements MainController {
         }
     }
 
-    public void setThisContactPerson(ContactPerson thisContactPerson) {
+    private void setThisContactPerson(ContactPerson thisContactPerson) {
         this.thisContactPerson = thisContactPerson;
     }
     /**The createContactPerson method tries to create a contactPerson and throws an exception
@@ -304,13 +303,12 @@ public class AddEventController implements MainController {
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     ol.remove(contactPerson.getSelectionModel().getSelectedItem());
-                    System.out.println(getContactPeople());
                 }
             });
         }
     }
     /**Setting the event to the event chosen in showEventController*/
-    public void setThisEvent(Event thisEvent) {
+    private void setThisEvent(Event thisEvent) {
         this.thisEvent = thisEvent;
     }
 

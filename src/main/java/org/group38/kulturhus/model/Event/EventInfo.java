@@ -1,6 +1,7 @@
 package org.group38.kulturhus.model.Event;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

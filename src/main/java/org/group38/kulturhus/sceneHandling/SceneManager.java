@@ -35,12 +35,14 @@ public enum SceneManager {
         SceneInfo addTickets = new SceneInfo("Reserver Billett", "/org/group38/addTicket.fxml"  );
         SceneInfo showTickets = new SceneInfo("Vis Billetter", "/org/group38/showTickets.fxml"  );
         SceneInfo showVenues = new SceneInfo("Oversikt over Lokaler", "/org/group38/showVenues.fxml"  );
+        SceneInfo addVenue = new SceneInfo("Legg til lokale", "/org/group38/addVenues.fxml"  );
 
         scenes.put(SceneName.SHOWEVENT, showEvent);
         scenes.put(SceneName.ADDEVENT, addEvent);
         scenes.put(SceneName.ADDTICKET, addTickets);
         scenes.put(SceneName.SHOWTICKET, showTickets);
         scenes.put(SceneName.SHOWVENUE, showVenues);
+        scenes.put(SceneName.ADDVENUE, addVenue);
 
     }
     public void setPrimaryStage(Stage primaryStage){

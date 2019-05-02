@@ -1,7 +1,6 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -22,7 +21,6 @@ import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxes.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
-import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class ShowEventController implements MainController{
     //data field
@@ -116,18 +114,18 @@ public class ShowEventController implements MainController{
                 if(newValue ==null || newValue.isEmpty()){
                     return true;
                 }
-                String lowerCaseFiler = newValue.toLowerCase();
+                String lowerCaseFilter = newValue.toLowerCase();
 
-                if(event.getEventInfo().getEventName().toLowerCase().contains(lowerCaseFiler)){
+                if(event.getEventInfo().getEventName().toLowerCase().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getDate().toString().contains(lowerCaseFiler)){
+                else if(event.getDate().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getTime().toString().contains(lowerCaseFiler)){
+                else if(event.getTime().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(event.getFacility().getFacilityName().toLowerCase().contains(lowerCaseFiler)){
+                else if(event.getFacility().getFacilityName().toLowerCase().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;

@@ -43,6 +43,9 @@ public class ShowTicketsController implements MainController {
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
      *it also shows an errormessage in an alert if there is no selected event*/
     @FXML
+    private void goToShowEvent(ActionEvent event){ SceneManager.navigate(SceneName.SHOWEVENT); }
+
+    @FXML
     private void goToAddTicket(ActionEvent event) throws IOException {
         SceneManager.navigate(SceneName.ADDTICKET);
     }
@@ -68,6 +71,7 @@ public class ShowTicketsController implements MainController {
         setThisEvent(getSelectedEvent());
         initCols();
         loadData();
+        filtering();
     }
 
     /** setThisEvent() registers the Ticket on the selected Event */
@@ -138,15 +142,15 @@ public class ShowTicketsController implements MainController {
                 if(newValue ==null || newValue.isEmpty()){
                     return true;
                 }
-                String lowerCaseFiler = newValue.toLowerCase();
+                String lowerCaseFilter = newValue.toLowerCase();
 
-                if(thisTicket.getPhonenumber().toLowerCase().contains(lowerCaseFiler)){
+                if(ticket.getPhonenumber().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getRow().toString().contains(lowerCaseFiler)){
+                else if(ticket.getRow().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(thisTicket.getSeat().toString().contains(lowerCaseFiler)){
+                else if(ticket.getSeat().toString().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;

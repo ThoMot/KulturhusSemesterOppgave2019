@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
-
 import static org.group38.kulturhus.Utilities.Validate.isValidPhoneNr;
 
 public class Ticket implements Serializable {
