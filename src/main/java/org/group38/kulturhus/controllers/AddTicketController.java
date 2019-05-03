@@ -193,6 +193,30 @@ public class AddTicketController implements MainController{
         }
     }
 
+    /** updateEvent() tries to update an event if selected in showEvent scene.
+     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
+    public void updateTicket(ActionEvent event) {
+        if (thisTicket == null) {
+            errorBox("Kan ikke endre et objekt som ikke eksisterer", "Ingen arrangement valgt",
+                    "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
+        } else {
+            try {
+                thisTicket.setRow(Integer.parseInt(seatRow.getText()));
+                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
+                thisTicket.setPhonenumber(phoneNumber.getText());
+                SceneManager.navigate(SceneName.SHOWTICKET);
+            } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
+                    "Vennligst sørg for at alle felter har riktig format" +
+                            "\nRaden må være mellom 0 og" + thisEvent.getFacility().getRows() +
+                            "\nog setenummer mellom 0 og "+ thisEvent.getFacility().getColumns());
+            } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt",
+                    "Vennligst fyll ut alle felter før du fortsetter");
+            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
+                    "Vennligst sørg for at alle felter har riktig format");
+            }
+        }
+    }
+
 
     public void defaultJOBJ(ActionEvent event){
         if(!fileName.equals(DefaultFiles.TICKETJOBJ.getFileName())){
@@ -236,33 +260,6 @@ public class AddTicketController implements MainController{
 
     public void chooseFile(ActionEvent event){
         sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);
-    }
-
-
-
-
-    /** updateEvent() tries to update an event if selected in showEvent scene.
-     *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/
-    public void updateTicket(ActionEvent event) {
-        if (thisTicket == null) {
-            errorBox("Kan ikke endre et objekt som ikke eksisterer", "Ingen arrangement valgt",
-                    "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
-        } else {
-            try {
-                thisTicket.setRow(Integer.parseInt(seatRow.getText()));
-                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
-                thisTicket.setPhonenumber(phoneNumber.getText());
-                SceneManager.navigate(SceneName.SHOWTICKET);
-            } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
-                    "Vennligst sørg for at alle felter har riktig format" +
-                            "\nRaden må være mellom 0 og" + thisEvent.getFacility().getRows() +
-                            "\nog setenummer mellom 0 og "+ thisEvent.getFacility().getColumns());
-            } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt",
-                    "Vennligst fyll ut alle felter før du fortsetter");
-            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
-                    "Vennligst sørg for at alle felter har riktig format");
-            }
-        }
     }
 
     @Override
