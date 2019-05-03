@@ -118,7 +118,7 @@ public class ShowTicketsController implements MainController {
         getTickets().clear();
         thisEvent.getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
-
+        thisEvent.getTickets().clear();
         try {
             getTickets().addAll(ReaderThreadRunner.startReader(fileName));
         } catch (ExecutionException | InterruptedException e) {
@@ -131,7 +131,6 @@ public class ShowTicketsController implements MainController {
                 }
             }
         }
-
 
         observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
