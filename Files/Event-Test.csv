@@ -1,0 +1,11 @@
+Class;PhoneNr;FacilityName;EventId;EventName;Type;Program;Performer;TicketPrice;Date;Time
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;beb0bd43-00ea-480a-bfe6-e1973e069d78;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;7456f9b1-981f-4f96-b2e5-71977fe9555e;BALLE;konsert;konsert med karpe;Megdi ++;260.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventFreeSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventFreeSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventFreeSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;beb0bd43-00ea-480a-bfe6-e1973e069d78;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;7456f9b1-981f-4f96-b2e5-71977fe9555e;BALLE;konsert;konsert med karpe;Megdi ++;260.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
+org.group38.kulturhus.model.Event.EventNumberedSeating;12345234;Sal 1;a1ec032d-dc7d-4143-8833-198368bd64d7;BALLE;konsert;konsert med karpe;Megdi ++;150.0;2019-05-10;18:00;
