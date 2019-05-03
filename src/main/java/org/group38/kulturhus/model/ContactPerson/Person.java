@@ -5,11 +5,14 @@ import java.io.Serializable;
 import static org.group38.frameworks.Validate.*;
 
 public abstract class Person implements Serializable {
-
     private String firstName;
     private String lastName;
 
 
+    /** Constructor for person
+     * the empty constructorer is used for writing to file*/
+    protected Person(){
+    }
     public Person(String firstName, String lastName) {
         if(!isOnlyLetters(firstName)) throw new IllegalArgumentException("Fornavn kan kun inneholde bokstaver");
         if(!isNotEmptyString(firstName)) throw new NullPointerException("Fornavn må fylles ut");
@@ -19,10 +22,7 @@ public abstract class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    protected Person(){
-
-    }
-
+    /** Getter and setter for contactPersons firstname. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getFirstName() {
         return firstName;
     }
@@ -32,6 +32,7 @@ public abstract class Person implements Serializable {
         this.firstName = firstName;
     }
 
+    /** Getter and setter for contactPersons lastName. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getLastName() {
         return lastName;
     }
