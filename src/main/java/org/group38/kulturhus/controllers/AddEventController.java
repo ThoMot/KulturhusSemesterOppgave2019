@@ -240,6 +240,7 @@ public class AddEventController implements MainController {
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
                     eventFile.delete();
+                    System.out.println(eventFile.exists());
                     try {
                         WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
                     } catch (InterruptedException e) {
@@ -387,8 +388,9 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
 
             contactFile.delete();
+            System.out.println(contactFile.exists());
             try {
-                WriterThreadRunner.WriterThreadRunner(getContactPeople(), EditedFiles.getActiveContactFile());
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
