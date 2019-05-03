@@ -114,6 +114,7 @@ public class ShowTicketsController implements MainController {
     /** loadData() adds all the tickets from the list in Kulturhus into TableView */
     private void loadData(){
 
+        getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
 
         try {
