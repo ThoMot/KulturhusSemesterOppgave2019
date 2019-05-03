@@ -311,9 +311,6 @@ public class AddEventController implements MainController {
         }
     }
 
-    private void setThisContactPerson(ContactPerson thisContactPerson) {
-        this.thisContactPerson = thisContactPerson;
-    }
     /**The createContactPerson method tries to create a contactPerson and throws an exception
     *if the input is wrong or missing. Th exceptions are shown in an alert box. When/if the
     *contactPerson is created, the createContact scene is closed.*/
@@ -447,6 +444,10 @@ public class AddEventController implements MainController {
     /**Setting the event to the event chosen in showEventController*/
     private void setThisEvent(Event thisEvent) {
         this.thisEvent = thisEvent;
+    }
+    /**setting the contactperson to bring the objekt over to the edit contactperson scene */
+    private void setThisContactPerson(ContactPerson thisContactPerson) {
+        this.thisContactPerson = thisContactPerson;
     }
 
     @Override
