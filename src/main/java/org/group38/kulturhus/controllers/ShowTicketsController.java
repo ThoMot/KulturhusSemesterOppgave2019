@@ -90,6 +90,7 @@ public class ShowTicketsController implements MainController {
     @Override
     public void refresh(){
         thisEvent.getTickets().clear();
+        getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
 
         try {
@@ -113,6 +114,9 @@ public class ShowTicketsController implements MainController {
 
     /** loadData() adds all the tickets from the list in Kulturhus into TableView */
     private void loadData(){
+
+        getTickets().clear();
+        thisEvent.getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
         thisEvent.getTickets().clear();
         try {
