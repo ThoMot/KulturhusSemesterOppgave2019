@@ -1,6 +1,6 @@
 package org.group38.kulturhus.model.FilePaths;
 
-import org.group38.frameworks.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 
 public class EditedFiles {
     private static String eventCSV;

@@ -36,6 +36,13 @@
                             <MenuItem onAction="#goToShowVenue" text="Oversikt over lokaler" />
                         </items>
                     </Menu>
+                    <Menu mnemonicParsing="false" text="Bytt Fil">
+                        <items>
+                         <MenuItem fx:id="JOBJ" mnemonicParsing="false" onAction="#defaultJOBJ" text="Les/Skriv standard Jobj for Arrangementer" />
+                          <MenuItem fx:id="CSV" mnemonicParsing="false" onAction="#defaultCSV" text="Les/Skriv standard Csv for Arrangementer" />
+                         <MenuItem fx:id="chooseFile" mnemonicParsing="false" onAction="#chooseFile" text="Velg egne filer" />
+                     </items>
+                    </Menu>
                 </menus>
             </MenuBar>
             <Pane prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">

@@ -1,5 +1,7 @@
 package org.group38.frameworks.SaveLoad.Load;
 
+import org.group38.frameworks.Exceptions.CorruptedFileException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,7 +12,7 @@ public class ReaderJOBJ implements ReaderInterface {
 
     @Override
     @SuppressWarnings("unchecked")
-    public ArrayList<Object> readObjects(String path) throws IOException, ClassNotFoundException {
+    public ArrayList<Object> readObjects(String path) throws IOException, ClassNotFoundException, CorruptedFileException {
         File file = new File(path);
         if (file.length() == 0) {
             return new ArrayList<>();

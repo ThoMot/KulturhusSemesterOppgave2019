@@ -8,8 +8,11 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.FilePaths.DefaultFiles;
 import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.frameworks.sceneHandling.SceneManager;
@@ -24,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 import static org.group38.frameworks.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.getTickets;
 
 public class ShowTicketsController implements MainController {
@@ -176,6 +180,47 @@ public class ShowTicketsController implements MainController {
                 }
             });
         }
+    }
+
+    public void defaultJOBJ(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.TICKETJOBJ.getFileName())){
+            File file = new File(fileName);
+            file.delete();
+
+            try {
+                WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
+            try{
+                EditedFiles.setTicketJOBJ(DefaultFiles.TICKETJOBJ.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void defaultCSV(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.TICKETCSV.getFileName())){
+            try {
+                WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
+            try{
+                EditedFiles.setTicketCSV(DefaultFiles.TICKETCSV.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void chooseFile(ActionEvent event){
+        sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);
     }
 
     /**the filtering method is run when the scene is opened and adds a listener to the TextField filtering,

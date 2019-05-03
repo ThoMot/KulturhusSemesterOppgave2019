@@ -26,7 +26,7 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.frameworks.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.frameworks.sceneHandling.SceneManager;
 import org.group38.frameworks.sceneHandling.SceneName;

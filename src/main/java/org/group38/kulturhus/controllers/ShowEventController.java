@@ -14,7 +14,7 @@ import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.FilePaths.DefaultFiles;
 import org.group38.kulturhus.model.FilePaths.EditedFiles;
-import org.group38.frameworks.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 import org.group38.frameworks.FileHandler;
 import org.group38.frameworks.sceneHandling.SceneManager;
 import org.group38.frameworks.sceneHandling.SceneName;
@@ -105,7 +105,7 @@ public class ShowEventController implements MainController{
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
                 }
-//TODO må håndteres bedre
+
             try{
                 EditedFiles.setEventsJOBJ(DefaultFiles.EVENTJOBJ.getFileName());
             } catch (WrongFileFormatException e){
@@ -123,7 +123,6 @@ public class ShowEventController implements MainController{
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
 
-//TODO Dette må hånderes bedre
             try{
                 EditedFiles.setEventsCSV(DefaultFiles.EVENTCSV.getFileName());
             } catch (WrongFileFormatException e){

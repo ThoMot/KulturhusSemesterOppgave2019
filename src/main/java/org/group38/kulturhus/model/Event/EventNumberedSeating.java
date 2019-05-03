@@ -1,6 +1,6 @@
 package org.group38.kulturhus.model.Event;
 
-import org.group38.frameworks.Exeptions.SeatTakenException;
+import org.group38.frameworks.Exceptions.SeatTakenException;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 

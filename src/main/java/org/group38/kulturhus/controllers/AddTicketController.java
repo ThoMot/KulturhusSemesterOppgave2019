@@ -7,8 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.group38.frameworks.Exeptions.SeatTakenException;
-import org.group38.frameworks.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exceptions.SeatTakenException;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.FilePaths.DefaultFiles;
 import org.group38.kulturhus.model.FilePaths.EditedFiles;
@@ -158,10 +158,6 @@ public class AddTicketController implements MainController{
                     int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
-                    System.out.println("Antall billetter etter kjøp" + thisEvent.getTickets().size());
-
-                    System.out.println("Dette eventets billetter :" + thisEvent.getTickets());
-                    System.out.println("Dette er Alle billettene før" + getTickets().size());
                     for(int i=0; i<getTickets().size(); i++){
                         if (getTickets().get(i).getEventId().equals(thisEvent.getEventId())){
                             getTickets().remove(i);
@@ -246,11 +242,11 @@ public class AddTicketController implements MainController{
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
-            //TODO HVORDAN BEST HÅNDTERE DEMME EXCEPTION
-            try {
+
+            try{
                 EditedFiles.setTicketJOBJ(DefaultFiles.TICKETJOBJ.getFileName());
             } catch (WrongFileFormatException e){
-                errorBox("default file er korrupt", " ", "");
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
             }
             refresh();
         } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
@@ -258,8 +254,6 @@ public class AddTicketController implements MainController{
 
     public void defaultCSV(ActionEvent event){
         if(!fileName.equals(DefaultFiles.TICKETCSV.getFileName())){
-            File file = new File(fileName);
-            file.delete();
             try {
                 WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
             } catch (InterruptedException e) {
@@ -269,12 +263,11 @@ public class AddTicketController implements MainController{
             try{
                 EditedFiles.setTicketCSV(DefaultFiles.TICKETCSV.getFileName());
             } catch (WrongFileFormatException e){
-                errorBox("Error in default path", "default path is not valid", "");
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
             }
             refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
-
 
     public void chooseFile(ActionEvent event){
         sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);

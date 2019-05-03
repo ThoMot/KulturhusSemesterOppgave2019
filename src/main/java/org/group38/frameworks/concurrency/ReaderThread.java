@@ -1,6 +1,7 @@
 package org.group38.frameworks.concurrency;
 
-import org.group38.frameworks.Exeptions.ParsingException;
+import org.group38.frameworks.Exceptions.CorruptedFileException;
+import org.group38.frameworks.Exceptions.ParsingException;
 import org.group38.frameworks.SaveLoad.Load.ReadCSV;
 import org.group38.frameworks.SaveLoad.Load.ReaderInterface;
 import org.group38.frameworks.SaveLoad.Load.ReaderJOBJ;
@@ -23,16 +24,16 @@ public class ReaderThread<T> implements Callable<ArrayList<T>> {
 
 
     @Override
-    public ArrayList<T> call() {
+    public ArrayList<T> call() throws CorruptedFileException {
         try {
             return readObjects();
-        } catch (IOException | ParsingException | ReflectiveOperationException e) { //TODO Dette burde håndteres bedre, aka sendes til GUIet på en måte.
+        } catch (IOException | ParsingException | ReflectiveOperationException  e) { //TODO Dette burde håndteres bedre, aka sendes til GUIet på en måte.
             e.printStackTrace();
         }
         return null;
     }
 
-    private <T> ArrayList<T> readObjects() throws ReflectiveOperationException, ParsingException,IOException, ClassNotFoundException {
+    private <T> ArrayList<T> readObjects() throws ReflectiveOperationException, ParsingException,IOException, ClassNotFoundException, CorruptedFileException {
         ReaderInterface readerInterface;
         String ext = filename.substring(filename.lastIndexOf(".") + 1);
 

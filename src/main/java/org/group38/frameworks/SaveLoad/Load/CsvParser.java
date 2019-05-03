@@ -1,6 +1,6 @@
 package org.group38.frameworks.SaveLoad.Load;
 
-import org.group38.frameworks.Exeptions.ParsingException;
+import org.group38.frameworks.Exceptions.ParsingException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

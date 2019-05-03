@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import org.group38.kulturhus.model.FilePaths.EditedFiles;
-import org.group38.frameworks.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exceptions.WrongFileFormatException;
 import org.group38.frameworks.FileHandler;
 import org.group38.frameworks.sceneHandling.SceneManager;
 
@@ -123,7 +123,6 @@ public class FileEditorController {
 
     }
 
-    //TODO Duplicate code kan puttes i en metode
     public void setJOBJTickets(ActionEvent event){
         fileName = fileHandler.chooseFile(null);
         if( fileName == null) {
@@ -134,7 +133,6 @@ public class FileEditorController {
         } catch (WrongFileFormatException e){
             errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
         }
-
     }
 
     public void exit() {

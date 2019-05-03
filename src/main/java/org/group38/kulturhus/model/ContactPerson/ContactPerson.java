@@ -61,18 +61,6 @@ public class ContactPerson extends Person implements Serializable{
         return super.equals(obj);
     }
 
-    public String getWebPage() {
-        return webPage;
-    }
-
-    public String getAffiliation() {
-        return affiliation;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
     public ContactInfo getContactInfo(){ return contactInfo; }
 
     public String getPhoneNr() { return getContactInfo().getPhoneNr(); }
