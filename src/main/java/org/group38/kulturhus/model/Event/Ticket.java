@@ -82,7 +82,7 @@ public class Ticket implements Serializable {
     public void setTime(LocalTime time){
         this.time=time;
     }
-    
+
     /** Getter and setter method for EventNumberedSeatings seat row and seat number. */
     public Integer getSeat() {
         return seat;

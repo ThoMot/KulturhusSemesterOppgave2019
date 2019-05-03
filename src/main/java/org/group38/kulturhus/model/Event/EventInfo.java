@@ -84,9 +84,4 @@ public class EventInfo implements Serializable {
     public String getType(){
         return type;
     }
-//KAN SLETTES??
-//    public void setType(){
-//        if(!isNotEmptyString(type)) throw new NullPointerException("TypeFeltet kan ikke være tomt");
-//        this.type=type;
-//    }
 }
