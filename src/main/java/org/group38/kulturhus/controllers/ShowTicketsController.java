@@ -113,9 +113,8 @@ public class ShowTicketsController implements MainController {
 
     /** loadData() adds all the tickets from the list in Kulturhus into TableView */
     private void loadData(){
-
         fileName = EditedFiles.getActiveTicketFile();
-
+        thisEvent.getTickets().clear();
         try {
             getTickets().addAll(ReaderThreadRunner.startReader(fileName));
         } catch (ExecutionException | InterruptedException e) {
@@ -128,7 +127,6 @@ public class ShowTicketsController implements MainController {
                 }
             }
         }
-
 
         observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
