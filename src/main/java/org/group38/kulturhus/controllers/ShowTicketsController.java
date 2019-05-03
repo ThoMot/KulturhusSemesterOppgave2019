@@ -36,21 +36,12 @@ public class ShowTicketsController implements MainController {
     private String fileName;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-    @FXML
-    private TableView<Ticket> ticketsView;
-
-    @FXML
-    private TextField filtering;
-    @FXML
-    private TextArea eventPerformers, eventProgram;
-
-    @FXML
-    private TableColumn<Ticket,String> phoneNumberColumn, seatRowColumn, seatNumberColumn;
-
-    @FXML
-    private Label eventName, eventDate, eventTime, eventFacility;
+    @FXML private TableView<Ticket> ticketsView;
+    @FXML private TextField filtering;
+    @FXML private TextArea eventPerformers, eventProgram;
+    @FXML private TableColumn<Ticket,String> phoneNumberColumn, seatRowColumn, seatNumberColumn;
+    @FXML private Label eventName, eventDate, eventTime, eventFacility;
 
     /** goTo.. methods are for opening different scenes, and setting the selected event if needed in the next scene.
      *it also shows an errormessage in an alert if there is no selected event*/
@@ -147,7 +138,7 @@ public class ShowTicketsController implements MainController {
     private void initCols(){
         eventName.setText(thisEvent.getEventInfo().getEventName());
         eventDate.setText(thisEvent.getEventInfo().getDate().format(dateFormatter));
-        eventTime.setText(thisEvent.getEventInfo().getTime().format(timeFormatter));
+        eventTime.setText(thisEvent.getEventInfo().getTime().toString());
         eventFacility.setText(thisEvent.getFacility().toString());
         eventPerformers.setText(thisEvent.getEventInfo().getPerformer());
         eventProgram.setText(thisEvent.getEventInfo().getProgram());

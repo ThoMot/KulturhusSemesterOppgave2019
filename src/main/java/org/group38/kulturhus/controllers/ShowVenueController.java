@@ -56,6 +56,9 @@ public class ShowVenueController implements MainController {
             SceneManager.navigate(SceneName.ADDVENUE);
         }
     }
+    /** the initialize method is run when the scene is opened.
+     * It loads the data into the tables and resets thisFacility
+     * so that no facility is chosen*/
     public void initialize() {
         setThisFacility(null);
         loadData();
