@@ -39,7 +39,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
         }
 
-        System.out.println(fileName);
     }
 
     //TODO Duplicate code kan puttes i en metode
@@ -54,8 +53,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
         }
 
-        System.out.println(fileName);
-        System.out.println(EditedFiles.getEventJOBJ());
     }
 
     public void setCSVContact(ActionEvent event){
@@ -69,7 +66,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
         }
 
-        System.out.println(fileName);
     }
 
     //TODO Duplicate code kan puttes i en metode
@@ -84,7 +80,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
         }
 
-        System.out.println(fileName);
     }
 
 
@@ -99,7 +94,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
         }
 
-        System.out.println(fileName);
     }
 
     //TODO Duplicate code kan puttes i en metode
@@ -114,7 +108,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
         }
 
-        System.out.println(fileName);
     }
 
     public void setCSVTickets(ActionEvent event){
@@ -128,7 +121,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Kan ikke lese fra denne filen", "Venligst velg en CSV fil");
         }
 
-        System.out.println(fileName);
     }
 
     //TODO Duplicate code kan puttes i en metode
@@ -143,7 +135,6 @@ public class FileEditorController {
             errorBox("Feil format på filen", "Venligst velg en JOBJ fil", "Default JOBJ vil bli lest");
         }
 
-        System.out.println(fileName);
     }
 
     public void exit() {

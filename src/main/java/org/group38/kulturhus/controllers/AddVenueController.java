@@ -58,7 +58,6 @@ public class AddVenueController implements MainController{
     public void refresh(){
 
         fileName = EditedFiles.getActiveFacilityFile();
-        System.out.println(fileName + " det aktive navnet");
 
     }
 
@@ -143,7 +142,6 @@ public class AddVenueController implements MainController{
         else{
             try{
                 thisFacility.setFacilityName(facilityName.getText());
-                thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
                 thisFacility.setRows(Integer.parseInt(seatRow.getText()));
                 thisFacility.setColumns(Integer.parseInt(columns.getText()));
 

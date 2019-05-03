@@ -112,8 +112,6 @@ public class AddEventController implements MainController {
         try {
             getContactPeople().addAll(ReaderThreadRunner.startReader(fileNameC));
             getFacilities().addAll(ReaderThreadRunner.startReader(fileNameF));
-            System.out.println(getContactPeople());
-            System.out.println(getFacilities());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -151,8 +149,6 @@ public class AddEventController implements MainController {
 
     public void defaultCSV(ActionEvent event){
         if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) || !fileNameF.equals(DefaultFiles.FACILITYCSV)){
-            System.out.println(fileNameC);
-            System.out.println(fileNameF);
 
             File file = new File(fileNameC);
             File file2 = new File(fileNameF);
@@ -169,8 +165,6 @@ public class AddEventController implements MainController {
             try{
                 EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
                 EditedFiles.setContactCSV(DefaultFiles.CONTACTCSV.getFileName());
-                System.out.println(fileNameC);
-                System.out.println(fileNameF);
             } catch (WrongFileFormatException e){
                 errorBox("HVA", "Skrives", "HER");
             }
@@ -238,9 +232,7 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    System.out.println("opprettet numberedseating event");
                     eventFile.delete();
-                    System.out.println(eventFile.exists());
                     try {
                         WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
                     } catch (InterruptedException e) {
@@ -261,7 +253,6 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-                    System.out.println("opprettet freeseating event");
                     eventFile.delete();
                     try {
                         WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
@@ -385,7 +376,6 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
 
             contactFile.delete();
-            System.out.println(contactFile.exists());
             try {
                 WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
             } catch (InterruptedException e) {

@@ -133,10 +133,9 @@ public class AddTicketController implements MainController{
                 if (thisEvent instanceof EventFreeSeating) {
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
-                    for(Ticket ticket : getTickets()){
-                        if (ticket.getEventId().equals(thisEvent.getEventId())){
-                            System.out.println(ticket);
-                            getTickets().remove(ticket);
+                    for(int i=0; i<getTickets().size(); i++){
+                        if (getTickets().get(i).getEventId().equals(thisEvent.getEventId())){
+                            getTickets().remove(i);
                         }
                     }
                     System.out.println("Dette er alle billettene etter:" + getTickets());
@@ -144,17 +143,16 @@ public class AddTicketController implements MainController{
                     System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets());
 
                     ticketFile.delete();
+                    System.out.println(ticketFile);
                     try {
-                        WriterThreadRunner.WriterThreadRunner(getTickets(), EditedFiles.getActiveTicketFile());
+                        WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
-                    System.out.println("Antall billetter før kjøp" + thisEvent.getTickets().size());
                     int newSeat = Integer.parseInt(seatNumber.getText());
                     int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
@@ -168,12 +166,9 @@ public class AddTicketController implements MainController{
                             getTickets().remove(i);
                         }
                     }
-                    System.out.println("Dette er alle billettene etter:" + getTickets().size());
                     getTickets().addAll(thisEvent.getTickets());
-                    System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets().size());
 
                     ticketFile.delete();
-                    System.out.println(ticketFile);
                     try {
                         WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
                     } catch (InterruptedException e) {
@@ -215,6 +210,23 @@ public class AddTicketController implements MainController{
                 thisTicket.setRow(Integer.parseInt(seatRow.getText()));
                 thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
                 thisTicket.setPhonenumber(phoneNumber.getText());
+                for(int i=0; i<getTickets().size(); i++){
+                    if (getTickets().get(i).getEventId().equals(thisEvent.getEventId())){
+                        getTickets().remove(i);
+                    }
+                }
+                System.out.println("Dette er alle billettene etter:" + getTickets().size());
+                getTickets().addAll(thisEvent.getTickets());
+                System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets().size());
+
+                ticketFile.delete();
+                System.out.println(ticketFile);
+                try {
+                    WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 SceneManager.navigate(SceneName.SHOWTICKET);
             } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format" +

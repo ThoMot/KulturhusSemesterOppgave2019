@@ -70,7 +70,6 @@ public class ShowVenueController implements MainController {
     public void refresh(){
         getFacilities().clear();
         fileName = EditedFiles.getActiveFacilityFile();
-        System.out.println(fileName + " det aktive navnet");
 
         try {
             getFacilities().addAll(ReaderThreadRunner.startReader(fileName));
@@ -92,7 +91,6 @@ public class ShowVenueController implements MainController {
 
         try {
             getFacilities().addAll(ReaderThreadRunner.startReader(fileName));
-            System.out.println(getFacilities());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -110,7 +108,6 @@ public class ShowVenueController implements MainController {
             try {
                 WriterThreadRunner.WriterThreadRunner(getFacilities(), fileName);
             } catch (InterruptedException e) {
-                System.out.println(fileName);
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
            //TODO HVORDAN BEST HÅNDTERE DEMME EXCEPTION
