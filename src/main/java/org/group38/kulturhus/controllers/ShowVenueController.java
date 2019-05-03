@@ -75,6 +75,9 @@ public class ShowVenueController implements MainController {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        observableList = FXCollections.observableList(getFacilities());
+        facilitiesView.setItems(observableList);
     }
 
 
@@ -129,7 +132,7 @@ public class ShowVenueController implements MainController {
             try{
                 EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
             } catch (WrongFileFormatException e){
-                errorBox("HVA", "Skrives", "HER");
+                errorBox("Error in default path", "default path is not valid", "");
             }
             System.out.println(fileName + " Dette skal være csv navnet nå");
             refresh();
