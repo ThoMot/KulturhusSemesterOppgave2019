@@ -17,7 +17,6 @@ import java.util.concurrent.ExecutionException;
 
 import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
-import org.group38.frameworks.concurrency.WriterThread;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
@@ -27,7 +26,7 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
-import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;

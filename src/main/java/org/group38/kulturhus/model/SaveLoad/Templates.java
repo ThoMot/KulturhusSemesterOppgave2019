@@ -1,8 +1,5 @@
 package org.group38.kulturhus.model.SaveLoad;
 
-import org.group38.kulturhus.model.Exeptions.NoSuchSubclassException;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public abstract class Templates {

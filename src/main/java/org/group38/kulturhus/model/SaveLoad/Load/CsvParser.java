@@ -1,6 +1,6 @@
 package org.group38.kulturhus.model.SaveLoad.Load;
 
-import org.group38.kulturhus.model.Exeptions.ParsingException;
+import org.group38.frameworks.Exeptions.ParsingException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

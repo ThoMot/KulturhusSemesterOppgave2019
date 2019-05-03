@@ -9,22 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.DefaultFiles;
 import org.group38.kulturhus.model.EditedFiles;
-import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.SaveLoad.FileHandler;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;

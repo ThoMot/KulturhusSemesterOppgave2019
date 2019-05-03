@@ -3,8 +3,7 @@ package org.group38.kulturhus.model.SaveLoad.Load;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.Ticket;
-import org.group38.kulturhus.model.Exeptions.NoSuchSubclassException;
-import org.group38.kulturhus.model.Exeptions.ParsingException;
+import org.group38.frameworks.Exeptions.ParsingException;
 import org.group38.kulturhus.model.SaveLoad.Templates;
 import org.group38.kulturhus.model.facility.Facility;
 

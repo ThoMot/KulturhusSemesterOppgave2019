@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.FileEditorController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
@@ -19,9 +18,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#exit" stylesheets="@styles.css" text="Endre jobj for Kontakperson" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#setJOBJContact" stylesheets="@styles.css" text="Endre jobj for Kontakperson" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onAction="#setCSVContact" stylesheets="@styles.css" text="Endre csv for Kontaktperson" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onAction="#setJOBJTickets" stylesheets="@styles.css" text="Endre jobj for Tickets" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onAction="#setCSVTickets" stylesheets="@styles.css" text="Endre csv for Tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -29,6 +29,7 @@
             <Button layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#setJOBJFacility" stylesheets="@styles.css" text="Endre jobj for Lokale" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button layoutX="10.0" layoutY="147.0" mnemonicParsing="false" onAction="#setCSVEvent" stylesheets="@styles.css" text="Endre csv for Arrangement" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button layoutX="310.0" layoutY="47.0" mnemonicParsing="false" onAction="#setCSVFacility" stylesheets="@styles.css" text="Endre csv for Lokale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button layoutX="385.0" layoutY="117.0" mnemonicParsing="false" onAction="#exit" stylesheets="@styles.css" text="Save" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>

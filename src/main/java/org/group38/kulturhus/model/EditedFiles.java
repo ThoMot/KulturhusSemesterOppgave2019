@@ -1,6 +1,6 @@
 package org.group38.kulturhus.model;
 
-import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exeptions.WrongFileFormatException;
 
 public class EditedFiles {
 

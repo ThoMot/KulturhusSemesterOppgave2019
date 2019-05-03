@@ -11,7 +11,7 @@ import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.DefaultFiles;
 import org.group38.kulturhus.model.EditedFiles;
-import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
+import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;

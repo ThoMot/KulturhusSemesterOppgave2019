@@ -1,13 +1,9 @@
 package org.group38.frameworks.concurrency;
 
-import javafx.collections.ObservableList;
-import org.group38.kulturhus.model.Exeptions.ParsingException;
+import org.group38.frameworks.Exeptions.ParsingException;
 import org.group38.kulturhus.model.SaveLoad.Load.ReadCSV;
 import org.group38.kulturhus.model.SaveLoad.Load.ReaderInterface;
 import org.group38.kulturhus.model.SaveLoad.Load.ReaderJOBJ;
-import org.group38.kulturhus.model.SaveLoad.Save.WriteToCSV;
-import org.group38.kulturhus.model.SaveLoad.Save.WriterInterface;
-import org.group38.kulturhus.model.SaveLoad.Save.WriterJOBJ;
 
 import java.io.IOException;
 import java.util.ArrayList;

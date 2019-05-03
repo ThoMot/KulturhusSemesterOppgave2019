@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model.Exeptions;
+package org.group38.frameworks.Exeptions;
 
 public class ParsingException extends Exception{
 
