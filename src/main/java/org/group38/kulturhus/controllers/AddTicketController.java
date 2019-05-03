@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.group38.frameworks.Exeptions.SeatTakenException;
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.FilePaths.DefaultFiles;
@@ -157,11 +158,11 @@ public class AddTicketController implements MainController{
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
                     System.out.println("Dette er Alle billettene før" + getTickets());
-                    for(Ticket ticket : getTickets()){
-                        if (ticket.getEventId().equals(thisEvent.getEventId())){
-                            getTickets().remove(ticket);
-                        }
-                    }
+//                    for(Ticket ticket : getTickets()){
+//                        if (ticket.getEventId().equals(thisEvent.getEventId())){
+//                            getTickets().remove(ticket);
+//                        }
+//                    }
                     System.out.println("Dette er alle billettene etter:" + getTickets());
                     getTickets().addAll(thisEvent.getTickets());
                     System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets());
@@ -178,7 +179,7 @@ public class AddTicketController implements MainController{
             } catch (IndexOutOfBoundsException e){
                 errorBox("Billetten er utenfor registeret", "Du har valgt et setenummer eller en seterad\n som er utenfor registeret",
                         "Vennligst velg et annet sete");
-            }
+            } catch (SeatTakenException e){errorBox("Opptatt", "Setet er allerede tatt", "Vennligst velg et annet sete");}
             catch (NumberFormatException e) {
                 errorBox("Feil input", "Feil input i et eller flere felter",
                         "Vennligst sørg for at alle felter har riktig format" +

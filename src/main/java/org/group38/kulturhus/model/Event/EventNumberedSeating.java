@@ -1,5 +1,6 @@
 package org.group38.kulturhus.model.Event;
 
+import org.group38.frameworks.Exeptions.SeatTakenException;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.facility.Facility;
 
@@ -26,13 +27,13 @@ public class EventNumberedSeating extends Event implements Serializable {
     }
 /**buyTicket method that adds a new ticket to the ArrayList of tickets
 *this method also checks if the seat is already taken or if the event is full*/
-    public void buyTicket(int seatRow, int seatNumber, String phoneNumber) {
+    public void buyTicket(int seatRow, int seatNumber, String phoneNumber) throws SeatTakenException {
         if (tickets.size() < (rows * columns)) {
             if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
             for (Ticket ticket : tickets) {
 
                 if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
-                    throw new IllegalArgumentException("Setet er allerede opptatt");
+                    throw new SeatTakenException("Setet er allerede opptatt");
                 }
             }
             tickets.add(new Ticket(seatNumber, seatRow, phoneNumber, getEventInfo().getDate(), getEventInfo().getTime(), getEventId(), getTicketPrice(),getFacility().getFacilityName()));
