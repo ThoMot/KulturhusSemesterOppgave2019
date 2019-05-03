@@ -60,7 +60,7 @@ public class ShowTicketsController implements MainController {
     }
     @FXML
     public void goToBuyTicket(ActionEvent event) throws IOException {
-        setSelectedTicket(thisTicket);
+        setSelectedTicket(null);
         setSelectedEvent(getSelectedEvent());
         SceneManager.navigate(SceneName.ADDTICKET);
     }
