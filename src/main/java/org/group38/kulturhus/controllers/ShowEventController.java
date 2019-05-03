@@ -95,6 +95,7 @@ public class ShowEventController implements MainController{
             e.printStackTrace();
         }
 
+        observableList = FXCollections.observableList(getEvents());
         eventsView.setItems(observableList);
 
     }
@@ -106,7 +107,7 @@ public class ShowEventController implements MainController{
             file.delete();
 
             try {
-                WriterThreadRunner.WriterThreadRunner(observableList, fileName);
+                WriterThreadRunner.WriterThreadRunner(getEvents(), fileName);
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
                 }
