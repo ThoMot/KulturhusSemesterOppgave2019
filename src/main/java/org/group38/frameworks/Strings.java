@@ -5,7 +5,7 @@ public final class Strings {
         throw new AssertionError("Can't assert strings");
     }
 
-
+    /** requiresNullAndNotEmpty makes sure no labels creates null-values*/
     public static String requireNonNullAndNotEmpty(String value) {
         if(value == null){
             throw new NullPointerException();
@@ -17,7 +17,6 @@ public final class Strings {
 
         return value;
     }
-
 
     public static boolean isNullOrEmpty(String value){
         return value == null || "".equals(value);
