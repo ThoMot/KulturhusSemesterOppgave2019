@@ -22,7 +22,7 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
 
     @Override
     public void writeObject(Object object, String filename) throws IOException {
-        ObservableList<Object> objects = FXCollections.observableArrayList();
+        ArrayList<Object> objects = new ArrayList<>();
         objects.add(object);
 
         writeObjects(objects, filename);
@@ -120,7 +120,7 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
 
 
 
-    public <T> void writeObjects(ObservableList<T> objects, String filename) throws IOException {
+    public <T> void writeObjects(ArrayList<T> objects, String filename) throws IOException {
         File file = new File(filename);
 
 

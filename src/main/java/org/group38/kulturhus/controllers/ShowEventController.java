@@ -23,6 +23,8 @@ import org.group38.kulturhus.model.Event.Event;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
@@ -39,6 +41,8 @@ public class ShowEventController implements MainController{
     @FXML private TableView<Event> eventsView;
     @FXML private TableColumn<Event,String> eventDateColumn, eventTimeColumn, eventNameColumn, eventFacilityColumn;
     @FXML private TextField filtering;
+
+
 
 
     /**Methods for opening different scenes, and setting the selected event if needed in the next scene.
@@ -80,10 +84,10 @@ public class ShowEventController implements MainController{
     @Override
     public void refresh(){
         fileName = EditedFiles.getActiveEventFile();
-        observableList.clear();
+        getEvents().clear();
 
         try {
-            observableList.addAll(ReaderThreadRunner.startReader(fileName));
+            getEvents().addAll(ReaderThreadRunner.startReader(fileName));
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -101,8 +105,12 @@ public class ShowEventController implements MainController{
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
                 }
-
-            fileName = DefaultFiles.EVENTJOBJ.getFileName();
+//TODO må håndteres bedre
+            try{
+                EditedFiles.setEventsJOBJ(DefaultFiles.EVENTJOBJ.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
+            }
             refresh();
         } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
     }
@@ -115,16 +123,20 @@ public class ShowEventController implements MainController{
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
 
-            fileName = DefaultFiles.EVENTCSV.getFileName();
+//TODO Dette må hånderes bedre
+            try{
+                EditedFiles.setEventsCSV(DefaultFiles.EVENTCSV.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
+            }
+
             System.out.println(fileName);
             refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
 
     public void chooseFile(ActionEvent event){
-        //TODO TRY her???
                 sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR,2 ,3);
-
         }
 
 
@@ -182,16 +194,24 @@ public class ShowEventController implements MainController{
     }
     /**The loadData method adds all the events read from JOBJ file by default to the tableview*/
     private void loadData(){
-        observableList = eventsView.getItems();
+
         fileName = EditedFiles.getActiveEventFile();
+        getEvents().clear();
 
         try {
-            observableList.addAll(ReaderThreadRunner.startReader(fileName));
-            System.out.println(observableList);
+            getEvents().addAll(ReaderThreadRunner.startReader(fileName));
+            ArrayList<Event> x = getEvents();
+            System.out.println(getEvents());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        observableList = FXCollections.observableList(getEvents());
+        eventsView.setItems(observableList);
+
     }
+
+
 
     /**The deleteRow method checks if an event is selected, or else shows an errorMessage.
     *If a field is selected, shows a confirmation alert, and then deletes the event if the
@@ -208,11 +228,13 @@ public class ShowEventController implements MainController{
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
+                    System.out.println("EVENTS" + getEvents() +" Dette er events");
+                    System.out.println("LISTEN" + observableList + " Dette er listen");
 
-                    File file = new File(EditedFiles.getEventCSV());
+                    File file = new File(EditedFiles.getActiveEventFile());
                     file.delete();
                     try {
-                        WriterThreadRunner.WriterThreadRunner(observableList, EditedFiles.getEventCSV());
+                        WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

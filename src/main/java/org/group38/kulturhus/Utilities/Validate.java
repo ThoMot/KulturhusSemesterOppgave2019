@@ -18,11 +18,7 @@ public class Validate {
 /** the validation methods checks if the input matches a regex
  * or some ither criteria and returns true or false based on the outcome*/
     public static boolean isValidPhoneNr(String phoneNr) {
-        if (phoneNr.matches("-?\\d+(\\.\\d+)?")) {
-            if (phoneNr.length() == 8) return true;
-            else return false;
-        }
-        else return false;
+        return  (phoneNr.matches("[0-9]{8}"));
     }
     public static boolean isOnlyLetters(String str){
         char[] chars = str.toCharArray();

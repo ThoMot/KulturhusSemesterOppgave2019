@@ -7,10 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,11 +24,15 @@ import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.getTickets;
 
 public class AddTicketController implements MainController{
     private Event event = getSelectedEvent();
     private Ticket thisTicket=getSelectedTicket();
     private Event thisEvent;
+    private String fileName;
+    File ticketFile = new File(EditedFiles.getActiveTicketFile());
 
     @FXML
     private Label dateTime, eventTitle, seatRowInfoText, seatsList;
@@ -84,13 +91,8 @@ public class AddTicketController implements MainController{
 
     @Override
     public void refresh(){
+        fileName = EditedFiles.getActiveTicketFile();
 
-//        try {
-//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
-//
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     /** setThisEvent sets the ticket to the event chosen in showEventController*/
@@ -131,7 +133,23 @@ public class AddTicketController implements MainController{
                 if (thisEvent instanceof EventFreeSeating) {
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
-                    goToShowTicket(event);
+                    for(Ticket ticket : getTickets()){
+                        if (ticket.getEventId().equals(thisEvent.getEventId())){
+                            getTickets().remove(ticket);
+                        }
+                    }
+                    System.out.println("Dette er alle billettene etter:" + getTickets());
+                    getTickets().addAll(thisEvent.getTickets());
+                    System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets());
+
+                    ticketFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getTickets(), EditedFiles.getActiveTicketFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
                 if (thisEvent instanceof EventNumberedSeating) {
@@ -139,7 +157,24 @@ public class AddTicketController implements MainController{
                     int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
-                    goToShowTicket(event);
+                    System.out.println("Dette er Alle billettene før" + getTickets());
+                    for(Ticket ticket : getTickets()){
+                        if (ticket.getEventId().equals(thisEvent.getEventId())){
+                            getTickets().remove(ticket);
+                        }
+                    }
+                    System.out.println("Dette er alle billettene etter:" + getTickets());
+                    getTickets().addAll(thisEvent.getTickets());
+                    System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets());
+
+                    ticketFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getTickets(), EditedFiles.getActiveTicketFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    SceneManager.navigate(SceneName.SHOWTICKET);
                 }
             } catch (NumberFormatException e) {
                 errorBox("Feil input", "Feil input i et eller flere felter",
@@ -152,8 +187,9 @@ public class AddTicketController implements MainController{
             } catch (IllegalArgumentException e) {
                 errorBox("Feil i telefonnummer", "Feil input i telefonnummerfeltet",
                         "Telefonnummer må bestå av nøyaktig 8 siffer");
-            } catch (Exception e){errorBox("Feil input", "Feil input i et eller flere felter",
-                    "Vennligst sørg for at alle felter har riktig format");
+            } catch (Exception e){//errorBox("Feil input", "Feil input i et eller flere felter",
+                   // "Vennligst sørg for at alle felter har riktig format");
+                e.printStackTrace();
             }
         }
     }

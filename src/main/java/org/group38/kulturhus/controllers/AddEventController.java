@@ -7,15 +7,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
-import javafx.util.Duration;
-import org.group38.frameworks.concurrency.ReaderThread;
+import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThread;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
 import org.group38.kulturhus.model.DefaultFiles;
@@ -24,6 +26,7 @@ import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
+import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -36,12 +39,11 @@ import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
 
 
 
-
-//TODO  skal det være mulig å lage flere helt like arrangementer?
-
-
 public class AddEventController implements MainController {
     //data field
+    private SceneManager sceneManager = SceneManager.INSTANCE;
+    private File eventFile = new File(EditedFiles.getActiveEventFile());
+    File contactFile = new File(EditedFiles.getActiveContactFile());
     private Event thisEvent;
     private ContactPerson thisContactPerson;
     private ObservableList<ContactPerson> ol;
@@ -102,30 +104,80 @@ public class AddEventController implements MainController {
     @Override
     public void refresh(){
         ol.clear();
+        ol2.clear();
+//TODO Skille disse ut i egen metode???
+        fileNameF = EditedFiles.getActiveFacilityFile();
+        fileNameC = EditedFiles.getActiveContactFile();
 
-//        try {
-//            ol.addAll(ReaderThreadRunner.startReader(fileName));
-//
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            ol.addAll(ReaderThreadRunner.startReader(fileNameF));
+            ol2.addAll(ReaderThreadRunner.startReader(fileNameC));
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        ol = FXCollections.observableList(getContactPeople());
+        ol2 = FXCollections.observableList(getFacilities());
+
+        //OBS!!!!!
+       // contactPerson.setItems(ol);
+        facility.setItems(ol2);
     }
 
-//    public void readFromJOBJ(ActionEvent event){
-//        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
-//            fileNameC = DefaultFiles.CONTACTJOBJ.getFileName();
-//            fileNameF = DefaultFiles.FACILITYJOBJ.getFileName();
-//            refresh(fileNameC, fileNameF);
-//        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligst velg annet alternativ");
-//    }
-//
-//    public void readFromCSV(ActionEvent event){
-//        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
-//            fileNameC = DefaultFiles.CONTACTCSV.getFileName();
-//            fileNameF = DefaultFiles.FACILITYCSV.getFileName();
-//            refresh(fileNameC, fileNameF);
-//        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligst velg annet alternativ");
-//    }
+    public void defaultJOBJ(ActionEvent event){
+        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
+            File file = new File(fileNameC);
+            File file2 = new File(fileNameF);
+            file.delete();
+            file2.delete();
+
+            try {
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
+                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileNameF);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+            //TODO HVORDAN BEST HÅNDTERE DEMME EXCEPTION
+            try {
+                EditedFiles.setFacilityJOBJ(DefaultFiles.FACILITYJOBJ.getFileName());
+                EditedFiles.setContactJOBJ(DefaultFiles.CONTACTJOBJ.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("default file er korrupt", " ", "");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void defaultCSV(ActionEvent event){
+        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
+            try {
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameF);
+                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileNameC);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
+//TODO Hvordan best håndtere denne exception
+            try{
+                EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
+                EditedFiles.setContactCSV(DefaultFiles.CONTACTCSV.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("HVA", "Skrives", "HER");
+            }
+            System.out.println(fileNameF + " Dette skal være csv navnet nå");
+            refresh();
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+
+
+
+
+    public void chooseFile(){
+        sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR,2 ,3);
+    }
+
 
     /** initCols method is deciding what the table columns shall contain*/
     private void initCols(){
@@ -135,19 +187,21 @@ public class AddEventController implements MainController {
     }
     /**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview*/
     private void loadInfo(){
-        ol = contactPerson.getItems();
-        ol2 = facility.getItems();
 
         fileNameC = EditedFiles.getActiveContactFile();
         fileNameF = EditedFiles.getActiveFacilityFile();
 
         try {
-            ol.addAll(ReaderThreadRunner.startReader(fileNameC));
-            ol2.addAll(ReaderThreadRunner.startReader(fileNameF));
+            getContactPeople().addAll(ReaderThreadRunner.startReader(fileNameC));
+            getFacilities().addAll(ReaderThreadRunner.startReader(fileNameF));
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        
+
+
+        ol = FXCollections.observableList(getContactPeople());
+        ol2 = FXCollections.observableList(getFacilities());
+        contactPerson.setItems(ol);
         facility.setItems(ol2);
 
     }
@@ -175,6 +229,13 @@ public class AddEventController implements MainController {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
 
+                    eventFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     showLabel(createEvLb);
 
 
@@ -189,7 +250,19 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
+
+                    eventFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     showLabel(createEvLb);
+
+
+
+
                 } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
                 } catch (DateTimeParseException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nTiden er på feil format\n Tiden skal være på følgende format\n TT:mm");
                 } catch (NullPointerException e) { errorBox("Tomme felter", "Alle felter er ikke utfylt", "Vennligst fyll ut alle felter før du fortsetter");
@@ -210,6 +283,14 @@ public class AddEventController implements MainController {
             thisEvent.getEventInfo().setTime(LocalTime.parse(time.getText()));
             thisEvent.getEventInfo().setPerformer(artist.getText());
             thisEvent.getEventInfo().setProgram(programInfo.getText());
+
+            eventFile.delete();
+            try {
+                WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             showLabel(createEvLb);
 
         } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter", "Vennligst sørg for at alle felter har riktig format\nBillettprisen må være en double Skriv prisen \npå følgende format 000.0");
@@ -236,6 +317,14 @@ public class AddEventController implements MainController {
                 getContactPeople().get(getContactPeople().size() - 1).setWebPage(webPage.getText());
             if (isNotEmptyString(other.getText()))
                 getContactPeople().get(getContactPeople().size() - 1).setNotes(other.getText());
+
+            contactFile.delete();
+            try {
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), EditedFiles.getActiveContactFile());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             showLabel(createContLb);
 
             //TODO flytte dette over i Scene manager??
@@ -286,6 +375,14 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
             if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
+
+            contactFile.delete();
+            try {
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), EditedFiles.getActiveContactFile());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             showLabel(createContLb);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/group38/chooseContact.fxml"));
@@ -323,6 +420,14 @@ public class AddEventController implements MainController {
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     ol.remove(contactPerson.getSelectionModel().getSelectedItem());
+
+                    contactFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getContactPeople(), EditedFiles.getActiveContactFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             });
         }

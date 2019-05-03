@@ -9,9 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
+
+import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -20,12 +24,17 @@ import java.util.concurrent.ExecutionException;
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
+import static org.group38.kulturhus.model.Kulturhus.getTickets;
 
 public class ShowTicketsController implements MainController {
+    private File ticketFile = new File(EditedFiles.getActiveTicketFile());
     private ObservableList<Ticket> observableList;
     private Ticket thisTicket = getSelectedTicket();
     private static Ticket selectedTicket;
     private Event thisEvent;
+    private SceneManager sceneManager = SceneManager.INSTANCE;
+    private String fileName;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -90,16 +99,22 @@ public class ShowTicketsController implements MainController {
 
     @Override
     public void refresh(){
-        observableList.clear();
+        thisEvent.getTickets().clear();
+        fileName = EditedFiles.getActiveTicketFile();
 
-//        try {
-//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
-//
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            getTickets().addAll(ReaderThreadRunner.startReader(fileName));
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(!getTickets().isEmpty()) {
+            for (Ticket ticket : getTickets()) {
+                if (ticket.getEventId().equals(thisEvent.getEventId())) {
+                    thisEvent.getTickets().add(ticket);
+                }
+            }
+        }
     }
-
 
     /** setThisEvent() registers the Ticket on the selected Event */
     private void setThisEvent(Event thisEvent){
@@ -108,6 +123,25 @@ public class ShowTicketsController implements MainController {
 
     /** loadData() adds all the tickets from the list in Kulturhus into TableView */
     private void loadData(){
+
+        fileName = EditedFiles.getActiveTicketFile();
+        System.out.println(fileName);
+
+        try {
+            getTickets().addAll(ReaderThreadRunner.startReader(fileName));
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(!getTickets().isEmpty()) {
+            for (Ticket ticket : getTickets()) {
+                if (ticket.getEventId().equals(thisEvent.getEventId())) {
+                    thisEvent.getTickets().add(ticket);
+                }
+            }
+        }
+
+        System.out.println(thisEvent.getTickets() + " DETTE ER BILLETTENE");
+
         observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
     }
@@ -141,6 +175,13 @@ public class ShowTicketsController implements MainController {
                     observableList.remove(ticketsView.getSelectionModel().getSelectedItem());
                     if(thisEvent instanceof EventNumberedSeating){
                         ((EventNumberedSeating)thisEvent).setTickets(new ArrayList<>(observableList));
+
+                        ticketFile.delete();
+                        try {
+                            WriterThreadRunner.WriterThreadRunner(thisEvent.getTickets(), EditedFiles.getActiveTicketFile());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });

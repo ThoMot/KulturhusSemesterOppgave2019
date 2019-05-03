@@ -6,7 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.DefaultFiles;
+import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
@@ -20,6 +25,8 @@ import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 public class ShowVenueController implements MainController {
     private ObservableList<Facility> observableList;
     private static Facility thisFacility;
+    private String fileName;
+    private SceneManager sceneManager = SceneManager.INSTANCE;
 
     @FXML private TableView<Facility> facilitiesView;
     @FXML private TableColumn<Facility,String> facilityNameColumn, facilityTypeColumn, seatRowColumn, seatNumberColumn, totalSeats;
@@ -38,10 +45,8 @@ public class ShowVenueController implements MainController {
     private void goToShowEvent(ActionEvent event){
         SceneManager.navigate(SceneName.SHOWEVENT);
     }
-
     @FXML
     private void goToAddVenue(ActionEvent event){ SceneManager.navigate(SceneName.ADDVENUE); }
-
     @FXML
     private void goToEditVenue() {
         if (facilitiesView.getSelectionModel().getSelectedItem() == null) {
@@ -55,26 +60,86 @@ public class ShowVenueController implements MainController {
         setThisFacility(null);
         loadData();
         initCols();
+
     }
 
     @Override
     public void refresh(){
-        observableList.clear();
+        getFacilities().clear();
+        fileName = EditedFiles.getActiveFacilityFile();
+        System.out.println(fileName + " det aktive navnet");
 
-//        try {
-//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
-//
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            getFacilities().addAll(ReaderThreadRunner.startReader(fileName));
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
     /** loadData() adds all the facilites from the list in Kulturhus into TableView */
     private void loadData(){
+
+        fileName = EditedFiles.getActiveFacilityFile();
+
+        try {
+            getFacilities().addAll(ReaderThreadRunner.startReader(fileName));
+            System.out.println(getFacilities());
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         observableList = FXCollections.observableList(getFacilities());
         facilitiesView.setItems(observableList);
     }
+
+    public void defaultJOBJ(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.FACILITYJOBJ.getFileName())){
+            File file = new File(fileName);
+            file.delete();
+
+            try {
+                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileName);
+            } catch (InterruptedException e) {
+                System.out.println(fileName);
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+           //TODO HVORDAN BEST HÅNDTERE DEMME EXCEPTION
+            try {
+                EditedFiles.setFacilityJOBJ(DefaultFiles.FACILITYJOBJ.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("default file er korrupt", " ", "");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void defaultCSV(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.FACILITYCSV.getFileName())){
+            try {
+                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
+//TODO Hvordan best håndtere denne exception
+            try{
+                EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("HVA", "Skrives", "HER");
+            }
+            System.out.println(fileName + " Dette skal være csv navnet nå");
+            refresh();
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+        public void chooseFile(ActionEvent event){
+            sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR,2 ,3);
+        }
+
+
 
     /** initCols() decides what data should be in each column of the tableView */
     private void initCols(){
@@ -99,13 +164,14 @@ public class ShowVenueController implements MainController {
                 if(response== ButtonType.OK){
                     observableList.remove(facilitiesView.getSelectionModel().getSelectedItem());
 
-                    File file = new File("Event.csv");
+                    File file = new File(EditedFiles.getActiveFacilityFile());
                     file.delete();
-//                    try {
-//                        WriterThreadRunner.WriterThreadRunner(observableList, "Event.csv");
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             });
         }

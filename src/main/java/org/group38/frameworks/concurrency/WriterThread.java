@@ -7,11 +7,12 @@ import org.group38.kulturhus.model.SaveLoad.Save.WriterJOBJ;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class WriterThread implements Runnable {
 
     private Object objectToWrite;
-    private ObservableList objectsToWrite;
+    private ArrayList objectsToWrite;
     private String filename;
 
     protected WriterThread(Object objectToWrite, String filename) {
@@ -19,7 +20,7 @@ public class WriterThread implements Runnable {
         this.filename = filename;
     }
 
-    protected <T> WriterThread(ObservableList<T> objectsToWrite, String filename) {
+    protected <T> WriterThread(ArrayList<T> objectsToWrite, String filename) {
         this.objectsToWrite = objectsToWrite;
         this.filename = filename;
     }

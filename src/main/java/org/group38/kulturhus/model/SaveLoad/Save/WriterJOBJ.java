@@ -14,7 +14,7 @@ public class WriterJOBJ implements WriterInterface {
 
     @Override
     public void writeObject(Object obj, String filename) throws IOException {
-        ObservableList<Object> listToWrite = FXCollections.observableArrayList();
+        ArrayList<Object> listToWrite = new ArrayList();
         listToWrite.add(obj);
 
         writeObjects(listToWrite, filename);
@@ -22,9 +22,8 @@ public class WriterJOBJ implements WriterInterface {
     }
 
     @Override
-    public <T> void writeObjects(ObservableList<T> objectList, String filename) throws IOException {
-        ArrayList<T> saveList = new ArrayList<>(objectList);
+    public <T> void writeObjects(ArrayList<T> objectList, String filename) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-        out.writeObject(saveList);
+        out.writeObject(objectList);
     }
 }

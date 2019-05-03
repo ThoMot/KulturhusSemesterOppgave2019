@@ -12,7 +12,7 @@ public class WriterThreadRunner {
         writerThread.join();
     }
 
-    public static <T> void WriterThreadRunner(ObservableList<T> list, String filename) throws InterruptedException {
+    public static <T> void WriterThreadRunner(ArrayList<T> list, String filename) throws InterruptedException {
         Thread writerThread = new Thread(new WriterThread(list, filename));
         writerThread.start();
         writerThread.join();

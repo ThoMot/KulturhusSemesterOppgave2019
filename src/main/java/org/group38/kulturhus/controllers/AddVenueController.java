@@ -3,19 +3,26 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.facility.Facility;
 import org.group38.kulturhus.sceneHandling.SceneManager;
 import org.group38.kulturhus.sceneHandling.SceneName;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.showLabel;
 import static org.group38.kulturhus.controllers.ShowVenueController.getThisFacility;
+import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
 public class AddVenueController implements MainController{
     private Facility thisFacility;
+    private String fileName;
+    File facilityFile = new File(EditedFiles.getActiveFacilityFile());
     @FXML private Button create, update;
     @FXML private TextField facilityName, seatRow, columns, maxSeats;
     @FXML private Label maxSeats2, seating, seating2;
@@ -48,15 +55,12 @@ public class AddVenueController implements MainController{
 
     @Override
     public void refresh(){
-//        observableList.clear();
-//
-//        try {
-//            observableList.addAll(ReaderThreadRunner.startReader(fileName));
-//
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
+        fileName = EditedFiles.getActiveFacilityFile();
+        System.out.println(fileName + " det aktive navnet");
+
     }
+
 
     /** editView adds or removes values based on what kind of facility the user wants to create, and hides the values not
      * used for that kind of facility*/
@@ -101,6 +105,14 @@ public class AddVenueController implements MainController{
             if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")){
                 try{
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(maxSeats.getText())));
+
+                    facilityFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
                 } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
@@ -118,7 +130,6 @@ public class AddVenueController implements MainController{
     }
     /** updateVenue checks if a facility is selected and tries to update the variables
      * if the input is wrong, it shows an errorbox*/
-    //TODO bli ferdig med denne
     @FXML
     private void updateVenue(){
         if(facilityType.getSelectionModel().getSelectedItem()==null) errorBox("Ikke valgt type facility", "Du har ikke valgt en lokaltype", "Vennligst velg en type fra nedtrekksmenyen");
@@ -126,9 +137,16 @@ public class AddVenueController implements MainController{
             try{
                 thisFacility.setFacilityName(facilityName.getText());
                 thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
-                //thisFacility.setMaxAntSeats(maxSeats);
-                thisFacility.setRows(Integer.parseInt(seatRow.getText()));
+                thisFacility.setRows(Integer.parseInt(row.getText()));
                 thisFacility.setColumns(Integer.parseInt(columns.getText()));
+
+                facilityFile.delete();
+                try {
+                    WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 showLabel(updated);
             } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
             } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );

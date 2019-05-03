@@ -15,6 +15,7 @@ public class Kulturhus {
     private static ArrayList<Event> events = new ArrayList<>();
     private static ArrayList<ContactPerson> contactPeople = new ArrayList<>();
     private static ArrayList<Facility> facilities = new ArrayList<>();
+    private static ArrayList<Ticket> tickets = new ArrayList<>();
 
     //kun for testing
     public static void opprett() {
@@ -45,9 +46,9 @@ public class Kulturhus {
         maxManus.buyTicket(2, 3, "11223344");
         maxManus.buyTicket(3, 4, "56743827");
 
-        events.add(maxManus);
-        events.add(event2);
-        events.add(eventFreeSeating);
+        //events.add(maxManus);
+        //events.add(event2);
+        //events.add(eventFreeSeating);
     }
 /** getter methods*/
     public static ArrayList<ContactPerson> getContactPeople() {
@@ -60,6 +61,10 @@ public class Kulturhus {
 
     public static ArrayList<Facility> getFacilities() {
         return facilities;
+    }
+
+    public static ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 
 

@@ -11,5 +11,5 @@ public interface WriterInterface {
 
     void writeObject(Object object, String filename) throws IOException;
 
-    <T> void writeObjects(ObservableList<T> objectList, String filename) throws IOException;
+    <T> void writeObjects(ArrayList<T> objectList, String filename) throws IOException;
     }

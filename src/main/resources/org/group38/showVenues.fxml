@@ -14,14 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<BorderPane minHeight="500.0" minWidth="600.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowVenueController">
+<BorderPane minHeight="500.0" minWidth="600.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group38.kulturhus.controllers.ShowVenueController">
     <top>
         <VBox>
             <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
@@ -37,6 +30,13 @@
                             <MenuItem fx:id="showVenue" disable="true" mnemonicParsing="false" onAction="#goToShowVenue" text="Oversikt over lokaler" />
                         </items>
                     </Menu>
+               <Menu mnemonicParsing="false" text="Bytt Fil">
+                  <items>
+                     <MenuItem fx:id="JOBJ" mnemonicParsing="false" onAction="#defaultJOBJ" text="Les/Skriv standard Jobj for Arrangementer" />
+                     <MenuItem fx:id="CSV" mnemonicParsing="false" onAction="#defaultCSV" text="Les/Skriv standard Csv for Arrangementer" />
+                     <MenuItem fx:id="chooseFile" mnemonicParsing="false" onAction="#chooseFile" text="Velg egne filer" />
+                  </items>
+               </Menu>
                 </menus>
             </MenuBar>
             <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
@@ -61,7 +61,7 @@
             <TableView fx:id="facilitiesView" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="facilityNameColumn" prefWidth="75.0" text="Navn" />
-                <TableColumn  fx:id="facilityTypeColumn" prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="facilityTypeColumn" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="seatRowColumn" prefWidth="75.0" text="Rader" />
                   <TableColumn fx:id="seatNumberColumn" prefWidth="75.0" text="Seter per rad" />
                   <TableColumn fx:id="totalSeats" prefWidth="75.0" text="Ståplasser" />
@@ -75,8 +75,8 @@
             </TableView>
              <HBox alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="800.0">
                  <children>
-                     <Button onAction="#deleteRow" mnemonicParsing="false" text="Slett lokale" />
-                     <Button onAction="#goToEditVenue" alignment="TOP_LEFT" mnemonicParsing="false" text="Endre lokale">
+                     <Button mnemonicParsing="false" onAction="#deleteRow" text="Slett lokale" />
+                     <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#goToEditVenue" text="Endre lokale">
                          <HBox.margin>
                              <Insets left="10.0" />
                          </HBox.margin>
