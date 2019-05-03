@@ -82,6 +82,7 @@ public class ShowVenueController implements MainController {
     private void loadData(){
 
         fileName = EditedFiles.getActiveFacilityFile();
+        getFacilities().clear();
 
         try {
             getFacilities().addAll(ReaderThreadRunner.startReader(fileName));

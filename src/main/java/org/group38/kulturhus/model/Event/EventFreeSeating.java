@@ -53,7 +53,7 @@ public class EventFreeSeating extends Event implements Serializable {
         super.setTicketPrice(price);
         for(Ticket ticket : tickets){
             if(ticket!=null){
-                ticket.setTicketPrice(price);
+                ticket.setPrice(price);
             }
         }
     }

@@ -1,6 +1,4 @@
 Class;Phonenumber;EventId;Price;Seat;Row;Date;Time;Facility
-org.group38.kulturhus.model.Event.Ticket;22222345;8b425782-6eba-4d56-9c3a-4ba4ad44ba76;20.0;2;4;2019-05-10;18:00;Sal1;
-org.group38.kulturhus.model.Event.Ticket;22222345;2245646c-bd2c-464d-bc83-eeecebda9cf3;20.0;2;4;2019-05-10;18:00;Sal1;
-org.group38.kulturhus.model.Event.Ticket;22222345;7a025638-a157-4a8f-b317-0070c2ac6dda;20.0;2;4;2019-05-10;18:00;Sal1;
-org.group38.kulturhus.model.Event.Ticket;22222345;75b5212a-7817-422f-9a22-51d45d1a0285;20.0;2;4;2019-05-10;18:00;Sal1;
-org.group38.kulturhus.model.Event.Ticket;12345234;75b5212a-7817-422f-9a22-51d45d1a0285;30.0;3;4;2019-05-10;18:00;Sal2;
+org.group38.kulturhus.model.Event.Ticket;94891594;fb93ccea-9fee-4194-a7c7-7c69cadab44b;150.0;2;1;2019-05-10;18:00;Sal 1;
+org.group38.kulturhus.model.Event.Ticket;12345678;fb93ccea-9fee-4194-a7c7-7c69cadab44b;150.0;4;2;2019-05-10;18:00;Sal 1;
+org.group38.kulturhus.model.Event.Ticket;94891594;4092169f-9591-4988-8df2-71ea79cc9a9e;150.0;2;1;2019-05-10;18:00;Sal 1;

@@ -129,13 +129,16 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
         String[] pattern;
 
 
+
 //        //sjekk filnavn
 
 
         for (T object : objects) {
 
             Class<?> clazz = object.getClass();
+            System.out.println(clazz);
             Method[] methods = clazz.getDeclaredMethods();
+            System.out.println(methods);
             StringBuilder save = new StringBuilder();
 
 

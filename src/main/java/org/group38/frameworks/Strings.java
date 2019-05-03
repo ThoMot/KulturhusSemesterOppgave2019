@@ -5,7 +5,6 @@ public final class Strings {
         throw new AssertionError("Can't assert strings");
     }
 
-    public static final String EMPTY = "";
 
     public static String requireNonNullAndNotEmpty(String value) {
         if(value == null){

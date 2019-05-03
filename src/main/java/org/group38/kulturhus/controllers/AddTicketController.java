@@ -108,9 +108,9 @@ public class AddTicketController implements MainController{
 
     /** setTicketInfo sets information about all tickets in TableView */
     private void setTicketInfo(){
-        seatRow.setText(thisTicket.getSeatRow().toString());
-        seatNumber.setText(thisTicket.getSeatNumber().toString());
-        phoneNumber.setText(thisTicket.getPhoneNumber());
+        seatRow.setText(thisTicket.getRow().toString());
+        seatNumber.setText(thisTicket.getSeat().toString());
+        phoneNumber.setText(thisTicket.getPhonenumber());
     }
     /** showFreeSeats shows all seats in a facility if event is a seatingNumbered event*/
     public void showFreeSeats(){
@@ -202,9 +202,9 @@ public class AddTicketController implements MainController{
                     "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
         } else {
             try {
-                thisTicket.setSeatRow(Integer.parseInt(seatRow.getText()));
-                thisTicket.setSeatNumber(Integer.parseInt(seatNumber.getText()));
-                thisTicket.setPhoneNumber(phoneNumber.getText());
+                thisTicket.setRow(Integer.parseInt(seatRow.getText()));
+                thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
+                thisTicket.setPhonenumber(phoneNumber.getText());
                 SceneManager.navigate(SceneName.SHOWTICKET);
             } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format" +

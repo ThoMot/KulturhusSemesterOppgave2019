@@ -84,14 +84,19 @@ public class ShowEventController implements MainController{
     @Override
     public void refresh(){
         fileName = EditedFiles.getActiveEventFile();
+        System.out.println(EditedFiles.getActiveEventFile());
         getEvents().clear();
 
         try {
             getEvents().addAll(ReaderThreadRunner.startReader(fileName));
+            System.out.println(getEvents());
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        eventsView.setItems(observableList);
+
     }
 
 
@@ -117,8 +122,9 @@ public class ShowEventController implements MainController{
 
     public void defaultCSV(ActionEvent event){
         if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
+            System.out.println(fileName);
             try {
-                WriterThreadRunner.WriterThreadRunner(observableList, fileName);
+                WriterThreadRunner.WriterThreadRunner(getEvents(), fileName);
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
@@ -129,8 +135,6 @@ public class ShowEventController implements MainController{
             } catch (WrongFileFormatException e){
                 errorBox("DEFAULT PATH ER KORRUPT", " ", " ");
             }
-
-            System.out.println(fileName);
             refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
@@ -200,7 +204,6 @@ public class ShowEventController implements MainController{
 
         try {
             getEvents().addAll(ReaderThreadRunner.startReader(fileName));
-            ArrayList<Event> x = getEvents();
             System.out.println(getEvents());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

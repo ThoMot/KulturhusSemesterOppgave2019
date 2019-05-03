@@ -125,7 +125,6 @@ public class ShowTicketsController implements MainController {
     private void loadData(){
 
         fileName = EditedFiles.getActiveTicketFile();
-        System.out.println(fileName);
 
         try {
             getTickets().addAll(ReaderThreadRunner.startReader(fileName));
@@ -140,7 +139,6 @@ public class ShowTicketsController implements MainController {
             }
         }
 
-        System.out.println(thisEvent.getTickets() + " DETTE ER BILLETTENE");
 
         observableList = FXCollections.observableList(thisEvent.getTickets());
         ticketsView.setItems(observableList);
@@ -155,9 +153,9 @@ public class ShowTicketsController implements MainController {
         eventPerformers.setText(thisEvent.getEventInfo().getPerformer());
         eventProgram.setText(thisEvent.getEventInfo().getProgram());
 
-        phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhoneNumber()));
-        seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeatRow().toString()));
-        seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeatNumber().toString()));
+        phoneNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhonenumber()));
+        seatRowColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRow().toString()));
+        seatNumberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSeat().toString()));
     }
 
     /** deleteRow() removes item from TicketsList if item from TableView is selected*/
@@ -168,7 +166,7 @@ public class ShowTicketsController implements MainController {
         } else{
             Alert mb = new Alert(Alert.AlertType.CONFIRMATION);
             mb.setTitle("Bekreft");
-            mb.setHeaderText("Du har trykket slett på "+ ticketsView.getSelectionModel().getSelectedItem().getPhoneNumber());
+            mb.setHeaderText("Du har trykket slett på "+ ticketsView.getSelectionModel().getSelectedItem().getPhonenumber());
             mb.setContentText("Ønsker du virkerlig å slette denne billetten?");
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
@@ -200,13 +198,13 @@ public class ShowTicketsController implements MainController {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if(ticket.getPhoneNumber().contains(lowerCaseFilter)){
+                if(ticket.getPhonenumber().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(ticket.getSeatRow().toString().contains(lowerCaseFilter)){
+                else if(ticket.getRow().toString().contains(lowerCaseFilter)){
                     return true;
                 }
-                else if(ticket.getSeatNumber().toString().contains(lowerCaseFilter)){
+                else if(ticket.getSeat().toString().contains(lowerCaseFilter)){
                     return true;
                 }
                 return false;

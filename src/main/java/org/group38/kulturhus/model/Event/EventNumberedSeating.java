@@ -31,7 +31,7 @@ public class EventNumberedSeating extends Event implements Serializable {
             if(seatRow<=0||seatNumber<=0||seatRow>=rows||seatNumber>=columns) throw new IndexOutOfBoundsException("Billetten du prøver å kjøpe er utenfor registeret");
             for (Ticket ticket : tickets) {
 
-                if (ticket.getSeatRow() == seatRow && ticket.getSeatNumber() == seatNumber) {
+                if (ticket.getRow() == seatRow && ticket.getSeat() == seatNumber) {
                     throw new IllegalArgumentException("Setet er allerede opptatt");
                 }
             }
@@ -46,7 +46,7 @@ public class EventNumberedSeating extends Event implements Serializable {
     public String allSeats(){
         StringJoiner s= new StringJoiner("\t");
         for (Ticket ticket: tickets) {
-            s.add("("+ticket.getSeatRow()+","+ticket.getSeatNumber()+")");
+            s.add("("+ticket.getRow()+","+ticket.getSeat()+")");
         }
         return s.toString();
     }
@@ -55,7 +55,7 @@ public class EventNumberedSeating extends Event implements Serializable {
      *based on the seat*/
     public Ticket findTicket(int rows, int columns){
         for(Ticket ticket:tickets){
-            if(ticket.getSeatNumber()==columns&&ticket.getSeatRow()==rows) return ticket;
+            if(ticket.getSeat()==columns&&ticket.getRow()==rows) return ticket;
         }
         return null;
     }
@@ -103,7 +103,7 @@ public class EventNumberedSeating extends Event implements Serializable {
     public void setTicketPrice(double price){
         super.setTicketPrice(price);
         for(Ticket tickets: tickets){
-            tickets.setTicketPrice(price);
+            tickets.setPrice(price);
         }
     }
     /** remaining setter and getter methods*/

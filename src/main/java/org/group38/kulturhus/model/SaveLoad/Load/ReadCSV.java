@@ -98,9 +98,7 @@ public class ReadCSV implements ReaderInterface {
         }
 
 
-        for (Map.Entry<String, Integer> entry : otherValues.entrySet())
-            System.out.println(entry.getKey() + " " + entry.getValue());
-
+        for (Map.Entry<String, Integer> entry : otherValues.entrySet());
         
         //henter infoen til eventinfo
         Class subclass = Templates.getSubClass(clazz);
@@ -122,20 +120,19 @@ public class ReadCSV implements ReaderInterface {
 
                 Field field = parentclazz.getDeclaredField("eventInfo");
                 field.setAccessible(true);
-                System.out.println(otherValues);
+
                 field.set(test, setComplexObj(otherValues, subclass, objVal));
-                System.out.println("TESTER2");
+
             }
 
             ArrayList<ContactPerson> ContactPerson = readSmallObjects(EditedFiles.getContactCSV());
             ArrayList<Facility> Facility = readSmallObjects(EditedFiles.getFacilityCSV());
             ArrayList<Ticket> Tickets = readSmallObjects(EditedFiles.getTicketCSV());
-            System.out.println(EditedFiles.getContactCSV() + "   hehhehehehehehhehehe");
+
 
 
             for(ContactPerson c : ContactPerson){
                 if (c.getPhoneNr().equals(objVal.get(searchValues.get("phoneNr")))){
-                    System.out.println("Fant kontaktperson");
                     Field field = parentclazz.getDeclaredField("contactPerson");
                     field.setAccessible(true);
                     field.set(test, c);
@@ -144,19 +141,16 @@ public class ReadCSV implements ReaderInterface {
 
             for(Facility c : Facility){
                 if (c.getFacilityName().equals(objVal.get(searchValues.get("facilityName")))){
-                    System.out.println("Fant Facility");
                     Field field = parentclazz.getDeclaredField("facility");
                     field.setAccessible(true);
                     field.set(test, c);
                 }
             }
 
-            System.out.println(searchValues);
             ArrayList<Ticket> belonging = new ArrayList<>();
             for(Ticket c : Tickets){
                 if (c.getEventId().equals(objVal.get(searchValues.get("eventId")))){
                     belonging.add(c);
-                    System.out.println(c.toString());
                 }
             }
             Field field = clazz.getDeclaredField("tickets");
@@ -196,7 +190,7 @@ public class ReadCSV implements ReaderInterface {
         Field[] parentFields = parentclazz.getDeclaredFields();
 
         headers = (convertToLowerCase(headers));
-        System.out.println(headers);
+
 
         HashMap<String, Integer> settableValues;
         HashMap<String, Integer> parentValues;
@@ -225,7 +219,6 @@ public class ReadCSV implements ReaderInterface {
                 setComplexFields(fields, clazz, test, otherValues, objVal);
             }
 
-            System.out.println(settableValues);
             returnObj.add(test);
         }
         return returnObj;
@@ -304,7 +297,6 @@ public class ReadCSV implements ReaderInterface {
         for (Map.Entry<String, Integer> entry : otherValues.entrySet()) {
             Field fieldToSet = clazz.getDeclaredField(entry.getKey());
             fieldToSet.setAccessible(true);
-            System.out.println(objVal.get(4));
             if (fieldToSet.getType().isPrimitive()) {
                 setPrimitive(instance, fieldToSet, (objVal.get(entry.getValue())));
             } else setNonPrimitive(instance, fieldToSet, (objVal.get(entry.getValue())));

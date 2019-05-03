@@ -31,7 +31,7 @@ public abstract class Templates {
                     "getDate", "getTime"};
             return patterns;
         } else if(clazz.getName().equals(ticket)){
-            patterns = new String[] { "getPhoneNumber", "getEventId", "getTicketPrice", "getSeatNumber", "getSeatRow", "getDate", "getTime", "getFacility"};
+            patterns = new String[] { "getPhonenumber", "getEventId", "getPrice", "getSeat", "getRow", "getDate", "getTime", "getFacility"};
             return patterns;
         } else if(clazz.getName().equals(contact)) {
             patterns = new String[]{"getPhoneNr", "getFirstName", "getLastName", "getEmail", "getNotes", "getAffiliation", "getWebPage"};

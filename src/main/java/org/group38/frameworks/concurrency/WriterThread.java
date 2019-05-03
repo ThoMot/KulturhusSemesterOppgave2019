@@ -27,15 +27,11 @@ public class WriterThread implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Write to file with Thread" + Thread.currentThread().getId());
-
         try {
             writeObjects();
         } catch (IOException e) { //TODO Dette burde håndteres bedre, aka sendes til GUIet på en måte.
             e.printStackTrace();
         }
-
-
     }
 
     private void writeObjects() throws IOException {

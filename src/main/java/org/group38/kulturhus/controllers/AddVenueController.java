@@ -121,6 +121,14 @@ public class AddVenueController implements MainController{
             else{
                 try {
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(seatRow.getText()), Integer.parseInt(columns.getText())));
+
+                    facilityFile.delete();
+                    try {
+                        WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     showLabel(created);
                 } catch (NullPointerException e){ errorBox("Feil", "Det er tomme felter", "Vennligst fyll ut alle felter");
                 } catch (IllegalArgumentException e){ errorBox("Negativt antall plasser","Kan ikke være negativt antall seter", "Vennligst legg inn et gyldig tall" );
@@ -137,7 +145,7 @@ public class AddVenueController implements MainController{
             try{
                 thisFacility.setFacilityName(facilityName.getText());
                 thisFacility.setFacilityType(facilityType.getSelectionModel().getSelectedItem().toString());
-                thisFacility.setRows(Integer.parseInt(row.getText()));
+                thisFacility.setRows(Integer.parseInt(seatRow.getText()));
                 thisFacility.setColumns(Integer.parseInt(columns.getText()));
 
                 facilityFile.delete();

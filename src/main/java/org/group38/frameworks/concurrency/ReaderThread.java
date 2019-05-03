@@ -28,8 +28,6 @@ public class ReaderThread<T> implements Callable<ArrayList<T>> {
 
     @Override
     public ArrayList<T> call() {
-        System.out.println("Reading from file with Thread" + Thread.currentThread().getId());
-
         try {
             return readObjects();
         } catch (IOException | ParsingException | ReflectiveOperationException e) { //TODO Dette burde håndteres bedre, aka sendes til GUIet på en måte.
@@ -41,7 +39,6 @@ public class ReaderThread<T> implements Callable<ArrayList<T>> {
     private <T> ArrayList<T> readObjects() throws ReflectiveOperationException, ParsingException,IOException, ClassNotFoundException {
         ReaderInterface readerInterface;
         String ext = filename.substring(filename.lastIndexOf(".") + 1);
-        System.out.println(ext);
 
         switch (ext) {
             case "jobj":

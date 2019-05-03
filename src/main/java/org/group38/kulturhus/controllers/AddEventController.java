@@ -1,6 +1,7 @@
 package org.group38.kulturhus.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -103,30 +104,30 @@ public class AddEventController implements MainController {
 
     @Override
     public void refresh(){
-        ol.clear();
-        ol2.clear();
-//TODO Skille disse ut i egen metode???
+        getContactPeople().clear();
+        getFacilities().clear();
+
         fileNameF = EditedFiles.getActiveFacilityFile();
         fileNameC = EditedFiles.getActiveContactFile();
 
         try {
-            ol.addAll(ReaderThreadRunner.startReader(fileNameF));
-            ol2.addAll(ReaderThreadRunner.startReader(fileNameC));
+            getContactPeople().addAll(ReaderThreadRunner.startReader(fileNameC));
+            getFacilities().addAll(ReaderThreadRunner.startReader(fileNameF));
+            System.out.println(getContactPeople());
+            System.out.println(getFacilities());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-
         ol = FXCollections.observableList(getContactPeople());
         ol2 = FXCollections.observableList(getFacilities());
-
-        //OBS!!!!!
-       // contactPerson.setItems(ol);
+        contactPerson.setItems(ol);
         facility.setItems(ol2);
+
     }
 
     public void defaultJOBJ(ActionEvent event){
-        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
+        if(!fileNameC.equals(DefaultFiles.CONTACTJOBJ.getFileName()) || !fileNameF.equals(DefaultFiles.FACILITYJOBJ)){
             File file = new File(fileNameC);
             File file2 = new File(fileNameF);
             file.delete();
@@ -150,10 +151,12 @@ public class AddEventController implements MainController {
     }
 
     public void defaultCSV(ActionEvent event){
-        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) && !fileNameF.equals(DefaultFiles.FACILITYCSV)){
+        if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) || !fileNameF.equals(DefaultFiles.FACILITYCSV)){
+            System.out.println(fileNameC);
+            System.out.println(fileNameF);
             try {
-                WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameF);
-                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileNameC);
+                WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
+                WriterThreadRunner.WriterThreadRunner(getFacilities(), fileNameF);
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
@@ -162,10 +165,11 @@ public class AddEventController implements MainController {
             try{
                 EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
                 EditedFiles.setContactCSV(DefaultFiles.CONTACTCSV.getFileName());
+                System.out.println(fileNameC);
+                System.out.println(fileNameF);
             } catch (WrongFileFormatException e){
                 errorBox("HVA", "Skrives", "HER");
             }
-            System.out.println(fileNameF + " Dette skal være csv navnet nå");
             refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
@@ -187,6 +191,8 @@ public class AddEventController implements MainController {
     }
     /**loadInfo method adds the facility list to the combobox and the contactpeople list to the tableview*/
     private void loadInfo(){
+        getContactPeople().clear();
+        getFacilities().clear();
 
         fileNameC = EditedFiles.getActiveContactFile();
         fileNameF = EditedFiles.getActiveFacilityFile();
