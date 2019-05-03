@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import static org.group38.frameworks.Validate.*;
 
-public class ContactPerson extends Person implements Serializable {
+public class ContactPerson extends Person implements Serializable{
     //Optional
     private String webPage;
     private String affiliation;
@@ -39,9 +39,10 @@ private ContactPerson(){
         contactInfo.setPhoneNr(phoneNr);
     }
 
-
-
-
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 
     public String getWebPage() {
         return webPage;
@@ -60,7 +61,6 @@ private ContactPerson(){
     public String getPhoneNr() { return getContactInfo().getPhoneNr(); }
 
     public String getEmail() { return getContactInfo().getEmail(); }
-
 
 
 

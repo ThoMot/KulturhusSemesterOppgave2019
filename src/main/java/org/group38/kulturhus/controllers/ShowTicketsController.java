@@ -28,7 +28,7 @@ import static org.group38.kulturhus.model.Kulturhus.getTickets;
 
 public class ShowTicketsController implements MainController {
     private File ticketFile = new File(EditedFiles.getActiveTicketFile());
-    private ObservableList<Ticket> observableList;
+    private static ObservableList<Ticket> observableList;
     private Ticket thisTicket = getSelectedTicket();
     private static Ticket selectedTicket;
     private Event thisEvent;
@@ -213,6 +213,9 @@ public class ShowTicketsController implements MainController {
     }
     public static Ticket getSelectedTicket(){
         return selectedTicket;
+    }
+    public static ObservableList<Ticket> getObservableList(){
+        return observableList;
     }
 
 

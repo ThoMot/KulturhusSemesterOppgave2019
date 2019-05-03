@@ -1,5 +1,7 @@
 package org.group38.kulturhus.model.ContactPerson;
 
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 
 import static org.group38.frameworks.Validate.*;
@@ -39,5 +41,13 @@ public abstract class Person implements Serializable {
     public void setLastName(String lastName) {
         if(!isOnlyLetters(lastName)) throw new IllegalArgumentException("Etternavn kan kun inneholde boklstaver");
         this.lastName = lastName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj.getClass()!=this.getClass()) return false;
+        Person other = (Person) obj;
+        return this.firstName.equals(other.firstName) && this.lastName.equals(other.lastName);
     }
 }

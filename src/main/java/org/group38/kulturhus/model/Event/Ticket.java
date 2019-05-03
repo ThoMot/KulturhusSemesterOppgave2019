@@ -1,5 +1,7 @@
 package org.group38.kulturhus.model.Event;
 
+import org.group38.kulturhus.model.ContactPerson.Person;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,6 +48,14 @@ public class Ticket implements Serializable {
         this.facility = facility;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj.getClass()!=this.getClass()) return false;
+        Ticket other = (Ticket) obj;
+        return (this.phonenumber.equals(other.phonenumber) && this.price==other.price&&this.date.equals(other.date)&&this.time.equals(other.time));
+    }
+
     /** Getter and setter method for phoneNumber. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getPhonenumber() {
         return phonenumber;
@@ -53,7 +63,7 @@ public class Ticket implements Serializable {
 
     public void setPhonenumber(String phoneNumber) {
         if(!isValidPhoneNr(phoneNumber)) throw new IllegalArgumentException("Telefonnummeret må bestå av 8 tall");
-        this.phonenumber = phonenumber;
+        this.phonenumber = phoneNumber;
     }
 
     /** Getter and setter method for ticket price. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/

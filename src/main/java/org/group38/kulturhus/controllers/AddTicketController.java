@@ -23,6 +23,7 @@ import java.io.IOException;
 import static org.group38.frameworks.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
+import static org.group38.kulturhus.controllers.ShowTicketsController.getObservableList;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
 import static org.group38.kulturhus.model.Kulturhus.*;
 
@@ -202,9 +203,20 @@ public class AddTicketController implements MainController{
                     "Gå til arrangementoversikten for å velge\n" + "et arrangement du vil redigere");
         } else {
             try {
+                getObservableList().remove(thisTicket);
+                System.out.println(getObservableList());
                 thisTicket.setRow(Integer.parseInt(seatRow.getText()));
                 thisTicket.setSeat(Integer.parseInt(seatNumber.getText()));
                 thisTicket.setPhonenumber(phoneNumber.getText());
+                getObservableList().add(thisTicket);
+
+                ticketFile.delete();
+                try {
+                    WriterThreadRunner.WriterThreadRunner(getTickets(), EditedFiles.getActiveTicketFile());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 SceneManager.navigate(SceneName.SHOWTICKET);
             } catch (NumberFormatException e) { errorBox("Feil input", "Feil input i et eller flere felter",
                     "Vennligst sørg for at alle felter har riktig format" +

@@ -367,6 +367,7 @@ public class AddEventController implements MainController {
     @FXML
     private void updateContactPersonComplete(ActionEvent event){
         try{
+            ol.remove(thisContactPerson);
             thisContactPerson.setFirstName(firstName.getText());
             thisContactPerson.setLastName(lastName.getText());
             thisContactPerson.getContactInfo().setEmail(email.getText());
@@ -374,7 +375,7 @@ public class AddEventController implements MainController {
             if(isNotEmptyString(other.getText())) thisContactPerson.setNotes(other.getText());
             if(isNotEmptyString(webPage.getText()))thisContactPerson.setWebPage(webPage.getText());
             if(isNotEmptyString(company.getText()))thisContactPerson.setAffiliation(company.getText());
-
+            ol.add(thisContactPerson);
             contactFile.delete();
             try {
                 WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
