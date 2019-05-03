@@ -175,7 +175,11 @@ public class AddTicketController implements MainController{
 
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
-            } catch (NumberFormatException e) {
+            } catch (IndexOutOfBoundsException e){
+                errorBox("Billetten er utenfor registeret", "Du har valgt et setenummer eller en seterad\n som er utenfor registeret",
+                        "Vennligst velg et annet sete");
+            }
+            catch (NumberFormatException e) {
                 errorBox("Feil input", "Feil input i et eller flere felter",
                         "Vennligst sørg for at alle felter har riktig format" +
                                 "\n\"Raden må være mellom 0 og " + thisEvent.getFacility().getRows() +
