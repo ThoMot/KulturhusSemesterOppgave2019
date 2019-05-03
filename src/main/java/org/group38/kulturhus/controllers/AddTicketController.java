@@ -135,6 +135,7 @@ public class AddTicketController implements MainController{
                     ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
                     for(Ticket ticket : getTickets()){
                         if (ticket.getEventId().equals(thisEvent.getEventId())){
+                            System.out.println(ticket);
                             getTickets().remove(ticket);
                         }
                     }
@@ -157,6 +158,7 @@ public class AddTicketController implements MainController{
                     int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
+
                     System.out.println("Dette er Alle billettene før" + getTickets());
 //                    for(Ticket ticket : getTickets()){
 //                        if (ticket.getEventId().equals(thisEvent.getEventId())){
