@@ -115,16 +115,16 @@ public enum SceneManager {
     }
 
     //TODO Endre navn på denne
-    public void createUndecoratedStageWithScene(Stage popUpStage, SceneName sceneName, double heightDivisor, double widthDivisor){ //throws NoPrimaryStageException {
+    public void createUndecoratedStageWithScene(Stage popUpStage, SceneName sceneName){ //throws NoPrimaryStageException {
      //   if (this.primaryStage == null) {
           //  throw new NoPrimaryStageException("No primary stage. Do not call this method before a Primary Stage has been defined");
    //     }
 
         Objects.requireNonNull(popUpStage, "The new stage can't be null, please provide a Stage object");
-        popUpStage.setWidth(this.primaryStage.getWidth()/widthDivisor);
-        popUpStage.setHeight(this.primaryStage.getHeight()/heightDivisor);
-        popUpStage.setMinHeight(333);
-        popUpStage.setMinWidth(400);
+        popUpStage.setWidth(this.primaryStage.getWidth()/2);
+        popUpStage.setHeight(this.primaryStage.getHeight()/2);
+        popUpStage.setMinHeight(500);
+        popUpStage.setMinWidth(600);
 
         SceneInfo sceneInfo = scenes.get(sceneName);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneInfo.getViewpath()));

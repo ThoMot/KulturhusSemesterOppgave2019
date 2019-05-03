@@ -153,6 +153,11 @@ public class AddEventController implements MainController {
         if(!fileNameC.equals(DefaultFiles.CONTACTCSV.getFileName()) || !fileNameF.equals(DefaultFiles.FACILITYCSV)){
             System.out.println(fileNameC);
             System.out.println(fileNameF);
+
+            File file = new File(fileNameC);
+            File file2 = new File(fileNameF);
+            file.delete();
+            file2.delete();
             try {
                 WriterThreadRunner.WriterThreadRunner(getContactPeople(), fileNameC);
                 WriterThreadRunner.WriterThreadRunner(getFacilities(), fileNameF);
@@ -178,7 +183,7 @@ public class AddEventController implements MainController {
 
 
     public void chooseFile(){
-        sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR,2 ,3);
+        sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR);
     }
 
 
