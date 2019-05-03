@@ -99,8 +99,8 @@
                     <GridPane alignment="CENTER" prefHeight="78.0" prefWidth="985.0">
                         <children>
                             <Label fx:id="seatRowInfoText" alignment="CENTER" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2" />
-                            <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="1" />
-                            <TextField fx:id="columns" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+                            <TextField fx:id="seatRow" promptText="Rad" GridPane.rowIndex="1" />
+                            <TextField fx:id="seatNumber" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
                                 <GridPane.margin>
                                     <Insets left="3.0" />
                                 </GridPane.margin>
