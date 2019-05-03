@@ -9,8 +9,7 @@ public class FileHandler {
     FileChooser fileChooser;
     File file;
 
-
-
+    /** chooseFile chooses which file of jobj and csv you want the system to load from */
     public String chooseFile(Window window){
         fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Files");
@@ -21,8 +20,5 @@ public class FileHandler {
         if (file != null) {
             return file.toString();
         } else return null;
-
-
     }
-
 }

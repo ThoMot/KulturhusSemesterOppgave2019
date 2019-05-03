@@ -134,20 +134,22 @@ public class AddTicketController implements MainController{
                 if (thisEvent instanceof EventFreeSeating) {
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventFreeSeating) thisEvent).buyTicket(newPhoneNumber);
-                    for(Ticket ticket : getTickets()){
-                        if (ticket.getEventId().equals(thisEvent.getEventId())){
-                            getTickets().remove(ticket);
+                    for(int i=0; i<getTickets().size(); i++){
+                        if (getTickets().get(i).getEventId().equals(thisEvent.getEventId())){
+                            getTickets().remove(i);
                         }
                     }
+                    System.out.println("Dette er alle billettene etter:" + getTickets());
                     getTickets().addAll(thisEvent.getTickets());
+                    System.out.println("Nå burde alle de nye ticketsene være lagt til" + getTickets());
 
                     ticketFile.delete();
+                    System.out.println(ticketFile);
                     try {
-                        WriterThreadRunner.WriterThreadRunner(getTickets(), EditedFiles.getActiveTicketFile());
+                        WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                     SceneManager.navigate(SceneName.SHOWTICKET);
                 }
 
@@ -156,7 +158,10 @@ public class AddTicketController implements MainController{
                     int newRow = Integer.parseInt(seatRow.getText());
                     String newPhoneNumber = phoneNumber.getText();
                     ((EventNumberedSeating) thisEvent).buyTicket(newRow,newSeat,newPhoneNumber);
+                    System.out.println("Antall billetter etter kjøp" + thisEvent.getTickets().size());
 
+                    System.out.println("Dette eventets billetter :" + thisEvent.getTickets());
+                    System.out.println("Dette er Alle billettene før" + getTickets().size());
                     for(int i=0; i<getTickets().size(); i++){
                         if (getTickets().get(i).getEventId().equals(thisEvent.getEventId())){
                             getTickets().remove(i);

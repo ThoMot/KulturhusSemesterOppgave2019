@@ -3,7 +3,6 @@ package org.group38.kulturhus.model.FilePaths;
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
 
 public class EditedFiles {
-
     private static String eventCSV;
     private static String eventJOBJ;
     private static String contactCSV;
@@ -104,7 +103,6 @@ public class EditedFiles {
             activeTicketFile = fileName;
         } else throw new WrongFileFormatException("Venligst velg en JOBJ fil");
     }
-
 
     private static boolean isCSV(String fileName){
         String ext = fileName.substring(fileName.lastIndexOf(".")+1);

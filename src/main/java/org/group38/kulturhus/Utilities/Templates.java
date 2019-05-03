@@ -13,7 +13,7 @@ public abstract class Templates {
     private static final String eventInfo = "org.group38.kulturhus.model.Event.EventInfo";
 
 
-    //Sjekker hvilket pattern objektet skal bruke
+    /** Chechs what pattern the objects supposed to use and gets the methods for each class to write to file*/
     public static String[] getterPattern(Class clazz) {
         String[] patterns;
         if (clazz.getName().equals(ens)
@@ -33,7 +33,6 @@ public abstract class Templates {
             return patterns;
         } else return null;
     }
-
 
     public static boolean isBigObject(Class clazz) {
         return  (clazz.getName().equals(ens) || clazz.getName().equals(efs));

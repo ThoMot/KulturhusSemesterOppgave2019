@@ -16,6 +16,8 @@ public class ErrorBoxesAndLabel {
         alert.setTitle(title);
         alert.show();
     }
+
+    /** the showLabel makes lables visible by default and makes the scene wait so the program doesn't crash */
     public static void showLabel(Label label){
         label.setVisible(true);
         PauseTransition visiblePause = new PauseTransition(Duration.seconds(2));

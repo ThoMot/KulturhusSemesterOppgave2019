@@ -8,6 +8,11 @@ public class ContactInfo implements Serializable {
     private String email;
     private String phoneNr;
 
+    /** Constructor of ContactInfo
+     * The empty constructer is used to write to file*/
+    public ContactInfo(){
+    }
+
     public ContactInfo(String email, String phoneNr) {
       if(!isValidEmail(email.toLowerCase())) throw new IllegalArgumentException("Eposten er på feil format.\n Den skal bestå av to deler adskilt med @ \nog avslutte med .com/.no eller lignende");
        if(!isValidPhoneNr(phoneNr)) throw new IllegalArgumentException("Telefonnummer er ikke gyldig.\n Det skal kun bestå av 8 tall");
@@ -16,10 +21,7 @@ public class ContactInfo implements Serializable {
 
     }
 
-    public ContactInfo(){
-
-    }
-
+    /** Getter and setter for contactPersons email. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getEmail() {
         return email;
     }
@@ -29,6 +31,7 @@ public class ContactInfo implements Serializable {
     this.email = email.toLowerCase();
     }
 
+    /** Getter and setter for contactPersons phoneNumber. To see validation go to -> org/group38/kulturhus/Utilities/Validate.java*/
     public String getPhoneNr() {
         return phoneNr;
     }
@@ -37,7 +40,6 @@ public class ContactInfo implements Serializable {
         if(!isValidPhoneNr(phoneNr)) throw new IllegalArgumentException("Telefonnummer er ikke gyldig.\n Det skal kun bestå av 8 tall");
         this.phoneNr = phoneNr;
     }
-
 
     @Override
     public String toString() {

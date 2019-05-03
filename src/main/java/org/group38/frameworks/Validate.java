@@ -15,8 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validate {
-/** the validation methods checks if the input matches a regex
- * or some ither criteria and returns true or false based on the outcome*/
+    /** the validation methods checks if the input matches a regex
+    * or some ither criteria and returns true or false based on the outcome*/
     public static boolean isValidPhoneNr(String phoneNr) {
         return  (phoneNr.matches("[0-9]{8}"));
     }

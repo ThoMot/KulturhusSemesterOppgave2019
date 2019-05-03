@@ -17,21 +17,21 @@ public enum SceneManager {
      INSTANCE;
 
      private Stage primaryStage = null;
-    private final Map<SceneName, SceneInfo> scenes;
-    private boolean initialized;
-    private BorderPane borderPane;
-    private MainController activeController;
-    private Stage currentPopUpStage;
-    private FXMLLoader currentLoader;
+     private final Map<SceneName, SceneInfo> scenes;
+     private boolean initialized;
+     private BorderPane borderPane;
+     private MainController activeController;
+     private Stage currentPopUpStage;
+     private FXMLLoader currentLoader;
+     private MainController currentController;
 
-    private MainController currentController;
-
+    /** SceneManager collects the scenes in a HashMap */
     SceneManager(){
         scenes = new HashMap<>();
-
         createSceneInfos();
     }
 
+    /** createSceneInfos creates SceneTitle and viewpath, and puts the to the given SceneNames */
     private void createSceneInfos(){
         SceneInfo showEvent = new SceneInfo("Arrangementsoversikt", "/org/group38/showEvent.fxml");
         SceneInfo addEvent = new SceneInfo("Legg til Arrangement", "/org/group38/addEvent.fxml"  );
@@ -48,25 +48,27 @@ public enum SceneManager {
         scenes.put(SceneName.SHOWVENUE, showVenues);
         scenes.put(SceneName.ADDVENUE, addVenue);
         scenes.put(SceneName.FILEEDITOR, fileEditor);
-
     }
+
+    /** setPrimaryStage makes sure the scenes connects fxml and controller methods */
     public void setPrimaryStage(Stage primaryStage){
-        this.primaryStage = Objects.requireNonNull(primaryStage, "primary stage cna't be null");
+        this.primaryStage = Objects.requireNonNull(primaryStage, "primary stage can't be null");
 
         primaryStage.setOnCloseRequest((windowEvent) -> {
             if (currentController != null) {
                 System.out.println("closing");
                 currentController.exit();
             }
-        }  );
-
+        });
         initialized = true;
     }
 
+    /** navigate methos is used in the controllers to navigator and sets the new scene */
     public static void navigate(SceneName sceneName){
         INSTANCE.changeToScene(sceneName);
     }
 
+    /** changeToScene exits currenty scene and opens new scene */
     public void changeToScene(SceneName sceneName) {
         Objects.requireNonNull(sceneName);
 
@@ -140,12 +142,7 @@ public enum SceneManager {
         }
         setCurrentPopUpStage(popUpStage);
         popUpStage.show();
-
     }
-
-
-
-
 
     @Override
     public String toString() {
