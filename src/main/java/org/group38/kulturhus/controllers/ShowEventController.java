@@ -137,7 +137,7 @@ public class ShowEventController implements MainController{
     }
 
     public void chooseFile(ActionEvent event){
-                sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR);
+                sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);
         }
 
 

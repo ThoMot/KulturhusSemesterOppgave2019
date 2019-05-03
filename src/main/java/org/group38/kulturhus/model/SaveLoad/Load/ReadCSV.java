@@ -14,17 +14,9 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class ReadCSV implements ReaderInterface {
-    String filename;
-    String[] classes = new String[]{};
 
 
 
-    public <T> void checkClass(String filename, Class clazz){
-        if(clazz == Templates.efs.getClass() || clazz == Templates.ens.getClass()){
-            ArrayList<T> list = new ArrayList<>();
-
-        }
-    }
 
 
 
@@ -60,7 +52,6 @@ public class ReadCSV implements ReaderInterface {
 
         List<List<String>> records = csvParser.parseCsv(filename);
         List<String> headers = csvParser.getHeaders();
-        System.out.println(headers);
         ArrayList<T> returnObj = new ArrayList<>();
 
         Class clazz = Class.forName(records.get(0).get(0));
@@ -108,11 +99,8 @@ public class ReadCSV implements ReaderInterface {
         for (List<String> objVal : records) {
 
             T test = (T) constructor.newInstance();
-            //set settable values
-            // setFields(settableValues, clazz, test, objVal);
-            //SetParent values
+
             setFields(parentValues, parentclazz, test, objVal);
-            //SetOther Values
             if (!otherValues.isEmpty()) {
                 Constructor subCons = subclass.getDeclaredConstructor();
                 subCons.setAccessible(true);
@@ -156,19 +144,13 @@ public class ReadCSV implements ReaderInterface {
             field.setAccessible(true);
             field.set(test, belonging);
 
-
-
-
-
                 returnObj.add(test);
         }
             return returnObj;
-        }
+    }
 
 
-
-
-    public static <T> ArrayList<T> readSmallObjects(String filename) throws ParsingException, IOException, ReflectiveOperationException {
+    private static <T> ArrayList<T> readSmallObjects(String filename) throws ParsingException, IOException, ReflectiveOperationException {
         File file = new File(filename);
         if (file.length() == 0) {
             return new ArrayList<>();
@@ -222,6 +204,9 @@ public class ReadCSV implements ReaderInterface {
         }
         return returnObj;
     }
+
+
+
 
 
 

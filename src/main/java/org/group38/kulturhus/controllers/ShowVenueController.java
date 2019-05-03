@@ -122,25 +122,25 @@ public class ShowVenueController implements MainController {
 
     public void defaultCSV(ActionEvent event){
         if(!fileName.equals(DefaultFiles.FACILITYCSV.getFileName())){
+            File file = new File(fileName);
+            file.delete();
             try {
                 WriterThreadRunner.WriterThreadRunner(getFacilities(), fileName);
             } catch (InterruptedException e) {
                 errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
             }
 
-//TODO Hvordan best håndtere denne exception
             try{
                 EditedFiles.setFacilitysCSV(DefaultFiles.FACILITYCSV.getFileName());
             } catch (WrongFileFormatException e){
                 errorBox("Error in default path", "default path is not valid", "");
             }
-            System.out.println(fileName + " Dette skal være csv navnet nå");
             refresh();
         } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
     }
 
         public void chooseFile(ActionEvent event){
-            sceneManager.createUndecoratedStageWithScene(new Stage(), SceneName.FILEEDITOR);
+            sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);
         }
 
 

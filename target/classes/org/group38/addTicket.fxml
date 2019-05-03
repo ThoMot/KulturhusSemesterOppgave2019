@@ -10,9 +10,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -32,16 +34,10 @@
                             <MenuItem onAction="#goToShowVenue" text="Se Lokaler" />
                         </items>
                     </Menu>
-                    <Menu text="ChangeFiles">
-                        <items>
-                            <MenuItem fx:id="readFromJOBJ" mnemonicParsing="false" onAction="#readFromJOBJ" text="ReadFromJobj" />
-                            <MenuItem fx:id="readFromCSV" mnemonicParsing="false" onAction="#readFromCSV" text="ReadFromCsv" />
-                        </items>
-                    </Menu>
                 </menus>
             </MenuBar>
             <Pane fx:id="headerPane" prefHeight="37.0" prefWidth="1000.0" styleClass="headerPane">
-                <Label layoutX="16.0" layoutY="6.0" text="Asbjørnsen og Moe Kulturhus" styleClass="headerPane-txt"/>
+                <Label layoutX="16.0" layoutY="6.0" styleClass="headerPane-txt" text="Asbjørnsen og Moe Kulturhus" />
             </Pane>
         </VBox>
     </top>
@@ -73,9 +69,9 @@
                 <children>
                     <VBox alignment="TOP_CENTER" prefHeight="285.0" prefWidth="970.0">
                         <children>
-                            <Label styleClass="h1" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="974.0" text="Seteoversikt"/>
-                            <Label text="Seteoversikt med ledig og ikke ledige seter" textAlignment="CENTER"/>
-                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="976.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER"/>
+                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="974.0" styleClass="h1" text="Seteoversikt" />
+                            <Label text="Seteoversikt med ledig og ikke ledige seter" textAlignment="CENTER" />
+                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="976.0" styleClass="seatScene" text="Scene/lerret" textAlignment="CENTER" />
                             <ScrollPane prefHeight="155.0" prefWidth="950.0">
                                 <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="957.0">
@@ -93,7 +89,7 @@
                     </VBox>
                 </children>
             </Pane>
-            <Label styleClass="h1" alignment="CENTER" prefHeight="17.0" prefWidth="1034.0" text="Reserver billett">
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="1034.0" styleClass="h1" text="Reserver billett">
                 <VBox.margin>
                     <Insets top="10.0" />
                 </VBox.margin>
@@ -102,7 +98,7 @@
                 <children>
                     <GridPane alignment="CENTER" prefHeight="78.0" prefWidth="985.0">
                         <children>
-                            <Label fx:id="seatRowInfoText" alignment="CENTER" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2"/>
+                            <Label fx:id="seatRowInfoText" alignment="CENTER" prefHeight="17.0" prefWidth="236.0" text="Velg sete (rad, setenummer):" GridPane.columnSpan="2" />
                             <TextField fx:id="row" promptText="Rad" GridPane.rowIndex="1" />
                             <TextField fx:id="columns" promptText="Setenr" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
                                 <GridPane.margin>
@@ -113,6 +109,14 @@
                         <padding>
                             <Insets left="10.0" top="10.0" />
                         </padding>
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
                     </GridPane>
                 </children>
             </Pane>
@@ -126,6 +130,14 @@
                         <padding>
                             <Insets left="10.0" top="10.0" />
                         </padding>
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
                     </GridPane>
                 </children>
             </Pane>

@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.group38.frameworks.concurrency.ReaderThreadRunner;
+import javafx.stage.Stage;
+import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
+import org.group38.kulturhus.model.DefaultFiles;
 import org.group38.kulturhus.model.EditedFiles;
 import org.group38.kulturhus.model.Event.*;
 import org.group38.kulturhus.sceneHandling.SceneManager;
@@ -15,23 +17,20 @@ import org.group38.kulturhus.sceneHandling.SceneName;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.concurrent.ExecutionException;
 
 
 import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowTicketsController.getSelectedTicket;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
-import static org.group38.kulturhus.model.Kulturhus.getTickets;
+import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class AddTicketController implements MainController{
     private Event event = getSelectedEvent();
     private Ticket thisTicket=getSelectedTicket();
     private Event thisEvent;
     private String fileName;
+    SceneManager sceneManager = SceneManager.INSTANCE;
     File ticketFile = new File(EditedFiles.getActiveTicketFile());
 
     @FXML
@@ -193,6 +192,54 @@ public class AddTicketController implements MainController{
             }
         }
     }
+
+
+    public void defaultJOBJ(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.TICKETJOBJ.getFileName())){
+            File file = new File(fileName);
+            file.delete();
+
+            try {
+                WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+            //TODO HVORDAN BEST HÅNDTERE DEMME EXCEPTION
+            try {
+                EditedFiles.setTicketJOBJ(DefaultFiles.TICKETJOBJ.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("default file er korrupt", " ", "");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for JOBJ allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+    public void defaultCSV(ActionEvent event){
+        if(!fileName.equals(DefaultFiles.TICKETCSV.getFileName())){
+            File file = new File(fileName);
+            file.delete();
+            try {
+                WriterThreadRunner.WriterThreadRunner(getTickets(), fileName);
+            } catch (InterruptedException e) {
+                errorBox("Kan ikke skrive til fil", "Lagring kunne ikke gjennomføres", " ");
+            }
+
+            try{
+                EditedFiles.setTicketCSV(DefaultFiles.TICKETCSV.getFileName());
+            } catch (WrongFileFormatException e){
+                errorBox("Error in default path", "default path is not valid", "");
+            }
+            refresh();
+        } else errorBox("Feil", "DefaultPath for CSV allerede i bruk", "vennligs velg annet alternativ");
+    }
+
+
+    public void chooseFile(ActionEvent event){
+        sceneManager.makePopupStage(new Stage(), SceneName.FILEEDITOR);
+    }
+
+
+
 
     /** updateEvent() tries to update an event if selected in showEvent scene.
      *This method throws exceptions for wrong input and missing input and displays it in an alert box.*/

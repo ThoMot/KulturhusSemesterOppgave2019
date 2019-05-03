@@ -115,12 +115,12 @@ public enum SceneManager {
     }
 
     //TODO Endre navn på denne
-    public void createUndecoratedStageWithScene(Stage popUpStage, SceneName sceneName){ //throws NoPrimaryStageException {
+    public void makePopupStage(Stage popUpStage, SceneName sceneName){ //throws NoPrimaryStageException {
      //   if (this.primaryStage == null) {
           //  throw new NoPrimaryStageException("No primary stage. Do not call this method before a Primary Stage has been defined");
    //     }
 
-        Objects.requireNonNull(popUpStage, "The new stage can't be null, please provide a Stage object");
+        Objects.requireNonNull(popUpStage, "there needs to be a stage set");
         popUpStage.setWidth(this.primaryStage.getWidth()/2);
         popUpStage.setHeight(this.primaryStage.getHeight()/2);
         popUpStage.setMinHeight(500);
