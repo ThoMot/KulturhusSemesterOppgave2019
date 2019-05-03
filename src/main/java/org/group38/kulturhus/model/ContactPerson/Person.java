@@ -5,6 +5,7 @@ import java.io.Serializable;
 import static org.group38.frameworks.Validate.*;
 
 public abstract class Person implements Serializable {
+    //datafield
     private String firstName;
     private String lastName;
 

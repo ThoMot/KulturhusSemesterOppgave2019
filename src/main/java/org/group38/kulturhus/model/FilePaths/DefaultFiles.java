@@ -12,13 +12,13 @@ public enum DefaultFiles {
 
     private String fileName;
 
+    /** defaultFiles sets the default filePath*/
     DefaultFiles(String filePath){
         this.fileName = filePath;
     }
 
+    /** gets fileName for the default filePath*/
     public String getFileName(){
         return fileName;
     }
-
-
 }
