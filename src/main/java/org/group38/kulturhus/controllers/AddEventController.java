@@ -20,21 +20,21 @@ import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
 import org.group38.kulturhus.model.ContactPerson.ContactInfo;
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.DefaultFiles;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.DefaultFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.kulturhus.model.Event.Event;
 import org.group38.kulturhus.model.Event.EventFreeSeating;
 import org.group38.kulturhus.model.Event.EventInfo;
 import org.group38.kulturhus.model.Event.EventNumberedSeating;
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
 import org.group38.kulturhus.model.facility.Facility;
-import org.group38.kulturhus.sceneHandling.SceneManager;
-import org.group38.kulturhus.sceneHandling.SceneName;
+import org.group38.frameworks.sceneHandling.SceneManager;
+import org.group38.frameworks.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.*;
+import static org.group38.frameworks.ErrorBoxesAndLabel.*;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.model.Kulturhus.*;
-import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
+import static org.group38.frameworks.Validate.isNotEmptyString;
 
 
 

@@ -1,4 +1,4 @@
-package org.group38.kulturhus.Utilities;
+package org.group38.frameworks;
 
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Alert;

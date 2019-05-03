@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
+import static org.group38.frameworks.Validate.isNotEmptyString;
 
 public class EventInfo implements Serializable {
     private String eventName;

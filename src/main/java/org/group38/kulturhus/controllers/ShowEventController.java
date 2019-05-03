@@ -12,18 +12,18 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.DefaultFiles;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.DefaultFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
-import org.group38.kulturhus.model.SaveLoad.FileHandler;
-import org.group38.kulturhus.sceneHandling.SceneManager;
-import org.group38.kulturhus.sceneHandling.SceneName;
+import org.group38.frameworks.FileHandler;
+import org.group38.frameworks.sceneHandling.SceneManager;
+import org.group38.frameworks.sceneHandling.SceneName;
 import org.group38.kulturhus.model.Event.Event;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
+import static org.group38.frameworks.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowTicketsController.setSelectedTicket;
 import static org.group38.kulturhus.model.Kulturhus.getEvents;
 

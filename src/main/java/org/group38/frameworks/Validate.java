@@ -1,4 +1,4 @@
-package org.group38.kulturhus.Utilities;
+package org.group38.frameworks;
 
 import org.group38.kulturhus.model.Event.Ticket;
 

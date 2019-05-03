@@ -10,10 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.kulturhus.model.Event.*;
-import org.group38.kulturhus.sceneHandling.SceneManager;
-import org.group38.kulturhus.sceneHandling.SceneName;
+import org.group38.frameworks.sceneHandling.SceneManager;
+import org.group38.frameworks.sceneHandling.SceneName;
 
 import java.io.File;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +21,9 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
+import static org.group38.frameworks.ErrorBoxesAndLabel.errorBox;
 import static org.group38.kulturhus.controllers.ShowEventController.getSelectedEvent;
 import static org.group38.kulturhus.controllers.ShowEventController.setSelectedEvent;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.getTickets;
 
 public class ShowTicketsController implements MainController {

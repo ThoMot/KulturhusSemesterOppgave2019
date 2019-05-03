@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model;
+package org.group38.kulturhus.model.FilePaths;
 
 public enum DefaultFiles {
     EVENTCSV("Files/Events.csv"),

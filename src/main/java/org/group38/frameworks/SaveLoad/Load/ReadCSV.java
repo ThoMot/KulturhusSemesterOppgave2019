@@ -1,10 +1,10 @@
-package org.group38.kulturhus.model.SaveLoad.Load;
+package org.group38.frameworks.SaveLoad.Load;
 
 import org.group38.kulturhus.model.ContactPerson.ContactPerson;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.kulturhus.model.Event.Ticket;
 import org.group38.frameworks.Exeptions.ParsingException;
-import org.group38.kulturhus.model.SaveLoad.Templates;
+import org.group38.kulturhus.Utilities.Templates;
 import org.group38.kulturhus.model.facility.Facility;
 
 import java.io.*;

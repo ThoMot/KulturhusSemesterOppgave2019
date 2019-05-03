@@ -1,9 +1,9 @@
 package org.group38.frameworks.concurrency;
 
 import org.group38.frameworks.Exeptions.ParsingException;
-import org.group38.kulturhus.model.SaveLoad.Load.ReadCSV;
-import org.group38.kulturhus.model.SaveLoad.Load.ReaderInterface;
-import org.group38.kulturhus.model.SaveLoad.Load.ReaderJOBJ;
+import org.group38.frameworks.SaveLoad.Load.ReadCSV;
+import org.group38.frameworks.SaveLoad.Load.ReaderInterface;
+import org.group38.frameworks.SaveLoad.Load.ReaderJOBJ;
 
 import java.io.IOException;
 import java.util.ArrayList;

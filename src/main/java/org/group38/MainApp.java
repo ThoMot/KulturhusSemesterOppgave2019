@@ -2,16 +2,14 @@ package org.group38;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.group38.kulturhus.sceneHandling.SceneManager;
-import org.group38.kulturhus.sceneHandling.SceneName;
+import org.group38.frameworks.sceneHandling.SceneManager;
+import org.group38.frameworks.sceneHandling.SceneName;
 
-import static org.group38.kulturhus.model.Kulturhus.opprett;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primarystage) throws Exception {
-        opprett(); //kun for å lage et Event for å sjekke MIDLERTIDIG
 
         SceneManager sceneManager = SceneManager.INSTANCE;
         sceneManager.setPrimaryStage(primarystage);

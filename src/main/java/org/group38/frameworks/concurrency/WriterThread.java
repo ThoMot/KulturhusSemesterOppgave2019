@@ -1,9 +1,8 @@
 package org.group38.frameworks.concurrency;
 
-import javafx.collections.ObservableList;
-import org.group38.kulturhus.model.SaveLoad.Save.WriteToCSV;
-import org.group38.kulturhus.model.SaveLoad.Save.WriterInterface;
-import org.group38.kulturhus.model.SaveLoad.Save.WriterJOBJ;
+import org.group38.frameworks.SaveLoad.Save.WriteToCSV;
+import org.group38.frameworks.SaveLoad.Save.WriterInterface;
+import org.group38.frameworks.SaveLoad.Save.WriterJOBJ;
 
 
 import java.io.IOException;

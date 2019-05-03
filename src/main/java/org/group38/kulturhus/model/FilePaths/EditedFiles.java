@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model;
+package org.group38.kulturhus.model.FilePaths;
 
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
 

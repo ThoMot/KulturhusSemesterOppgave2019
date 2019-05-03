@@ -1,11 +1,7 @@
-package org.group38.kulturhus.model.SaveLoad.Save;
-
-import javafx.collections.ObservableList;
-import org.group38.kulturhus.model.Event.EventNumberedSeating;
+package org.group38.frameworks.SaveLoad.Save;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface WriterInterface {
 

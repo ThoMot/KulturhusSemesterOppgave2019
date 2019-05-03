@@ -1,14 +1,7 @@
-package org.group38.kulturhus.model.SaveLoad;
+package org.group38.frameworks;
 
-import javafx.beans.value.ObservableNumberValue;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.DefaultFiles;
-import org.group38.kulturhus.model.EditedFiles;
 
 import java.io.File;
 

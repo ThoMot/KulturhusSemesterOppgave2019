@@ -3,14 +3,14 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.frameworks.Exeptions.WrongFileFormatException;
-import org.group38.kulturhus.model.SaveLoad.FileHandler;
-import org.group38.kulturhus.sceneHandling.SceneManager;
+import org.group38.frameworks.FileHandler;
+import org.group38.frameworks.sceneHandling.SceneManager;
 
 import java.io.File;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
+import static org.group38.frameworks.ErrorBoxesAndLabel.errorBox;
 
 public class FileEditorController {
 

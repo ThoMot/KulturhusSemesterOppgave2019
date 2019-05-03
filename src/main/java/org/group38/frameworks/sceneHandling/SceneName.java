@@ -1,4 +1,4 @@
-package org.group38.kulturhus.sceneHandling;
+package org.group38.frameworks.sceneHandling;
 
 public enum SceneName {
     NONE,

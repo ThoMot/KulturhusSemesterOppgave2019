@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model.SaveLoad;
+package org.group38.kulturhus.Utilities;
 
 import java.util.LinkedHashMap;
 
@@ -11,11 +11,6 @@ public abstract class Templates {
     private static final String facility = "org.group38.kulturhus.model.facility.Facility";
     private static final String person = "org.group38.kulturhus.model.ContactPerson.Person";
     private static final String eventInfo = "org.group38.kulturhus.model.Event.EventInfo";
-
-
-
-
-
 
 
     //Sjekker hvilket pattern objektet skal bruke
@@ -39,48 +34,6 @@ public abstract class Templates {
         } else return null;
     }
 
-     private String facilityName;
-     private String facilityType;
-     private int maxAntSeats;
-     private int rows;
-     private int columns;
-
-
-
-    static String[] setterPattern(Class clazz){
-            String[] patterns;
-            if (clazz.getName().equals(ens)
-                    || clazz.getName().equals(efs)) {
-                patterns = new String[] {"setPhoneNr", "setEventId", "setEventName", "setType",
-                        "setProgram", "setPerformer", "setTicketPrice", "setFacilityName", "setMaxSeats",
-                        "setDate", "setTime", "setRows", "setColumns"};
-                return patterns;
-            } else if(clazz.getName().equals(ticket)){
-                patterns = new String[] { "setPhoneNumber", "setTicketPrice", "setSeatNumber", "setSeatRow", "setDate", "setTime"};
-                return patterns;
-            } else if(clazz.getName().equals(contact)){
-                patterns = new String[]{"setPhoneNr", "setFirstName", "setLastName", "setEmail", "setNotes", "setAffiliation", "setWebPage"};
-                return patterns;
-            } else return null;
-        }
-
-
-    static String[] readerPattern(Class clazz){
-        String[] patterns;
-        if (clazz.getName().equals(ens)
-                || clazz.getName().equals(efs)) {
-            patterns = new String[] {"setPhoneNr", "setEventId", "setEventName", "setType",
-                    "setProgram", "setPerformer", "setTicketPrice", "setFacilityName", "setMaxSeats",
-                    "setDate", "setTime", "setRows", "setColumns"};
-            return patterns;
-        } else if(clazz.getName().equals(ticket)){
-            patterns = new String[] { "setPhoneNumber", "setTicketPrice", "setSeatNumber", "setSeatRow", "setDate", "setTime"};
-            return patterns;
-        } else if(clazz.getName().equals(contact)){
-            patterns = new String[]{contactInfo, person, person, contactInfo, contact, contact, contact};
-            return patterns;
-        } else return null;
-    }
 
     public static boolean isBigObject(Class clazz) {
         return  (clazz.getName().equals(ens) || clazz.getName().equals(efs));
@@ -99,7 +52,6 @@ public abstract class Templates {
             return Class.forName(eventInfo);
         else return null;//throw new NoSuchSubclassException("There is no such subclass");
     }
-
 
 
 }

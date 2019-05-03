@@ -1,4 +1,4 @@
-package org.group38.kulturhus.model.SaveLoad.Load;
+package org.group38.frameworks.SaveLoad.Load;
 
 import java.io.File;
 import java.io.FileInputStream;

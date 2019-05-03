@@ -3,20 +3,18 @@ package org.group38.kulturhus.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.group38.frameworks.concurrency.ReaderThreadRunner;
 import org.group38.frameworks.concurrency.WriterThreadRunner;
-import org.group38.kulturhus.model.EditedFiles;
+import org.group38.kulturhus.model.FilePaths.EditedFiles;
 import org.group38.kulturhus.model.facility.Facility;
-import org.group38.kulturhus.sceneHandling.SceneManager;
-import org.group38.kulturhus.sceneHandling.SceneName;
+import org.group38.frameworks.sceneHandling.SceneManager;
+import org.group38.frameworks.sceneHandling.SceneName;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.errorBox;
-import static org.group38.kulturhus.Utilities.ErrorBoxesAndLabel.showLabel;
+import static org.group38.frameworks.ErrorBoxesAndLabel.errorBox;
+import static org.group38.frameworks.ErrorBoxesAndLabel.showLabel;
 import static org.group38.kulturhus.controllers.ShowVenueController.getThisFacility;
-import static org.group38.kulturhus.model.Kulturhus.getEvents;
 import static org.group38.kulturhus.model.Kulturhus.getFacilities;
 
 public class AddVenueController implements MainController{

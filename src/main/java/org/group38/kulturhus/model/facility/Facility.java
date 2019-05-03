@@ -1,7 +1,7 @@
 package org.group38.kulturhus.model.facility;
 import java.io.Serializable;
-import static org.group38.kulturhus.Utilities.Validate.isNotEmptyString;
-import static org.group38.kulturhus.Utilities.Validate.isValidNumber;
+import static org.group38.frameworks.Validate.isNotEmptyString;
+import static org.group38.frameworks.Validate.isValidNumber;
 
 public class Facility implements Serializable {
     // data fields

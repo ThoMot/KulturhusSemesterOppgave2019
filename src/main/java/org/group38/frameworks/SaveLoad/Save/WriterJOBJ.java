@@ -1,7 +1,4 @@
-package org.group38.kulturhus.model.SaveLoad.Save;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+package org.group38.frameworks.SaveLoad.Save;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
