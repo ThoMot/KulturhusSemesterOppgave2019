@@ -90,6 +90,7 @@ public class ShowTicketsController implements MainController {
     @Override
     public void refresh(){
         thisEvent.getTickets().clear();
+        getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
 
         try {
@@ -115,6 +116,7 @@ public class ShowTicketsController implements MainController {
     private void loadData(){
 
         getTickets().clear();
+        thisEvent.getTickets().clear();
         fileName = EditedFiles.getActiveTicketFile();
 
         try {
