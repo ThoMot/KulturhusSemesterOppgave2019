@@ -15,7 +15,7 @@ public class EditedFiles {
     private static String activeFacilityFile;
     private static String activeContactFile;
     private static String activeTicketFile;
-    
+
     public static void setEventsCSV(String fileName) throws WrongFileFormatException {
         if(fileName == null){
             eventCSV = null;

@@ -18,7 +18,7 @@ public class Kulturhus {
     private static ArrayList<Ticket> tickets = new ArrayList<>();
 
 
-/** getter methods*/
+    /** getter methods */
     public static ArrayList<ContactPerson> getContactPeople() {
         return contactPeople;
     }
