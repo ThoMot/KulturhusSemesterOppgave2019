@@ -1,5 +1,4 @@
 Class;FacilityName;FacilityType;MaxAntSeats;Rows;Columns
-org.group38.kulturhus.model.facility.Facility;Sal 1;Kinosal;0;10;20;
-org.group38.kulturhus.model.facility.Facility;Sal 1;Kinosal;30;0;0;
-org.group38.kulturhus.model.facility.Facility;Sal 1;Kinosal;0;10;20;
-org.group38.kulturhus.model.facility.Facility;Sal 1;Kinosal;30;0;0;
+org.group38.kulturhus.model.facility.Facility;Sal 1 - Kinosal;Kinosal;0;10;10;
+org.group38.kulturhus.model.facility.Facility;Sal 2 - Forsamling;Forsamlingssal;20;0;0;
+org.group38.kulturhus.model.facility.Facility;Sal 3 - Teater;Teatersal;0;20;20;

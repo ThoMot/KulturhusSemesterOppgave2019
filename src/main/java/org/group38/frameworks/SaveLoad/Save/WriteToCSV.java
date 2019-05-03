@@ -15,7 +15,7 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 
-public class WriteToCSV implements WriterInterface { //TODO implementer interface. Gjør så WriteObjects tar inn Arralist i stedet for Object.
+public class WriteToCSV implements WriterInterface {
 
 
     @Override
@@ -52,13 +52,10 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
         }
 
         Method[] mid = new Method[antall];
-        System.out.println("antall metoder " + antall);
         for (Method method : methods) {
             if (isGetter(method)) {
 
                     name = method.getName();
-                    System.out.println(name);
-
                     for (int i=0; i<pattern.length; i++){
                         if (name.equals(pattern[i])){
                            mid[i] = method;
@@ -94,7 +91,6 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
             sb.append(pattern.substring(3));
             sb.append(";");
         }
-
         try {
             sb.deleteCharAt(sb.length() - 1);
             sb.append("\n");
@@ -114,10 +110,8 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
     }
 
 
+
 //Skriver objerkter til fil
-
-
-
     public <T> void writeObjects(ArrayList<T> objects, String filename) throws IOException {
         File file = new File(filename);
 
@@ -129,20 +123,14 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
 
 
 //        //sjekk filnavn
-
-
         for (T object : objects) {
 
             Class<?> clazz = object.getClass();
-            System.out.println(clazz);
             Method[] methods = clazz.getDeclaredMethods();
-            System.out.println(methods);
             StringBuilder save = new StringBuilder();
 
 
             pattern = Templates.getterPattern(object.getClass());
-            System.out.println(pattern);
-
 
             //sjekk om har superklasse og hent gettere
             if (clazz.getSuperclass() != null && clazz.getSuperclass() != Object.class) {
@@ -151,7 +139,6 @@ public class WriteToCSV implements WriterInterface { //TODO implementer interfac
                 Method[] common = new Method[parentmethods.length + methods.length];
                 System.arraycopy(methods, 0, common, 0, methods.length);
                 System.arraycopy(parentmethods, 0, common, methods.length, parentmethods.length);
-                System.out.println("Denne" + Arrays.toString(common));
                 save.append(getterItteration(common, pattern, object));
             } else save.append(getterItteration(methods, pattern, object));
 

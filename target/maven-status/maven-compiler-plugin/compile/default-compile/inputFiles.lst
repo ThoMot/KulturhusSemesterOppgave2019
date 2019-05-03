@@ -1,7 +1,47 @@
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\MainApp.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\Modul\Lokale.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\Modul\Arrangement.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\module-info.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\Modul\Billett.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\Modul\Kontaktperson.java
-C:\Users\Martina Rebekka\Documents\viktig\Skole\HIOA\Programutvikling\Kulturhus-SemesterOppgave\src\main\java\org\openjfx\FXMLController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/AddTicketController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Load/CsvParser.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/concurrency/WriterThread.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Event/Ticket.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Exceptions/SeatTakenException.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Strings.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Save/WriterInterface.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/AddEventController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/concurrency/ReaderThreadRunner.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/sceneHandling/SceneManager.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/ContactPerson/Person.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/ShowEventController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Load/ReaderJOBJ.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/facility/Facility.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Exceptions/NoSuchSubclassException.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/ShowVenueController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Save/WriteToCSV.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/concurrency/WriterThreadRunner.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Event/EventInfo.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Exceptions/CorruptedFileException.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/ErrorBoxesAndLabel.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/FilePaths/DefaultFiles.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/MainApp.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/sceneHandling/SceneInfo.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/FilePaths/EditedFiles.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Event/EventFreeSeating.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Event/Event.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Kulturhus.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/ContactPerson/ContactInfo.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/ShowTicketsController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Save/WriterJOBJ.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/ContactPerson/ContactPerson.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Load/ReaderInterface.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Exceptions/ParsingException.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/FileEditorController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/MainController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/sceneHandling/SceneName.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/Utilities/Templates.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/FileHandler.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/concurrency/ReaderThread.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/SaveLoad/Load/ReadCSV.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Exceptions/WrongFileFormatException.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/EnhetsTesting.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/module-info.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/model/Event/EventNumberedSeating.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/kulturhus/controllers/AddVenueController.java
+/home/thoramarie/Documents/GitHub/KulturhusSemesterOppgave2019/src/main/java/org/group38/frameworks/Validate.java

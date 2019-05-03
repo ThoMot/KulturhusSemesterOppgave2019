@@ -1,3 +1,0 @@
-Class;Phonenumber;EventId;Price;Seat;Row;Date;Time;Facility
-org.group38.kulturhus.model.Event.Ticket;94891594;6a223933-803c-48fc-a033-32209751ff1a;150.0;2;1;2019-05-10;18:00;Sal 1;
-org.group38.kulturhus.model.Event.Ticket;12345678;6a223933-803c-48fc-a033-32209751ff1a;150.0;4;2;2019-05-10;18:00;Sal 1;

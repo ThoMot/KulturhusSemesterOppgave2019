@@ -13,9 +13,6 @@ import java.util.concurrent.Callable;
 public class ReaderThread<T> implements Callable<ArrayList<T>> {
 
 
-    //TODO implementer callable
-    //TODO bruker call ikke run. se write thread.
-
     private String filename;
 
     protected ReaderThread(String filename) {
@@ -27,7 +24,7 @@ public class ReaderThread<T> implements Callable<ArrayList<T>> {
     public ArrayList<T> call() throws CorruptedFileException {
         try {
             return readObjects();
-        } catch (IOException | ParsingException | ReflectiveOperationException  e) { //TODO Dette burde håndteres bedre, aka sendes til GUIet på en måte.
+        } catch (IOException | ParsingException | ReflectiveOperationException  e) {
             e.printStackTrace();
         }
         return null;
@@ -45,7 +42,6 @@ public class ReaderThread<T> implements Callable<ArrayList<T>> {
                 readerInterface = new ReadCSV();
                 break;
             default:
-                //TODO Make new exception here
                 throw new NullPointerException();
         }
         return readerInterface.readObjects(filename);
