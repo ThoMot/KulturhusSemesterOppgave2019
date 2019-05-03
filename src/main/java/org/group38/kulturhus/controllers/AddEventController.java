@@ -238,7 +238,7 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventNumberedSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-
+                    System.out.println("opprettet numberedseating event");
                     eventFile.delete();
                     System.out.println(eventFile.exists());
                     try {
@@ -261,7 +261,7 @@ public class AddEventController implements MainController {
                 try {
                     EventInfo eventInfo = new EventInfo(eventName.getText(), programInfo.getText(), artist.getText(), ((Facility) facility.getSelectionModel().getSelectedItem()).getFacilityType(), date.getValue(), LocalTime.parse(time.getText()));
                     getEvents().add(new EventFreeSeating((ContactPerson) contactPerson.getSelectionModel().getSelectedItem(), (Facility) facility.getValue(), Double.parseDouble(ticketPrice.getText()), eventInfo));
-
+                    System.out.println("opprettet freeseating event");
                     eventFile.delete();
                     try {
                         WriterThreadRunner.WriterThreadRunner(getEvents(), EditedFiles.getActiveEventFile());

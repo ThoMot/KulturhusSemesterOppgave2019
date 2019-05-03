@@ -152,6 +152,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <TextArea fx:id="changeFacility" prefHeight="191.0" prefWidth="584.0" text="Du kan dessverre ikke oppdatere hva slags type lokale det er&#10;etter at det er opprettet. Da må loklaet slettes og det må &#10;opprettes et nytt." visible="false" />
          </children>
          <BorderPane.margin>
             <Insets left="20.0" right="20.0" top="10.0" />

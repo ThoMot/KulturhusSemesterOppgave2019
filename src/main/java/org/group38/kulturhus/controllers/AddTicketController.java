@@ -27,7 +27,6 @@ import static org.group38.kulturhus.controllers.ShowTicketsController.getSelecte
 import static org.group38.kulturhus.model.Kulturhus.*;
 
 public class AddTicketController implements MainController{
-    private Event event = getSelectedEvent();
     private Ticket thisTicket=getSelectedTicket();
     private Event thisEvent;
     private String fileName;
@@ -74,7 +73,7 @@ public class AddTicketController implements MainController{
         fileName = EditedFiles.getActiveTicketFile();
     if(thisTicket!=null)setTicketInfo();
 
-    if(event instanceof EventFreeSeating){
+    if(thisEvent instanceof EventFreeSeating){
         seatRowInfoText.setVisible(false);
         seatRow.setVisible(false);
         seatNumber.setVisible(false);

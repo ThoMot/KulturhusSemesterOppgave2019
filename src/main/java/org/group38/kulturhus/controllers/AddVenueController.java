@@ -26,6 +26,7 @@ public class AddVenueController implements MainController{
     @FXML private Label maxSeats2, seating, seating2;
     @FXML private ComboBox facilityType;
     @FXML private Label updated, created;
+    @FXML private TextArea changeFacility;
     @FXML
     /** these methods switches the scenes from the menubar*/
     private void goToAddEvent(ActionEvent event) throws IOException {
@@ -48,6 +49,8 @@ public class AddVenueController implements MainController{
             setThisFacility(getThisFacility());
             loadValues();
             create.setVisible(false);
+            facilityType.setVisible(false);
+            changeFacility.setVisible(true);
         }
     }
 
@@ -103,7 +106,6 @@ public class AddVenueController implements MainController{
             if(facilityType.getSelectionModel().getSelectedItem().equals("Forsamlingssal")){
                 try{
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(maxSeats.getText())));
-
                     facilityFile.delete();
                     try {
                         WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
@@ -119,7 +121,6 @@ public class AddVenueController implements MainController{
             else{
                 try {
                     getFacilities().add(new Facility(facilityName.getText(), facilityType.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(seatRow.getText()), Integer.parseInt(columns.getText())));
-
                     facilityFile.delete();
                     try {
                         WriterThreadRunner.WriterThreadRunner(getFacilities(), EditedFiles.getActiveFacilityFile());
