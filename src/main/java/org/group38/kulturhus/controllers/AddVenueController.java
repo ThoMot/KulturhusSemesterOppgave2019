@@ -58,7 +58,6 @@ public class AddVenueController implements MainController{
     public void refresh(){
 
         fileName = EditedFiles.getActiveFacilityFile();
-        System.out.println(fileName + " det aktive navnet");
 
     }
 

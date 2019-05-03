@@ -80,12 +80,10 @@ public class ShowEventController implements MainController{
     @Override
     public void refresh(){
         fileName = EditedFiles.getActiveEventFile();
-        System.out.println(EditedFiles.getActiveEventFile());
         getEvents().clear();
 
         try {
             getEvents().addAll(ReaderThreadRunner.startReader(fileName));
-            System.out.println(getEvents());
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -119,7 +117,6 @@ public class ShowEventController implements MainController{
 
     public void defaultCSV(ActionEvent event){
         if(!fileName.equals(DefaultFiles.EVENTCSV.getFileName())){
-            System.out.println(fileName);
             try {
                 WriterThreadRunner.WriterThreadRunner(getEvents(), fileName);
             } catch (InterruptedException e) {
@@ -201,7 +198,6 @@ public class ShowEventController implements MainController{
 
         try {
             getEvents().addAll(ReaderThreadRunner.startReader(fileName));
-            System.out.println(getEvents());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -228,8 +224,6 @@ public class ShowEventController implements MainController{
             mb.showAndWait().ifPresent(response -> {
                 if(response==ButtonType.OK){
                     observableList.remove(eventsView.getSelectionModel().getSelectedItem());
-                    System.out.println("EVENTS" + getEvents() +" Dette er events");
-                    System.out.println("LISTEN" + observableList + " Dette er listen");
 
                     File file = new File(EditedFiles.getActiveEventFile());
                     file.delete();
