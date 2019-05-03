@@ -33,7 +33,7 @@ public abstract class Templates {
             return patterns;
         } else return null;
     }
-    
+
     public static boolean isBigObject(Class clazz) {
         return  (clazz.getName().equals(ens) || clazz.getName().equals(efs));
     }
